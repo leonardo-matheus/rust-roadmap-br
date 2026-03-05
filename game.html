@@ -1140,9 +1140,18 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['println!("Hello");', 'println!("Hello, World!");', 'println!("Olá");', 'println!("Rust");', 'println!("test");', 'println!("Hi");'],
+                // Aceita qualquer println! válido
+                validationPattern: /^println!\s*\(\s*"[^"]*"\s*\)\s*;?$/,
                 almostCorrect: [
                     { answer: 'print("Hello");', feedback: 'Use <code>println!</code> com ! (é uma macro).' },
-                    { answer: 'println("Hello");', feedback: 'Faltou o <code>!</code> - é <code>println!</code>' }
+                    { answer: 'println("Hello");', feedback: 'Faltou o <code>!</code> - é <code>println!</code>' },
+                    { almostPattern: /^print\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'Use <code>println!</code> com ! (é uma macro).' },
+                    { almostPattern: /^println\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'Faltou o <code>!</code> - é <code>println!</code>' },
+                    { almostPattern: /^printf?\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'Em Rust usamos <code>println!</code>, não printf.' },
+                    { almostPattern: /^console\.log\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'Isso é JavaScript! Em Rust, use <code>println!</code>' },
+                    { almostPattern: /println\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'Isso é Java! Em Rust, use <code>println!</code>' },
+                    { almostPattern: /^echo\s+"[^"]*"\s*;?$/, feedback: 'Isso é shell/PHP! Em Rust, use <code>println!</code>' },
+                    { almostPattern: /^puts\s+"[^"]*"\s*;?$/, feedback: 'Isso é Ruby! Em Rust, use <code>println!</code>' }
                 ],
                 hints: [
                     "Sintaxe: println!(\"mensagem\");"
@@ -1165,9 +1174,14 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['let valor = 42;', 'let valor = 10;', 'let valor = 100;', 'let valor = 0;', 'let valor = 1;', 'let valor = 5;'],
+                // Aceita let valor = qualquer_numero;
+                validationPattern: /^let\s+valor\s*=\s*-?\d+\s*;?$/,
                 almostCorrect: [
                     { answer: 'var valor = 42;', feedback: 'Rust usa <code>let</code>, não <code>var</code>.' },
-                    { answer: 'int valor = 42;', feedback: 'Rust usa <code>let</code>. Tipos são inferidos ou declarados com <code>:</code>.' }
+                    { answer: 'int valor = 42;', feedback: 'Rust usa <code>let</code>. Tipos são inferidos ou declarados com <code>:</code>.' },
+                    { almostPattern: /^var\s+valor\s*=\s*-?\d+\s*;?$/, feedback: 'Rust usa <code>let</code>, não <code>var</code>.' },
+                    { almostPattern: /^int\s+valor\s*=\s*-?\d+\s*;?$/, feedback: 'Rust usa <code>let</code>. Tipos são inferidos ou declarados com <code>:</code>.' },
+                    { almostPattern: /^let\s+\w+\s*=\s*-?\d+\s*;?$/, feedback: 'A variável deve se chamar <code>valor</code> para funcionar com o println.' }
                 ],
                 hints: [
                     "let nome = valor;"
@@ -1191,8 +1205,12 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['let mut contador = 0;', 'let mut contador = 1;', 'let mut contador = 10;'],
+                // Aceita let mut contador = qualquer_numero;
+                validationPattern: /^let\s+mut\s+contador\s*=\s*-?\d+\s*;?$/,
                 almostCorrect: [
-                    { answer: 'let contador = 0;', feedback: 'Faltou <code>mut</code> - a variável precisa ser mutável.' }
+                    { answer: 'let contador = 0;', feedback: 'Faltou <code>mut</code> - a variável precisa ser mutável.' },
+                    { almostPattern: /^let\s+contador\s*=\s*-?\d+\s*;?$/, feedback: 'Faltou <code>mut</code> - a variável precisa ser mutável para usar <code>+=</code>.' },
+                    { almostPattern: /^var\s+contador\s*=\s*-?\d+\s*;?$/, feedback: 'Rust usa <code>let mut</code>, não <code>var</code>.' }
                 ],
                 hints: [
                     "let mut nome = valor;"
@@ -1215,7 +1233,12 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['let numero: i32 = 100;', 'let numero: i32 = 42;', 'let numero: i32 = 0;', 'let numero: i32 = 10;', 'let numero: i32 = -5;'],
-                almostCorrect: [],
+                // Aceita let numero: i32 = qualquer_numero;
+                validationPattern: /^let\s+numero\s*:\s*i32\s*=\s*-?\d+\s*;?$/,
+                almostCorrect: [
+                    { almostPattern: /^let\s+numero\s*=\s*-?\d+\s*;?$/, feedback: 'Faltou especificar o tipo: <code>numero: i32</code>' },
+                    { almostPattern: /^let\s+numero\s*:\s*int\s*=\s*-?\d+\s*;?$/, feedback: 'O tipo é <code>i32</code>, não <code>int</code>.' }
+                ],
                 hints: [
                     "let nome: tipo = valor;"
                 ],
@@ -1237,8 +1260,12 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['let texto = String::from("Rust");', 'let texto = String::from("Hello");', 'let texto = String::from("test");', 'let texto: String = String::from("Rust");'],
+                // Aceita let texto = String::from("qualquer");
+                validationPattern: /^let\s+texto\s*(:\s*String\s*)?=\s*String::from\s*\(\s*"[^"]*"\s*\)\s*;?$/,
                 almostCorrect: [
-                    { answer: 'let texto = "Rust";', feedback: 'Isso cria um <code>&str</code>. Use <code>String::from()</code> para String.' }
+                    { answer: 'let texto = "Rust";', feedback: 'Isso cria um <code>&str</code>. Use <code>String::from()</code> para String.' },
+                    { almostPattern: /^let\s+texto\s*=\s*"[^"]*"\s*;?$/, feedback: 'Isso cria um <code>&str</code>. Use <code>String::from("...")</code> para criar uma String.' },
+                    { almostPattern: /^let\s+texto\s*=\s*'[^']*'\s*;?$/, feedback: 'Use aspas duplas <code>"..."</code> para strings, não aspas simples.' }
                 ],
                 hints: [
                     "String::from(\"texto\")"
@@ -1266,9 +1293,13 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['fn saudar() {'],
+                validationPattern: /^fn\s+saudar\s*\(\s*\)\s*\{?$/,
                 almostCorrect: [
                     { answer: 'function saudar() {', feedback: 'Rust usa <code>fn</code>, não <code>function</code>.' },
-                    { answer: 'def saudar():', feedback: 'Isso é Python. Rust usa <code>fn nome() {</code>.' }
+                    { answer: 'def saudar():', feedback: 'Isso é Python. Rust usa <code>fn nome() {</code>.' },
+                    { almostPattern: /^function\s+saudar\s*\(\s*\)/, feedback: 'Rust usa <code>fn</code>, não <code>function</code>.' },
+                    { almostPattern: /^def\s+saudar\s*\(\s*\)/, feedback: 'Isso é Python! Em Rust, use <code>fn saudar() {</code>' },
+                    { almostPattern: /^void\s+saudar\s*\(\s*\)/, feedback: 'Isso é C/C++! Em Rust, use <code>fn saudar() {</code>' }
                 ],
                 hints: [
                     "fn nome() {"
@@ -1294,8 +1325,11 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['fn mostrar(n: i32) {', 'fn mostrar(n:i32) {', 'fn mostrar(n : i32) {'],
+                validationPattern: /^fn\s+mostrar\s*\(\s*n\s*:\s*i32\s*\)\s*\{?$/,
                 almostCorrect: [
-                    { answer: 'fn mostrar(n) {', feedback: 'Parâmetros precisam de tipo: <code>n: i32</code>.' }
+                    { answer: 'fn mostrar(n) {', feedback: 'Parâmetros precisam de tipo: <code>n: i32</code>.' },
+                    { almostPattern: /^fn\s+mostrar\s*\(\s*n\s*\)\s*\{?$/, feedback: 'Parâmetros precisam de tipo explícito: <code>n: i32</code>.' },
+                    { almostPattern: /^fn\s+mostrar\s*\(\s*int\s+n\s*\)\s*\{?$/, feedback: 'A sintaxe é <code>n: i32</code>, não <code>int n</code>.' }
                 ],
                 hints: [
                     "fn nome(param: tipo) {"
@@ -1322,8 +1356,11 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['fn get_answer() -> i32 {', 'fn get_answer()->i32 {', 'fn get_answer() -> i32{'],
+                validationPattern: /^fn\s+get_answer\s*\(\s*\)\s*->\s*i32\s*\{?$/,
                 almostCorrect: [
-                    { answer: 'fn get_answer() {', feedback: 'Faltou o tipo de retorno: <code>-> i32</code>.' }
+                    { answer: 'fn get_answer() {', feedback: 'Faltou o tipo de retorno: <code>-> i32</code>.' },
+                    { almostPattern: /^fn\s+get_answer\s*\(\s*\)\s*\{?$/, feedback: 'Faltou o tipo de retorno: <code>-> i32</code>.' },
+                    { almostPattern: /^fn\s+get_answer\s*\(\s*\)\s*:\s*i32\s*\{?$/, feedback: 'Use <code>-></code> para tipo de retorno, não <code>:</code>.' }
                 ],
                 hints: [
                     "-> tipo após os parênteses"
@@ -4295,18 +4332,30 @@
             const userAnswer = input.value.trim();
             const feedbackSection = document.getElementById('feedbackSection');
 
-            // Check for exact match
-            const isCorrect = ex.correctAnswers.some(ans =>
-                userAnswer === ans ||
-                userAnswer.toLowerCase() === ans.toLowerCase()
-            );
+            // Check for validation pattern (regex) first
+            let isCorrect = false;
+            if (ex.validationPattern) {
+                isCorrect = ex.validationPattern.test(userAnswer);
+            }
 
-            // Check for almost correct answers
+            // Then check for exact match
+            if (!isCorrect) {
+                isCorrect = ex.correctAnswers.some(ans =>
+                    userAnswer === ans ||
+                    userAnswer.toLowerCase() === ans.toLowerCase() ||
+                    userAnswer.replace(/\s+/g, ' ').trim() === ans.replace(/\s+/g, ' ').trim()
+                );
+            }
+
+            // Check for almost correct answers (string match or pattern)
             let almostMatch = null;
             if (!isCorrect && ex.almostCorrect) {
-                almostMatch = ex.almostCorrect.find(item =>
-                    userAnswer.toLowerCase() === item.answer.toLowerCase()
-                );
+                almostMatch = ex.almostCorrect.find(item => {
+                    if (item.almostPattern) {
+                        return item.almostPattern.test(userAnswer);
+                    }
+                    return item.answer && userAnswer.toLowerCase() === item.answer.toLowerCase();
+                });
             }
 
             // Check for semicolon tolerance
