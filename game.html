@@ -2458,25 +2458,375 @@
                 successMessage: "Perfeito! Option elimina erros de null. Some = tem valor, None = vazio."
             },
 
-            // === CONCLUSÃO ===
+            // === BLOCO 9: Ownership (41-45) ===
             {
                 level: 41,
+                title: "O que é Ownership?",
+                category: "Ownership",
+                objective: "Entenda o conceito mais importante e único do Rust!",
+                teaching: `<strong>Ownership</strong> é o que torna Rust especial e seguro.<br><br>
+                    <strong>Regra fundamental:</strong> Cada valor tem <strong>um único dono</strong>.<br><br>
+                    <strong>Analogia:</strong> Pense em um livro físico:<br>
+                    • Só uma pessoa pode ser dona do livro<br>
+                    • Quando você dá o livro, você não tem mais<br>
+                    • Quando o dono sai do escopo, o livro é "destruído"<br><br>
+                    O compilador garante essas regras em tempo de compilação!`,
+                syntax: 'let dono = valor; // dono possui o valor',
+                code: [
+                    'fn main() {',
+                    '    let s1 = String::from("olá");',
+                    '    let s2 = s1; // s1 foi MOVIDO para s2',
+                    '    // println!("{}", s1); // ERRO! s1 não existe mais',
+                    '    println!("{}", ___);',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 's2',
+                correctAnswers: ['s2'],
+                almostCorrect: [
+                    { answer: 's1', feedback: '<code>s1</code> foi movido! Agora só <code>s2</code> é válido.' }
+                ],
+                hints: [
+                    "s1 foi movido para s2, então s1 não existe mais",
+                    "Qual variável agora possui o valor?",
+                    "Digite: <code>s2</code>"
+                ],
+                successMessage: "Excelente! Quando atribui s1 a s2, o ownership MOVE. s1 deixa de existir!"
+            },
+            {
+                level: 42,
+                title: "Move Semântico",
+                category: "Ownership",
+                objective: "Entenda como valores são movidos entre variáveis.",
+                teaching: `Quando você passa um valor para uma função, ele é <strong>movido</strong>:<br><br>
+                    <code>fn recebe(s: String) { ... }</code><br><br>
+                    <code>let texto = String::from("oi");</code><br>
+                    <code>recebe(texto);</code><br>
+                    <code>// texto não existe mais aqui!</code><br><br>
+                    A função <code>recebe</code> agora é dona do valor.`,
+                syntax: 'fn func(param: String) // ownership movido',
+                code: [
+                    'fn imprime(s: String) {',
+                    '    println!("{}", s);',
+                    '} // s é destruído aqui',
+                    '',
+                    'fn main() {',
+                    '    let msg = String::from("Rust");',
+                    '    imprime(___);',
+                    '    // msg não pode mais ser usada!',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'msg',
+                correctAnswers: ['msg'],
+                almostCorrect: [],
+                hints: [
+                    "Qual variável queremos passar para a função?",
+                    "É a variável que contém 'Rust'",
+                    "Digite: <code>msg</code>"
+                ],
+                successMessage: "Correto! Ao chamar imprime(msg), o ownership de msg é movido para a função."
+            },
+            {
+                level: 43,
+                title: "Clone: Copiando Valores",
+                category: "Ownership",
+                objective: "Aprenda a fazer cópias quando precisar manter o original.",
+                teaching: `Se você quer <strong>manter o original</strong>, use <code>.clone()</code>:<br><br>
+                    <code>let s1 = String::from("oi");</code><br>
+                    <code>let s2 = s1.clone(); // cópia profunda</code><br>
+                    <code>println!("{} {}", s1, s2); // ambos válidos!</code><br><br>
+                    <strong>Atenção:</strong> clone() pode ser custoso para dados grandes!`,
+                syntax: 'let copia = original.clone();',
+                code: [
+                    'fn main() {',
+                    '    let original = String::from("dados");',
+                    '    let copia = original.___();',
+                    '    println!("Original: {}", original);',
+                    '    println!("Cópia: {}", copia);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'clone',
+                correctAnswers: ['clone'],
+                almostCorrect: [
+                    { answer: 'copy', feedback: 'Para String, use <code>clone()</code>, não <code>copy()</code>.' }
+                ],
+                hints: [
+                    "O método para fazer uma cópia profunda",
+                    "Rima com 'cone'",
+                    "Digite: <code>clone</code>"
+                ],
+                successMessage: "Perfeito! clone() cria uma cópia independente. Ambas variáveis são válidas!"
+            },
+            {
+                level: 44,
+                title: "Copy Trait",
+                category: "Ownership",
+                objective: "Alguns tipos são copiados automaticamente!",
+                teaching: `Tipos simples implementam <code>Copy</code> e são copiados automaticamente:<br><br>
+                    • Inteiros: <code>i32</code>, <code>u64</code>, etc.<br>
+                    • Floats: <code>f32</code>, <code>f64</code><br>
+                    • Booleanos: <code>bool</code><br>
+                    • Char: <code>char</code><br><br>
+                    <code>let x = 5;</code><br>
+                    <code>let y = x; // x é COPIADO, não movido</code><br>
+                    <code>println!("{} {}", x, y); // ambos válidos!</code>`,
+                syntax: 'let y = x; // tipos Copy são copiados',
+                code: [
+                    'fn main() {',
+                    '    let a = 10;',
+                    '    let b = a; // i32 é Copy!',
+                    '    println!("a = {}", ___);',
+                    '    println!("b = {}", b);',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'a',
+                correctAnswers: ['a'],
+                almostCorrect: [],
+                hints: [
+                    "i32 implementa Copy, então a ainda é válido",
+                    "Podemos usar a mesmo após atribuir a b",
+                    "Digite: <code>a</code>"
+                ],
+                successMessage: "Ótimo! Tipos simples como i32 são copiados, não movidos. a ainda é válido!"
+            },
+            {
+                level: 45,
+                title: "Ownership e Escopo",
+                category: "Ownership",
+                objective: "Valores são destruídos quando o dono sai do escopo.",
+                teaching: `Quando uma variável sai do escopo, o valor é <strong>destruído</strong> (drop):<br><br>
+                    <code>{</code><br>
+                    <code>    let s = String::from("oi");</code><br>
+                    <code>    // s é válido aqui</code><br>
+                    <code>} // s sai do escopo e é destruído!</code><br><br>
+                    Isso garante que a memória é liberada automaticamente!`,
+                syntax: '{ let x = ...; } // x destruído aqui',
+                code: [
+                    'fn main() {',
+                    '    let externo = 1;',
+                    '    {',
+                    '        let interno = 2;',
+                    '        println!("{}", interno);',
+                    '    } // interno destruído aqui',
+                    '    println!("{}", ___);',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'externo',
+                correctAnswers: ['externo'],
+                almostCorrect: [
+                    { answer: 'interno', feedback: '<code>interno</code> foi destruído! Só <code>externo</code> existe.' }
+                ],
+                hints: [
+                    "interno foi destruído quando o bloco {} fechou",
+                    "Qual variável ainda existe no escopo externo?",
+                    "Digite: <code>externo</code>"
+                ],
+                successMessage: "Correto! interno foi destruído ao sair do escopo. externo ainda existe!"
+            },
+
+            // === BLOCO 10: Borrowing (46-50) ===
+            {
+                level: 46,
+                title: "Referências (Borrowing)",
+                category: "Borrowing",
+                objective: "Aprenda a emprestar valores sem mover ownership!",
+                teaching: `Em vez de mover, você pode <strong>emprestar</strong> com <code>&</code>:<br><br>
+                    <code>fn tamanho(s: &String) -> usize {</code><br>
+                    <code>    s.len()</code><br>
+                    <code>}</code><br><br>
+                    <code>let msg = String::from("oi");</code><br>
+                    <code>let tam = tamanho(&msg); // empresta</code><br>
+                    <code>println!("{}", msg); // msg ainda é válido!</code><br><br>
+                    <code>&</code> cria uma <strong>referência</strong> (empréstimo).`,
+                syntax: 'fn func(s: &String) // referência',
+                code: [
+                    'fn conta_letras(s: &String) -> usize {',
+                    '    s.len()',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let palavra = String::from("Rust");',
+                    '    let tam = conta_letras(___palavra);',
+                    '    println!("{} tem {} letras", palavra, tam);',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: '&',
+                correctAnswers: ['&'],
+                almostCorrect: [
+                    { answer: '*', feedback: '<code>*</code> é para dereferenciar. Para emprestar, use <code>&</code>.' }
+                ],
+                hints: [
+                    "Qual símbolo cria uma referência (empréstimo)?",
+                    "É o 'e comercial' (ampersand)",
+                    "Digite: <code>&</code>"
+                ],
+                successMessage: "Excelente! &palavra empresta o valor. A função usa, mas palavra continua válido!"
+            },
+            {
+                level: 47,
+                title: "Referências Imutáveis",
+                category: "Borrowing",
+                objective: "Referências com & são somente leitura.",
+                teaching: `Referências com <code>&</code> são <strong>imutáveis</strong> — só leitura:<br><br>
+                    <code>fn mostra(s: &String) {</code><br>
+                    <code>    // s.push_str("!"); // ERRO! não pode modificar</code><br>
+                    <code>    println!("{}", s); // OK, só leitura</code><br>
+                    <code>}</code><br><br>
+                    Você pode ter <strong>múltiplas</strong> referências imutáveis ao mesmo tempo!`,
+                syntax: '&T // referência imutável (só leitura)',
+                code: [
+                    'fn main() {',
+                    '    let texto = String::from("Olá");',
+                    '    let r1 = &texto;',
+                    '    let r2 = ___texto; // outra referência',
+                    '    println!("{} e {}", r1, r2);',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: '&',
+                correctAnswers: ['&'],
+                almostCorrect: [],
+                hints: [
+                    "Queremos criar outra referência imutável",
+                    "Mesmo símbolo da referência anterior",
+                    "Digite: <code>&</code>"
+                ],
+                successMessage: "Correto! Múltiplas referências imutáveis são permitidas. Ambas só leem!"
+            },
+            {
+                level: 48,
+                title: "Referências Mutáveis",
+                category: "Borrowing",
+                objective: "Aprenda a emprestar com permissão de modificar.",
+                teaching: `Para modificar um valor emprestado, use <code>&mut</code>:<br><br>
+                    <code>fn adiciona(s: &mut String) {</code><br>
+                    <code>    s.push_str(" Rust!"); // OK!</code><br>
+                    <code>}</code><br><br>
+                    <code>let mut msg = String::from("Olá");</code><br>
+                    <code>adiciona(&mut msg);</code><br><br>
+                    <strong>Regra:</strong> A variável original também deve ser <code>mut</code>!`,
+                syntax: '&mut T // referência mutável',
+                code: [
+                    'fn dobra(n: &mut i32) {',
+                    '    *n = *n * 2;',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let mut valor = 5;',
+                    '    dobra(&___ valor);',
+                    '    println!("{}", valor); // 10',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'mut',
+                correctAnswers: ['mut'],
+                almostCorrect: [
+                    { answer: '&mut', feedback: 'Já tem o <code>&</code>! Só falta <code>mut</code>.' }
+                ],
+                hints: [
+                    "Precisamos de uma referência mutável",
+                    "A palavra que indica mutabilidade",
+                    "Digite: <code>mut</code>"
+                ],
+                successMessage: "Perfeito! &mut permite modificar. O valor original foi alterado para 10!"
+            },
+            {
+                level: 49,
+                title: "Regras do Borrow Checker",
+                category: "Borrowing",
+                objective: "Entenda as regras que garantem segurança.",
+                teaching: `O <strong>Borrow Checker</strong> garante duas regras:<br><br>
+                    <strong>1.</strong> Você pode ter OU:<br>
+                    • Uma referência mutável <code>&mut T</code><br>
+                    • Várias referências imutáveis <code>&T</code><br><br>
+                    <strong>2.</strong> Nunca ambas ao mesmo tempo!<br><br>
+                    Isso previne <em>data races</em> em tempo de compilação!`,
+                syntax: '&T ou &mut T, nunca os dois',
+                code: [
+                    'fn main() {',
+                    '    let mut s = String::from("oi");',
+                    '    let r1 = &s;     // OK',
+                    '    let r2 = &s;     // OK, múltiplas imutáveis',
+                    '    println!("{} {}", r1, r2);',
+                    '    // r1 e r2 não são mais usadas',
+                    '    let r3 = &___ s; // OK agora!',
+                    '    r3.push_str("!");',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'mut',
+                correctAnswers: ['mut'],
+                almostCorrect: [],
+                hints: [
+                    "Queremos uma referência que pode modificar",
+                    "Qual palavra permite mutabilidade?",
+                    "Digite: <code>mut</code>"
+                ],
+                successMessage: "Excelente! Como r1 e r2 não são mais usadas, podemos criar &mut. O Borrow Checker é inteligente!"
+            },
+            {
+                level: 50,
+                title: "Dangling References",
+                category: "Borrowing",
+                objective: "Rust previne referências inválidas!",
+                teaching: `Rust impede <strong>dangling references</strong> (referências para dados destruídos):<br><br>
+                    <code>fn dangling() -> &String { // ERRO!</code><br>
+                    <code>    let s = String::from("oi");</code><br>
+                    <code>    &s // s será destruído!</code><br>
+                    <code>}</code><br><br>
+                    O compilador detecta e impede esse erro comum em C/C++!<br>
+                    Solução: retorne o valor (mova ownership), não uma referência.`,
+                syntax: 'fn func() -> String // retorna ownership',
+                code: [
+                    'fn cria_texto() -> String {',
+                    '    let s = String::from("Criado!");',
+                    '    ___ // retorna ownership, não referência',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let texto = cria_texto();',
+                    '    println!("{}", texto);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 's',
+                correctAnswers: ['s'],
+                almostCorrect: [
+                    { answer: '&s', feedback: 'Não pode retornar <code>&s</code>! s será destruída. Retorne <code>s</code> diretamente.' }
+                ],
+                hints: [
+                    "Retorne o valor, não uma referência",
+                    "Move o ownership para fora da função",
+                    "Digite: <code>s</code>"
+                ],
+                successMessage: "Perfeito! Retornando s (não &s), movemos ownership. Rust previne dangling references!"
+            },
+
+            // === CONCLUSÃO ===
+            {
+                level: 51,
                 title: "🎉 Parabéns, Rustacean!",
                 category: "Conclusão",
-                objective: "Você completou o curso básico de Rust!",
-                teaching: `<strong>🦀 Você aprendeu MUITO!</strong><br><br>
+                objective: "Você completou o curso de Rust!",
+                teaching: `<strong>🦀 Você domina os fundamentos do Rust!</strong><br><br>
                     ✅ Variáveis e mutabilidade<br>
                     ✅ Tipos básicos e compostos<br>
                     ✅ Operadores e comparações<br>
                     ✅ Controle de fluxo<br>
                     ✅ Funções<br>
-                    ✅ <strong>Structs</strong> — seus próprios tipos<br>
-                    ✅ <strong>Enums</strong> — variantes e Option<br><br>
-                    <strong>Próximos passos:</strong> Ownership, Borrowing, Lifetimes, Result, Traits...`,
+                    ✅ <strong>Structs</strong> e <strong>Enums</strong><br>
+                    ✅ <strong>Ownership</strong> — o coração do Rust<br>
+                    ✅ <strong>Borrowing</strong> — referências seguras<br><br>
+                    <strong>Próximos passos:</strong> Lifetimes, Traits, Generics, Error Handling, Async...`,
                 syntax: 'println!("🦀 Rust!");',
                 code: [
                     'fn main() {',
-                    '    println!("Sou um ___!");',
+                    '    println!("Eu sou um ___!");',
                     '}'
                 ],
                 inputLine: 1,
@@ -2488,7 +2838,7 @@
                     "É um crustáceo... um Rust-áceo!",
                     "Digite: <code>Rustacean</code>"
                 ],
-                successMessage: "🎉🦀 PARABÉNS! Você completou todos os 41 níveis! Você é oficialmente um Rustacean! Continue praticando e explorando conceitos avançados!"
+                successMessage: "🎉🦀 PARABÉNS! Você completou todos os 51 níveis! Você domina Ownership e Borrowing — os conceitos mais importantes do Rust! Continue praticando!"
             }
         ];
 
@@ -3348,21 +3698,157 @@
                 ],
                 successMessage: "Perfeito! <code>Humor::Feliz</code> escolhe a opção 'Feliz' do enum Humor! 😊"
             },
+            // === BLOCO 7: Ownership para Iniciantes (26-29) ===
             {
                 level: 26,
+                title: "O Dono do Brinquedo",
+                category: "Ownership",
+                objective: "Entenda o conceito mais especial do Rust!",
+                teaching: `<strong>🎯 Analogia:</strong> Pense em um <strong>brinquedo único</strong>:<br><br>
+                    • Só UMA criança pode ser dona do brinquedo<br>
+                    • Se você DÁ o brinquedo, você não tem mais<br>
+                    • Quando a criança vai embora, o brinquedo some<br><br>
+                    Em Rust, cada valor tem <strong>um único dono</strong>!<br>
+                    Isso evita muitos bugs que outras linguagens têm.`,
+                syntax: 'let dono = valor;',
+                code: [
+                    'fn main() {',
+                    '    let brinquedo1 = String::from("bola");',
+                    '    let brinquedo2 = brinquedo1; // PASSOU o brinquedo!',
+                    '    // brinquedo1 não existe mais!',
+                    '    println!("Tenho: {}", ___);',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'brinquedo2',
+                correctAnswers: ['brinquedo2'],
+                almostCorrect: [
+                    { answer: 'brinquedo1', feedback: 'brinquedo1 foi passado! Agora só <code>brinquedo2</code> tem a bola.' }
+                ],
+                hints: [
+                    "brinquedo1 passou a bola para brinquedo2",
+                    "Quem tem a bola agora?",
+                    "Digite: <code>brinquedo2</code>"
+                ],
+                successMessage: "Excelente! Quando você 'passa' um valor, o anterior perde. Isso é Ownership!"
+            },
+            {
+                level: 27,
+                title: "Fazendo Cópias",
+                category: "Ownership",
+                objective: "Aprenda a manter o original quando precisar.",
+                teaching: `<strong>🎯 Analogia:</strong> E se você quiser <strong>tirar uma foto</strong> do brinquedo?<br><br>
+                    Você pode fazer uma <strong>cópia</strong> com <code>.clone()</code>:<br><br>
+                    <code>let original = String::from("bola");</code><br>
+                    <code>let copia = original.clone();</code><br>
+                    <code>// Agora AMBOS existem!</code>`,
+                syntax: 'let copia = original.clone();',
+                code: [
+                    'fn main() {',
+                    '    let original = String::from("ursinho");',
+                    '    let copia = original.___();',
+                    '    println!("Original: {}", original);',
+                    '    println!("Cópia: {}", copia);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'clone',
+                correctAnswers: ['clone'],
+                almostCorrect: [],
+                hints: [
+                    "O método para fazer uma cópia",
+                    "Parece com 'cone'",
+                    "Digite: <code>clone</code>"
+                ],
+                successMessage: "Perfeito! clone() faz uma cópia. Agora temos dois ursinhos! 🧸🧸"
+            },
+            {
+                level: 28,
+                title: "Emprestando sem Dar",
+                category: "Borrowing",
+                objective: "Aprenda a emprestar valores sem perder!",
+                teaching: `<strong>🎯 Analogia:</strong> Às vezes você quer <strong>mostrar</strong> o brinquedo, não dar:<br><br>
+                    "Olha meu brinquedo!" (empresta para ver)<br>
+                    Depois você pega de volta!<br><br>
+                    Use <code>&</code> para <strong>emprestar</strong>:<br>
+                    <code>let msg = String::from("oi");</code><br>
+                    <code>mostra(&msg); // empresta</code><br>
+                    <code>println!("{}", msg); // ainda tenho!</code>`,
+                syntax: '&variavel // empresta',
+                code: [
+                    'fn mostra(texto: &String) {',
+                    '    println!("Olha: {}", texto);',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let meu = String::from("tesouro");',
+                    '    mostra(___meu); // empresta, não dá!',
+                    '    println!("Ainda tenho: {}", meu);',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: '&',
+                correctAnswers: ['&'],
+                almostCorrect: [],
+                hints: [
+                    "Qual símbolo 'empresta' em vez de 'dar'?",
+                    "É o 'e comercial' (&)",
+                    "Digite: <code>&</code>"
+                ],
+                successMessage: "Ótimo! & empresta o valor. A função viu, mas você ainda tem o tesouro! 💎"
+            },
+            {
+                level: 29,
+                title: "Empréstimo com Permissão",
+                category: "Borrowing",
+                objective: "Aprenda a emprestar com permissão de modificar.",
+                teaching: `<strong>🎯 Analogia:</strong> Às vezes você empresta e deixa a pessoa <strong>desenhar</strong> nele:<br><br>
+                    "Pode pintar meu quadro!" (empréstimo mutável)<br><br>
+                    Use <code>&mut</code> para emprestar COM permissão de mudar:<br>
+                    <code>fn pinta(quadro: &mut String) {</code><br>
+                    <code>    quadro.push_str(" colorido!");</code><br>
+                    <code>}</code>`,
+                syntax: '&mut variavel // empresta para modificar',
+                code: [
+                    'fn adiciona_coracao(texto: &mut String) {',
+                    '    texto.push_str(" ❤️");',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let mut carta = String::from("Oi");',
+                    '    adiciona_coracao(&___ carta);',
+                    '    println!("{}", carta); // "Oi ❤️"',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'mut',
+                correctAnswers: ['mut'],
+                almostCorrect: [],
+                hints: [
+                    "Queremos emprestar COM permissão de mudar",
+                    "Qual palavra indica 'pode modificar'?",
+                    "Digite: <code>mut</code>"
+                ],
+                successMessage: "Perfeito! &mut empresta e permite modificar. A carta agora tem coração! ❤️"
+            },
+
+            // === CONCLUSÃO ===
+            {
+                level: 30,
                 title: "🎉 Parabéns, Iniciante!",
                 category: "Conclusão",
-                objective: "Você completou o básico de Rust!",
-                teaching: `<strong>🦀 Você aprendeu MUITO!</strong><br><br>
+                objective: "Você completou o modo iniciante!",
+                teaching: `<strong>🦀 Você aprendeu os conceitos mais importantes!</strong><br><br>
                     ✅ Variáveis e tipos (caixas etiquetadas)<br>
                     ✅ Mutabilidade (quadro branco vs porta-retrato)<br>
-                    ✅ Operadores (calculadora)<br>
-                    ✅ Comparações (= vs ==)<br>
+                    ✅ Operadores e comparações<br>
                     ✅ Decisões (if/else/match/for)<br>
-                    ✅ Funções (receitas reutilizáveis)<br>
-                    ✅ <strong>Structs</strong> (fichas cadastrais)<br>
-                    ✅ <strong>Enums</strong> (múltipla escolha)<br><br>
-                    <strong>Próximo passo:</strong> Tente o modo Normal para aprofundar!`,
+                    ✅ Funções (receitas)<br>
+                    ✅ Structs (fichas cadastrais)<br>
+                    ✅ Enums (múltipla escolha)<br>
+                    ✅ <strong>Ownership</strong> (dono do brinquedo)<br>
+                    ✅ <strong>Borrowing</strong> (emprestar sem dar)<br><br>
+                    <strong>Próximo passo:</strong> Modo Normal para se aprofundar!`,
                 syntax: 'println!("🦀");',
                 code: [
                     'fn main() {',
@@ -3378,7 +3864,7 @@
                     "É como um crustáceo... Rust-áceo!",
                     "Digite: <code>Rustacean</code>"
                 ],
-                successMessage: "🎉🦀 INCRÍVEL! Você completou o modo iniciante! Você agora entende os fundamentos do Rust. Que tal tentar o modo Normal para se aprofundar?"
+                successMessage: "🎉🦀 INCRÍVEL! Você completou 30 níveis! Você entende Ownership e Borrowing — os conceitos mais únicos do Rust! Experimente o modo Normal!"
             }
         ];
 
