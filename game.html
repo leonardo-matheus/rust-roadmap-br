@@ -2048,33 +2048,447 @@
             },
             {
                 level: 30,
-                title: "Parabéns! 🎉",
-                category: "Conclusão",
-                objective: "Você completou a introdução ao Rust!",
-                teaching: `<strong>Você aprendeu os fundamentos do Rust!</strong><br><br>
-                    ✅ Variáveis (<code>let</code>, <code>mut</code>)<br>
-                    ✅ Tipos (<code>i32</code>, <code>f64</code>, <code>bool</code>, <code>String</code>)<br>
-                    ✅ Operadores (+, -, *, /, %, ==, !=, &&, ||)<br>
-                    ✅ Controle de fluxo (<code>if</code>, <code>match</code>, <code>for</code>, <code>while</code>)<br>
-                    ✅ Funções (<code>fn</code>, parâmetros, retorno)<br><br>
-                    <strong>Próximos passos:</strong> Ownership, Borrowing, Structs, Enums...`,
-                syntax: 'println!("Parabéns!");',
+                title: "Revisão de Funções",
+                category: "Funções",
+                objective: "Pratique tudo sobre funções antes de avançar!",
+                teaching: `Vamos revisar funções:<br><br>
+                    • <code>fn nome()</code> → função sem parâmetros<br>
+                    • <code>fn nome(x: i32)</code> → com parâmetro<br>
+                    • <code>fn nome() -> i32</code> → com retorno<br>
+                    • Última expressão sem <code>;</code> é retornada<br><br>
+                    Complete a função que retorna o triplo:`,
+                syntax: 'fn triplo(x: i32) -> i32 {\n    x * 3\n}',
                 code: [
+                    'fn triplo(x: i32) -> i32 {',
+                    '    x ___ 3',
+                    '}',
+                    '',
                     'fn main() {',
-                    '    let mensagem = "Você é um Rustacean!";',
-                    '    println!("___", mensagem);',
+                    '    println!("{}", triplo(5));',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: '*',
+                correctAnswers: ['*'],
+                almostCorrect: [],
+                hints: [
+                    "Triplo significa multiplicar por 3",
+                    "Qual operador de multiplicação?",
+                    "Digite: <code>*</code>"
+                ],
+                successMessage: "Perfeito! 5 × 3 = 15. Você domina funções! Agora vamos para Structs!"
+            },
+
+            // === BLOCO 7: Structs (31-35) ===
+            {
+                level: 31,
+                title: "O que são Structs?",
+                category: "Structs",
+                objective: "Aprenda a criar seus próprios tipos de dados!",
+                teaching: `<strong>Structs</strong> permitem agrupar dados relacionados.<br><br>
+                    <strong>Analogia:</strong> Pense em uma <strong>ficha cadastral</strong>:<br>
+                    • Nome: Maria<br>
+                    • Idade: 25<br>
+                    • Ativo: true<br><br>
+                    Em Rust, criamos assim:<br>
+                    <code>struct Pessoa {</code><br>
+                    <code>    nome: String,</code><br>
+                    <code>    idade: u32,</code><br>
+                    <code>}</code>`,
+                syntax: 'struct Nome {\n    campo: Tipo,\n}',
+                code: [
+                    '___ Carro {',
+                    '    marca: String,',
+                    '    ano: u32,',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'struct',
+                correctAnswers: ['struct'],
+                almostCorrect: [
+                    { answer: 'class', feedback: 'Rust não tem <code>class</code>! Use <code>struct</code>.' },
+                    { answer: 'type', feedback: 'Use <code>struct</code> para criar tipos compostos.' }
+                ],
+                hints: [
+                    "A palavra-chave para criar estruturas de dados",
+                    "Vem de 'structure' (estrutura)",
+                    "Digite: <code>struct</code>"
+                ],
+                successMessage: "Excelente! <code>struct</code> cria um tipo personalizado. Agora temos o tipo 'Carro'!"
+            },
+            {
+                level: 32,
+                title: "Criando Instâncias",
+                category: "Structs",
+                objective: "Aprenda a criar um valor do tipo struct.",
+                teaching: `Depois de definir a struct, você cria <strong>instâncias</strong> dela:<br><br>
+                    <code>let maria = Pessoa {</code><br>
+                    <code>    nome: String::from("Maria"),</code><br>
+                    <code>    idade: 25,</code><br>
+                    <code>};</code><br><br>
+                    Cada campo recebe um valor com <code>campo: valor</code>.`,
+                syntax: 'let var = NomeStruct { campo: valor };',
+                code: [
+                    'struct Produto {',
+                    '    nome: String,',
+                    '    preco: f64,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let item = Produto {',
+                    '        nome: String::from("Café"),',
+                    '        ___: 9.90,',
+                    '    };',
+                    '}'
+                ],
+                inputLine: 8,
+                inputPlaceholder: 'preco',
+                correctAnswers: ['preco'],
+                almostCorrect: [
+                    { answer: 'preço', feedback: 'Sem acento! O nome do campo é <code>preco</code>.' },
+                    { answer: 'price', feedback: 'Use o nome definido na struct: <code>preco</code>.' }
+                ],
+                hints: [
+                    "Qual é o nome do segundo campo da struct?",
+                    "Olhe na definição: <code>preco: f64</code>",
+                    "Digite: <code>preco</code>"
+                ],
+                successMessage: "Ótimo! Você criou uma instância de Produto com nome e preço!"
+            },
+            {
+                level: 33,
+                title: "Acessando Campos",
+                category: "Structs",
+                objective: "Aprenda a ler valores dos campos de uma struct.",
+                teaching: `Para acessar um campo, use <strong>ponto</strong>: <code>variavel.campo</code><br><br>
+                    <code>let p = Pessoa { nome: "Ana", idade: 30 };</code><br>
+                    <code>println!("{}", p.nome);  // "Ana"</code><br>
+                    <code>println!("{}", p.idade); // 30</code>`,
+                syntax: 'variavel.campo',
+                code: [
+                    'struct Livro {',
+                    '    titulo: String,',
+                    '    paginas: u32,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let livro = Livro {',
+                    '        titulo: String::from("O Hobbit"),',
+                    '        paginas: 310,',
+                    '    };',
+                    '    println!("Páginas: {}", livro___paginas);',
+                    '}'
+                ],
+                inputLine: 10,
+                inputPlaceholder: '.',
+                correctAnswers: ['.'],
+                almostCorrect: [
+                    { answer: '->', feedback: 'Rust usa <code>.</code> para acessar campos, não <code>-></code>.' }
+                ],
+                hints: [
+                    "Qual símbolo separa a variável do campo?",
+                    "É um ponto",
+                    "Digite: <code>.</code>"
+                ],
+                successMessage: "Correto! <code>livro.paginas</code> acessa o campo. Mostra: 310 páginas."
+            },
+            {
+                level: 34,
+                title: "Métodos em Structs",
+                category: "Structs",
+                objective: "Adicione funções às suas structs com impl.",
+                teaching: `Podemos adicionar <strong>métodos</strong> às structs usando <code>impl</code>:<br><br>
+                    <code>impl Pessoa {</code><br>
+                    <code>    fn apresentar(&self) {</code><br>
+                    <code>        println!("Olá, sou {}", self.nome);</code><br>
+                    <code>    }</code><br>
+                    <code>}</code><br><br>
+                    <code>&self</code> é uma referência à própria instância.`,
+                syntax: 'impl NomeStruct {\n    fn metodo(&self) { }\n}',
+                code: [
+                    'struct Retangulo {',
+                    '    largura: u32,',
+                    '    altura: u32,',
+                    '}',
+                    '',
+                    '___ Retangulo {',
+                    '    fn area(&self) -> u32 {',
+                    '        self.largura * self.altura',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 5,
+                inputPlaceholder: 'impl',
+                correctAnswers: ['impl'],
+                almostCorrect: [
+                    { answer: 'implement', feedback: 'Use a abreviação: <code>impl</code>, não <code>implement</code>.' }
+                ],
+                hints: [
+                    "Abreviação de 'implement' (implementar)",
+                    "Tem 4 letras: i-m-p-l",
+                    "Digite: <code>impl</code>"
+                ],
+                successMessage: "Perfeito! <code>impl</code> adiciona métodos. Agora Retangulo tem o método area()!"
+            },
+            {
+                level: 35,
+                title: "Chamando Métodos",
+                category: "Structs",
+                objective: "Use os métodos que você criou.",
+                teaching: `Chamamos métodos com <code>instancia.metodo()</code>:<br><br>
+                    <code>let ret = Retangulo { largura: 10, altura: 5 };</code><br>
+                    <code>let a = ret.area(); // 50</code><br><br>
+                    O <code>&self</code> é passado automaticamente!`,
+                syntax: 'instancia.metodo()',
+                code: [
+                    'struct Contador {',
+                    '    valor: i32,',
+                    '}',
+                    '',
+                    'impl Contador {',
+                    '    fn dobro(&self) -> i32 {',
+                    '        self.valor * 2',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let c = Contador { valor: 21 };',
+                    '    println!("{}", c___dobro());',
+                    '}'
+                ],
+                inputLine: 12,
+                inputPlaceholder: '.',
+                correctAnswers: ['.'],
+                almostCorrect: [],
+                hints: [
+                    "Como acessamos campos? Mesma coisa para métodos!",
+                    "Use o ponto",
+                    "Digite: <code>.</code>"
+                ],
+                successMessage: "Excelente! <code>c.dobro()</code> retorna 42. Você domina structs!"
+            },
+
+            // === BLOCO 8: Enums (36-40) ===
+            {
+                level: 36,
+                title: "O que são Enums?",
+                category: "Enums",
+                objective: "Aprenda a criar tipos com múltiplas variantes!",
+                teaching: `<strong>Enums</strong> representam valores que podem ser <strong>uma coisa OU outra</strong>.<br><br>
+                    <strong>Analogia:</strong> Um semáforo só pode estar:<br>
+                    • Verde OU<br>
+                    • Amarelo OU<br>
+                    • Vermelho<br><br>
+                    <code>enum Semaforo {</code><br>
+                    <code>    Verde,</code><br>
+                    <code>    Amarelo,</code><br>
+                    <code>    Vermelho,</code><br>
+                    <code>}</code>`,
+                syntax: 'enum Nome {\n    Variante1,\n    Variante2,\n}',
+                code: [
+                    '___ DiaSemana {',
+                    '    Segunda,',
+                    '    Terca,',
+                    '    Quarta,',
+                    '    Quinta,',
+                    '    Sexta,',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'enum',
+                correctAnswers: ['enum'],
+                almostCorrect: [
+                    { answer: 'Enum', feedback: 'Minúsculo: <code>enum</code>, não <code>Enum</code>.' }
+                ],
+                hints: [
+                    "A palavra vem de 'enumeration' (enumeração)",
+                    "Tem 4 letras: e-n-u-m",
+                    "Digite: <code>enum</code>"
+                ],
+                successMessage: "Ótimo! <code>enum</code> cria um tipo com variantes. DiaSemana pode ser Segunda, Terca, etc."
+            },
+            {
+                level: 37,
+                title: "Usando Enums",
+                category: "Enums",
+                objective: "Crie valores de um tipo enum.",
+                teaching: `Para usar uma variante do enum, use <code>::</code>:<br><br>
+                    <code>let luz = Semaforo::Verde;</code><br>
+                    <code>let dia = DiaSemana::Sexta;</code><br><br>
+                    O <code>::</code> indica "a variante X do enum Y".`,
+                syntax: 'let var = NomeEnum::Variante;',
+                code: [
+                    'enum Status {',
+                    '    Ativo,',
+                    '    Inativo,',
+                    '    Pendente,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let meu_status = Status___Ativo;',
+                    '}'
+                ],
+                inputLine: 7,
+                inputPlaceholder: '::',
+                correctAnswers: ['::'],
+                almostCorrect: [
+                    { answer: '.', feedback: 'Enums usam <code>::</code>, não ponto.' },
+                    { answer: ':', feedback: 'São DOIS dois-pontos: <code>::</code>' }
+                ],
+                hints: [
+                    "Para acessar variantes de enum, usamos dois dois-pontos",
+                    "É diferente do ponto usado em structs",
+                    "Digite: <code>::</code>"
+                ],
+                successMessage: "Correto! <code>Status::Ativo</code> cria um valor do tipo Status."
+            },
+            {
+                level: 38,
+                title: "Enums com Dados",
+                category: "Enums",
+                objective: "Enums podem carregar dados junto!",
+                teaching: `Variantes podem ter <strong>dados associados</strong>:<br><br>
+                    <code>enum Mensagem {</code><br>
+                    <code>    Texto(String),</code><br>
+                    <code>    Numero(i32),</code><br>
+                    <code>    Nada,</code><br>
+                    <code>}</code><br><br>
+                    <code>let m = Mensagem::Texto(String::from("Oi"));</code><br>
+                    <code>let n = Mensagem::Numero(42);</code>`,
+                syntax: 'Variante(tipo)',
+                code: [
+                    'enum Evento {',
+                    '    Clique { x: i32, y: i32 },',
+                    '    Tecla(char),',
+                    '    Sair,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let e = Evento::Tecla(___);',
+                    '}'
+                ],
+                inputLine: 7,
+                inputPlaceholder: "'a'",
+                correctAnswers: ["'a'", "'b'", "'c'", "'x'", "'y'", "'z'", "'A'", "'B'", "'1'", "'0'"],
+                almostCorrect: [
+                    { answer: 'a', feedback: 'Caracteres usam aspas simples: <code>\'a\'</code>' },
+                    { answer: '"a"', feedback: 'Caractere único usa aspas SIMPLES: <code>\'a\'</code>, não duplas.' }
+                ],
+                hints: [
+                    "Tecla espera um char (caractere)",
+                    "Caracteres usam aspas simples",
+                    "Digite: <code>'a'</code>"
+                ],
+                successMessage: "Perfeito! Enums com dados são muito poderosos em Rust!"
+            },
+            {
+                level: 39,
+                title: "Match com Enums",
+                category: "Enums",
+                objective: "Use match para lidar com diferentes variantes.",
+                teaching: `<code>match</code> é perfeito para enums — você trata cada caso:<br><br>
+                    <code>match semaforo {</code><br>
+                    <code>    Semaforo::Verde => println!("Siga!"),</code><br>
+                    <code>    Semaforo::Amarelo => println!("Atenção!"),</code><br>
+                    <code>    Semaforo::Vermelho => println!("Pare!"),</code><br>
+                    <code>}</code><br><br>
+                    Rust OBRIGA você a tratar TODAS as variantes!`,
+                syntax: 'match valor {\n    Enum::Var => ...,\n}',
+                code: [
+                    'enum Moeda {',
+                    '    Real,',
+                    '    Dolar,',
+                    '    Euro,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let m = Moeda::Real;',
+                    '    ___ m {',
+                    '        Moeda::Real => println!("R$"),',
+                    '        Moeda::Dolar => println!("$"),',
+                    '        Moeda::Euro => println!("€"),',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 8,
+                inputPlaceholder: 'match',
+                correctAnswers: ['match'],
+                almostCorrect: [],
+                hints: [
+                    "Qual palavra-chave para pattern matching?",
+                    "Rima com 'catch'",
+                    "Digite: <code>match</code>"
+                ],
+                successMessage: "Excelente! match + enum é uma combinação poderosa e segura!"
+            },
+            {
+                level: 40,
+                title: "Option: Enum Especial",
+                category: "Enums",
+                objective: "Conheça o enum mais importante do Rust!",
+                teaching: `<code>Option</code> é um enum que representa "pode ter ou não ter":<br><br>
+                    <code>enum Option&lt;T&gt; {</code><br>
+                    <code>    Some(T),  // tem valor</code><br>
+                    <code>    None,     // não tem valor</code><br>
+                    <code>}</code><br><br>
+                    Rust NÃO tem <code>null</code>! Usa <code>Option</code> no lugar.<br>
+                    É mais seguro porque OBRIGA você a verificar!`,
+                syntax: 'Some(valor) ou None',
+                code: [
+                    'fn buscar(id: i32) -> Option<String> {',
+                    '    if id == 1 {',
+                    '        ___(String::from("Encontrado!"))',
+                    '    } else {',
+                    '        None',
+                    '    }',
                     '}'
                 ],
                 inputLine: 2,
-                inputPlaceholder: '{}',
-                correctAnswers: ['{}'],
+                inputPlaceholder: 'Some',
+                correctAnswers: ['Some'],
+                almostCorrect: [
+                    { answer: 'some', feedback: 'Com maiúscula: <code>Some</code>, não <code>some</code>.' },
+                    { answer: 'return', feedback: 'Não precisa de return! Apenas <code>Some(...)</code>.' }
+                ],
+                hints: [
+                    "Se encontrou algo, retorna 'algum' valor",
+                    "'Some' significa 'algum' em inglês",
+                    "Digite: <code>Some</code>"
+                ],
+                successMessage: "Perfeito! Option elimina erros de null. Some = tem valor, None = vazio."
+            },
+
+            // === CONCLUSÃO ===
+            {
+                level: 41,
+                title: "🎉 Parabéns, Rustacean!",
+                category: "Conclusão",
+                objective: "Você completou o curso básico de Rust!",
+                teaching: `<strong>🦀 Você aprendeu MUITO!</strong><br><br>
+                    ✅ Variáveis e mutabilidade<br>
+                    ✅ Tipos básicos e compostos<br>
+                    ✅ Operadores e comparações<br>
+                    ✅ Controle de fluxo<br>
+                    ✅ Funções<br>
+                    ✅ <strong>Structs</strong> — seus próprios tipos<br>
+                    ✅ <strong>Enums</strong> — variantes e Option<br><br>
+                    <strong>Próximos passos:</strong> Ownership, Borrowing, Lifetimes, Result, Traits...`,
+                syntax: 'println!("🦀 Rust!");',
+                code: [
+                    'fn main() {',
+                    '    println!("Sou um ___!");',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'Rustacean',
+                correctAnswers: ['Rustacean', 'rustacean', 'RUSTACEAN'],
                 almostCorrect: [],
                 hints: [
-                    "Para interpolar variáveis, usamos chaves vazias",
-                    "É o placeholder que aprendemos no início",
-                    "Digite: <code>{}</code>"
+                    "Como são chamados os programadores Rust?",
+                    "É um crustáceo... um Rust-áceo!",
+                    "Digite: <code>Rustacean</code>"
                 ],
-                successMessage: "🎉 PARABÉNS! Você completou todos os 30 níveis! Você está pronto para conceitos avançados como Ownership e Borrowing!"
+                successMessage: "🎉🦀 PARABÉNS! Você completou todos os 41 níveis! Você é oficialmente um Rustacean! Continue praticando e explorando conceitos avançados!"
             }
         ];
 
@@ -2750,7 +3164,221 @@
                     "Apenas 2 letras: f-n",
                     "Digite: <code>fn</code>"
                 ],
-                successMessage: "🎉 PARABÉNS! Você completou o modo iniciante! Agora conhece variáveis, tipos, operadores, decisões e funções. Você está pronto para conceitos mais avançados!"
+                successMessage: "Ótimo! Você sabe criar funções! Agora vamos aprender a criar seus próprios tipos de dados!"
+            },
+
+            // === BLOCO 6: Structs para Iniciantes (21-24) ===
+            {
+                level: 21,
+                title: "Criando Fichas Cadastrais",
+                category: "Structs",
+                objective: "Aprenda a agrupar informações relacionadas!",
+                teaching: `<strong>🎯 Analogia:</strong> Pense em uma <strong>ficha de cadastro</strong>:<br><br>
+                    📋 <strong>Ficha do Aluno</strong><br>
+                    • Nome: Maria<br>
+                    • Idade: 20<br>
+                    • Aprovado: true<br><br>
+                    Em Rust, chamamos isso de <code>struct</code> (estrutura):<br>
+                    <code>struct Aluno {</code><br>
+                    <code>    nome: String,</code><br>
+                    <code>    idade: u32,</code><br>
+                    <code>}</code>`,
+                syntax: 'struct Nome {\n    campo: Tipo,\n}',
+                code: [
+                    '___ Pessoa {',
+                    '    nome: String,',
+                    '    idade: u32,',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'struct',
+                correctAnswers: ['struct'],
+                almostCorrect: [
+                    { answer: 'class', feedback: 'Rust não tem <code>class</code>! Use <code>struct</code> (estrutura).' },
+                    { answer: 'ficha', feedback: 'A palavra-chave é <code>struct</code> (do inglês structure).' }
+                ],
+                hints: [
+                    "É a palavra para criar uma 'estrutura' de dados",
+                    "Vem de 'structure' em inglês",
+                    "Digite: <code>struct</code>"
+                ],
+                successMessage: "Excelente! <code>struct</code> cria uma 'ficha' — um tipo com vários campos!"
+            },
+            {
+                level: 22,
+                title: "Preenchendo a Ficha",
+                category: "Structs",
+                objective: "Aprenda a criar valores usando sua struct.",
+                teaching: `<strong>🎯 Analogia:</strong> Depois de criar o modelo da ficha, você <strong>preenche</strong> ela:<br><br>
+                    <code>let maria = Pessoa {</code><br>
+                    <code>    nome: String::from("Maria"),</code><br>
+                    <code>    idade: 25,</code><br>
+                    <code>};</code><br><br>
+                    Cada campo recebe seu valor com <code>campo: valor</code>.`,
+                syntax: 'let var = Struct { campo: valor };',
+                code: [
+                    'struct Pet {',
+                    '    nome: String,',
+                    '    idade: u32,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let meu_pet = Pet {',
+                    '        nome: String::from("Rex"),',
+                    '        ___: 3,',
+                    '    };',
+                    '}'
+                ],
+                inputLine: 8,
+                inputPlaceholder: 'idade',
+                correctAnswers: ['idade'],
+                almostCorrect: [
+                    { answer: 'age', feedback: 'Use o nome do campo definido na struct: <code>idade</code>.' }
+                ],
+                hints: [
+                    "Qual é o segundo campo da struct Pet?",
+                    "Olhe na definição: <code>idade: u32</code>",
+                    "Digite: <code>idade</code>"
+                ],
+                successMessage: "Perfeito! Você 'preencheu' a ficha do Rex com nome e idade!"
+            },
+            {
+                level: 23,
+                title: "Lendo a Ficha",
+                category: "Structs",
+                objective: "Acesse os campos da struct.",
+                teaching: `<strong>🎯 Analogia:</strong> Para ler um campo específico da ficha, use <strong>ponto</strong>:<br><br>
+                    <code>pet.nome</code> → "Rex"<br>
+                    <code>pet.idade</code> → 3<br><br>
+                    É como dizer: "da ficha do pet, me dá o nome".`,
+                syntax: 'variavel.campo',
+                code: [
+                    'struct Livro {',
+                    '    titulo: String,',
+                    '    paginas: u32,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let livro = Livro {',
+                    '        titulo: String::from("Harry Potter"),',
+                    '        paginas: 300,',
+                    '    };',
+                    '    println!("Tem {} páginas", livro___paginas);',
+                    '}'
+                ],
+                inputLine: 10,
+                inputPlaceholder: '.',
+                correctAnswers: ['.'],
+                almostCorrect: [],
+                hints: [
+                    "Qual símbolo conecta a variável ao campo?",
+                    "É um pontinho",
+                    "Digite: <code>.</code>"
+                ],
+                successMessage: "Correto! <code>livro.paginas</code> acessa o campo. Harry Potter tem 300 páginas!"
+            },
+            {
+                level: 24,
+                title: "Múltiplas Escolhas",
+                category: "Enums",
+                objective: "Aprenda sobre tipos com opções exclusivas!",
+                teaching: `<strong>🎯 Analogia:</strong> Um <strong>semáforo</strong> só pode estar em UM estado:<br><br>
+                    🔴 Vermelho OU<br>
+                    🟡 Amarelo OU<br>
+                    🟢 Verde<br><br>
+                    Nunca dois ao mesmo tempo! Isso é um <code>enum</code>:<br>
+                    <code>enum Semaforo {</code><br>
+                    <code>    Verde,</code><br>
+                    <code>    Amarelo,</code><br>
+                    <code>    Vermelho,</code><br>
+                    <code>}</code>`,
+                syntax: 'enum Nome {\n    Opcao1,\n    Opcao2,\n}',
+                code: [
+                    '___ Tamanho {',
+                    '    Pequeno,',
+                    '    Medio,',
+                    '    Grande,',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'enum',
+                correctAnswers: ['enum'],
+                almostCorrect: [
+                    { answer: 'Enum', feedback: 'Minúsculo: <code>enum</code>, não <code>Enum</code>.' }
+                ],
+                hints: [
+                    "Vem de 'enumeration' (enumeração/lista)",
+                    "Tem 4 letras: e-n-u-m",
+                    "Digite: <code>enum</code>"
+                ],
+                successMessage: "Ótimo! <code>enum</code> cria tipos com opções. Tamanho pode ser Pequeno, Medio ou Grande!"
+            },
+            {
+                level: 25,
+                title: "Escolhendo uma Opção",
+                category: "Enums",
+                objective: "Use uma variante do enum.",
+                teaching: `<strong>🎯</strong> Para usar uma opção do enum, use <code>::</code> (dois dois-pontos):<br><br>
+                    <code>let luz = Semaforo::Verde;</code><br>
+                    <code>let tamanho = Tamanho::Grande;</code><br><br>
+                    Lê-se: "do enum Semaforo, a opção Verde".`,
+                syntax: 'let var = Enum::Variante;',
+                code: [
+                    'enum Humor {',
+                    '    Feliz,',
+                    '    Triste,',
+                    '    Neutro,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let meu_humor = Humor___Feliz;',
+                    '}'
+                ],
+                inputLine: 7,
+                inputPlaceholder: '::',
+                correctAnswers: ['::'],
+                almostCorrect: [
+                    { answer: '.', feedback: 'Enums usam <code>::</code>, não ponto.' },
+                    { answer: ':', feedback: 'São DOIS dois-pontos: <code>::</code>' }
+                ],
+                hints: [
+                    "São dois dois-pontos juntos",
+                    "Diferente do ponto usado em structs",
+                    "Digite: <code>::</code>"
+                ],
+                successMessage: "Perfeito! <code>Humor::Feliz</code> escolhe a opção 'Feliz' do enum Humor! 😊"
+            },
+            {
+                level: 26,
+                title: "🎉 Parabéns, Iniciante!",
+                category: "Conclusão",
+                objective: "Você completou o básico de Rust!",
+                teaching: `<strong>🦀 Você aprendeu MUITO!</strong><br><br>
+                    ✅ Variáveis e tipos (caixas etiquetadas)<br>
+                    ✅ Mutabilidade (quadro branco vs porta-retrato)<br>
+                    ✅ Operadores (calculadora)<br>
+                    ✅ Comparações (= vs ==)<br>
+                    ✅ Decisões (if/else/match/for)<br>
+                    ✅ Funções (receitas reutilizáveis)<br>
+                    ✅ <strong>Structs</strong> (fichas cadastrais)<br>
+                    ✅ <strong>Enums</strong> (múltipla escolha)<br><br>
+                    <strong>Próximo passo:</strong> Tente o modo Normal para aprofundar!`,
+                syntax: 'println!("🦀");',
+                code: [
+                    'fn main() {',
+                    '    println!("Eu sou um ___!");',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'Rustacean',
+                correctAnswers: ['Rustacean', 'rustacean'],
+                almostCorrect: [],
+                hints: [
+                    "Como chamamos quem programa em Rust?",
+                    "É como um crustáceo... Rust-áceo!",
+                    "Digite: <code>Rustacean</code>"
+                ],
+                successMessage: "🎉🦀 INCRÍVEL! Você completou o modo iniciante! Você agora entende os fundamentos do Rust. Que tal tentar o modo Normal para se aprofundar?"
             }
         ];
 
