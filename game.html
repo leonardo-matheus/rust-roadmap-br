@@ -2086,12 +2086,15 @@
                 title: "O que é um Programa?",
                 category: "Primeiro Contato",
                 objective: "Vamos entender como computadores funcionam e escrever seu primeiro código!",
-                teaching: `<strong>🎯 Analogia:</strong> Um programa é como uma <strong>receita de bolo</strong>.<br><br>
-                    • Você escreve os passos (instruções)<br>
-                    • O computador segue cada passo exatamente como escrito<br>
-                    • Se a receita estiver errada, o bolo não sai bom!<br><br>
-                    Em Rust, <code>println!</code> é o comando para "falar" — mostrar algo na tela.<br>
-                    <strong>Importante:</strong> O <code>!</code> indica que é uma <strong>macro</strong>, não uma função comum.`,
+                teaching: `<strong>🎯 O que é Programação?</strong><br><br>
+                    Programar é <strong>dar instruções ao computador</strong>, como uma receita de bolo:<br>
+                    • Você escreve os passos (código)<br>
+                    • O computador segue EXATAMENTE o que você escreveu<br>
+                    • Se errar uma letra, não funciona!<br><br>
+                    <strong>Seu primeiro comando:</strong> <code>println!</code><br>
+                    • Faz o computador "falar" (mostrar texto na tela)<br>
+                    • O <code>!</code> indica que é uma <strong>macro</strong> (comando especial do Rust)<br>
+                    • O texto vai entre <strong>aspas duplas</strong>: <code>"texto"</code>`,
                 syntax: 'println!("sua mensagem");',
                 code: [
                     'fn main() {',
@@ -2503,15 +2506,17 @@
             },
             {
                 level: 14,
-                title: "Comparando Valores",
+                title: "= vs == (Super Importante!)",
                 category: "Operações",
-                objective: "Aprenda a comparar se valores são iguais.",
-                teaching: `<strong>🎯 Analogia:</strong> Às vezes precisamos PERGUNTAR, não calcular:<br><br>
-                    "5 é igual a 5?" → <code>5 == 5</code> → <code>true</code><br>
-                    "5 é igual a 3?" → <code>5 == 3</code> → <code>false</code><br><br>
-                    <strong>IMPORTANTE:</strong><br>
-                    • <code>=</code> (um) → atribui valor ("guarde isso")<br>
-                    • <code>==</code> (dois) → pergunta ("são iguais?")`,
+                objective: "Entenda a diferença crucial entre atribuir e comparar.",
+                teaching: `<strong>🎯 A CONFUSÃO MAIS COMUM EM PROGRAMAÇÃO!</strong><br><br>
+                    <strong><code>=</code> (um igual) → ATRIBUIÇÃO</strong><br>
+                    É como <em>"coloque isso na caixa"</em><br>
+                    <code>let x = 5;</code> → guarda 5 em x<br><br>
+                    <strong><code>==</code> (dois iguais) → PERGUNTA</strong><br>
+                    É como <em>"esses dois são iguais?"</em><br>
+                    <code>x == 5</code> → retorna <code>true</code> ou <code>false</code><br><br>
+                    <strong>💡 E o <code>===</code>?</strong> Em Rust não existe! JavaScript usa <code>===</code> para comparação estrita, mas em Rust <code>==</code> já é estrito — não converte tipos automaticamente.`,
                 syntax: 'let iguais = a == b;',
                 code: [
                     'fn main() {',
