@@ -4666,6 +4666,137 @@
         }
 
         init();
+
+        // ============================================
+        // PROTEÇÃO ANTI-DEVTOOLS (INBURLÁVEL)
+        // ============================================
+
+        (function() {
+            const blockOverlay = document.createElement('div');
+            blockOverlay.id = 'devtools-block';
+            blockOverlay.innerHTML = `
+                <div style="text-align:center;padding:2rem;">
+                    <div style="font-size:4rem;margin-bottom:1rem;">🚫</div>
+                    <h1 style="color:#F74C00;margin-bottom:1rem;">Acesso Bloqueado</h1>
+                    <p style="color:#999;max-width:400px;margin:0 auto;">
+                        DevTools detectado. Feche as ferramentas de desenvolvedor e recarregue a página para continuar jogando.
+                    </p>
+                    <button onclick="location.reload()" style="margin-top:2rem;padding:1rem 2rem;background:#F74C00;color:white;border:none;border-radius:8px;cursor:pointer;font-size:1rem;">
+                        Recarregar Página
+                    </button>
+                </div>
+            `;
+            blockOverlay.style.cssText = `
+                display:none;position:fixed;inset:0;background:#1a1a1a;
+                z-index:999999;justify-content:center;align-items:center;
+                font-family:Inter,sans-serif;
+            `;
+            document.body.appendChild(blockOverlay);
+
+            let isBlocked = false;
+
+            function blockGame() {
+                if (!isBlocked) {
+                    isBlocked = true;
+                    blockOverlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // 1. Bloquear atalhos de teclado
+            document.addEventListener('keydown', function(e) {
+                // F12
+                if (e.key === 'F12' || e.keyCode === 123) {
+                    e.preventDefault();
+                    blockGame();
+                    return false;
+                }
+                // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+                if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) {
+                    e.preventDefault();
+                    blockGame();
+                    return false;
+                }
+                // Ctrl+U (view source)
+                if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                    e.preventDefault();
+                    blockGame();
+                    return false;
+                }
+                // Cmd+Option+I (Mac)
+                if (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i')) {
+                    e.preventDefault();
+                    blockGame();
+                    return false;
+                }
+            }, true);
+
+            // 2. Bloquear clique direito em toda página
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            }, true);
+
+            // 3. Detectar DevTools por tamanho da janela
+            const threshold = 160;
+            let lastCheck = Date.now();
+
+            function checkDevTools() {
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+                if (widthThreshold || heightThreshold) {
+                    blockGame();
+                }
+            }
+
+            // 4. Detectar DevTools por debugger timing
+            function checkDebugger() {
+                const start = performance.now();
+                debugger;
+                const end = performance.now();
+                if (end - start > 100) {
+                    blockGame();
+                }
+            }
+
+            // 5. Detectar se console está aberto via toString
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function() {
+                    blockGame();
+                    return '';
+                }
+            });
+
+            // 6. Verificações contínuas
+            setInterval(function() {
+                checkDevTools();
+                // Console check silencioso
+                console.log('%c', element);
+                console.clear();
+            }, 1000);
+
+            // 7. Verificar ao redimensionar
+            window.addEventListener('resize', checkDevTools);
+
+            // 8. Desabilitar arrastar elementos
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 9. Bloquear seleção global (exceto input)
+            document.addEventListener('selectstart', function(e) {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // 10. Verificação inicial
+            checkDevTools();
+        })();
     </script>
 </body>
 </html>
