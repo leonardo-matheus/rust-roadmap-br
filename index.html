@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rust: Do Zero ao Júnior | Roadmap Completo</title>
     <meta name="description" content="Roadmap profissional e didático para aprender Rust do zero ao nível júnior.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#F74C00">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -276,6 +281,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        nav .logo-img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
         }
 
         nav ul { display: flex; list-style: none; gap: 2rem; }
@@ -940,7 +951,7 @@
 
     <nav id="navbar">
         <div class="container">
-            <a href="#" class="logo">Rust Roadmap</a>
+            <a href="#" class="logo"><img src="logo.png" alt="Rust Crab" class="logo-img"> Rust Roadmap</a>
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
             <ul id="navMenu">
                 <li><a href="#section-3">Fundamentos</a></li>
