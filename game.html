@@ -1754,7 +1754,7 @@
                 successMessage: "Correto! <code>false || true</code> = <code>true</code>. Pelo menos uma é verdadeira!"
             },
 
-            // === BLOCO 5: Controle de Fluxo (21-25) ===
+            // === BLOCO 5: Controle de Fluxo (21-30) - EXPANDIDO ===
             {
                 level: 21,
                 title: "Condicional if",
@@ -1790,6 +1790,42 @@
             },
             {
                 level: 22,
+                title: "Escrevendo a Condição",
+                category: "Controle de Fluxo",
+                objective: "Agora você escreve a condição completa!",
+                teaching: `Você já sabe usar <code>if</code>. Agora pratique escrevendo a <strong>condição</strong>!<br><br>
+                    Operadores de comparação:<br>
+                    • <code>></code> maior que<br>
+                    • <code><</code> menor que<br>
+                    • <code>>=</code> maior ou igual<br>
+                    • <code>==</code> igual<br><br>
+                    Verifique se <code>idade</code> é maior ou igual a 18:`,
+                syntax: 'if idade >= 18 { }',
+                code: [
+                    'fn main() {',
+                    '    let idade = 21;',
+                    '    if ___ {',
+                    '        println!("Pode votar!");',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'idade >= 18',
+                correctAnswers: ['idade >= 18', 'idade>=18', 'idade > 17', 'idade>17'],
+                almostCorrect: [
+                    { answer: 'idade > 18', feedback: 'Quase! Use <code>>=</code> para incluir quem tem 18.' },
+                    { answer: 'idade = 18', feedback: 'Cuidado! Para comparar use <code>>=</code>, não <code>=</code>.' },
+                    { answer: '(idade >= 18)', feedback: 'Correto, mas em Rust não precisamos dos parênteses!' }
+                ],
+                hints: [
+                    "Compare 'idade' com 18 usando maior ou igual",
+                    "O operador maior ou igual é: >=",
+                    "Digite: <code>idade >= 18</code>"
+                ],
+                successMessage: "Excelente! Você escreveu a condição completa! 21 >= 18 é true."
+            },
+            {
+                level: 23,
                 title: "If com Else",
                 category: "Controle de Fluxo",
                 objective: "Adicione um bloco alternativo quando a condição for falsa.",
@@ -1802,11 +1838,11 @@
                 syntax: 'if cond { } else { }',
                 code: [
                     'fn main() {',
-                    '    let idade = 15;',
-                    '    if idade >= 18 {',
-                    '        println!("Maior de idade");',
+                    '    let temperatura = 15;',
+                    '    if temperatura > 25 {',
+                    '        println!("Está calor!");',
                     '    } ___ {',
-                    '        println!("Menor de idade");',
+                    '        println!("Está frio!");',
                     '    }',
                     '}'
                 ],
@@ -1821,10 +1857,83 @@
                     "Tem 4 letras",
                     "Digite: <code>else</code>"
                 ],
-                successMessage: "Ótimo! Como 15 < 18, o bloco <code>else</code> será executado."
+                successMessage: "Ótimo! Como 15 < 25, o bloco <code>else</code> mostra 'Está frio!'."
             },
             {
-                level: 23,
+                level: 24,
+                title: "If-Else Completo",
+                category: "Controle de Fluxo",
+                objective: "Escreva um if-else quase completo!",
+                teaching: `Agora pratique escrevendo mais código!<br><br>
+                    Complete o bloco if para verificar se o número é positivo:<br><br>
+                    <code>if numero > 0 { ... } else { ... }</code>`,
+                syntax: 'if numero > 0 { positivo } else { negativo }',
+                code: [
+                    'fn main() {',
+                    '    let numero = -5;',
+                    '    ___ {',
+                    '        println!("Positivo!");',
+                    '    } else {',
+                    '        println!("Não positivo!");',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'if numero > 0',
+                correctAnswers: ['if numero > 0', 'if numero>0', 'if numero >= 1', 'if numero>=1'],
+                almostCorrect: [
+                    { answer: 'numero > 0', feedback: 'Não esqueça do <code>if</code> no início!' },
+                    { answer: 'if (numero > 0)', feedback: 'Correto, mas sem parênteses em Rust!' }
+                ],
+                hints: [
+                    "Comece com 'if' e depois a condição",
+                    "Verifique se numero é maior que 0",
+                    "Digite: <code>if numero > 0</code>"
+                ],
+                successMessage: "Perfeito! Você escreveu o if completo! -5 não é > 0, então mostra 'Não positivo!'."
+            },
+            {
+                level: 25,
+                title: "Else If",
+                category: "Controle de Fluxo",
+                objective: "Use else if para múltiplas condições.",
+                teaching: `Quando precisa verificar várias condições, use <code>else if</code>:<br><br>
+                    <code>if nota >= 9 {</code><br>
+                    <code>    println!("A");</code><br>
+                    <code>} else if nota >= 7 {</code><br>
+                    <code>    println!("B");</code><br>
+                    <code>} else {</code><br>
+                    <code>    println!("C");</code><br>
+                    <code>}</code>`,
+                syntax: 'if ... else if ... else',
+                code: [
+                    'fn main() {',
+                    '    let nota = 8;',
+                    '    if nota >= 9 {',
+                    '        println!("Excelente!");',
+                    '    } ___ nota >= 7 {',
+                    '        println!("Bom!");',
+                    '    } else {',
+                    '        println!("Estude mais!");',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'else if',
+                correctAnswers: ['else if'],
+                almostCorrect: [
+                    { answer: 'elif', feedback: 'Rust não usa <code>elif</code>. Use <code>else if</code> separado.' },
+                    { answer: 'elseif', feedback: 'São duas palavras separadas: <code>else if</code>.' }
+                ],
+                hints: [
+                    "Em Rust são duas palavras separadas",
+                    "else + if",
+                    "Digite: <code>else if</code>"
+                ],
+                successMessage: "Ótimo! nota=8 não é >=9, mas é >=7, então mostra 'Bom!'."
+            },
+            {
+                level: 26,
                 title: "Match Básico",
                 category: "Controle de Fluxo",
                 objective: "Aprenda o poderoso pattern matching do Rust!",
@@ -1839,11 +1948,11 @@
                 syntax: 'match valor {\n    padrão => ação,\n}',
                 code: [
                     'fn main() {',
-                    '    let dia = 1;',
-                    '    ___ dia {',
-                    '        1 => println!("Segunda"),',
-                    '        2 => println!("Terça"),',
-                    '        _ => println!("Outro dia"),',
+                    '    let cor = "verde";',
+                    '    ___ cor {',
+                    '        "vermelho" => println!("Pare!"),',
+                    '        "verde" => println!("Siga!"),',
+                    '        _ => println!("Atenção!"),',
                     '    }',
                     '}'
                 ],
@@ -1858,10 +1967,44 @@
                     "Não é 'switch' como em outras linguagens",
                     "Digite: <code>match</code>"
                 ],
-                successMessage: "Excelente! <code>match</code> é pattern matching — mais poderoso que switch!"
+                successMessage: "Excelente! cor='verde', então mostra 'Siga!'."
             },
             {
-                level: 24,
+                level: 27,
+                title: "Match com Padrão",
+                category: "Controle de Fluxo",
+                objective: "Escreva um braço do match!",
+                teaching: `Cada "braço" do match tem a sintaxe:<br><br>
+                    <code>padrão => expressão,</code><br><br>
+                    O <code>=></code> (seta gorda) separa o padrão da ação.<br>
+                    Note a vírgula no final!`,
+                syntax: 'valor => ação,',
+                code: [
+                    'fn main() {',
+                    '    let numero = 1;',
+                    '    match numero {',
+                    '        ___',
+                    '        2 => println!("Dois!"),',
+                    '        _ => println!("Outro!"),',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: '1 => println!("Um!"),',
+                correctAnswers: ['1 => println!("Um!"),', '1 => println!("Um!")', '1=>println!("Um!"),'],
+                almostCorrect: [
+                    { answer: '1 = println!("Um!")', feedback: 'Use <code>=></code> (seta), não <code>=</code>!' },
+                    { answer: '1: println!("Um!")', feedback: 'Use <code>=></code> (seta), não <code>:</code>!' }
+                ],
+                hints: [
+                    "O padrão é 1, a ação é println!(\"Um!\")",
+                    "Use => para separar padrão da ação",
+                    "Digite: <code>1 => println!(\"Um!\"),</code>"
+                ],
+                successMessage: "Perfeito! Você escreveu um braço completo do match!"
+            },
+            {
+                level: 28,
                 title: "Loop For",
                 category: "Controle de Fluxo",
                 objective: "Aprenda a repetir código com for.",
@@ -1873,8 +2016,8 @@
                 syntax: 'for variavel in range { }',
                 code: [
                     'fn main() {',
-                    '    ___ i in 1..4 {',
-                    '        println!("Número: {}", i);',
+                    '    ___ i in 1..=5 {',
+                    '        println!("Contando: {}", i);',
                     '    }',
                     '}'
                 ],
@@ -1889,10 +2032,40 @@
                     "Tem 3 letras",
                     "Digite: <code>for</code>"
                 ],
-                successMessage: "Perfeito! O loop vai imprimir 1, 2, 3 (o 4 não é incluído em 1..4)."
+                successMessage: "Perfeito! O loop vai imprimir 1, 2, 3, 4, 5 (com ..= inclui o 5)."
             },
             {
-                level: 25,
+                level: 29,
+                title: "For Completo",
+                category: "Controle de Fluxo",
+                objective: "Escreva o loop for quase completo!",
+                teaching: `Agora escreva mais do loop!<br><br>
+                    Queremos iterar de 1 até 3 (inclusive):<br>
+                    <code>for x in 1..=3</code>`,
+                syntax: 'for var in inicio..=fim { }',
+                code: [
+                    'fn main() {',
+                    '    ___ {',
+                    '        println!("Número: {}", n);',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'for n in 1..=3',
+                correctAnswers: ['for n in 1..=3', 'for n in 1..=3 ', 'for n in 1..4'],
+                almostCorrect: [
+                    { answer: 'for n in 1..3', feedback: '<code>1..3</code> vai até 2! Use <code>1..=3</code> para incluir 3.' },
+                    { answer: 'for (n in 1..=3)', feedback: 'Sem parênteses em Rust!' }
+                ],
+                hints: [
+                    "Comece com 'for', nome da variável, 'in', e o range",
+                    "Para incluir o 3, use ..= (ponto ponto igual)",
+                    "Digite: <code>for n in 1..=3</code>"
+                ],
+                successMessage: "Excelente! Você escreveu o loop completo! Imprime 1, 2, 3."
+            },
+            {
+                level: 30,
                 title: "Loop While",
                 category: "Controle de Fluxo",
                 objective: "Repita enquanto uma condição for verdadeira.",
@@ -1923,8 +2096,78 @@
                 ],
                 successMessage: "Ótimo! Vai imprimir 3!, 2!, 1!, Lançar! — uma contagem regressiva!"
             },
+            {
+                level: 31,
+                title: "While Completo",
+                category: "Controle de Fluxo",
+                objective: "Escreva o while com a condição!",
+                teaching: `Agora escreva o while completo!<br><br>
+                    Queremos repetir enquanto <code>contador < 5</code>:<br>
+                    <code>while contador < 5 { ... }</code>`,
+                syntax: 'while condição { }',
+                code: [
+                    'fn main() {',
+                    '    let mut contador = 0;',
+                    '    ___ {',
+                    '        println!("Vez: {}", contador);',
+                    '        contador = contador + 1;',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'while contador < 5',
+                correctAnswers: ['while contador < 5', 'while contador<5', 'while contador <= 4'],
+                almostCorrect: [
+                    { answer: 'contador < 5', feedback: 'Não esqueça do <code>while</code> no início!' },
+                    { answer: 'while (contador < 5)', feedback: 'Correto, mas sem parênteses em Rust!' }
+                ],
+                hints: [
+                    "Comece com 'while' e depois a condição",
+                    "contador deve ser menor que 5",
+                    "Digite: <code>while contador < 5</code>"
+                ],
+                successMessage: "Perfeito! Imprime 0, 1, 2, 3, 4 — depois contador vira 5 e para."
+            },
+            {
+                level: 32,
+                title: "Loop Infinito",
+                category: "Controle de Fluxo",
+                objective: "Conheça o loop infinito e break!",
+                teaching: `Rust tem um loop infinito chamado simplesmente <code>loop</code>:<br><br>
+                    <code>loop {</code><br>
+                    <code>    // repete para sempre</code><br>
+                    <code>    if condicao { break; }</code><br>
+                    <code>}</code><br><br>
+                    Use <code>break</code> para sair do loop!`,
+                syntax: 'loop { if x { break; } }',
+                code: [
+                    'fn main() {',
+                    '    let mut n = 0;',
+                    '    loop {',
+                    '        n = n + 1;',
+                    '        if n == 5 {',
+                    '            ___;',
+                    '        }',
+                    '        println!("{}", n);',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 5,
+                inputPlaceholder: 'break',
+                correctAnswers: ['break'],
+                almostCorrect: [
+                    { answer: 'exit', feedback: 'Em Rust, use <code>break</code> para sair de loops.' },
+                    { answer: 'return', feedback: '<code>return</code> sai da função! Use <code>break</code> para sair do loop.' }
+                ],
+                hints: [
+                    "Qual palavra 'quebra' o loop?",
+                    "Rima com 'freek'",
+                    "Digite: <code>break</code>"
+                ],
+                successMessage: "Correto! break sai do loop quando n == 5. Imprime 1, 2, 3, 4."
+            },
 
-            // === BLOCO 6: Funções (26-30) ===
+            // === BLOCO 6: Funções (33-37) ===
             {
                 level: 26,
                 title: "Criando Funções",
