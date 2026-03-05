@@ -471,7 +471,7 @@
             border: 2px solid var(--ferris-orange);
             border-radius: 6px;
             padding: 0.15rem 0.5rem;
-            min-width: 80px;
+            min-width: 200px;
             max-width: 100%;
             width: auto;
             color: var(--text-primary);
@@ -4287,7 +4287,7 @@
             span.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font-family:inherit;font-size:inherit;padding:0.15rem 0.5rem;';
             span.textContent = input.value || input.placeholder || '...';
             document.body.appendChild(span);
-            const width = Math.max(80, Math.min(span.offsetWidth + 20, 500));
+            const width = Math.max(200, Math.min(span.offsetWidth + 30, 600));
             input.style.width = width + 'px';
             document.body.removeChild(span);
 
