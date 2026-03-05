@@ -1121,1066 +1121,141 @@
     </div>
 
     <script>
-        // Exercícios com progressão MUITO gradual
+        // MODO AVANÇADO: Exercícios para quem já sabe programar
+        // Menos dicas, mais autonomia, complexidade progressiva
         const exercises = [
-            // === BLOCO 1: Introdução (1-5) ===
+            // === BLOCO 1: Aquecimento Rápido (1-5) ===
             {
                 level: 1,
-                title: "Olá, Mundo!",
-                category: "Introdução",
-                objective: "Vamos escrever seu primeiro código em Rust! Digite o texto que será mostrado na tela.",
-                teaching: `Em Rust, usamos <code>println!</code> para mostrar mensagens na tela.<br><br>
-                    <strong>O que é println!?</strong><br>
-                    • <code>println!</code> é uma <strong>macro</strong> (note o <code>!</code> no final)<br>
-                    • Ela imprime texto e pula para a próxima linha<br>
-                    • O texto deve estar entre <strong>aspas duplas</strong> <code>"texto"</code>`,
-                syntax: 'println!("sua mensagem aqui");',
+                title: "Hello Rust",
+                category: "Warmup",
+                objective: "Imprima qualquer mensagem na tela.",
+                teaching: `<code>println!</code> é uma macro (note o <code>!</code>).`,
+                syntax: 'println!("texto");',
                 code: [
                     'fn main() {',
-                    '    println!("___");',
+                    '    ___',
                     '}'
                 ],
                 inputLine: 1,
-                inputPlaceholder: 'Olá, Rust!',
-                correctAnswers: ['Olá, Rust!', 'Ola, Rust!', 'olá, rust!', 'ola, rust!', 'Olá Rust!', 'Ola Rust!', 'Hello, World!', 'hello, world!', 'Hello World!'],
-                almostCorrect: [],
-                hints: [
-                    "Digite qualquer mensagem que você queira mostrar na tela",
-                    "Por exemplo: <code>Olá, Rust!</code>",
-                    "Apenas digite o texto — as aspas já estão no código!"
+                inputPlaceholder: 'println!("Hello");',
+                correctAnswers: ['println!("Hello");', 'println!("Hello, World!");', 'println!("Olá");', 'println!("Rust");', 'println!("test");', 'println!("Hi");'],
+                almostCorrect: [
+                    { answer: 'print("Hello");', feedback: 'Use <code>println!</code> com ! (é uma macro).' },
+                    { answer: 'println("Hello");', feedback: 'Faltou o <code>!</code> - é <code>println!</code>' }
                 ],
-                successMessage: "Perfeito! Você usou <code>println!</code> para mostrar uma mensagem. O <code>!</code> indica que é uma macro, não uma função comum."
+                hints: [
+                    "Sintaxe: println!(\"mensagem\");"
+                ],
+                successMessage: "Correto! <code>println!</code> é uma macro, não uma função."
             },
             {
                 level: 2,
-                title: "Criando Variáveis",
-                category: "Introdução",
-                objective: "Aprenda a criar variáveis para guardar valores.",
-                teaching: `Uma <strong>variável</strong> é como uma caixa que guarda um valor.<br><br>
-                    Em Rust, criamos variáveis com a palavra-chave <code>let</code>:<br>
-                    • <code>let</code> = "deixe" ou "seja" em português<br>
-                    • Depois vem o <strong>nome</strong> da variável<br>
-                    • O sinal <code>=</code> atribui um valor<br>
-                    • No final, sempre colocamos <code>;</code>`,
-                syntax: 'let nome = valor;',
+                title: "Declarar Variável",
+                category: "Warmup",
+                objective: "Declare uma variável com um valor inteiro.",
+                teaching: `Variáveis são imutáveis por padrão.`,
+                syntax: 'let x = 10;',
                 code: [
                     'fn main() {',
-                    '    ___ mensagem = "Olá!";',
-                    '    println!("{}", mensagem);',
+                    '    ___',
+                    '    println!("{}", valor);',
                     '}'
                 ],
                 inputLine: 1,
-                inputPlaceholder: 'let',
-                correctAnswers: ['let'],
+                inputPlaceholder: 'let valor = 42;',
+                correctAnswers: ['let valor = 42;', 'let valor = 10;', 'let valor = 100;', 'let valor = 0;', 'let valor = 1;', 'let valor = 5;'],
                 almostCorrect: [
-                    { answer: 'Let', feedback: 'Quase! Em Rust, <code>let</code> é sempre minúsculo.' },
-                    { answer: 'var', feedback: 'Rust não usa <code>var</code>. A palavra-chave é <code>let</code>.' },
-                    { answer: 'const', feedback: '<code>const</code> existe, mas é para constantes. Para variáveis, use <code>let</code>.' }
+                    { answer: 'var valor = 42;', feedback: 'Rust usa <code>let</code>, não <code>var</code>.' },
+                    { answer: 'int valor = 42;', feedback: 'Rust usa <code>let</code>. Tipos são inferidos ou declarados com <code>:</code>.' }
                 ],
                 hints: [
-                    "Qual palavra em inglês significa 'deixe' ou 'seja'?",
-                    "A palavra tem 3 letras: l-e-t",
-                    "Digite: <code>let</code>"
+                    "let nome = valor;"
                 ],
-                successMessage: "Excelente! <code>let</code> é a palavra-chave para criar variáveis em Rust."
+                successMessage: "Variáveis em Rust são imutáveis por padrão."
             },
             {
                 level: 3,
-                title: "Tipos de Valores",
-                category: "Introdução",
-                objective: "Entenda os diferentes tipos de valores em Rust.",
-                teaching: `Rust tem diferentes <strong>tipos de dados</strong>:<br><br>
-                    • <strong>Texto (String):</strong> <code>"Olá"</code> — sempre entre aspas duplas<br>
-                    • <strong>Números inteiros:</strong> <code>42</code>, <code>-10</code>, <code>0</code><br>
-                    • <strong>Números decimais:</strong> <code>3.14</code>, <code>-2.5</code><br>
-                    • <strong>Verdadeiro/Falso:</strong> <code>true</code> ou <code>false</code><br><br>
-                    Complete o código criando uma variável com um número:`,
-                syntax: 'let idade = 25;',
+                title: "Variável Mutável",
+                category: "Warmup",
+                objective: "Declare uma variável que pode ser modificada.",
+                teaching: `Use <code>mut</code> para variáveis mutáveis.`,
+                syntax: 'let mut x = 0;',
                 code: [
                     'fn main() {',
-                    '    let idade = ___;',
-                    '    println!("Idade: {}", idade);',
+                    '    ___',
+                    '    contador += 1;',
+                    '    println!("{}", contador);',
                     '}'
                 ],
                 inputLine: 1,
-                inputPlaceholder: '25',
-                correctAnswers: ['25', '18', '30', '20', '21', '22', '23', '24', '26', '27', '28', '29', '10', '15', '35', '40'],
+                inputPlaceholder: 'let mut contador = 0;',
+                correctAnswers: ['let mut contador = 0;', 'let mut contador = 1;', 'let mut contador = 10;'],
                 almostCorrect: [
-                    { answer: '"25"', feedback: 'Você colocou aspas! Números não precisam de aspas. Digite apenas <code>25</code>.' },
-                    { answer: 'vinte', feedback: 'Use o número em formato numérico: <code>25</code>, não por extenso.' }
+                    { answer: 'let contador = 0;', feedback: 'Faltou <code>mut</code> - a variável precisa ser mutável.' }
                 ],
                 hints: [
-                    "Digite um número inteiro, como sua idade",
-                    "Números não precisam de aspas — apenas digite o valor",
-                    "Por exemplo: <code>25</code>"
+                    "let mut nome = valor;"
                 ],
-                successMessage: "Ótimo! Você criou uma variável numérica. Note que números não usam aspas!"
+                successMessage: "<code>mut</code> permite que a variável seja reatribuída."
             },
             {
                 level: 4,
-                title: "Texto vs Número",
-                category: "Introdução",
-                objective: "Pratique a diferença entre texto e números.",
-                teaching: `Lembre-se:<br><br>
-                    • <strong>Texto:</strong> precisa de aspas duplas <code>"Maria"</code><br>
-                    • <strong>Número:</strong> sem aspas <code>25</code><br><br>
-                    Crie uma variável com seu nome (texto):`,
-                syntax: 'let nome = "seu nome";',
+                title: "Tipo Explícito",
+                category: "Warmup",
+                objective: "Declare uma variável com tipo explícito i32.",
+                teaching: `Tipos podem ser especificados após <code>:</code>`,
+                syntax: 'let x: i32 = 10;',
                 code: [
                     'fn main() {',
-                    '    let nome = ___;',
-                    '    println!("Olá, {}!", nome);',
+                    '    ___',
+                    '    println!("{}", numero);',
                     '}'
                 ],
                 inputLine: 1,
-                inputPlaceholder: '"Maria"',
-                correctAnswers: ['"Maria"', '"João"', '"Ana"', '"Carlos"', '"Pedro"', '"Lucas"', '"Julia"', '"Mariana"', '"Rafael"', '"Fernanda"', '"Leonardo"', '"Bruno"', '"Camila"', '"Gabriel"', '"Amanda"'],
-                almostCorrect: [
-                    { answer: 'Maria', feedback: 'Texto precisa de aspas! Use <code>"Maria"</code> com aspas duplas.' },
-                    { answer: "'Maria'", feedback: 'Em Rust, texto usa aspas duplas, não simples. Use <code>"Maria"</code>.' }
-                ],
+                inputPlaceholder: 'let numero: i32 = 100;',
+                correctAnswers: ['let numero: i32 = 100;', 'let numero: i32 = 42;', 'let numero: i32 = 0;', 'let numero: i32 = 10;', 'let numero: i32 = -5;'],
+                almostCorrect: [],
                 hints: [
-                    "Texto (strings) sempre precisam de aspas duplas",
-                    "O formato é: <code>\"seu texto\"</code>",
-                    "Digite: <code>\"Maria\"</code> (ou seu nome entre aspas)"
+                    "let nome: tipo = valor;"
                 ],
-                successMessage: "Perfeito! Texto sempre usa aspas duplas em Rust. Números ficam sem aspas."
+                successMessage: "Tipos explícitos ajudam na clareza do código."
             },
             {
                 level: 5,
-                title: "Verdadeiro ou Falso",
-                category: "Introdução",
-                objective: "Aprenda sobre valores booleanos (true/false).",
-                teaching: `Valores <strong>booleanos</strong> representam verdadeiro ou falso:<br><br>
-                    • <code>true</code> = verdadeiro<br>
-                    • <code>false</code> = falso<br><br>
-                    <strong>Importante:</strong> sempre em minúsculas e em inglês!<br>
-                    São muito usados em condições (se algo é verdade, faça X).`,
-                syntax: 'let ativo = true;',
+                title: "String vs &str",
+                category: "Warmup",
+                objective: "Declare uma variável do tipo String.",
+                teaching: `<code>String</code> é heap-allocated e mutável. <code>&str</code> é uma referência.`,
+                syntax: 'let s = String::from("texto");',
                 code: [
                     'fn main() {',
-                    '    let esta_chovendo = ___;',
-                    '    println!("Está chovendo? {}", esta_chovendo);',
+                    '    ___',
+                    '    println!("{}", texto);',
                     '}'
                 ],
                 inputLine: 1,
-                inputPlaceholder: 'true',
-                correctAnswers: ['true', 'false'],
+                inputPlaceholder: 'let texto = String::from("Rust");',
+                correctAnswers: ['let texto = String::from("Rust");', 'let texto = String::from("Hello");', 'let texto = String::from("test");', 'let texto: String = String::from("Rust");'],
                 almostCorrect: [
-                    { answer: 'True', feedback: 'Quase! Em Rust é minúsculo: <code>true</code>, não <code>True</code>.' },
-                    { answer: 'False', feedback: 'Quase! Em Rust é minúsculo: <code>false</code>, não <code>False</code>.' },
-                    { answer: 'verdadeiro', feedback: 'Use o inglês: <code>true</code> ou <code>false</code>.' },
-                    { answer: '"true"', feedback: 'Sem aspas! <code>true</code> é um valor especial, não texto.' }
+                    { answer: 'let texto = "Rust";', feedback: 'Isso cria um <code>&str</code>. Use <code>String::from()</code> para String.' }
                 ],
                 hints: [
-                    "Booleanos em Rust são: <code>true</code> ou <code>false</code>",
-                    "São sempre em inglês e minúsculas",
-                    "Digite: <code>true</code> ou <code>false</code>"
+                    "String::from(\"texto\")"
                 ],
-                successMessage: "Ótimo! Booleanos (<code>true</code>/<code>false</code>) são fundamentais para lógica de programação."
+                successMessage: "<code>String</code> é owned, <code>&str</code> é borrowed."
             },
 
-            // === BLOCO 2: Variáveis em Profundidade (6-10) ===
+            // === BLOCO 2: Funções (6-12) ===
             {
                 level: 6,
-                title: "Variáveis são Imutáveis",
-                category: "Variáveis",
-                objective: "Entenda que variáveis em Rust não podem mudar por padrão.",
-                teaching: `Em Rust, variáveis são <strong>imutáveis por padrão</strong>.<br><br>
-                    Isso significa que depois de atribuir um valor, você <strong>não pode mudá-lo</strong>!<br><br>
-                    O código abaixo dá <strong>erro</strong>:<br>
-                    <code>let x = 5;</code><br>
-                    <code>x = 10; // ERRO!</code><br><br>
-                    Isso pode parecer estranho, mas ajuda a evitar bugs!`,
-                syntax: 'let x = 5; // não pode mudar',
-                code: [
-                    'fn main() {',
-                    '    ___ numero = 10;',
-                    '    // numero não pode ser alterado depois!',
-                    '    println!("Número: {}", numero);',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'let',
-                correctAnswers: ['let'],
-                almostCorrect: [],
-                hints: [
-                    "Use a mesma palavra-chave que aprendemos antes",
-                    "Começa com 'l' e tem 3 letras",
-                    "Digite: <code>let</code>"
-                ],
-                successMessage: "Correto! Variáveis com <code>let</code> são imutáveis — não podem ser alteradas depois."
-            },
-            {
-                level: 7,
-                title: "Variáveis Mutáveis",
-                category: "Variáveis",
-                objective: "Aprenda a criar variáveis que PODEM ser alteradas.",
-                teaching: `Para criar uma variável que <strong>pode mudar</strong>, adicione <code>mut</code>:<br><br>
-                    <code>let mut contador = 0;</code><br>
-                    <code>contador = 1; // OK!</code><br><br>
-                    <code>mut</code> vem de "mutable" (mutável em inglês).<br>
-                    Complete o código para permitir que a variável seja alterada:`,
-                syntax: 'let mut variavel = valor;',
-                code: [
-                    'fn main() {',
-                    '    let ___ contador = 0;',
-                    '    contador = 1;',
-                    '    println!("Contador: {}", contador);',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'mut',
-                correctAnswers: ['mut'],
-                almostCorrect: [
-                    { answer: 'mutable', feedback: 'Use a abreviação: <code>mut</code>, não <code>mutable</code>.' },
-                    { answer: 'var', feedback: 'Em Rust não é <code>var</code>. Use <code>let mut</code> para mutável.' }
-                ],
-                hints: [
-                    "A palavra é abreviação de 'mutable' (mutável)",
-                    "Tem 3 letras: m-u-t",
-                    "Digite: <code>mut</code>"
-                ],
-                successMessage: "Excelente! <code>let mut</code> cria variáveis mutáveis que podem ser alteradas."
-            },
-            {
-                level: 8,
-                title: "Especificando Tipos",
-                category: "Variáveis",
-                objective: "Aprenda a declarar o tipo de uma variável explicitamente.",
-                teaching: `Rust pode <strong>inferir</strong> tipos automaticamente, mas você pode especificar:<br><br>
-                    <code>let idade: i32 = 25;</code><br><br>
-                    Tipos comuns de números inteiros:<br>
-                    • <code>i32</code> = inteiro de 32 bits (mais usado)<br>
-                    • <code>i64</code> = inteiro de 64 bits (números maiores)<br><br>
-                    O <code>i</code> significa "integer" (inteiro com sinal, pode ser negativo).`,
-                syntax: 'let variavel: tipo = valor;',
-                code: [
-                    'fn main() {',
-                    '    let idade: ___ = 25;',
-                    '    println!("Idade: {}", idade);',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'i32',
-                correctAnswers: ['i32', 'i64', 'i16', 'i8'],
-                almostCorrect: [
-                    { answer: 'int', feedback: 'Rust não usa <code>int</code>. Use <code>i32</code> para inteiros.' },
-                    { answer: 'integer', feedback: 'Use a abreviação: <code>i32</code>, não <code>integer</code>.' },
-                    { answer: 'number', feedback: 'Rust usa tipos específicos: <code>i32</code> para inteiros.' }
-                ],
-                hints: [
-                    "O tipo padrão para inteiros é <code>i32</code>",
-                    "i = integer (inteiro), 32 = 32 bits",
-                    "Digite: <code>i32</code>"
-                ],
-                successMessage: "Perfeito! <code>i32</code> é um inteiro de 32 bits — o tipo mais comum para números inteiros."
-            },
-            {
-                level: 9,
-                title: "Números Decimais",
-                category: "Variáveis",
-                objective: "Aprenda sobre números com casas decimais (ponto flutuante).",
-                teaching: `Para números decimais, usamos tipos de <strong>ponto flutuante</strong>:<br><br>
-                    • <code>f64</code> = 64 bits (mais preciso, padrão)<br>
-                    • <code>f32</code> = 32 bits (menos preciso)<br><br>
-                    O <code>f</code> vem de "float" (flutuante).<br><br>
-                    Exemplo: <code>let pi: f64 = 3.14159;</code>`,
-                syntax: 'let decimal: f64 = 3.14;',
-                code: [
-                    'fn main() {',
-                    '    let pi: ___ = 3.14159;',
-                    '    println!("Pi = {}", pi);',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'f64',
-                correctAnswers: ['f64', 'f32'],
-                almostCorrect: [
-                    { answer: 'float', feedback: 'Rust não usa <code>float</code>. Use <code>f64</code>.' },
-                    { answer: 'double', feedback: 'Rust não usa <code>double</code>. Use <code>f64</code> (equivalente).' }
-                ],
-                hints: [
-                    "Para decimais, o tipo padrão é <code>f64</code>",
-                    "f = float (flutuante), 64 = 64 bits",
-                    "Digite: <code>f64</code>"
-                ],
-                successMessage: "Ótimo! <code>f64</code> é usado para números decimais com alta precisão."
-            },
-            {
-                level: 10,
-                title: "Praticando Variáveis",
-                category: "Variáveis",
-                objective: "Pratique criando uma variável completa.",
-                teaching: `Vamos revisar o que aprendemos:<br><br>
-                    • <code>let</code> = cria variável imutável<br>
-                    • <code>let mut</code> = cria variável mutável<br>
-                    • <code>: tipo</code> = especifica o tipo (opcional)<br><br>
-                    Crie uma variável para armazenar uma pontuação (número inteiro):`,
-                syntax: 'let pontuacao = 100;',
-                code: [
-                    'fn main() {',
-                    '    let pontuacao = ___;',
-                    '    println!("Pontuação: {}", pontuacao);',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: '100',
-                correctAnswers: ['100', '0', '50', '75', '200', '1000', '10', '20', '500'],
-                almostCorrect: [
-                    { answer: '"100"', feedback: 'Sem aspas! Números não precisam de aspas.' }
-                ],
-                hints: [
-                    "Digite um número inteiro para a pontuação",
-                    "Por exemplo: 100, 500, ou qualquer valor",
-                    "Apenas o número, sem aspas: <code>100</code>"
-                ],
-                successMessage: "Excelente! Você está dominando a criação de variáveis em Rust!"
-            },
-
-            // === BLOCO 3: Operações (11-15) ===
-            {
-                level: 11,
-                title: "Operador de Soma",
-                category: "Operações",
-                objective: "Aprenda a somar dois números.",
-                teaching: `Rust usa operadores matemáticos padrão:<br><br>
-                    • <code>+</code> soma<br>
-                    • <code>-</code> subtração<br>
-                    • <code>*</code> multiplicação<br>
-                    • <code>/</code> divisão<br><br>
-                    Complete o código para somar dois números:`,
-                syntax: 'let resultado = a + b;',
-                code: [
-                    'fn main() {',
-                    '    let a = 10;',
-                    '    let b = 5;',
-                    '    let soma = a ___ b;',
-                    '    println!("Soma: {}", soma);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '+',
-                correctAnswers: ['+'],
-                almostCorrect: [],
-                hints: [
-                    "Qual símbolo representa adição?",
-                    "É o sinal de mais",
-                    "Digite: <code>+</code>"
-                ],
-                successMessage: "Correto! O operador <code>+</code> soma valores. Resultado: 10 + 5 = 15"
-            },
-            {
-                level: 12,
-                title: "Operador de Subtração",
-                category: "Operações",
-                objective: "Pratique a subtração.",
-                teaching: `Continuando com operações matemáticas:<br><br>
-                    Use <code>-</code> para subtrair valores.<br><br>
-                    <code>let diferenca = 20 - 8; // resultado: 12</code>`,
-                syntax: 'let resultado = a - b;',
-                code: [
-                    'fn main() {',
-                    '    let total = 100;',
-                    '    let gasto = 30;',
-                    '    let resto = total ___ gasto;',
-                    '    println!("Resto: {}", resto);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '-',
-                correctAnswers: ['-'],
-                almostCorrect: [],
-                hints: [
-                    "Qual símbolo representa subtração?",
-                    "É o sinal de menos",
-                    "Digite: <code>-</code>"
-                ],
-                successMessage: "Ótimo! 100 - 30 = 70. Você está pegando o jeito!"
-            },
-            {
-                level: 13,
-                title: "Multiplicação",
-                category: "Operações",
-                objective: "Aprenda a multiplicar valores.",
-                teaching: `Para multiplicação, usamos <code>*</code> (asterisco):<br><br>
-                    <code>let produto = 5 * 4; // resultado: 20</code><br><br>
-                    Note: não é <code>x</code> como na matemática!`,
-                syntax: 'let resultado = a * b;',
-                code: [
-                    'fn main() {',
-                    '    let preco = 50;',
-                    '    let quantidade = 3;',
-                    '    let total = preco ___ quantidade;',
-                    '    println!("Total: R${}", total);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '*',
-                correctAnswers: ['*'],
-                almostCorrect: [
-                    { answer: 'x', feedback: 'Em programação usamos <code>*</code>, não <code>x</code>.' }
-                ],
-                hints: [
-                    "O símbolo de multiplicação em programação é o asterisco",
-                    "Fica acima do número 8 no teclado",
-                    "Digite: <code>*</code>"
-                ],
-                successMessage: "Perfeito! 50 × 3 = 150. O asterisco <code>*</code> é usado para multiplicação."
-            },
-            {
-                level: 14,
-                title: "Divisão",
-                category: "Operações",
-                objective: "Aprenda sobre divisão e um detalhe importante!",
-                teaching: `O operador de divisão é <code>/</code>:<br><br>
-                    <strong>Atenção:</strong> Divisão entre inteiros resulta em inteiro!<br>
-                    <code>let x = 7 / 2; // resultado: 3, não 3.5!</code><br><br>
-                    O resultado é "truncado" (parte decimal removida).`,
-                syntax: 'let resultado = a / b;',
-                code: [
-                    'fn main() {',
-                    '    let pizza_fatias = 8;',
-                    '    let pessoas = 4;',
-                    '    let fatias_cada = pizza_fatias ___ pessoas;',
-                    '    println!("Cada um come {} fatias", fatias_cada);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '/',
-                correctAnswers: ['/'],
-                almostCorrect: [
-                    { answer: '÷', feedback: 'Em programação usamos <code>/</code>, não <code>÷</code>.' }
-                ],
-                hints: [
-                    "O símbolo de divisão é a barra",
-                    "É a mesma barra usada em datas: 10/05/2024",
-                    "Digite: <code>/</code>"
-                ],
-                successMessage: "Correto! 8 ÷ 4 = 2 fatias para cada. Lembre-se: divisão entre inteiros trunca o resultado!"
-            },
-            {
-                level: 15,
-                title: "Resto da Divisão",
-                category: "Operações",
-                objective: "Aprenda o operador módulo (resto).",
-                teaching: `O operador <code>%</code> retorna o <strong>resto</strong> da divisão:<br><br>
-                    <code>let resto = 7 % 3; // resultado: 1</code><br>
-                    Porque 7 = 3×2 + <strong>1</strong><br><br>
-                    Muito útil para saber se um número é par ou ímpar:<br>
-                    <code>numero % 2 == 0</code> → é par!`,
-                syntax: 'let resto = a % b;',
-                code: [
-                    'fn main() {',
-                    '    let numero = 17;',
-                    '    let resto = numero ___ 5;',
-                    '    println!("Resto de 17/5: {}", resto);',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: '%',
-                correctAnswers: ['%'],
-                almostCorrect: [
-                    { answer: 'mod', feedback: 'Em Rust usamos <code>%</code>, não <code>mod</code>.' }
-                ],
-                hints: [
-                    "Este operador é chamado de 'módulo'",
-                    "É o símbolo de porcentagem",
-                    "Digite: <code>%</code>"
-                ],
-                successMessage: "Excelente! 17 % 5 = 2 (17 = 5×3 + 2). O módulo é muito útil!"
-            },
-
-            // === BLOCO 4: Comparações (16-20) ===
-            {
-                level: 16,
-                title: "Comparando Igualdade",
-                category: "Comparações",
-                objective: "Aprenda a comparar se dois valores são iguais.",
-                teaching: `Para comparar igualdade, usamos <code>==</code> (dois iguais):<br><br>
-                    <strong>Cuidado:</strong><br>
-                    • <code>=</code> (um igual) → atribui valor<br>
-                    • <code>==</code> (dois iguais) → compara valores<br><br>
-                    O resultado é <code>true</code> ou <code>false</code>.`,
-                syntax: 'let igual = a == b;',
-                code: [
-                    'fn main() {',
-                    '    let a = 5;',
-                    '    let b = 5;',
-                    '    let sao_iguais = a ___ b;',
-                    '    println!("São iguais? {}", sao_iguais);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '==',
-                correctAnswers: ['=='],
-                almostCorrect: [
-                    { answer: '=', feedback: 'Um <code>=</code> é atribuição! Para comparar, use <code>==</code> (dois iguais).' },
-                    { answer: '===', feedback: 'Rust usa <code>==</code>, não <code>===</code> (JavaScript).' }
-                ],
-                hints: [
-                    "Para comparar, você precisa de DOIS sinais de igual",
-                    "Um = é para atribuir, dois == é para comparar",
-                    "Digite: <code>==</code>"
-                ],
-                successMessage: "Correto! <code>==</code> compara igualdade. 5 == 5 é <code>true</code>!"
-            },
-            {
-                level: 17,
-                title: "Diferente",
-                category: "Comparações",
-                objective: "Aprenda a verificar se valores são diferentes.",
-                teaching: `Para verificar se valores são <strong>diferentes</strong>, use <code>!=</code>:<br><br>
-                    <code>let diferente = 5 != 3; // true</code><br>
-                    <code>let diferente = 5 != 5; // false</code><br><br>
-                    O <code>!</code> significa "não" — então <code>!=</code> é "não igual".`,
-                syntax: 'let diferente = a != b;',
-                code: [
-                    'fn main() {',
-                    '    let senha_digitada = 1234;',
-                    '    let senha_correta = 5678;',
-                    '    let senha_errada = senha_digitada ___ senha_correta;',
-                    '    println!("Senha errada? {}", senha_errada);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '!=',
-                correctAnswers: ['!='],
-                almostCorrect: [
-                    { answer: '<>', feedback: 'Rust não usa <code><></code>. Use <code>!=</code>.' },
-                    { answer: '!==', feedback: 'Rust usa <code>!=</code>, não <code>!==</code>.' }
-                ],
-                hints: [
-                    "O símbolo de 'não igual' combina ! com =",
-                    "! significa 'não', = significa 'igual'",
-                    "Digite: <code>!=</code>"
-                ],
-                successMessage: "Ótimo! 1234 != 5678 é <code>true</code> (são diferentes)."
-            },
-            {
-                level: 18,
-                title: "Maior que",
-                category: "Comparações",
-                objective: "Compare se um valor é maior que outro.",
-                teaching: `Operadores de comparação:<br><br>
-                    • <code>></code> maior que<br>
-                    • <code><</code> menor que<br>
-                    • <code>>=</code> maior ou igual<br>
-                    • <code><=</code> menor ou igual<br><br>
-                    Complete para verificar se a idade é maior que 18:`,
-                syntax: 'let maior = a > b;',
-                code: [
-                    'fn main() {',
-                    '    let idade = 21;',
-                    '    let maior_de_idade = idade ___ 18;',
-                    '    println!("Maior de idade? {}", maior_de_idade);',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: '>',
-                correctAnswers: ['>', '>='],
-                almostCorrect: [],
-                hints: [
-                    "Qual símbolo significa 'maior que'?",
-                    "É o símbolo que parece uma seta para a direita",
-                    "Digite: <code>></code>"
-                ],
-                successMessage: "Perfeito! 21 > 18 é <code>true</code>. Também aceitaríamos >= (maior ou igual)."
-            },
-            {
-                level: 19,
-                title: "E Lógico (AND)",
-                category: "Comparações",
-                objective: "Combine condições com AND — ambas devem ser verdadeiras.",
-                teaching: `O operador <code>&&</code> (AND) verifica se <strong>ambas</strong> as condições são verdadeiras:<br><br>
-                    <code>true && true</code> → <code>true</code><br>
-                    <code>true && false</code> → <code>false</code><br>
-                    <code>false && false</code> → <code>false</code><br><br>
-                    Útil para: "tem carteira E tem 18 anos"`,
-                syntax: 'let ambos = cond1 && cond2;',
-                code: [
-                    'fn main() {',
-                    '    let tem_ingresso = true;',
-                    '    let tem_18_anos = true;',
-                    '    let pode_entrar = tem_ingresso ___ tem_18_anos;',
-                    '    println!("Pode entrar? {}", pode_entrar);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '&&',
-                correctAnswers: ['&&'],
-                almostCorrect: [
-                    { answer: 'and', feedback: 'Rust não usa <code>and</code>. Use <code>&&</code>.' },
-                    { answer: '&', feedback: 'Para AND lógico, use dois: <code>&&</code>.' }
-                ],
-                hints: [
-                    "O operador AND em Rust usa dois símbolos 'e comercial'",
-                    "O símbolo & fica acima do 7 no teclado",
-                    "Digite: <code>&&</code>"
-                ],
-                successMessage: "Excelente! <code>true && true</code> = <code>true</code>. Ambas condições são verdadeiras!"
-            },
-            {
-                level: 20,
-                title: "OU Lógico (OR)",
-                category: "Comparações",
-                objective: "Combine condições com OR — pelo menos uma deve ser verdadeira.",
-                teaching: `O operador <code>||</code> (OR) verifica se <strong>pelo menos uma</strong> condição é verdadeira:<br><br>
-                    <code>true || false</code> → <code>true</code><br>
-                    <code>false || true</code> → <code>true</code><br>
-                    <code>false || false</code> → <code>false</code><br><br>
-                    Útil para: "tem PIX OU tem cartão"`,
-                syntax: 'let algum = cond1 || cond2;',
-                code: [
-                    'fn main() {',
-                    '    let tem_pix = false;',
-                    '    let tem_cartao = true;',
-                    '    let pode_pagar = tem_pix ___ tem_cartao;',
-                    '    println!("Pode pagar? {}", pode_pagar);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '||',
-                correctAnswers: ['||'],
-                almostCorrect: [
-                    { answer: 'or', feedback: 'Rust não usa <code>or</code>. Use <code>||</code>.' },
-                    { answer: '|', feedback: 'Para OR lógico, use dois: <code>||</code>.' }
-                ],
-                hints: [
-                    "O operador OR usa duas barras verticais",
-                    "A barra vertical fica acima do Enter, com Shift",
-                    "Digite: <code>||</code>"
-                ],
-                successMessage: "Correto! <code>false || true</code> = <code>true</code>. Pelo menos uma é verdadeira!"
-            },
-
-            // === BLOCO 5: Controle de Fluxo (21-30) - EXPANDIDO ===
-            {
-                level: 21,
-                title: "Condicional if",
-                category: "Controle de Fluxo",
-                objective: "Aprenda a executar código apenas se uma condição for verdadeira.",
-                teaching: `O <code>if</code> executa código somente quando a condição é <code>true</code>:<br><br>
-                    <strong>Diferente de outras linguagens:</strong> não usamos parênteses!<br><br>
-                    <code>if condicao {</code><br>
-                    <code>    // código</code><br>
-                    <code>}</code>`,
-                syntax: 'if condicao {\n    // código\n}',
-                code: [
-                    'fn main() {',
-                    '    let numero = 10;',
-                    '    ___ numero > 5 {',
-                    '        println!("Maior que 5!");',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'if',
-                correctAnswers: ['if'],
-                almostCorrect: [
-                    { answer: 'If', feedback: 'Em Rust, <code>if</code> é minúsculo.' },
-                    { answer: 'if(', feedback: 'Em Rust não usamos parênteses! Apenas <code>if</code>.' }
-                ],
-                hints: [
-                    "Qual palavra significa 'se' em inglês?",
-                    "Tem 2 letras",
-                    "Digite: <code>if</code>"
-                ],
-                successMessage: "Perfeito! O <code>if</code> executa o bloco porque 10 > 5 é <code>true</code>."
-            },
-            {
-                level: 22,
-                title: "Escrevendo a Condição",
-                category: "Controle de Fluxo",
-                objective: "Agora você escreve a condição completa!",
-                teaching: `Você já sabe usar <code>if</code>. Agora pratique escrevendo a <strong>condição</strong>!<br><br>
-                    Operadores de comparação:<br>
-                    • <code>></code> maior que<br>
-                    • <code><</code> menor que<br>
-                    • <code>>=</code> maior ou igual<br>
-                    • <code>==</code> igual<br><br>
-                    Verifique se <code>idade</code> é maior ou igual a 18:`,
-                syntax: 'if idade >= 18 { }',
-                code: [
-                    'fn main() {',
-                    '    let idade = 21;',
-                    '    if ___ {',
-                    '        println!("Pode votar!");',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'idade >= 18',
-                correctAnswers: ['idade >= 18', 'idade>=18', 'idade > 17', 'idade>17'],
-                almostCorrect: [
-                    { answer: 'idade > 18', feedback: 'Quase! Use <code>>=</code> para incluir quem tem 18.' },
-                    { answer: 'idade = 18', feedback: 'Cuidado! Para comparar use <code>>=</code>, não <code>=</code>.' },
-                    { answer: '(idade >= 18)', feedback: 'Correto, mas em Rust não precisamos dos parênteses!' }
-                ],
-                hints: [
-                    "Compare 'idade' com 18 usando maior ou igual",
-                    "O operador maior ou igual é: >=",
-                    "Digite: <code>idade >= 18</code>"
-                ],
-                successMessage: "Excelente! Você escreveu a condição completa! 21 >= 18 é true."
-            },
-            {
-                level: 23,
-                title: "If com Else",
-                category: "Controle de Fluxo",
-                objective: "Adicione um bloco alternativo quando a condição for falsa.",
-                teaching: `O <code>else</code> executa quando o <code>if</code> é falso:<br><br>
-                    <code>if condicao {</code><br>
-                    <code>    // se verdadeiro</code><br>
-                    <code>} else {</code><br>
-                    <code>    // se falso</code><br>
-                    <code>}</code>`,
-                syntax: 'if cond { } else { }',
-                code: [
-                    'fn main() {',
-                    '    let temperatura = 15;',
-                    '    if temperatura > 25 {',
-                    '        println!("Está calor!");',
-                    '    } ___ {',
-                    '        println!("Está frio!");',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 4,
-                inputPlaceholder: 'else',
-                correctAnswers: ['else'],
-                almostCorrect: [
-                    { answer: 'Else', feedback: 'Em Rust, <code>else</code> é minúsculo.' }
-                ],
-                hints: [
-                    "'Else' significa 'senão' ou 'caso contrário'",
-                    "Tem 4 letras",
-                    "Digite: <code>else</code>"
-                ],
-                successMessage: "Ótimo! Como 15 < 25, o bloco <code>else</code> mostra 'Está frio!'."
-            },
-            {
-                level: 24,
-                title: "If-Else Completo",
-                category: "Controle de Fluxo",
-                objective: "Escreva um if-else quase completo!",
-                teaching: `Agora pratique escrevendo mais código!<br><br>
-                    Complete o bloco if para verificar se o número é positivo:<br><br>
-                    <code>if numero > 0 { ... } else { ... }</code>`,
-                syntax: 'if numero > 0 { positivo } else { negativo }',
-                code: [
-                    'fn main() {',
-                    '    let numero = -5;',
-                    '    ___ {',
-                    '        println!("Positivo!");',
-                    '    } else {',
-                    '        println!("Não positivo!");',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'if numero > 0',
-                correctAnswers: ['if numero > 0', 'if numero>0', 'if numero >= 1', 'if numero>=1'],
-                almostCorrect: [
-                    { answer: 'numero > 0', feedback: 'Não esqueça do <code>if</code> no início!' },
-                    { answer: 'if (numero > 0)', feedback: 'Correto, mas sem parênteses em Rust!' }
-                ],
-                hints: [
-                    "Comece com 'if' e depois a condição",
-                    "Verifique se numero é maior que 0",
-                    "Digite: <code>if numero > 0</code>"
-                ],
-                successMessage: "Perfeito! Você escreveu o if completo! -5 não é > 0, então mostra 'Não positivo!'."
-            },
-            {
-                level: 25,
-                title: "Else If",
-                category: "Controle de Fluxo",
-                objective: "Use else if para múltiplas condições.",
-                teaching: `Quando precisa verificar várias condições, use <code>else if</code>:<br><br>
-                    <code>if nota >= 9 {</code><br>
-                    <code>    println!("A");</code><br>
-                    <code>} else if nota >= 7 {</code><br>
-                    <code>    println!("B");</code><br>
-                    <code>} else {</code><br>
-                    <code>    println!("C");</code><br>
-                    <code>}</code>`,
-                syntax: 'if ... else if ... else',
-                code: [
-                    'fn main() {',
-                    '    let nota = 8;',
-                    '    if nota >= 9 {',
-                    '        println!("Excelente!");',
-                    '    } ___ nota >= 7 {',
-                    '        println!("Bom!");',
-                    '    } else {',
-                    '        println!("Estude mais!");',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 4,
-                inputPlaceholder: 'else if',
-                correctAnswers: ['else if'],
-                almostCorrect: [
-                    { answer: 'elif', feedback: 'Rust não usa <code>elif</code>. Use <code>else if</code> separado.' },
-                    { answer: 'elseif', feedback: 'São duas palavras separadas: <code>else if</code>.' }
-                ],
-                hints: [
-                    "Em Rust são duas palavras separadas",
-                    "else + if",
-                    "Digite: <code>else if</code>"
-                ],
-                successMessage: "Ótimo! nota=8 não é >=9, mas é >=7, então mostra 'Bom!'."
-            },
-            {
-                level: 26,
-                title: "Match Básico",
-                category: "Controle de Fluxo",
-                objective: "Aprenda o poderoso pattern matching do Rust!",
-                teaching: `<code>match</code> é uma das features mais poderosas do Rust!<br><br>
-                    Compara um valor com vários padrões:<br><br>
-                    <code>match valor {</code><br>
-                    <code>    1 => println!("um"),</code><br>
-                    <code>    2 => println!("dois"),</code><br>
-                    <code>    _ => println!("outro"),</code><br>
-                    <code>}</code><br><br>
-                    O <code>_</code> captura "qualquer outro valor".`,
-                syntax: 'match valor {\n    padrão => ação,\n}',
-                code: [
-                    'fn main() {',
-                    '    let cor = "verde";',
-                    '    ___ cor {',
-                    '        "vermelho" => println!("Pare!"),',
-                    '        "verde" => println!("Siga!"),',
-                    '        _ => println!("Atenção!"),',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'match',
-                correctAnswers: ['match'],
-                almostCorrect: [
-                    { answer: 'switch', feedback: 'Rust não tem <code>switch</code>. Use <code>match</code>.' }
-                ],
-                hints: [
-                    "Rust usa 'match' para pattern matching",
-                    "Não é 'switch' como em outras linguagens",
-                    "Digite: <code>match</code>"
-                ],
-                successMessage: "Excelente! cor='verde', então mostra 'Siga!'."
-            },
-            {
-                level: 27,
-                title: "Match com Padrão",
-                category: "Controle de Fluxo",
-                objective: "Escreva um braço do match!",
-                teaching: `Cada "braço" do match tem a sintaxe:<br><br>
-                    <code>padrão => expressão,</code><br><br>
-                    O <code>=></code> (seta gorda) separa o padrão da ação.<br>
-                    Note a vírgula no final!`,
-                syntax: 'valor => ação,',
-                code: [
-                    'fn main() {',
-                    '    let numero = 1;',
-                    '    match numero {',
-                    '        ___',
-                    '        2 => println!("Dois!"),',
-                    '        _ => println!("Outro!"),',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: '1 => println!("Um!"),',
-                correctAnswers: ['1 => println!("Um!"),', '1 => println!("Um!")', '1=>println!("Um!"),'],
-                almostCorrect: [
-                    { answer: '1 = println!("Um!")', feedback: 'Use <code>=></code> (seta), não <code>=</code>!' },
-                    { answer: '1: println!("Um!")', feedback: 'Use <code>=></code> (seta), não <code>:</code>!' }
-                ],
-                hints: [
-                    "O padrão é 1, a ação é println!(\"Um!\")",
-                    "Use => para separar padrão da ação",
-                    "Digite: <code>1 => println!(\"Um!\"),</code>"
-                ],
-                successMessage: "Perfeito! Você escreveu um braço completo do match!"
-            },
-            {
-                level: 28,
-                title: "Loop For",
-                category: "Controle de Fluxo",
-                objective: "Aprenda a repetir código com for.",
-                teaching: `O <code>for</code> em Rust itera sobre sequências:<br><br>
-                    <code>for i in 1..4 {</code> → números 1, 2, 3<br>
-                    <code>for i in 1..=4 {</code> → números 1, 2, 3, 4<br><br>
-                    <code>..</code> é exclusivo (não inclui o último)<br>
-                    <code>..=</code> é inclusivo (inclui o último)`,
-                syntax: 'for variavel in range { }',
-                code: [
-                    'fn main() {',
-                    '    ___ i in 1..=5 {',
-                    '        println!("Contando: {}", i);',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'for',
-                correctAnswers: ['for'],
-                almostCorrect: [
-                    { answer: 'For', feedback: 'Em Rust, <code>for</code> é minúsculo.' }
-                ],
-                hints: [
-                    "Qual palavra é usada para loops em sequências?",
-                    "Tem 3 letras",
-                    "Digite: <code>for</code>"
-                ],
-                successMessage: "Perfeito! O loop vai imprimir 1, 2, 3, 4, 5 (com ..= inclui o 5)."
-            },
-            {
-                level: 29,
-                title: "For Completo",
-                category: "Controle de Fluxo",
-                objective: "Escreva o loop for quase completo!",
-                teaching: `Agora escreva mais do loop!<br><br>
-                    Queremos iterar de 1 até 3 (inclusive):<br>
-                    <code>for x in 1..=3</code>`,
-                syntax: 'for var in inicio..=fim { }',
-                code: [
-                    'fn main() {',
-                    '    ___ {',
-                    '        println!("Número: {}", n);',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: 'for n in 1..=3',
-                correctAnswers: ['for n in 1..=3', 'for n in 1..=3 ', 'for n in 1..4'],
-                almostCorrect: [
-                    { answer: 'for n in 1..3', feedback: '<code>1..3</code> vai até 2! Use <code>1..=3</code> para incluir 3.' },
-                    { answer: 'for (n in 1..=3)', feedback: 'Sem parênteses em Rust!' }
-                ],
-                hints: [
-                    "Comece com 'for', nome da variável, 'in', e o range",
-                    "Para incluir o 3, use ..= (ponto ponto igual)",
-                    "Digite: <code>for n in 1..=3</code>"
-                ],
-                successMessage: "Excelente! Você escreveu o loop completo! Imprime 1, 2, 3."
-            },
-            {
-                level: 30,
-                title: "Loop While",
-                category: "Controle de Fluxo",
-                objective: "Repita enquanto uma condição for verdadeira.",
-                teaching: `O <code>while</code> repete enquanto a condição for <code>true</code>:<br><br>
-                    <code>while condicao {</code><br>
-                    <code>    // código</code><br>
-                    <code>}</code><br><br>
-                    <strong>Cuidado:</strong> se a condição nunca ficar falsa, o loop é infinito!`,
-                syntax: 'while condicao { }',
-                code: [
-                    'fn main() {',
-                    '    let mut n = 3;',
-                    '    ___ n > 0 {',
-                    '        println!("{}!", n);',
-                    '        n = n - 1;',
-                    '    }',
-                    '    println!("Lançar!");',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'while',
-                correctAnswers: ['while'],
-                almostCorrect: [],
-                hints: [
-                    "'While' significa 'enquanto' em inglês",
-                    "Tem 5 letras",
-                    "Digite: <code>while</code>"
-                ],
-                successMessage: "Ótimo! Vai imprimir 3!, 2!, 1!, Lançar! — uma contagem regressiva!"
-            },
-            {
-                level: 31,
-                title: "While Completo",
-                category: "Controle de Fluxo",
-                objective: "Escreva o while com a condição!",
-                teaching: `Agora escreva o while completo!<br><br>
-                    Queremos repetir enquanto <code>contador < 5</code>:<br>
-                    <code>while contador < 5 { ... }</code>`,
-                syntax: 'while condição { }',
-                code: [
-                    'fn main() {',
-                    '    let mut contador = 0;',
-                    '    ___ {',
-                    '        println!("Vez: {}", contador);',
-                    '        contador = contador + 1;',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 2,
-                inputPlaceholder: 'while contador < 5',
-                correctAnswers: ['while contador < 5', 'while contador<5', 'while contador <= 4'],
-                almostCorrect: [
-                    { answer: 'contador < 5', feedback: 'Não esqueça do <code>while</code> no início!' },
-                    { answer: 'while (contador < 5)', feedback: 'Correto, mas sem parênteses em Rust!' }
-                ],
-                hints: [
-                    "Comece com 'while' e depois a condição",
-                    "contador deve ser menor que 5",
-                    "Digite: <code>while contador < 5</code>"
-                ],
-                successMessage: "Perfeito! Imprime 0, 1, 2, 3, 4 — depois contador vira 5 e para."
-            },
-            {
-                level: 32,
-                title: "Loop Infinito",
-                category: "Controle de Fluxo",
-                objective: "Conheça o loop infinito e break!",
-                teaching: `Rust tem um loop infinito chamado simplesmente <code>loop</code>:<br><br>
-                    <code>loop {</code><br>
-                    <code>    // repete para sempre</code><br>
-                    <code>    if condicao { break; }</code><br>
-                    <code>}</code><br><br>
-                    Use <code>break</code> para sair do loop!`,
-                syntax: 'loop { if x { break; } }',
-                code: [
-                    'fn main() {',
-                    '    let mut n = 0;',
-                    '    loop {',
-                    '        n = n + 1;',
-                    '        if n == 5 {',
-                    '            ___;',
-                    '        }',
-                    '        println!("{}", n);',
-                    '    }',
-                    '}'
-                ],
-                inputLine: 5,
-                inputPlaceholder: 'break',
-                correctAnswers: ['break'],
-                almostCorrect: [
-                    { answer: 'exit', feedback: 'Em Rust, use <code>break</code> para sair de loops.' },
-                    { answer: 'return', feedback: '<code>return</code> sai da função! Use <code>break</code> para sair do loop.' }
-                ],
-                hints: [
-                    "Qual palavra 'quebra' o loop?",
-                    "Rima com 'freek'",
-                    "Digite: <code>break</code>"
-                ],
-                successMessage: "Correto! break sai do loop quando n == 5. Imprime 1, 2, 3, 4."
-            },
-
-            // === BLOCO 6: Funções (33-37) ===
-            {
-                level: 26,
-                title: "Criando Funções",
+                title: "Função Simples",
                 category: "Funções",
-                objective: "Aprenda a criar suas próprias funções.",
-                teaching: `Funções organizam código em blocos reutilizáveis.<br><br>
-                    Em Rust, usamos <code>fn</code> (abreviação de "function"):<br><br>
-                    <code>fn nome_da_funcao() {</code><br>
-                    <code>    // código</code><br>
-                    <code>}</code>`,
-                syntax: 'fn nome_funcao() { }',
+                objective: "Crie uma função que não retorna nada.",
+                teaching: `Funções são definidas com <code>fn</code>.`,
+                syntax: 'fn nome() { }',
                 code: [
-                    '___ saudar() {',
+                    '___',
                     '    println!("Olá!");',
                     '}',
                     '',
@@ -2189,896 +1264,1725 @@
                     '}'
                 ],
                 inputLine: 0,
-                inputPlaceholder: 'fn',
-                correctAnswers: ['fn'],
+                inputPlaceholder: 'fn saudar() {',
+                correctAnswers: ['fn saudar() {'],
                 almostCorrect: [
-                    { answer: 'function', feedback: 'Rust usa <code>fn</code>, não <code>function</code>.' },
-                    { answer: 'func', feedback: 'Rust usa <code>fn</code>, não <code>func</code>.' },
-                    { answer: 'def', feedback: 'Rust usa <code>fn</code>, não <code>def</code> (Python).' }
+                    { answer: 'function saudar() {', feedback: 'Rust usa <code>fn</code>, não <code>function</code>.' },
+                    { answer: 'def saudar():', feedback: 'Isso é Python. Rust usa <code>fn nome() {</code>.' }
                 ],
                 hints: [
-                    "A palavra-chave é abreviação de 'function'",
-                    "Tem apenas 2 letras",
-                    "Digite: <code>fn</code>"
+                    "fn nome() {"
                 ],
-                successMessage: "Excelente! <code>fn</code> declara funções em Rust. Curto e direto!"
+                successMessage: "Funções sem retorno implicitamente retornam <code>()</code> (unit type)."
             },
             {
-                level: 27,
+                level: 7,
                 title: "Função com Parâmetro",
                 category: "Funções",
-                objective: "Passe valores para funções.",
-                teaching: `Funções podem receber valores (parâmetros):<br><br>
-                    <code>fn saudar(nome: String) {</code><br>
-                    <code>    println!("Olá, {}!", nome);</code><br>
-                    <code>}</code><br><br>
-                    A sintaxe é: <code>nome: Tipo</code> (tipo é obrigatório!)`,
-                syntax: 'fn func(param: Tipo) { }',
+                objective: "Crie uma função que recebe um i32 como parâmetro.",
+                teaching: `Parâmetros precisam de tipo explícito.`,
+                syntax: 'fn nome(param: tipo) { }',
                 code: [
-                    'fn saudar(nome___ String) {',
-                    '    println!("Olá, {}!", nome);',
+                    '___',
+                    '    println!("Valor: {}", n);',
                     '}',
                     '',
                     'fn main() {',
-                    '    saudar(String::from("Maria"));',
+                    '    mostrar(42);',
                     '}'
                 ],
                 inputLine: 0,
-                inputPlaceholder: ':',
-                correctAnswers: [':', ': '],
-                almostCorrect: [],
-                hints: [
-                    "Nome e tipo são separados por um caractere",
-                    "É dois pontos",
-                    "Digite: <code>:</code>"
+                inputPlaceholder: 'fn mostrar(n: i32) {',
+                correctAnswers: ['fn mostrar(n: i32) {', 'fn mostrar(n:i32) {', 'fn mostrar(n : i32) {'],
+                almostCorrect: [
+                    { answer: 'fn mostrar(n) {', feedback: 'Parâmetros precisam de tipo: <code>n: i32</code>.' }
                 ],
-                successMessage: "Correto! Em Rust, parâmetros sempre têm tipo: <code>nome: Tipo</code>."
+                hints: [
+                    "fn nome(param: tipo) {"
+                ],
+                successMessage: "Em Rust, parâmetros sempre precisam de anotação de tipo."
             },
             {
-                level: 28,
+                level: 8,
                 title: "Função com Retorno",
                 category: "Funções",
-                objective: "Faça funções retornarem valores.",
-                teaching: `Para retornar um valor, especifique o tipo com <code>-></code>:<br><br>
-                    <code>fn dobro(x: i32) -> i32 {</code><br>
-                    <code>    x * 2</code><br>
-                    <code>}</code><br><br>
-                    <strong>Note:</strong> a última expressão sem <code>;</code> é retornada automaticamente!`,
-                syntax: 'fn func() -> TipoRetorno { }',
+                objective: "Crie uma função que retorna um i32.",
+                teaching: `Use <code>-> tipo</code> para indicar retorno. Última expressão sem <code>;</code> é o retorno.`,
+                syntax: 'fn nome() -> tipo { valor }',
                 code: [
-                    'fn dobro(x: i32) ___ i32 {',
-                    '    x * 2',
+                    '___',
+                    '    42',
                     '}',
                     '',
                     'fn main() {',
-                    '    let resultado = dobro(5);',
-                    '    println!("Dobro: {}", resultado);',
+                    '    let x = get_answer();',
+                    '    println!("{}", x);',
                     '}'
                 ],
                 inputLine: 0,
-                inputPlaceholder: '->',
-                correctAnswers: ['->', ' ->', '-> ', ' -> '],
+                inputPlaceholder: 'fn get_answer() -> i32 {',
+                correctAnswers: ['fn get_answer() -> i32 {', 'fn get_answer()->i32 {', 'fn get_answer() -> i32{'],
                 almostCorrect: [
-                    { answer: ':', feedback: 'Para tipo de retorno, use <code>-></code>, não <code>:</code>.' }
+                    { answer: 'fn get_answer() {', feedback: 'Faltou o tipo de retorno: <code>-> i32</code>.' }
                 ],
                 hints: [
-                    "O tipo de retorno usa uma 'seta'",
-                    "É traço e maior-que",
-                    "Digite: <code>-></code>"
+                    "-> tipo após os parênteses"
                 ],
-                successMessage: "Perfeito! <code>-></code> indica o tipo de retorno. A função retorna 10 (5 × 2)."
+                successMessage: "A última expressão (sem ;) é retornada automaticamente."
             },
             {
-                level: 29,
-                title: "Retorno Implícito",
+                level: 9,
+                title: "Soma de Dois Números",
                 category: "Funções",
-                objective: "Entenda o retorno implícito do Rust.",
-                teaching: `Em Rust, a última expressão <strong>sem ponto-e-vírgula</strong> é retornada:<br><br>
-                    <code>fn cinco() -> i32 {</code><br>
-                    <code>    5  // retorna 5 (sem ;)</code><br>
-                    <code>}</code><br><br>
-                    Se colocar <code>;</code>, vira "statement" e retorna <code>()</code> (nada)!`,
-                syntax: 'fn func() -> i32 {\n    valor // sem ;\n}',
+                objective: "Implemente uma função que soma dois i32.",
+                teaching: ``,
+                syntax: 'fn soma(a: i32, b: i32) -> i32 { a + b }',
                 code: [
-                    'fn quadrado(x: i32) -> i32 {',
-                    '    x * x___',
-                    '}',
+                    '___',
                     '',
                     'fn main() {',
-                    '    println!("{}", quadrado(4));',
+                    '    let resultado = soma(5, 3);',
+                    '    println!("{}", resultado);',
                     '}'
                 ],
-                inputLine: 1,
-                inputPlaceholder: '',
-                correctAnswers: ['', ' '],
-                almostCorrect: [
-                    { answer: ';', feedback: 'Com <code>;</code> o valor não é retornado! Deixe em branco.' }
-                ],
-                hints: [
-                    "Para retorno implícito, NÃO coloque ponto-e-vírgula",
-                    "A última expressão sem ; é retornada",
-                    "Deixe em branco (não digite nada)"
-                ],
-                successMessage: "Excelente! Sem <code>;</code>, o valor é retornado automaticamente. Resultado: 16."
-            },
-            {
-                level: 30,
-                title: "Revisão de Funções",
-                category: "Funções",
-                objective: "Pratique tudo sobre funções antes de avançar!",
-                teaching: `Vamos revisar funções:<br><br>
-                    • <code>fn nome()</code> → função sem parâmetros<br>
-                    • <code>fn nome(x: i32)</code> → com parâmetro<br>
-                    • <code>fn nome() -> i32</code> → com retorno<br>
-                    • Última expressão sem <code>;</code> é retornada<br><br>
-                    Complete a função que retorna o triplo:`,
-                syntax: 'fn triplo(x: i32) -> i32 {\n    x * 3\n}',
-                code: [
-                    'fn triplo(x: i32) -> i32 {',
-                    '    x ___ 3',
-                    '}',
-                    '',
-                    'fn main() {',
-                    '    println!("{}", triplo(5));',
-                    '}'
-                ],
-                inputLine: 1,
-                inputPlaceholder: '*',
-                correctAnswers: ['*'],
+                inputLine: 0,
+                inputPlaceholder: 'fn soma(a: i32, b: i32) -> i32 { a + b }',
+                correctAnswers: ['fn soma(a: i32, b: i32) -> i32 { a + b }', 'fn soma(a:i32, b:i32) -> i32 { a + b }', 'fn soma(a: i32, b: i32) -> i32 { return a + b; }'],
                 almostCorrect: [],
                 hints: [
-                    "Triplo significa multiplicar por 3",
-                    "Qual operador de multiplicação?",
-                    "Digite: <code>*</code>"
+                    "fn nome(p1: tipo, p2: tipo) -> tipo { expressão }"
                 ],
-                successMessage: "Perfeito! 5 × 3 = 15. Você domina funções! Agora vamos para Structs!"
+                successMessage: "Funções com múltiplos parâmetros separam com vírgula."
             },
-
-            // === BLOCO 7: Structs (31-35) ===
             {
-                level: 31,
-                title: "O que são Structs?",
-                category: "Structs",
-                objective: "Aprenda a criar seus próprios tipos de dados!",
-                teaching: `<strong>Structs</strong> permitem agrupar dados relacionados.<br><br>
-                    <strong>Analogia:</strong> Pense em uma <strong>ficha cadastral</strong>:<br>
-                    • Nome: Maria<br>
-                    • Idade: 25<br>
-                    • Ativo: true<br><br>
-                    Em Rust, criamos assim:<br>
-                    <code>struct Pessoa {</code><br>
-                    <code>    nome: String,</code><br>
-                    <code>    idade: u32,</code><br>
-                    <code>}</code>`,
-                syntax: 'struct Nome {\n    campo: Tipo,\n}',
+                level: 10,
+                title: "Função Completa",
+                category: "Funções",
+                objective: "Crie uma função que calcula o quadrado de um número.",
+                teaching: ``,
+                syntax: '',
                 code: [
-                    '___ Carro {',
-                    '    marca: String,',
-                    '    ano: u32,',
+                    '___',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", quadrado(5)); // deve imprimir 25',
                     '}'
                 ],
                 inputLine: 0,
-                inputPlaceholder: 'struct',
-                correctAnswers: ['struct'],
-                almostCorrect: [
-                    { answer: 'class', feedback: 'Rust não tem <code>class</code>! Use <code>struct</code>.' },
-                    { answer: 'type', feedback: 'Use <code>struct</code> para criar tipos compostos.' }
-                ],
+                inputPlaceholder: 'fn quadrado(n: i32) -> i32 { n * n }',
+                correctAnswers: ['fn quadrado(n: i32) -> i32 { n * n }', 'fn quadrado(x: i32) -> i32 { x * x }', 'fn quadrado(num: i32) -> i32 { num * num }'],
+                almostCorrect: [],
                 hints: [
-                    "A palavra-chave para criar estruturas de dados",
-                    "Vem de 'structure' (estrutura)",
-                    "Digite: <code>struct</code>"
+                    "Multiplique o parâmetro por ele mesmo"
                 ],
-                successMessage: "Excelente! <code>struct</code> cria um tipo personalizado. Agora temos o tipo 'Carro'!"
+                successMessage: "Você implementou uma função completa do zero."
             },
             {
-                level: 32,
-                title: "Criando Instâncias",
-                category: "Structs",
-                objective: "Aprenda a criar um valor do tipo struct.",
-                teaching: `Depois de definir a struct, você cria <strong>instâncias</strong> dela:<br><br>
-                    <code>let maria = Pessoa {</code><br>
-                    <code>    nome: String::from("Maria"),</code><br>
-                    <code>    idade: 25,</code><br>
-                    <code>};</code><br><br>
-                    Cada campo recebe um valor com <code>campo: valor</code>.`,
-                syntax: 'let var = NomeStruct { campo: valor };',
+                level: 11,
+                title: "Referência Imutável",
+                category: "Funções",
+                objective: "Passe uma String por referência imutável.",
+                teaching: `<code>&</code> cria uma referência (borrow).`,
+                syntax: 'fn nome(s: &String) { }',
                 code: [
-                    'struct Produto {',
+                    '___',
+                    '    println!("Tamanho: {}", s.len());',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let texto = String::from("Rust");',
+                    '    mostrar_len(&texto);',
+                    '    println!("{}", texto); // ainda válido',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'fn mostrar_len(s: &String) {',
+                correctAnswers: ['fn mostrar_len(s: &String) {', 'fn mostrar_len(s: &str) {'],
+                almostCorrect: [
+                    { answer: 'fn mostrar_len(s: String) {', feedback: 'Isso faria move. Use <code>&String</code> para borrow.' }
+                ],
+                hints: [
+                    "& antes do tipo para referência"
+                ],
+                successMessage: "Referências permitem usar dados sem tomar ownership."
+            },
+            {
+                level: 12,
+                title: "Referência Mutável",
+                category: "Funções",
+                objective: "Modifique uma String através de referência mutável.",
+                teaching: `<code>&mut</code> permite modificar o valor emprestado.`,
+                syntax: 'fn nome(s: &mut String) { }',
+                code: [
+                    '___',
+                    '    s.push_str(" World");',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let mut texto = String::from("Hello");',
+                    '    adicionar(&mut texto);',
+                    '    println!("{}", texto);',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'fn adicionar(s: &mut String) {',
+                correctAnswers: ['fn adicionar(s: &mut String) {'],
+                almostCorrect: [
+                    { answer: 'fn adicionar(s: &String) {', feedback: 'Referência imutável não permite modificar. Use <code>&mut</code>.' }
+                ],
+                hints: [
+                    "&mut para referência mutável"
+                ],
+                successMessage: "Apenas uma <code>&mut</code> pode existir por vez."
+            },
+
+            // === BLOCO 3: Controle de Fluxo (13-20) ===
+            {
+                level: 13,
+                title: "If Expression",
+                category: "Controle de Fluxo",
+                objective: "Escreva um if que verifica se um número é positivo.",
+                teaching: `<code>if</code> em Rust não usa parênteses na condição.`,
+                syntax: 'if condição { }',
+                code: [
+                    'fn main() {',
+                    '    let n = 5;',
+                    '    ___',
+                    '        println!("positivo");',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'if n > 0 {',
+                correctAnswers: ['if n > 0 {', 'if n>0 {', 'if n >= 1 {'],
+                almostCorrect: [
+                    { answer: 'if (n > 0) {', feedback: 'Parênteses não são necessários em Rust.' }
+                ],
+                hints: [
+                    "if condição {"
+                ],
+                successMessage: "<code>if</code> em Rust é uma expressão, pode retornar valores."
+            },
+            {
+                level: 14,
+                title: "If-Else",
+                category: "Controle de Fluxo",
+                objective: "Complete o else de uma verificação de paridade.",
+                teaching: ``,
+                syntax: 'if cond { } else { }',
+                code: [
+                    'fn main() {',
+                    '    let n = 7;',
+                    '    if n % 2 == 0 {',
+                    '        println!("par");',
+                    '    } ___',
+                    '        println!("ímpar");',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'else {',
+                correctAnswers: ['else {', '} else {'],
+                almostCorrect: [],
+                hints: [
+                    "else {"
+                ],
+                successMessage: "O <code>else</code> captura todos os casos não cobertos pelo <code>if</code>."
+            },
+            {
+                level: 15,
+                title: "If como Expressão",
+                category: "Controle de Fluxo",
+                objective: "Use if para atribuir valor a uma variável.",
+                teaching: `<code>if</code> retorna valor — ambos os branches devem ter mesmo tipo.`,
+                syntax: 'let x = if cond { a } else { b };',
+                code: [
+                    'fn main() {',
+                    '    let idade = 20;',
+                    '    ___',
+                    '    println!("{}", status);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'let status = if idade >= 18 { "adulto" } else { "menor" };',
+                correctAnswers: ['let status = if idade >= 18 { "adulto" } else { "menor" };', 'let status = if idade > 17 { "adulto" } else { "menor" };'],
+                almostCorrect: [],
+                hints: [
+                    "let var = if cond { val1 } else { val2 };"
+                ],
+                successMessage: "Você pode usar <code>if</code> como operador ternário."
+            },
+            {
+                level: 16,
+                title: "Match Básico",
+                category: "Controle de Fluxo",
+                objective: "Use match para verificar um valor numérico.",
+                teaching: `<code>match</code> deve ser exaustivo. Use <code>_</code> para default.`,
+                syntax: 'match valor { padrão => expr, _ => expr }',
+                code: [
+                    'fn main() {',
+                    '    let dia = 1;',
+                    '    ___',
+                    '        1 => println!("Segunda"),',
+                    '        2 => println!("Terça"),',
+                    '        _ => println!("Outro"),',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'match dia {',
+                correctAnswers: ['match dia {'],
+                almostCorrect: [
+                    { answer: 'switch dia {', feedback: 'Rust usa <code>match</code>, não <code>switch</code>.' }
+                ],
+                hints: [
+                    "match valor {"
+                ],
+                successMessage: "<code>match</code> é muito mais poderoso que switch de outras linguagens."
+            },
+            {
+                level: 17,
+                title: "Match com Ranges",
+                category: "Controle de Fluxo",
+                objective: "Use ranges no match para classificar uma nota.",
+                teaching: `Ranges: <code>0..=59</code> inclui 0 a 59.`,
+                syntax: 'match x { 0..=10 => expr }',
+                code: [
+                    'fn main() {',
+                    '    let nota = 85;',
+                    '    let conceito = match nota {',
+                    '        ___',
+                    '        60..=79 => "C",',
+                    '        80..=100 => "B",',
+                    '        _ => "?",',
+                    '    };',
+                    '    println!("{}", conceito);',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: '0..=59 => "F",',
+                correctAnswers: ['0..=59 => "F",', '0..=59 => "D",'],
+                almostCorrect: [],
+                hints: [
+                    "inicio..=fim => valor,"
+                ],
+                successMessage: "Ranges em match são muito úteis para classificações."
+            },
+            {
+                level: 18,
+                title: "Loop Infinito",
+                category: "Controle de Fluxo",
+                objective: "Crie um loop que para quando contador chega a 3.",
+                teaching: `<code>loop</code> é infinito até <code>break</code>.`,
+                syntax: 'loop { if cond { break; } }',
+                code: [
+                    'fn main() {',
+                    '    let mut contador = 0;',
+                    '    ___',
+                    '        contador += 1;',
+                    '        if contador == 3 { break; }',
+                    '    }',
+                    '    println!("Fim: {}", contador);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'loop {',
+                correctAnswers: ['loop {'],
+                almostCorrect: [],
+                hints: [
+                    "loop {"
+                ],
+                successMessage: "<code>loop</code> pode retornar valores com <code>break valor;</code>"
+            },
+            {
+                level: 19,
+                title: "While",
+                category: "Controle de Fluxo",
+                objective: "Use while para contar de 1 a 5.",
+                teaching: ``,
+                syntax: 'while condição { }',
+                code: [
+                    'fn main() {',
+                    '    let mut n = 1;',
+                    '    ___',
+                    '        println!("{}", n);',
+                    '        n += 1;',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'while n <= 5 {',
+                correctAnswers: ['while n <= 5 {', 'while n < 6 {', 'while n<=5 {'],
+                almostCorrect: [],
+                hints: [
+                    "while condição {"
+                ],
+                successMessage: "<code>while</code> verifica a condição antes de cada iteração."
+            },
+            {
+                level: 20,
+                title: "For com Range",
+                category: "Controle de Fluxo",
+                objective: "Use for para iterar de 1 a 5 (inclusive).",
+                teaching: `<code>1..=5</code> é range inclusivo. <code>1..5</code> exclui o último.`,
+                syntax: 'for i in inicio..=fim { }',
+                code: [
+                    'fn main() {',
+                    '    ___',
+                    '        println!("{}", i);',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'for i in 1..=5 {',
+                correctAnswers: ['for i in 1..=5 {', 'for i in 1..6 {'],
+                almostCorrect: [
+                    { answer: 'for i in 1..5 {', feedback: '<code>1..5</code> vai de 1 a 4. Use <code>1..=5</code> para incluir 5.' }
+                ],
+                hints: [
+                    "for var in range {"
+                ],
+                successMessage: "<code>for</code> é a forma idiomática de iterar em Rust."
+            },
+
+            // === BLOCO 4: Structs (21-28) ===
+            {
+                level: 21,
+                title: "Definir Struct",
+                category: "Structs",
+                objective: "Defina uma struct Pessoa com nome e idade.",
+                teaching: ``,
+                syntax: 'struct Nome { campo: tipo, }',
+                code: [
+                    '___',
                     '    nome: String,',
-                    '    preco: f64,',
+                    '    idade: u32,',
                     '}',
                     '',
                     'fn main() {',
-                    '    let item = Produto {',
-                    '        nome: String::from("Café"),',
-                    '        ___: 9.90,',
-                    '    };',
+                    '    let p = Pessoa { nome: String::from("Ana"), idade: 25 };',
+                    '    println!("{} tem {}", p.nome, p.idade);',
                     '}'
                 ],
-                inputLine: 8,
-                inputPlaceholder: 'preco',
-                correctAnswers: ['preco'],
+                inputLine: 0,
+                inputPlaceholder: 'struct Pessoa {',
+                correctAnswers: ['struct Pessoa {'],
                 almostCorrect: [
-                    { answer: 'preço', feedback: 'Sem acento! O nome do campo é <code>preco</code>.' },
-                    { answer: 'price', feedback: 'Use o nome definido na struct: <code>preco</code>.' }
+                    { answer: 'class Pessoa {', feedback: 'Rust usa <code>struct</code>, não <code>class</code>.' }
                 ],
                 hints: [
-                    "Qual é o nome do segundo campo da struct?",
-                    "Olhe na definição: <code>preco: f64</code>",
-                    "Digite: <code>preco</code>"
+                    "struct NomeDaStruct {"
                 ],
-                successMessage: "Ótimo! Você criou uma instância de Produto com nome e preço!"
+                successMessage: "Structs são tipos de dados compostos em Rust."
             },
             {
-                level: 33,
-                title: "Acessando Campos",
+                level: 22,
+                title: "Instanciar Struct",
                 category: "Structs",
-                objective: "Aprenda a ler valores dos campos de uma struct.",
-                teaching: `Para acessar um campo, use <strong>ponto</strong>: <code>variavel.campo</code><br><br>
-                    <code>let p = Pessoa { nome: "Ana", idade: 30 };</code><br>
-                    <code>println!("{}", p.nome);  // "Ana"</code><br>
-                    <code>println!("{}", p.idade); // 30</code>`,
-                syntax: 'variavel.campo',
-                code: [
-                    'struct Livro {',
-                    '    titulo: String,',
-                    '    paginas: u32,',
-                    '}',
-                    '',
-                    'fn main() {',
-                    '    let livro = Livro {',
-                    '        titulo: String::from("O Hobbit"),',
-                    '        paginas: 310,',
-                    '    };',
-                    '    println!("Páginas: {}", livro___paginas);',
-                    '}'
-                ],
-                inputLine: 10,
-                inputPlaceholder: '.',
-                correctAnswers: ['.'],
-                almostCorrect: [
-                    { answer: '->', feedback: 'Rust usa <code>.</code> para acessar campos, não <code>-></code>.' }
-                ],
-                hints: [
-                    "Qual símbolo separa a variável do campo?",
-                    "É um ponto",
-                    "Digite: <code>.</code>"
-                ],
-                successMessage: "Correto! <code>livro.paginas</code> acessa o campo. Mostra: 310 páginas."
-            },
-            {
-                level: 34,
-                title: "Métodos em Structs",
-                category: "Structs",
-                objective: "Adicione funções às suas structs com impl.",
-                teaching: `Podemos adicionar <strong>métodos</strong> às structs usando <code>impl</code>:<br><br>
-                    <code>impl Pessoa {</code><br>
-                    <code>    fn apresentar(&self) {</code><br>
-                    <code>        println!("Olá, sou {}", self.nome);</code><br>
-                    <code>    }</code><br>
-                    <code>}</code><br><br>
-                    <code>&self</code> é uma referência à própria instância.`,
-                syntax: 'impl NomeStruct {\n    fn metodo(&self) { }\n}',
+                objective: "Crie uma instância da struct Retangulo.",
+                teaching: ``,
+                syntax: 'NomeStruct { campo: valor }',
                 code: [
                     'struct Retangulo {',
                     '    largura: u32,',
                     '    altura: u32,',
                     '}',
                     '',
-                    '___ Retangulo {',
-                    '    fn area(&self) -> u32 {',
-                    '        self.largura * self.altura',
-                    '    }',
+                    'fn main() {',
+                    '    ___',
+                    '    println!("{}x{}", r.largura, r.altura);',
                     '}'
                 ],
-                inputLine: 5,
-                inputPlaceholder: 'impl',
-                correctAnswers: ['impl'],
-                almostCorrect: [
-                    { answer: 'implement', feedback: 'Use a abreviação: <code>impl</code>, não <code>implement</code>.' }
-                ],
+                inputLine: 6,
+                inputPlaceholder: 'let r = Retangulo { largura: 10, altura: 5 };',
+                correctAnswers: ['let r = Retangulo { largura: 10, altura: 5 };', 'let r = Retangulo { altura: 5, largura: 10 };', 'let r = Retangulo { largura: 5, altura: 10 };'],
+                almostCorrect: [],
                 hints: [
-                    "Abreviação de 'implement' (implementar)",
-                    "Tem 4 letras: i-m-p-l",
-                    "Digite: <code>impl</code>"
+                    "let var = NomeStruct { campos };"
                 ],
-                successMessage: "Perfeito! <code>impl</code> adiciona métodos. Agora Retangulo tem o método area()!"
+                successMessage: "A ordem dos campos na instanciação não importa."
             },
             {
-                level: 35,
-                title: "Chamando Métodos",
+                level: 23,
+                title: "Método impl",
                 category: "Structs",
-                objective: "Use os métodos que você criou.",
-                teaching: `Chamamos métodos com <code>instancia.metodo()</code>:<br><br>
-                    <code>let ret = Retangulo { largura: 10, altura: 5 };</code><br>
-                    <code>let a = ret.area(); // 50</code><br><br>
-                    O <code>&self</code> é passado automaticamente!`,
-                syntax: 'instancia.metodo()',
+                objective: "Implemente um método que calcula a área do retângulo.",
+                teaching: `Métodos são definidos dentro de <code>impl</code>. <code>&self</code> é a instância.`,
+                syntax: 'impl Struct { fn metodo(&self) -> tipo { } }',
+                code: [
+                    'struct Retangulo {',
+                    '    largura: u32,',
+                    '    altura: u32,',
+                    '}',
+                    '',
+                    'impl Retangulo {',
+                    '    ___',
+                    '        self.largura * self.altura',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let r = Retangulo { largura: 10, altura: 5 };',
+                    '    println!("{}", r.area());',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'fn area(&self) -> u32 {',
+                correctAnswers: ['fn area(&self) -> u32 {'],
+                almostCorrect: [],
+                hints: [
+                    "fn nome(&self) -> tipo {"
+                ],
+                successMessage: "<code>&self</code> é um atalho para <code>self: &Self</code>."
+            },
+            {
+                level: 24,
+                title: "Associated Function",
+                category: "Structs",
+                objective: "Crie uma função associada (construtor) para Retangulo.",
+                teaching: `Funções sem <code>self</code> são chamadas com <code>::</code>.`,
+                syntax: 'fn new(params) -> Self { Self { campos } }',
+                code: [
+                    'struct Retangulo {',
+                    '    largura: u32,',
+                    '    altura: u32,',
+                    '}',
+                    '',
+                    'impl Retangulo {',
+                    '    ___',
+                    '        Self { largura: l, altura: a }',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let r = Retangulo::new(10, 5);',
+                    '    println!("{}x{}", r.largura, r.altura);',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: 'fn new(l: u32, a: u32) -> Self {',
+                correctAnswers: ['fn new(l: u32, a: u32) -> Self {', 'fn new(l: u32, a: u32) -> Retangulo {'],
+                almostCorrect: [],
+                hints: [
+                    "fn new(params) -> Self {"
+                ],
+                successMessage: "<code>Self</code> é um alias para o tipo sendo implementado."
+            },
+            {
+                level: 25,
+                title: "Struct com Método Mutável",
+                category: "Structs",
+                objective: "Implemente um método que modifica a struct.",
+                teaching: `Use <code>&mut self</code> para modificar campos.`,
+                syntax: 'fn metodo(&mut self) { self.campo = valor; }',
                 code: [
                     'struct Contador {',
                     '    valor: i32,',
                     '}',
                     '',
                     'impl Contador {',
-                    '    fn dobro(&self) -> i32 {',
-                    '        self.valor * 2',
+                    '    ___',
+                    '        self.valor += 1;',
                     '    }',
                     '}',
                     '',
                     'fn main() {',
-                    '    let c = Contador { valor: 21 };',
-                    '    println!("{}", c___dobro());',
+                    '    let mut c = Contador { valor: 0 };',
+                    '    c.incrementar();',
+                    '    println!("{}", c.valor);',
                     '}'
                 ],
-                inputLine: 12,
-                inputPlaceholder: '.',
-                correctAnswers: ['.'],
-                almostCorrect: [],
-                hints: [
-                    "Como acessamos campos? Mesma coisa para métodos!",
-                    "Use o ponto",
-                    "Digite: <code>.</code>"
+                inputLine: 5,
+                inputPlaceholder: 'fn incrementar(&mut self) {',
+                correctAnswers: ['fn incrementar(&mut self) {'],
+                almostCorrect: [
+                    { answer: 'fn incrementar(&self) {', feedback: 'Para modificar, precisa de <code>&mut self</code>.' }
                 ],
-                successMessage: "Excelente! <code>c.dobro()</code> retorna 42. Você domina structs!"
+                hints: [
+                    "&mut self para modificar"
+                ],
+                successMessage: "<code>&mut self</code> permite modificar a instância."
             },
-
-            // === BLOCO 8: Enums (36-40) ===
             {
-                level: 36,
-                title: "O que são Enums?",
-                category: "Enums",
-                objective: "Aprenda a criar tipos com múltiplas variantes!",
-                teaching: `<strong>Enums</strong> representam valores que podem ser <strong>uma coisa OU outra</strong>.<br><br>
-                    <strong>Analogia:</strong> Um semáforo só pode estar:<br>
-                    • Verde OU<br>
-                    • Amarelo OU<br>
-                    • Vermelho<br><br>
-                    <code>enum Semaforo {</code><br>
-                    <code>    Verde,</code><br>
-                    <code>    Amarelo,</code><br>
-                    <code>    Vermelho,</code><br>
-                    <code>}</code>`,
-                syntax: 'enum Nome {\n    Variante1,\n    Variante2,\n}',
+                level: 26,
+                title: "Tuple Struct",
+                category: "Structs",
+                objective: "Defina uma tuple struct para representar um ponto (x, y).",
+                teaching: `Tuple structs não têm nomes de campos.`,
+                syntax: 'struct Nome(tipo, tipo);',
                 code: [
-                    '___ DiaSemana {',
-                    '    Segunda,',
-                    '    Terca,',
-                    '    Quarta,',
-                    '    Quinta,',
-                    '    Sexta,',
+                    '___',
+                    '',
+                    'fn main() {',
+                    '    let p = Ponto(10, 20);',
+                    '    println!("x={}, y={}", p.0, p.1);',
                     '}'
                 ],
                 inputLine: 0,
-                inputPlaceholder: 'enum',
-                correctAnswers: ['enum'],
-                almostCorrect: [
-                    { answer: 'Enum', feedback: 'Minúsculo: <code>enum</code>, não <code>Enum</code>.' }
-                ],
+                inputPlaceholder: 'struct Ponto(i32, i32);',
+                correctAnswers: ['struct Ponto(i32, i32);'],
+                almostCorrect: [],
                 hints: [
-                    "A palavra vem de 'enumeration' (enumeração)",
-                    "Tem 4 letras: e-n-u-m",
-                    "Digite: <code>enum</code>"
+                    "struct Nome(tipo, tipo);"
                 ],
-                successMessage: "Ótimo! <code>enum</code> cria um tipo com variantes. DiaSemana pode ser Segunda, Terca, etc."
+                successMessage: "Tuple structs são úteis para newtype pattern."
             },
             {
-                level: 37,
-                title: "Usando Enums",
-                category: "Enums",
-                objective: "Crie valores de um tipo enum.",
-                teaching: `Para usar uma variante do enum, use <code>::</code>:<br><br>
-                    <code>let luz = Semaforo::Verde;</code><br>
-                    <code>let dia = DiaSemana::Sexta;</code><br><br>
-                    O <code>::</code> indica "a variante X do enum Y".`,
-                syntax: 'let var = NomeEnum::Variante;',
+                level: 27,
+                title: "Unit Struct",
+                category: "Structs",
+                objective: "Defina uma unit struct (sem campos).",
+                teaching: `Unit structs são úteis para traits sem dados.`,
+                syntax: 'struct Nome;',
                 code: [
-                    'enum Status {',
-                    '    Ativo,',
-                    '    Inativo,',
-                    '    Pendente,',
-                    '}',
+                    '___',
                     '',
                     'fn main() {',
-                    '    let meu_status = Status___Ativo;',
+                    '    let _marcador = Vazio;',
+                    '    println!("Unit struct criada");',
                     '}'
                 ],
-                inputLine: 7,
-                inputPlaceholder: '::',
-                correctAnswers: ['::'],
-                almostCorrect: [
-                    { answer: '.', feedback: 'Enums usam <code>::</code>, não ponto.' },
-                    { answer: ':', feedback: 'São DOIS dois-pontos: <code>::</code>' }
-                ],
+                inputLine: 0,
+                inputPlaceholder: 'struct Vazio;',
+                correctAnswers: ['struct Vazio;'],
+                almostCorrect: [],
                 hints: [
-                    "Para acessar variantes de enum, usamos dois dois-pontos",
-                    "É diferente do ponto usado em structs",
-                    "Digite: <code>::</code>"
+                    "struct Nome;"
                 ],
-                successMessage: "Correto! <code>Status::Ativo</code> cria um valor do tipo Status."
+                successMessage: "Unit structs ocupam zero bytes."
             },
             {
-                level: 38,
-                title: "Enums com Dados",
-                category: "Enums",
-                objective: "Enums podem carregar dados junto!",
-                teaching: `Variantes podem ter <strong>dados associados</strong>:<br><br>
-                    <code>enum Mensagem {</code><br>
-                    <code>    Texto(String),</code><br>
-                    <code>    Numero(i32),</code><br>
-                    <code>    Nada,</code><br>
-                    <code>}</code><br><br>
-                    <code>let m = Mensagem::Texto(String::from("Oi"));</code><br>
-                    <code>let n = Mensagem::Numero(42);</code>`,
-                syntax: 'Variante(tipo)',
+                level: 28,
+                title: "Derive Debug",
+                category: "Structs",
+                objective: "Adicione derive(Debug) para permitir println com {:?}.",
+                teaching: `<code>#[derive(Debug)]</code> implementa formatação de debug.`,
+                syntax: '#[derive(Debug)]',
                 code: [
-                    'enum Evento {',
-                    '    Clique { x: i32, y: i32 },',
-                    '    Tecla(char),',
-                    '    Sair,',
+                    '___',
+                    'struct Usuario {',
+                    '    nome: String,',
+                    '    ativo: bool,',
                     '}',
                     '',
                     'fn main() {',
-                    '    let e = Evento::Tecla(___);',
+                    '    let u = Usuario { nome: String::from("Ana"), ativo: true };',
+                    '    println!("{:?}", u);',
                     '}'
                 ],
-                inputLine: 7,
-                inputPlaceholder: "'a'",
-                correctAnswers: ["'a'", "'b'", "'c'", "'x'", "'y'", "'z'", "'A'", "'B'", "'1'", "'0'"],
-                almostCorrect: [
-                    { answer: 'a', feedback: 'Caracteres usam aspas simples: <code>\'a\'</code>' },
-                    { answer: '"a"', feedback: 'Caractere único usa aspas SIMPLES: <code>\'a\'</code>, não duplas.' }
-                ],
+                inputLine: 0,
+                inputPlaceholder: '#[derive(Debug)]',
+                correctAnswers: ['#[derive(Debug)]'],
+                almostCorrect: [],
                 hints: [
-                    "Tecla espera um char (caractere)",
-                    "Caracteres usam aspas simples",
-                    "Digite: <code>'a'</code>"
+                    "#[derive(Trait)]"
                 ],
-                successMessage: "Perfeito! Enums com dados são muito poderosos em Rust!"
+                successMessage: "<code>Debug</code> é essencial para depuração."
             },
+
+            // === BLOCO 5: Enums (29-36) ===
             {
-                level: 39,
-                title: "Match com Enums",
+                level: 29,
+                title: "Definir Enum",
                 category: "Enums",
-                objective: "Use match para lidar com diferentes variantes.",
-                teaching: `<code>match</code> é perfeito para enums — você trata cada caso:<br><br>
-                    <code>match semaforo {</code><br>
-                    <code>    Semaforo::Verde => println!("Siga!"),</code><br>
-                    <code>    Semaforo::Amarelo => println!("Atenção!"),</code><br>
-                    <code>    Semaforo::Vermelho => println!("Pare!"),</code><br>
-                    <code>}</code><br><br>
-                    Rust OBRIGA você a tratar TODAS as variantes!`,
-                syntax: 'match valor {\n    Enum::Var => ...,\n}',
+                objective: "Defina um enum para representar direções.",
+                teaching: `Enums definem um tipo com variantes mutuamente exclusivas.`,
+                syntax: 'enum Nome { Variante1, Variante2 }',
                 code: [
-                    'enum Moeda {',
-                    '    Real,',
-                    '    Dolar,',
-                    '    Euro,',
+                    '___',
+                    '    Norte,',
+                    '    Sul,',
+                    '    Leste,',
+                    '    Oeste,',
                     '}',
                     '',
                     'fn main() {',
-                    '    let m = Moeda::Real;',
-                    '    ___ m {',
-                    '        Moeda::Real => println!("R$"),',
-                    '        Moeda::Dolar => println!("$"),',
-                    '        Moeda::Euro => println!("€"),',
+                    '    let dir = Direcao::Norte;',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'enum Direcao {',
+                correctAnswers: ['enum Direcao {'],
+                almostCorrect: [],
+                hints: [
+                    "enum Nome {"
+                ],
+                successMessage: "Enums são fundamentais para modelagem de estados."
+            },
+            {
+                level: 30,
+                title: "Enum com Dados",
+                category: "Enums",
+                objective: "Defina variantes de enum que carregam dados.",
+                teaching: `Variantes podem conter tipos diferentes.`,
+                syntax: 'enum Nome { Var(tipo), Var { campo: tipo } }',
+                code: [
+                    'enum Mensagem {',
+                    '    Texto(String),',
+                    '    ___',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let m = Mensagem::Mover { x: 10, y: 20 };',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 'Mover { x: i32, y: i32 },',
+                correctAnswers: ['Mover { x: i32, y: i32 },', 'Mover {x: i32, y: i32},'],
+                almostCorrect: [],
+                hints: [
+                    "Variante { campo: tipo },"
+                ],
+                successMessage: "Cada variante pode ter estrutura diferente."
+            },
+            {
+                level: 31,
+                title: "Match com Enum",
+                category: "Enums",
+                objective: "Use match para tratar todas as variantes de um enum.",
+                teaching: ``,
+                syntax: 'match valor { Enum::Var => expr }',
+                code: [
+                    'enum Cor {',
+                    '    Vermelho,',
+                    '    Verde,',
+                    '    Azul,',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let c = Cor::Verde;',
+                    '    ___',
+                    '        Cor::Vermelho => println!("R"),',
+                    '        Cor::Verde => println!("G"),',
+                    '        Cor::Azul => println!("B"),',
                     '    }',
                     '}'
                 ],
                 inputLine: 8,
-                inputPlaceholder: 'match',
-                correctAnswers: ['match'],
+                inputPlaceholder: 'match c {',
+                correctAnswers: ['match c {'],
                 almostCorrect: [],
                 hints: [
-                    "Qual palavra-chave para pattern matching?",
-                    "Rima com 'catch'",
-                    "Digite: <code>match</code>"
+                    "match variavel {"
                 ],
-                successMessage: "Excelente! match + enum é uma combinação poderosa e segura!"
+                successMessage: "O compilador garante que todas as variantes sejam tratadas."
             },
             {
-                level: 40,
-                title: "Option: Enum Especial",
+                level: 32,
+                title: "Option<T>",
                 category: "Enums",
-                objective: "Conheça o enum mais importante do Rust!",
-                teaching: `<code>Option</code> é um enum que representa "pode ter ou não ter":<br><br>
-                    <code>enum Option&lt;T&gt; {</code><br>
-                    <code>    Some(T),  // tem valor</code><br>
-                    <code>    None,     // não tem valor</code><br>
-                    <code>}</code><br><br>
-                    Rust NÃO tem <code>null</code>! Usa <code>Option</code> no lugar.<br>
-                    É mais seguro porque OBRIGA você a verificar!`,
-                syntax: 'Some(valor) ou None',
+                objective: "Use Option para representar um valor opcional.",
+                teaching: `<code>Option&lt;T&gt;</code> tem <code>Some(valor)</code> ou <code>None</code>.`,
+                syntax: 'let x: Option<T> = Some(valor);',
                 code: [
-                    'fn buscar(id: i32) -> Option<String> {',
-                    '    if id == 1 {',
-                    '        ___(String::from("Encontrado!"))',
+                    'fn main() {',
+                    '    ___',
+                    '    match numero {',
+                    '        Some(n) => println!("Tem: {}", n),',
+                    '        None => println!("Vazio"),',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'let numero: Option<i32> = Some(42);',
+                correctAnswers: ['let numero: Option<i32> = Some(42);', 'let numero = Some(42);', 'let numero: Option<i32> = None;'],
+                almostCorrect: [],
+                hints: [
+                    "Some(valor) ou None"
+                ],
+                successMessage: "<code>Option</code> elimina null pointer exceptions."
+            },
+            {
+                level: 33,
+                title: "Result<T, E>",
+                category: "Enums",
+                objective: "Use Result para representar sucesso ou erro.",
+                teaching: `<code>Result&lt;T, E&gt;</code> tem <code>Ok(valor)</code> ou <code>Err(erro)</code>.`,
+                syntax: 'let x: Result<T, E> = Ok(valor);',
+                code: [
+                    'fn dividir(a: i32, b: i32) -> Result<i32, String> {',
+                    '    if b == 0 {',
+                    '        Err(String::from("divisão por zero"))',
                     '    } else {',
-                    '        None',
+                    '        ___',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{:?}", dividir(10, 2));',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'Ok(a / b)',
+                correctAnswers: ['Ok(a / b)'],
+                almostCorrect: [
+                    { answer: 'a / b', feedback: 'Precisa envolver em <code>Ok()</code>.' }
+                ],
+                hints: [
+                    "Ok(expressão)"
+                ],
+                successMessage: "<code>Result</code> força tratamento explícito de erros."
+            },
+            {
+                level: 34,
+                title: "Operador ?",
+                category: "Enums",
+                objective: "Use ? para propagar erros automaticamente.",
+                teaching: `<code>?</code> retorna Err se falhar, senão extrai o valor Ok.`,
+                syntax: 'let x = funcao_que_pode_falhar()?;',
+                code: [
+                    'fn pode_falhar() -> Result<i32, String> {',
+                    '    Ok(42)',
+                    '}',
+                    '',
+                    'fn usar() -> Result<i32, String> {',
+                    '    let valor = ___',
+                    '    Ok(valor * 2)',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{:?}", usar());',
+                    '}'
+                ],
+                inputLine: 5,
+                inputPlaceholder: 'pode_falhar()?;',
+                correctAnswers: ['pode_falhar()?;'],
+                almostCorrect: [
+                    { answer: 'pode_falhar();', feedback: 'Faltou o <code>?</code> para propagar erros.' }
+                ],
+                hints: [
+                    "funcao()?"
+                ],
+                successMessage: "<code>?</code> simplifica o tratamento de erros."
+            },
+            {
+                level: 35,
+                title: "if let",
+                category: "Enums",
+                objective: "Use if let para extrair valor de Some.",
+                teaching: `<code>if let</code> é açúcar sintático para match com uma branch.`,
+                syntax: 'if let Some(x) = option { }',
+                code: [
+                    'fn main() {',
+                    '    let config: Option<i32> = Some(100);',
+                    '    ___',
+                    '        println!("Valor: {}", valor);',
                     '    }',
                     '}'
                 ],
                 inputLine: 2,
-                inputPlaceholder: 'Some',
-                correctAnswers: ['Some'],
-                almostCorrect: [
-                    { answer: 'some', feedback: 'Com maiúscula: <code>Some</code>, não <code>some</code>.' },
-                    { answer: 'return', feedback: 'Não precisa de return! Apenas <code>Some(...)</code>.' }
-                ],
+                inputPlaceholder: 'if let Some(valor) = config {',
+                correctAnswers: ['if let Some(valor) = config {', 'if let Some(v) = config {'],
+                almostCorrect: [],
                 hints: [
-                    "Se encontrou algo, retorna 'algum' valor",
-                    "'Some' significa 'algum' em inglês",
-                    "Digite: <code>Some</code>"
+                    "if let Padrao = variavel {"
                 ],
-                successMessage: "Perfeito! Option elimina erros de null. Some = tem valor, None = vazio."
+                successMessage: "<code>if let</code> é mais conciso que match para um caso."
             },
-
-            // === BLOCO 9: Ownership (41-45) ===
             {
-                level: 41,
-                title: "O que é Ownership?",
-                category: "Ownership",
-                objective: "Entenda o conceito mais importante e único do Rust!",
-                teaching: `<strong>Ownership</strong> é o que torna Rust especial e seguro.<br><br>
-                    <strong>Regra fundamental:</strong> Cada valor tem <strong>um único dono</strong>.<br><br>
-                    <strong>Analogia:</strong> Pense em um livro físico:<br>
-                    • Só uma pessoa pode ser dona do livro<br>
-                    • Quando você dá o livro, você não tem mais<br>
-                    • Quando o dono sai do escopo, o livro é "destruído"<br><br>
-                    O compilador garante essas regras em tempo de compilação!`,
-                syntax: 'let dono = valor; // dono possui o valor',
+                level: 36,
+                title: "while let",
+                category: "Enums",
+                objective: "Use while let para iterar enquanto tiver Some.",
+                teaching: ``,
+                syntax: 'while let Some(x) = iter.next() { }',
                 code: [
                     'fn main() {',
-                    '    let s1 = String::from("olá");',
-                    '    let s2 = s1; // s1 foi MOVIDO para s2',
-                    '    // println!("{}", s1); // ERRO! s1 não existe mais',
-                    '    println!("{}", ___);',
+                    '    let mut stack = vec![1, 2, 3];',
+                    '    ___',
+                    '        println!("{}", valor);',
+                    '    }',
                     '}'
                 ],
-                inputLine: 4,
-                inputPlaceholder: 's2',
-                correctAnswers: ['s2'],
+                inputLine: 2,
+                inputPlaceholder: 'while let Some(valor) = stack.pop() {',
+                correctAnswers: ['while let Some(valor) = stack.pop() {', 'while let Some(v) = stack.pop() {'],
+                almostCorrect: [],
+                hints: [
+                    "while let Padrao = expressão {"
+                ],
+                successMessage: "<code>while let</code> é útil para iteradores e pilhas."
+            },
+
+            // === BLOCO 6: Ownership & Borrowing (37-44) ===
+            {
+                level: 37,
+                title: "Move Semantics",
+                category: "Ownership",
+                objective: "Clone uma String para evitar move.",
+                teaching: `Atribuição move valores heap-allocated. Use <code>.clone()</code> para cópia.`,
+                syntax: 's.clone()',
+                code: [
+                    'fn main() {',
+                    '    let s1 = String::from("hello");',
+                    '    let s2 = ___;',
+                    '    println!("{} {}", s1, s2);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: 's1.clone()',
+                correctAnswers: ['s1.clone()', 's1.clone();'],
                 almostCorrect: [
-                    { answer: 's1', feedback: '<code>s1</code> foi movido! Agora só <code>s2</code> é válido.' }
+                    { answer: 's1', feedback: 'Isso faria move. s1 não seria mais válido. Use <code>.clone()</code>.' }
                 ],
                 hints: [
-                    "s1 foi movido para s2, então s1 não existe mais",
-                    "Qual variável agora possui o valor?",
-                    "Digite: <code>s2</code>"
+                    ".clone() cria cópia"
                 ],
-                successMessage: "Excelente! Quando atribui s1 a s2, o ownership MOVE. s1 deixa de existir!"
+                successMessage: "<code>clone()</code> cria deep copy, mantendo original válido."
+            },
+            {
+                level: 38,
+                title: "Borrow Checker",
+                category: "Ownership",
+                objective: "Passe por referência para não perder ownership.",
+                teaching: ``,
+                syntax: '&variavel',
+                code: [
+                    'fn mostrar(s: &String) {',
+                    '    println!("{}", s);',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let texto = String::from("Rust");',
+                    '    mostrar(___);',
+                    '    println!("Ainda tenho: {}", texto);',
+                    '}'
+                ],
+                inputLine: 6,
+                inputPlaceholder: '&texto',
+                correctAnswers: ['&texto'],
+                almostCorrect: [
+                    { answer: 'texto', feedback: 'Isso faria move. Use <code>&texto</code> para emprestar.' }
+                ],
+                hints: [
+                    "& para referência"
+                ],
+                successMessage: "Borrowing permite usar valores sem tomar ownership."
+            },
+            {
+                level: 39,
+                title: "Múltiplas Refs Imutáveis",
+                category: "Ownership",
+                objective: "Crie duas referências imutáveis ao mesmo tempo.",
+                teaching: `Múltiplas <code>&</code> são permitidas. Apenas uma <code>&mut</code> por vez.`,
+                syntax: 'let r1 = &x; let r2 = &x;',
+                code: [
+                    'fn main() {',
+                    '    let s = String::from("hello");',
+                    '    let r1 = &s;',
+                    '    let r2 = ___;',
+                    '    println!("{} {}", r1, r2);',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: '&s',
+                correctAnswers: ['&s', '&s;'],
+                almostCorrect: [],
+                hints: [
+                    "&variavel"
+                ],
+                successMessage: "Múltiplas referências imutáveis são sempre seguras."
+            },
+            {
+                level: 40,
+                title: "Referência Mutável Exclusiva",
+                category: "Ownership",
+                objective: "Crie uma referência mutável.",
+                teaching: `Apenas UMA <code>&mut</code> pode existir por vez.`,
+                syntax: 'let r = &mut variavel;',
+                code: [
+                    'fn main() {',
+                    '    let mut s = String::from("hello");',
+                    '    let r = ___;',
+                    '    r.push_str(" world");',
+                    '    println!("{}", r);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: '&mut s',
+                correctAnswers: ['&mut s', '&mut s;'],
+                almostCorrect: [
+                    { answer: '&s', feedback: 'Precisa ser mutável para modificar. Use <code>&mut s</code>.' }
+                ],
+                hints: [
+                    "&mut variavel"
+                ],
+                successMessage: "Exclusividade de <code>&mut</code> previne data races."
+            },
+            {
+                level: 41,
+                title: "Slices",
+                category: "Ownership",
+                objective: "Crie uma slice de uma String.",
+                teaching: `Slices são referências a porções de dados: <code>&s[inicio..fim]</code>`,
+                syntax: '&s[0..5]',
+                code: [
+                    'fn main() {',
+                    '    let s = String::from("hello world");',
+                    '    let hello = ___;',
+                    '    println!("{}", hello);',
+                    '}'
+                ],
+                inputLine: 2,
+                inputPlaceholder: '&s[0..5]',
+                correctAnswers: ['&s[0..5]', '&s[..5]', '&s[0..=4]'],
+                almostCorrect: [],
+                hints: [
+                    "&s[inicio..fim]"
+                ],
+                successMessage: "Slices não tomam ownership, são views dos dados."
             },
             {
                 level: 42,
-                title: "Move Semântico",
+                title: "String Slices (&str)",
                 category: "Ownership",
-                objective: "Entenda como valores são movidos entre variáveis.",
-                teaching: `Quando você passa um valor para uma função, ele é <strong>movido</strong>:<br><br>
-                    <code>fn recebe(s: String) { ... }</code><br><br>
-                    <code>let texto = String::from("oi");</code><br>
-                    <code>recebe(texto);</code><br>
-                    <code>// texto não existe mais aqui!</code><br><br>
-                    A função <code>recebe</code> agora é dona do valor.`,
-                syntax: 'fn func(param: String) // ownership movido',
+                objective: "Use &str como parâmetro mais flexível.",
+                teaching: `<code>&str</code> aceita tanto <code>&String</code> quanto string literals.`,
+                syntax: 'fn nome(s: &str)',
                 code: [
-                    'fn imprime(s: String) {',
-                    '    println!("{}", s);',
-                    '} // s é destruído aqui',
+                    '___',
+                    '    println!("Primeiro: {}", s.chars().next().unwrap());',
+                    '}',
                     '',
                     'fn main() {',
-                    '    let msg = String::from("Rust");',
-                    '    imprime(___);',
-                    '    // msg não pode mais ser usada!',
+                    '    let s = String::from("Rust");',
+                    '    primeira_letra(&s);',
+                    '    primeira_letra("Teste");',
                     '}'
                 ],
-                inputLine: 6,
-                inputPlaceholder: 'msg',
-                correctAnswers: ['msg'],
-                almostCorrect: [],
-                hints: [
-                    "Qual variável queremos passar para a função?",
-                    "É a variável que contém 'Rust'",
-                    "Digite: <code>msg</code>"
+                inputLine: 0,
+                inputPlaceholder: 'fn primeira_letra(s: &str) {',
+                correctAnswers: ['fn primeira_letra(s: &str) {'],
+                almostCorrect: [
+                    { answer: 'fn primeira_letra(s: &String) {', feedback: '<code>&str</code> é mais flexível, aceita ambos tipos.' }
                 ],
-                successMessage: "Correto! Ao chamar imprime(msg), o ownership de msg é movido para a função."
+                hints: [
+                    "&str é mais genérico"
+                ],
+                successMessage: "Prefira <code>&str</code> a <code>&String</code> em parâmetros."
             },
             {
                 level: 43,
-                title: "Clone: Copiando Valores",
+                title: "Lifetime Básico",
                 category: "Ownership",
-                objective: "Aprenda a fazer cópias quando precisar manter o original.",
-                teaching: `Se você quer <strong>manter o original</strong>, use <code>.clone()</code>:<br><br>
-                    <code>let s1 = String::from("oi");</code><br>
-                    <code>let s2 = s1.clone(); // cópia profunda</code><br>
-                    <code>println!("{} {}", s1, s2); // ambos válidos!</code><br><br>
-                    <strong>Atenção:</strong> clone() pode ser custoso para dados grandes!`,
-                syntax: 'let copia = original.clone();',
+                objective: "Adicione lifetime annotation em função que retorna referência.",
+                teaching: `Lifetimes garantem que referências não outlive seus dados.`,
+                syntax: "fn nome<'a>(x: &'a T) -> &'a T",
                 code: [
+                    '___',
+                    '    if a.len() > b.len() { a } else { b }',
+                    '}',
+                    '',
                     'fn main() {',
-                    '    let original = String::from("dados");',
-                    '    let copia = original.___();',
-                    '    println!("Original: {}", original);',
-                    '    println!("Cópia: {}", copia);',
+                    '    let s1 = String::from("long");',
+                    '    let s2 = String::from("hi");',
+                    '    let result = maior(&s1, &s2);',
+                    '    println!("{}", result);',
                     '}'
                 ],
-                inputLine: 2,
-                inputPlaceholder: 'clone',
-                correctAnswers: ['clone'],
+                inputLine: 0,
+                inputPlaceholder: "fn maior<'a>(a: &'a str, b: &'a str) -> &'a str {",
+                correctAnswers: ["fn maior<'a>(a: &'a str, b: &'a str) -> &'a str {"],
                 almostCorrect: [
-                    { answer: 'copy', feedback: 'Para String, use <code>clone()</code>, não <code>copy()</code>.' }
+                    { answer: 'fn maior(a: &str, b: &str) -> &str {', feedback: 'O compilador não sabe qual lifetime usar. Adicione <code>\'a</code>.' }
                 ],
                 hints: [
-                    "O método para fazer uma cópia profunda",
-                    "Rima com 'cone'",
-                    "Digite: <code>clone</code>"
+                    "'a é uma lifetime genérica"
                 ],
-                successMessage: "Perfeito! clone() cria uma cópia independente. Ambas variáveis são válidas!"
+                successMessage: "Lifetimes são verificados em compile-time."
             },
             {
                 level: 44,
-                title: "Copy Trait",
+                title: "'static Lifetime",
                 category: "Ownership",
-                objective: "Alguns tipos são copiados automaticamente!",
-                teaching: `Tipos simples implementam <code>Copy</code> e são copiados automaticamente:<br><br>
-                    • Inteiros: <code>i32</code>, <code>u64</code>, etc.<br>
-                    • Floats: <code>f32</code>, <code>f64</code><br>
-                    • Booleanos: <code>bool</code><br>
-                    • Char: <code>char</code><br><br>
-                    <code>let x = 5;</code><br>
-                    <code>let y = x; // x é COPIADO, não movido</code><br>
-                    <code>println!("{} {}", x, y); // ambos válidos!</code>`,
-                syntax: 'let y = x; // tipos Copy são copiados',
+                objective: "Retorne uma string com lifetime 'static.",
+                teaching: `<code>'static</code> dura toda a execução do programa.`,
+                syntax: "fn nome() -> &'static str",
                 code: [
-                    'fn main() {',
-                    '    let a = 10;',
-                    '    let b = a; // i32 é Copy!',
-                    '    println!("a = {}", ___);',
-                    '    println!("b = {}", b);',
-                    '}'
-                ],
-                inputLine: 3,
-                inputPlaceholder: 'a',
-                correctAnswers: ['a'],
-                almostCorrect: [],
-                hints: [
-                    "i32 implementa Copy, então a ainda é válido",
-                    "Podemos usar a mesmo após atribuir a b",
-                    "Digite: <code>a</code>"
-                ],
-                successMessage: "Ótimo! Tipos simples como i32 são copiados, não movidos. a ainda é válido!"
-            },
-            {
-                level: 45,
-                title: "Ownership e Escopo",
-                category: "Ownership",
-                objective: "Valores são destruídos quando o dono sai do escopo.",
-                teaching: `Quando uma variável sai do escopo, o valor é <strong>destruído</strong> (drop):<br><br>
-                    <code>{</code><br>
-                    <code>    let s = String::from("oi");</code><br>
-                    <code>    // s é válido aqui</code><br>
-                    <code>} // s sai do escopo e é destruído!</code><br><br>
-                    Isso garante que a memória é liberada automaticamente!`,
-                syntax: '{ let x = ...; } // x destruído aqui',
-                code: [
-                    'fn main() {',
-                    '    let externo = 1;',
-                    '    {',
-                    '        let interno = 2;',
-                    '        println!("{}", interno);',
-                    '    } // interno destruído aqui',
-                    '    println!("{}", ___);',
-                    '}'
-                ],
-                inputLine: 6,
-                inputPlaceholder: 'externo',
-                correctAnswers: ['externo'],
-                almostCorrect: [
-                    { answer: 'interno', feedback: '<code>interno</code> foi destruído! Só <code>externo</code> existe.' }
-                ],
-                hints: [
-                    "interno foi destruído quando o bloco {} fechou",
-                    "Qual variável ainda existe no escopo externo?",
-                    "Digite: <code>externo</code>"
-                ],
-                successMessage: "Correto! interno foi destruído ao sair do escopo. externo ainda existe!"
-            },
-
-            // === BLOCO 10: Borrowing (46-50) ===
-            {
-                level: 46,
-                title: "Referências (Borrowing)",
-                category: "Borrowing",
-                objective: "Aprenda a emprestar valores sem mover ownership!",
-                teaching: `Em vez de mover, você pode <strong>emprestar</strong> com <code>&</code>:<br><br>
-                    <code>fn tamanho(s: &String) -> usize {</code><br>
-                    <code>    s.len()</code><br>
-                    <code>}</code><br><br>
-                    <code>let msg = String::from("oi");</code><br>
-                    <code>let tam = tamanho(&msg); // empresta</code><br>
-                    <code>println!("{}", msg); // msg ainda é válido!</code><br><br>
-                    <code>&</code> cria uma <strong>referência</strong> (empréstimo).`,
-                syntax: 'fn func(s: &String) // referência',
-                code: [
-                    'fn conta_letras(s: &String) -> usize {',
-                    '    s.len()',
+                    '___',
+                    '    "Eu duro para sempre"',
                     '}',
                     '',
                     'fn main() {',
-                    '    let palavra = String::from("Rust");',
-                    '    let tam = conta_letras(___palavra);',
-                    '    println!("{} tem {} letras", palavra, tam);',
+                    '    let s = mensagem();',
+                    '    println!("{}", s);',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: "fn mensagem() -> &'static str {",
+                correctAnswers: ["fn mensagem() -> &'static str {"],
+                almostCorrect: [],
+                hints: [
+                    "'static para dados que vivem sempre"
+                ],
+                successMessage: "String literals têm lifetime <code>'static</code>."
+            },
+
+            // === BLOCO 7: Traits & Generics (45-50) ===
+            {
+                level: 45,
+                title: "Definir Trait",
+                category: "Traits",
+                objective: "Defina um trait com um método.",
+                teaching: `Traits definem comportamentos compartilhados.`,
+                syntax: 'trait Nome { fn metodo(&self); }',
+                code: [
+                    '___',
+                    '    fn descrever(&self) -> String;',
+                    '}',
+                    '',
+                    'struct Pessoa { nome: String }',
+                    '',
+                    'impl Descritivel for Pessoa {',
+                    '    fn descrever(&self) -> String {',
+                    '        format!("Pessoa: {}", self.nome)',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let p = Pessoa { nome: String::from("Ana") };',
+                    '    println!("{}", p.descrever());',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'trait Descritivel {',
+                correctAnswers: ['trait Descritivel {'],
+                almostCorrect: [
+                    { answer: 'interface Descritivel {', feedback: 'Rust usa <code>trait</code>, não <code>interface</code>.' }
+                ],
+                hints: [
+                    "trait Nome {"
+                ],
+                successMessage: "Traits são como interfaces em outras linguagens."
+            },
+            {
+                level: 46,
+                title: "impl Trait",
+                category: "Traits",
+                objective: "Implemente um trait para uma struct.",
+                teaching: ``,
+                syntax: 'impl Trait for Tipo { }',
+                code: [
+                    'trait Saudavel {',
+                    '    fn saudar(&self);',
+                    '}',
+                    '',
+                    'struct Robo;',
+                    '',
+                    '___',
+                    '    fn saudar(&self) {',
+                    '        println!("Beep boop!");',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    Robo.saudar();',
                     '}'
                 ],
                 inputLine: 6,
-                inputPlaceholder: '&',
-                correctAnswers: ['&'],
-                almostCorrect: [
-                    { answer: '*', feedback: '<code>*</code> é para dereferenciar. Para emprestar, use <code>&</code>.' }
-                ],
+                inputPlaceholder: 'impl Saudavel for Robo {',
+                correctAnswers: ['impl Saudavel for Robo {'],
+                almostCorrect: [],
                 hints: [
-                    "Qual símbolo cria uma referência (empréstimo)?",
-                    "É o 'e comercial' (ampersand)",
-                    "Digite: <code>&</code>"
+                    "impl Trait for Tipo {"
                 ],
-                successMessage: "Excelente! &palavra empresta o valor. A função usa, mas palavra continua válido!"
+                successMessage: "Qualquer tipo pode implementar qualquer trait."
             },
             {
                 level: 47,
-                title: "Referências Imutáveis",
-                category: "Borrowing",
-                objective: "Referências com & são somente leitura.",
-                teaching: `Referências com <code>&</code> são <strong>imutáveis</strong> — só leitura:<br><br>
-                    <code>fn mostra(s: &String) {</code><br>
-                    <code>    // s.push_str("!"); // ERRO! não pode modificar</code><br>
-                    <code>    println!("{}", s); // OK, só leitura</code><br>
-                    <code>}</code><br><br>
-                    Você pode ter <strong>múltiplas</strong> referências imutáveis ao mesmo tempo!`,
-                syntax: '&T // referência imutável (só leitura)',
+                title: "Função Genérica",
+                category: "Traits",
+                objective: "Crie uma função genérica que aceita qualquer tipo.",
+                teaching: `<code>&lt;T&gt;</code> define um tipo genérico.`,
+                syntax: 'fn nome<T>(x: T) { }',
                 code: [
+                    '___',
+                    '    println!("{:?}", item);',
+                    '}',
+                    '',
                     'fn main() {',
-                    '    let texto = String::from("Olá");',
-                    '    let r1 = &texto;',
-                    '    let r2 = ___texto; // outra referência',
-                    '    println!("{} e {}", r1, r2);',
+                    '    mostrar(42);',
+                    '    mostrar("texto");',
                     '}'
                 ],
-                inputLine: 3,
-                inputPlaceholder: '&',
-                correctAnswers: ['&'],
-                almostCorrect: [],
-                hints: [
-                    "Queremos criar outra referência imutável",
-                    "Mesmo símbolo da referência anterior",
-                    "Digite: <code>&</code>"
+                inputLine: 0,
+                inputPlaceholder: 'fn mostrar<T: std::fmt::Debug>(item: T) {',
+                correctAnswers: ['fn mostrar<T: std::fmt::Debug>(item: T) {', 'fn mostrar<T: Debug>(item: T) {'],
+                almostCorrect: [
+                    { answer: 'fn mostrar<T>(item: T) {', feedback: 'T precisa implementar Debug para usar <code>{:?}</code>.' }
                 ],
-                successMessage: "Correto! Múltiplas referências imutáveis são permitidas. Ambas só leem!"
+                hints: [
+                    "<T: Trait> para bounds"
+                ],
+                successMessage: "Trait bounds restringem quais tipos são aceitos."
             },
             {
                 level: 48,
-                title: "Referências Mutáveis",
-                category: "Borrowing",
-                objective: "Aprenda a emprestar com permissão de modificar.",
-                teaching: `Para modificar um valor emprestado, use <code>&mut</code>:<br><br>
-                    <code>fn adiciona(s: &mut String) {</code><br>
-                    <code>    s.push_str(" Rust!"); // OK!</code><br>
-                    <code>}</code><br><br>
-                    <code>let mut msg = String::from("Olá");</code><br>
-                    <code>adiciona(&mut msg);</code><br><br>
-                    <strong>Regra:</strong> A variável original também deve ser <code>mut</code>!`,
-                syntax: '&mut T // referência mutável',
+                title: "Trait Bound com where",
+                category: "Traits",
+                objective: "Use where para trait bounds mais legíveis.",
+                teaching: `<code>where</code> deixa assinaturas complexas mais claras.`,
+                syntax: 'fn nome<T>(x: T) where T: Trait { }',
                 code: [
-                    'fn dobra(n: &mut i32) {',
-                    '    *n = *n * 2;',
+                    'fn comparar<T>(a: T, b: T) -> bool',
+                    '___',
+                    '{',
+                    '    a == b',
                     '}',
                     '',
                     'fn main() {',
-                    '    let mut valor = 5;',
-                    '    dobra(&___ valor);',
-                    '    println!("{}", valor); // 10',
+                    '    println!("{}", comparar(1, 1));',
                     '}'
                 ],
-                inputLine: 6,
-                inputPlaceholder: 'mut',
-                correctAnswers: ['mut'],
-                almostCorrect: [
-                    { answer: '&mut', feedback: 'Já tem o <code>&</code>! Só falta <code>mut</code>.' }
-                ],
+                inputLine: 1,
+                inputPlaceholder: 'where T: PartialEq',
+                correctAnswers: ['where T: PartialEq', 'where T: PartialEq,', '    where T: PartialEq'],
+                almostCorrect: [],
                 hints: [
-                    "Precisamos de uma referência mutável",
-                    "A palavra que indica mutabilidade",
-                    "Digite: <code>mut</code>"
+                    "where T: Trait"
                 ],
-                successMessage: "Perfeito! &mut permite modificar. O valor original foi alterado para 10!"
+                successMessage: "<code>where</code> é preferido para múltiplos bounds."
             },
             {
                 level: 49,
-                title: "Regras do Borrow Checker",
-                category: "Borrowing",
-                objective: "Entenda as regras que garantem segurança.",
-                teaching: `O <strong>Borrow Checker</strong> garante duas regras:<br><br>
-                    <strong>1.</strong> Você pode ter OU:<br>
-                    • Uma referência mutável <code>&mut T</code><br>
-                    • Várias referências imutáveis <code>&T</code><br><br>
-                    <strong>2.</strong> Nunca ambas ao mesmo tempo!<br><br>
-                    Isso previne <em>data races</em> em tempo de compilação!`,
-                syntax: '&T ou &mut T, nunca os dois',
+                title: "Struct Genérica",
+                category: "Traits",
+                objective: "Defina uma struct genérica.",
+                teaching: ``,
+                syntax: 'struct Nome<T> { campo: T }',
                 code: [
-                    'fn main() {',
-                    '    let mut s = String::from("oi");',
-                    '    let r1 = &s;     // OK',
-                    '    let r2 = &s;     // OK, múltiplas imutáveis',
-                    '    println!("{} {}", r1, r2);',
-                    '    // r1 e r2 não são mais usadas',
-                    '    let r3 = &___ s; // OK agora!',
-                    '    r3.push_str("!");',
-                    '}'
-                ],
-                inputLine: 6,
-                inputPlaceholder: 'mut',
-                correctAnswers: ['mut'],
-                almostCorrect: [],
-                hints: [
-                    "Queremos uma referência que pode modificar",
-                    "Qual palavra permite mutabilidade?",
-                    "Digite: <code>mut</code>"
-                ],
-                successMessage: "Excelente! Como r1 e r2 não são mais usadas, podemos criar &mut. O Borrow Checker é inteligente!"
-            },
-            {
-                level: 50,
-                title: "Dangling References",
-                category: "Borrowing",
-                objective: "Rust previne referências inválidas!",
-                teaching: `Rust impede <strong>dangling references</strong> (referências para dados destruídos):<br><br>
-                    <code>fn dangling() -> &String { // ERRO!</code><br>
-                    <code>    let s = String::from("oi");</code><br>
-                    <code>    &s // s será destruído!</code><br>
-                    <code>}</code><br><br>
-                    O compilador detecta e impede esse erro comum em C/C++!<br>
-                    Solução: retorne o valor (mova ownership), não uma referência.`,
-                syntax: 'fn func() -> String // retorna ownership',
-                code: [
-                    'fn cria_texto() -> String {',
-                    '    let s = String::from("Criado!");',
-                    '    ___ // retorna ownership, não referência',
+                    '___',
+                    '    valor: T,',
                     '}',
                     '',
                     'fn main() {',
-                    '    let texto = cria_texto();',
-                    '    println!("{}", texto);',
+                    '    let caixa_int = Caixa { valor: 42 };',
+                    '    let caixa_str = Caixa { valor: "texto" };',
+                    '    println!("{} {}", caixa_int.valor, caixa_str.valor);',
+                    '}'
+                ],
+                inputLine: 0,
+                inputPlaceholder: 'struct Caixa<T> {',
+                correctAnswers: ['struct Caixa<T> {'],
+                almostCorrect: [],
+                hints: [
+                    "struct Nome<T> {"
+                ],
+                successMessage: "Generics permitem código reutilizável type-safe."
+            },
+            {
+                level: 50,
+                title: "impl para Tipo Genérico",
+                category: "Traits",
+                objective: "Implemente métodos para uma struct genérica.",
+                teaching: `O <code>impl</code> também precisa do parâmetro genérico.`,
+                syntax: 'impl<T> Struct<T> { }',
+                code: [
+                    'struct Wrapper<T> {',
+                    '    valor: T,',
+                    '}',
+                    '',
+                    '___',
+                    '    fn get(&self) -> &T {',
+                    '        &self.valor',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let w = Wrapper { valor: 42 };',
+                    '    println!("{}", w.get());',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'impl<T> Wrapper<T> {',
+                correctAnswers: ['impl<T> Wrapper<T> {'],
+                almostCorrect: [
+                    { answer: 'impl Wrapper<T> {', feedback: 'Faltou declarar <code>&lt;T&gt;</code> no impl: <code>impl&lt;T&gt;</code>.' }
+                ],
+                hints: [
+                    "impl<T> Nome<T> {"
+                ],
+                successMessage: "Você completou os fundamentos de Rust! 🎉"
+            },
+
+            // === BLOCO 8: Desafios de Algoritmos (51-65) ===
+            {
+                level: 51,
+                title: "Verificar Par ou Ímpar",
+                category: "Algoritmos",
+                objective: "Implemente a lógica para verificar se um número é par.",
+                teaching: `Use o operador módulo <code>%</code>.`,
+                syntax: 'n % 2 == 0',
+                code: [
+                    'fn eh_par(n: i32) -> bool {',
+                    '    ___',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", eh_par(4));  // true',
+                    '    println!("{}", eh_par(7));  // false',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'n % 2 == 0',
+                correctAnswers: ['n % 2 == 0', 'n%2==0', 'n % 2 == 0;', 'return n % 2 == 0;'],
+                almostCorrect: [],
+                hints: [
+                    "% retorna o resto da divisão"
+                ],
+                successMessage: "Módulo é fundamental para muitos algoritmos."
+            },
+            {
+                level: 52,
+                title: "Fatorial Iterativo",
+                category: "Algoritmos",
+                objective: "Implemente fatorial usando loop.",
+                teaching: `fatorial(5) = 5 * 4 * 3 * 2 * 1 = 120`,
+                syntax: '',
+                code: [
+                    'fn fatorial(n: u32) -> u32 {',
+                    '    let mut resultado = 1;',
+                    '    for i in 1..=n {',
+                    '        ___',
+                    '    }',
+                    '    resultado',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", fatorial(5)); // 120',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'resultado *= i;',
+                correctAnswers: ['resultado *= i;', 'resultado = resultado * i;', 'resultado*=i;'],
+                almostCorrect: [],
+                hints: [
+                    "Multiplique resultado pelo índice atual"
+                ],
+                successMessage: "Fatorial iterativo é mais eficiente que recursivo em Rust."
+            },
+            {
+                level: 53,
+                title: "Fatorial Recursivo",
+                category: "Algoritmos",
+                objective: "Implemente fatorial usando recursão.",
+                teaching: `Caso base: 0! = 1. Recursão: n! = n * (n-1)!`,
+                syntax: '',
+                code: [
+                    'fn fatorial(n: u32) -> u32 {',
+                    '    if n == 0 {',
+                    '        1',
+                    '    } else {',
+                    '        ___',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", fatorial(5)); // 120',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'n * fatorial(n - 1)',
+                correctAnswers: ['n * fatorial(n - 1)', 'n * fatorial(n-1)', 'fatorial(n - 1) * n'],
+                almostCorrect: [],
+                hints: [
+                    "Chame a própria função com n-1"
+                ],
+                successMessage: "Recursão expressa a definição matemática diretamente."
+            },
+            {
+                level: 54,
+                title: "Fibonacci",
+                category: "Algoritmos",
+                objective: "Implemente o caso recursivo de Fibonacci.",
+                teaching: `fib(n) = fib(n-1) + fib(n-2)`,
+                syntax: '',
+                code: [
+                    'fn fib(n: u32) -> u32 {',
+                    '    match n {',
+                    '        0 => 0,',
+                    '        1 => 1,',
+                    '        ___',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    for i in 0..10 {',
+                    '        print!("{} ", fib(i));',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: '_ => fib(n - 1) + fib(n - 2)',
+                correctAnswers: ['_ => fib(n - 1) + fib(n - 2)', '_ => fib(n-1) + fib(n-2)', 'n => fib(n - 1) + fib(n - 2)'],
+                almostCorrect: [],
+                hints: [
+                    "Soma dos dois anteriores"
+                ],
+                successMessage: "Fibonacci é O(2^n) recursivo - considere memoização."
+            },
+            {
+                level: 55,
+                title: "Soma de Array",
+                category: "Algoritmos",
+                objective: "Some todos os elementos de um array.",
+                teaching: `Use <code>.iter().sum()</code> ou loop.`,
+                syntax: '',
+                code: [
+                    'fn soma(arr: &[i32]) -> i32 {',
+                    '    let mut total = 0;',
+                    '    for n in arr {',
+                    '        ___',
+                    '    }',
+                    '    total',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let nums = [1, 2, 3, 4, 5];',
+                    '    println!("{}", soma(&nums)); // 15',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'total += n;',
+                correctAnswers: ['total += n;', 'total = total + n;', 'total += *n;', 'total = total + *n;'],
+                almostCorrect: [],
+                hints: [
+                    "Acumule cada elemento em total"
+                ],
+                successMessage: "Idiomático: arr.iter().sum()"
+            },
+            {
+                level: 56,
+                title: "Encontrar Máximo",
+                category: "Algoritmos",
+                objective: "Encontre o maior elemento em um slice.",
+                teaching: ``,
+                syntax: '',
+                code: [
+                    'fn maximo(arr: &[i32]) -> i32 {',
+                    '    let mut max = arr[0];',
+                    '    for &n in arr {',
+                    '        ___',
+                    '            max = n;',
+                    '        }',
+                    '    }',
+                    '    max',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", maximo(&[3, 7, 2, 9, 1])); // 9',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'if n > max {',
+                correctAnswers: ['if n > max {', 'if n>max {'],
+                almostCorrect: [],
+                hints: [
+                    "Compare n com o máximo atual"
+                ],
+                successMessage: "Idiomático: arr.iter().max()"
+            },
+            {
+                level: 57,
+                title: "Contar Ocorrências",
+                category: "Algoritmos",
+                objective: "Conte quantas vezes um valor aparece no array.",
+                teaching: ``,
+                syntax: '',
+                code: [
+                    'fn contar(arr: &[i32], alvo: i32) -> usize {',
+                    '    let mut count = 0;',
+                    '    for &n in arr {',
+                    '        if n == alvo {',
+                    '            ___',
+                    '        }',
+                    '    }',
+                    '    count',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", contar(&[1, 2, 2, 3, 2], 2)); // 3',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'count += 1;',
+                correctAnswers: ['count += 1;', 'count = count + 1;'],
+                almostCorrect: [],
+                hints: [
+                    "Incremente o contador"
+                ],
+                successMessage: "Idiomático: arr.iter().filter(|&x| *x == alvo).count()"
+            },
+            {
+                level: 58,
+                title: "Verificar Palíndromo",
+                category: "Algoritmos",
+                objective: "Verifique se uma string é palíndromo.",
+                teaching: `Palíndromo lê igual de trás pra frente.`,
+                syntax: '',
+                code: [
+                    'fn eh_palindromo(s: &str) -> bool {',
+                    '    let chars: Vec<char> = s.chars().collect();',
+                    '    let reversed: Vec<char> = s.chars().rev().collect();',
+                    '    ___',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", eh_palindromo("arara")); // true',
+                    '    println!("{}", eh_palindromo("rust"));  // false',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'chars == reversed',
+                correctAnswers: ['chars == reversed', 'chars==reversed'],
+                almostCorrect: [],
+                hints: [
+                    "Compare original com reverso"
+                ],
+                successMessage: "Strings em Rust são UTF-8, cuidado com grafemas."
+            },
+            {
+                level: 59,
+                title: "Número Primo",
+                category: "Algoritmos",
+                objective: "Verifique se um número é primo.",
+                teaching: `Primo: divisível apenas por 1 e ele mesmo.`,
+                syntax: '',
+                code: [
+                    'fn eh_primo(n: u32) -> bool {',
+                    '    if n < 2 { return false; }',
+                    '    for i in 2..n {',
+                    '        ___',
+                    '            return false;',
+                    '        }',
+                    '    }',
+                    '    true',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", eh_primo(7));  // true',
+                    '    println!("{}", eh_primo(10)); // false',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'if n % i == 0 {',
+                correctAnswers: ['if n % i == 0 {', 'if n%i==0 {'],
+                almostCorrect: [],
+                hints: [
+                    "Se divisível por algum i, não é primo"
+                ],
+                successMessage: "Otimização: verificar até sqrt(n)."
+            },
+            {
+                level: 60,
+                title: "Inverter Vetor",
+                category: "Algoritmos",
+                objective: "Inverta um vetor in-place.",
+                teaching: `Troque elementos das extremidades.`,
+                syntax: '',
+                code: [
+                    'fn inverter(arr: &mut [i32]) {',
+                    '    let len = arr.len();',
+                    '    for i in 0..len/2 {',
+                    '        ___',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let mut nums = [1, 2, 3, 4, 5];',
+                    '    inverter(&mut nums);',
+                    '    println!("{:?}", nums); // [5, 4, 3, 2, 1]',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'arr.swap(i, len - 1 - i);',
+                correctAnswers: ['arr.swap(i, len - 1 - i);', 'arr.swap(i, len-1-i);'],
+                almostCorrect: [],
+                hints: [
+                    "Use .swap() para trocar elementos"
+                ],
+                successMessage: "swap() é eficiente e seguro."
+            },
+            {
+                level: 61,
+                title: "Bubble Sort - Comparação",
+                category: "Algoritmos",
+                objective: "Complete a condição de troca do Bubble Sort.",
+                teaching: `Bubble Sort: compara elementos adjacentes.`,
+                syntax: '',
+                code: [
+                    'fn bubble_sort(arr: &mut [i32]) {',
+                    '    let n = arr.len();',
+                    '    for _ in 0..n {',
+                    '        for j in 0..n-1 {',
+                    '            ___',
+                    '                arr.swap(j, j + 1);',
+                    '            }',
+                    '        }',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    let mut nums = [5, 2, 8, 1, 9];',
+                    '    bubble_sort(&mut nums);',
+                    '    println!("{:?}", nums);',
+                    '}'
+                ],
+                inputLine: 4,
+                inputPlaceholder: 'if arr[j] > arr[j + 1] {',
+                correctAnswers: ['if arr[j] > arr[j + 1] {', 'if arr[j] > arr[j+1] {'],
+                almostCorrect: [],
+                hints: [
+                    "Troque se atual > próximo"
+                ],
+                successMessage: "Bubble Sort é O(n²) - use para aprendizado, não produção."
+            },
+            {
+                level: 62,
+                title: "Busca Linear",
+                category: "Algoritmos",
+                objective: "Implemente busca linear retornando Option.",
+                teaching: `Retorne Some(índice) ou None.`,
+                syntax: '',
+                code: [
+                    'fn buscar(arr: &[i32], alvo: i32) -> Option<usize> {',
+                    '    for (i, &n) in arr.iter().enumerate() {',
+                    '        if n == alvo {',
+                    '            ___',
+                    '        }',
+                    '    }',
+                    '    None',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{:?}", buscar(&[1, 3, 5, 7], 5)); // Some(2)',
+                    '    println!("{:?}", buscar(&[1, 3, 5, 7], 4)); // None',
+                    '}'
+                ],
+                inputLine: 3,
+                inputPlaceholder: 'return Some(i);',
+                correctAnswers: ['return Some(i);', 'Some(i)'],
+                almostCorrect: [],
+                hints: [
+                    "Retorne Some com o índice"
+                ],
+                successMessage: "Option elimina a necessidade de -1 como \"não encontrado\"."
+            },
+            {
+                level: 63,
+                title: "FizzBuzz Completo",
+                category: "Algoritmos",
+                objective: "Implemente a lógica completa do FizzBuzz.",
+                teaching: `15: FizzBuzz, 3: Fizz, 5: Buzz, senão: número`,
+                syntax: '',
+                code: [
+                    'fn fizzbuzz(n: u32) -> String {',
+                    '    ___',
+                    '        String::from("FizzBuzz")',
+                    '    } else if n % 3 == 0 {',
+                    '        String::from("Fizz")',
+                    '    } else if n % 5 == 0 {',
+                    '        String::from("Buzz")',
+                    '    } else {',
+                    '        n.to_string()',
+                    '    }',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    for i in 1..=15 {',
+                    '        println!("{}", fizzbuzz(i));',
+                    '    }',
+                    '}'
+                ],
+                inputLine: 1,
+                inputPlaceholder: 'if n % 15 == 0 {',
+                correctAnswers: ['if n % 15 == 0 {', 'if n%15==0 {', 'if n % 3 == 0 && n % 5 == 0 {'],
+                almostCorrect: [],
+                hints: [
+                    "Divisível por 15 = divisível por 3 E 5"
+                ],
+                successMessage: "FizzBuzz é clássico em entrevistas."
+            },
+            {
+                level: 64,
+                title: "Média de Vetor",
+                category: "Algoritmos",
+                objective: "Calcule a média dos elementos como f64.",
+                teaching: `Soma / contagem, com cast para f64.`,
+                syntax: '',
+                code: [
+                    'fn media(arr: &[i32]) -> f64 {',
+                    '    let soma: i32 = arr.iter().sum();',
+                    '    ___',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", media(&[1, 2, 3, 4, 5])); // 3.0',
                     '}'
                 ],
                 inputLine: 2,
-                inputPlaceholder: 's',
-                correctAnswers: ['s'],
-                almostCorrect: [
-                    { answer: '&s', feedback: 'Não pode retornar <code>&s</code>! s será destruída. Retorne <code>s</code> diretamente.' }
-                ],
+                inputPlaceholder: 'soma as f64 / arr.len() as f64',
+                correctAnswers: ['soma as f64 / arr.len() as f64', '(soma as f64) / (arr.len() as f64)'],
+                almostCorrect: [],
                 hints: [
-                    "Retorne o valor, não uma referência",
-                    "Move o ownership para fora da função",
-                    "Digite: <code>s</code>"
+                    "Cast com 'as f64'"
                 ],
-                successMessage: "Perfeito! Retornando s (não &s), movemos ownership. Rust previne dangling references!"
+                successMessage: "Rust exige casts explícitos entre tipos numéricos."
+            },
+            {
+                level: 65,
+                title: "Dois Ponteiros",
+                category: "Algoritmos",
+                objective: "Use dois ponteiros para verificar se array ordenado tem soma.",
+                teaching: `Técnica clássica: um ponteiro no início, outro no fim.`,
+                syntax: '',
+                code: [
+                    'fn tem_soma(arr: &[i32], alvo: i32) -> bool {',
+                    '    let mut esq = 0;',
+                    '    let mut dir = arr.len() - 1;',
+                    '    while esq < dir {',
+                    '        let soma = arr[esq] + arr[dir];',
+                    '        if soma == alvo {',
+                    '            return true;',
+                    '        } else if soma < alvo {',
+                    '            esq += 1;',
+                    '        } else {',
+                    '            ___',
+                    '        }',
+                    '    }',
+                    '    false',
+                    '}',
+                    '',
+                    'fn main() {',
+                    '    println!("{}", tem_soma(&[1, 2, 3, 4, 5], 7)); // true',
+                    '}'
+                ],
+                inputLine: 10,
+                inputPlaceholder: 'dir -= 1;',
+                correctAnswers: ['dir -= 1;', 'dir = dir - 1;'],
+                almostCorrect: [],
+                hints: [
+                    "Se soma > alvo, mova ponteiro direito"
+                ],
+                successMessage: "Dois ponteiros: O(n) em vez de O(n²)."
             },
 
             // === CONCLUSÃO ===
             {
-                level: 51,
-                title: "🎉 Parabéns, Rustacean!",
+                level: 66,
+                title: "🎉 Mestre em Rust!",
                 category: "Conclusão",
-                objective: "Você completou o curso de Rust!",
-                teaching: `<strong>🦀 Você domina os fundamentos do Rust!</strong><br><br>
-                    ✅ Variáveis e mutabilidade<br>
-                    ✅ Tipos básicos e compostos<br>
-                    ✅ Operadores e comparações<br>
+                objective: "Você completou todos os desafios!",
+                teaching: `<strong>🦀 Você domina Rust!</strong><br><br>
+                    ✅ Fundamentos e tipos<br>
+                    ✅ Funções e referências<br>
                     ✅ Controle de fluxo<br>
-                    ✅ Funções<br>
-                    ✅ <strong>Structs</strong> e <strong>Enums</strong><br>
-                    ✅ <strong>Ownership</strong> — o coração do Rust<br>
-                    ✅ <strong>Borrowing</strong> — referências seguras<br><br>
-                    <strong>Próximos passos:</strong> Lifetimes, Traits, Generics, Error Handling, Async...`,
-                syntax: 'println!("🦀 Rust!");',
+                    ✅ Structs, Enums e Option/Result<br>
+                    ✅ Ownership e Borrowing<br>
+                    ✅ Traits e Generics<br>
+                    ✅ Algoritmos clássicos<br><br>
+                    <strong>Próximos passos:</strong> Async, Macros, Unsafe, FFI...`,
+                syntax: '',
                 code: [
                     'fn main() {',
                     '    println!("Eu sou um ___!");',
@@ -3086,16 +2990,15 @@
                 ],
                 inputLine: 1,
                 inputPlaceholder: 'Rustacean',
-                correctAnswers: ['Rustacean', 'rustacean', 'RUSTACEAN'],
+                correctAnswers: ['Rustacean', 'rustacean', 'RUSTACEAN', 'Mestre'],
                 almostCorrect: [],
                 hints: [
-                    "Como são chamados os programadores Rust?",
-                    "É um crustáceo... um Rust-áceo!",
-                    "Digite: <code>Rustacean</code>"
+                    "Como são chamados os programadores Rust?"
                 ],
-                successMessage: "🎉🦀 PARABÉNS! Você completou todos os 51 níveis! Você domina Ownership e Borrowing — os conceitos mais importantes do Rust! Continue praticando!"
+                successMessage: "🎉🦀 PARABÉNS! Você completou todos os 66 níveis! Você é um verdadeiro Rustacean!"
             }
         ];
+
 
         // Exercícios específicos para INICIANTES (com analogias do dia a dia)
         const beginnerExercises = [
@@ -4471,18 +4374,115 @@
 
         function showSuccessModal() {
             const ex = currentExercises[currentLevel];
+            const modal = document.getElementById('successModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
 
             if (currentLevel < currentExercises.length - 1) {
-                document.getElementById('modalIcon').textContent = '🎉';
-                document.getElementById('modalTitle').textContent = 'Nível Completo!';
-                document.getElementById('modalText').textContent = `Você dominou: ${ex.title}`;
+                modalIcon.textContent = '🎉';
+                modalTitle.textContent = 'Nível Completo!';
+                modalText.textContent = `Você dominou: ${ex.title}`;
+                modal.classList.add('visible');
             } else {
-                document.getElementById('modalIcon').textContent = '🏆';
-                document.getElementById('modalTitle').textContent = 'Você é um Rustacean!';
-                document.getElementById('modalText').textContent = `Completou todos os ${currentExercises.length} níveis!`;
+                // Último nível - verificar se todos foram completados
+                const allCompleted = completedLevels.size === currentExercises.length;
+
+                if (gameMode === 'beginner' && allCompleted) {
+                    // Modo iniciante com todos os níveis completados - sugerir modo avançado
+                    showAdvancedSuggestionModal();
+                } else if (allCompleted) {
+                    modalIcon.textContent = '🏆';
+                    modalTitle.textContent = 'Você é um Rustacean!';
+                    modalText.textContent = `Parabéns! Completou todos os ${currentExercises.length} níveis!`;
+                    modal.classList.add('visible');
+                } else {
+                    // Terminou o último nível mas ainda há níveis não completados
+                    const remaining = currentExercises.length - completedLevels.size;
+                    modalIcon.textContent = '🎯';
+                    modalTitle.textContent = 'Quase lá!';
+                    modalText.textContent = `Você ainda tem ${remaining} nível(is) para completar. Revise os níveis anteriores!`;
+                    modal.classList.add('visible');
+                }
+            }
+        }
+
+        function showAdvancedSuggestionModal() {
+            // Criar modal especial para sugestão do modo avançado
+            const existingModal = document.getElementById('advancedSuggestionModal');
+            if (existingModal) {
+                existingModal.classList.add('visible');
+                return;
             }
 
-            document.getElementById('successModal').classList.add('visible');
+            const modal = document.createElement('div');
+            modal.id = 'advancedSuggestionModal';
+            modal.className = 'modal visible';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 500px;">
+                    <div class="modal-icon" style="font-size: 4rem;">🎓</div>
+                    <h2 style="background: linear-gradient(135deg, #f7931a, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                        Parabéns, Rustacean!
+                    </h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #ccc;">
+                        Você completou <strong style="color: #f7931a;">todos os ${currentExercises.length} níveis</strong> do modo Iniciante!
+                    </p>
+                    <p style="font-size: 1rem; margin-bottom: 2rem; color: #aaa;">
+                        Agora que você domina os fundamentos, está pronto para um novo desafio?
+                        O <strong style="color: #00d4aa;">Modo Avançado</strong> tem exercícios mais complexos
+                        para quem já conhece programação!
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="switchToAdvancedMode()" style="
+                            padding: 1rem 2rem;
+                            font-size: 1.1rem;
+                            background: linear-gradient(135deg, #00d4aa, #00b894);
+                            color: white;
+                            border: none;
+                            border-radius: 12px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            🚀 Tentar Modo Avançado
+                        </button>
+                        <button onclick="closeAdvancedModal()" style="
+                            padding: 1rem 2rem;
+                            font-size: 1.1rem;
+                            background: rgba(255,255,255,0.1);
+                            color: #ccc;
+                            border: 1px solid rgba(255,255,255,0.2);
+                            border-radius: 12px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                            Ficar no Iniciante
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function switchToAdvancedMode() {
+            // Fechar modal e trocar para modo avançado
+            const modal = document.getElementById('advancedSuggestionModal');
+            if (modal) modal.remove();
+
+            gameMode = 'normal';
+            currentExercises = exercises;
+            currentLevel = 0;
+            completedLevels = new Set();
+            streak = 0;
+            saveProgress();
+            updateModeIndicator();
+            loadLevel(0);
+        }
+
+        function closeAdvancedModal() {
+            const modal = document.getElementById('advancedSuggestionModal');
+            if (modal) modal.classList.remove('visible');
+            setTimeout(() => modal && modal.remove(), 300);
         }
 
         function nextLevel() {
