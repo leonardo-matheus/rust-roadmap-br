@@ -1055,8 +1055,43 @@
             </div>
             <h3>Instalando o Rust</h3>
             <div class="card">
-                <h4>Windows</h4>
-                <p>Baixe o instalador em <a href="https://rustup.rs" target="_blank">rustup.rs</a></p>
+                <h4>Windows (Passo a Passo)</h4>
+                <ol>
+                    <li><strong>Instale o Visual Studio Build Tools</strong> (necessário para compilar):
+                        <ul>
+                            <li>Acesse <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/" target="_blank">Visual Studio Build Tools</a></li>
+                            <li>Baixe e execute o instalador</li>
+                            <li>Selecione <strong>"Desenvolvimento para desktop com C++"</strong></li>
+                            <li>Clique em Instalar e aguarde</li>
+                        </ul>
+                    </li>
+                    <li><strong>Baixe o instalador do Rust:</strong>
+                        <ul>
+                            <li>Acesse <a href="https://rustup.rs" target="_blank">rustup.rs</a></li>
+                            <li>Clique em <strong>"rustup-init.exe (64-bit)"</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Execute o instalador:</strong>
+                        <ul>
+                            <li>Abra o arquivo <code>rustup-init.exe</code> baixado</li>
+                            <li>Pressione <strong>1</strong> e Enter para instalação padrão</li>
+                            <li>Aguarde o download e instalação</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reinicie o terminal</strong> (ou abra um novo) para carregar as variáveis de ambiente</li>
+                </ol>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">powershell</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code class="language-powershell"># Verificar instalação no PowerShell ou CMD
+rustc --version
+cargo --version</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
                 <h4>Linux/Mac</h4>
                 <div class="code-block">
                     <div class="code-header">
