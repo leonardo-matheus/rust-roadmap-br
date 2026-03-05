@@ -471,13 +471,16 @@
             border: 2px solid var(--ferris-orange);
             border-radius: 6px;
             padding: 0.15rem 0.5rem;
-            min-width: 100px;
+            min-width: 80px;
+            max-width: 100%;
+            width: auto;
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             font-size: inherit;
             outline: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             animation: pulseGlow 2s ease-in-out infinite;
+            field-sizing: content; /* Modern browsers */
         }
 
         @keyframes pulseGlow {
@@ -1385,6 +1388,7 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['fn soma(a: i32, b: i32) -> i32 { a + b }', 'fn soma(a:i32, b:i32) -> i32 { a + b }', 'fn soma(a: i32, b: i32) -> i32 { return a + b; }'],
+                validationPattern: /^fn\s+soma\s*\(\s*\w+\s*:\s*i32\s*,\s*\w+\s*:\s*i32\s*\)\s*->\s*i32\s*\{\s*(\w+\s*\+\s*\w+|return\s+\w+\s*\+\s*\w+\s*;?)\s*\}$/,
                 almostCorrect: [],
                 hints: [
                     "fn nome(p1: tipo, p2: tipo) -> tipo { expressão }"
@@ -1408,6 +1412,7 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['fn quadrado(n: i32) -> i32 { n * n }', 'fn quadrado(x: i32) -> i32 { x * x }', 'fn quadrado(num: i32) -> i32 { num * num }'],
+                validationPattern: /^fn\s+quadrado\s*\(\s*(\w+)\s*:\s*i32\s*\)\s*->\s*i32\s*\{\s*\1\s*\*\s*\1\s*\}$/,
                 almostCorrect: [],
                 hints: [
                     "Multiplique o parâmetro por ele mesmo"
@@ -1492,6 +1497,7 @@
                 inputLine: 2,
                 inputPlaceholder: '...',
                 correctAnswers: ['if n > 0 {', 'if n>0 {', 'if n >= 1 {'],
+                validationPattern: /^if\s+n\s*(>|>=)\s*(0|1)\s*\{?$/,
                 almostCorrect: [
                     { answer: 'if (n > 0) {', feedback: 'Parênteses não são necessários em Rust.' }
                 ],
@@ -1520,6 +1526,7 @@
                 inputLine: 4,
                 inputPlaceholder: '...',
                 correctAnswers: ['else {', '} else {'],
+                validationPattern: /^(\}\s*)?else\s*\{?$/,
                 almostCorrect: [],
                 hints: [
                     "else {"
@@ -1569,6 +1576,7 @@
                 inputLine: 2,
                 inputPlaceholder: '...',
                 correctAnswers: ['match dia {'],
+                validationPattern: /^match\s+dia\s*\{?$/,
                 almostCorrect: [
                     { answer: 'switch dia {', feedback: 'Rust usa <code>match</code>, não <code>switch</code>.' }
                 ],
@@ -1625,6 +1633,7 @@
                 inputLine: 2,
                 inputPlaceholder: '...',
                 correctAnswers: ['loop {'],
+                validationPattern: /^loop\s*\{?$/,
                 almostCorrect: [],
                 hints: [
                     "loop {"
@@ -1650,6 +1659,7 @@
                 inputLine: 2,
                 inputPlaceholder: '...',
                 correctAnswers: ['while n <= 5 {', 'while n < 6 {', 'while n<=5 {'],
+                validationPattern: /^while\s+n\s*(<=?\s*[56]|<\s*6)\s*\{?$/,
                 almostCorrect: [],
                 hints: [
                     "while condição {"
@@ -1673,6 +1683,7 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['for i in 1..=5 {', 'for i in 1..6 {'],
+                validationPattern: /^for\s+\w+\s+in\s+(1\.\.=?5|1\.\.6)\s*\{?$/,
                 almostCorrect: [
                     { answer: 'for i in 1..5 {', feedback: '<code>1..5</code> vai de 1 a 4. Use <code>1..=5</code> para incluir 5.' }
                 ],
@@ -1704,6 +1715,7 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['struct Pessoa {'],
+                validationPattern: /^struct\s+Pessoa\s*\{?$/,
                 almostCorrect: [
                     { answer: 'class Pessoa {', feedback: 'Rust usa <code>struct</code>, não <code>class</code>.' }
                 ],
@@ -1940,6 +1952,7 @@
                 inputLine: 0,
                 inputPlaceholder: '...',
                 correctAnswers: ['enum Direcao {'],
+                validationPattern: /^enum\s+Direcao\s*\{?$/,
                 almostCorrect: [],
                 hints: [
                     "enum Nome {"
@@ -2023,6 +2036,7 @@
                 inputLine: 1,
                 inputPlaceholder: '...',
                 correctAnswers: ['let numero: Option<i32> = Some(42);', 'let numero = Some(42);', 'let numero: Option<i32> = None;'],
+                validationPattern: /^let\s+numero\s*(:\s*Option<i32>\s*)?=\s*(Some\s*\(\s*-?\d+\s*\)|None)\s*;?$/,
                 almostCorrect: [],
                 hints: [
                     "Some(valor) ou None"
@@ -4257,7 +4271,23 @@
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') checkAnswer();
                 });
+                // Auto-resize input based on content
+                input.addEventListener('input', autoResizeInput);
+                autoResizeInput.call(input);
             }
+        }
+
+        function autoResizeInput() {
+            const input = document.getElementById('codeInput');
+            if (!input) return;
+            // Create a hidden span to measure text width
+            const span = document.createElement('span');
+            span.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font-family:inherit;font-size:inherit;padding:0.15rem 0.5rem;';
+            span.textContent = input.value || input.placeholder || '...';
+            document.body.appendChild(span);
+            const width = Math.max(80, Math.min(span.offsetWidth + 20, 500));
+            input.style.width = width + 'px';
+            document.body.removeChild(span);
 
             // Reset hints
             document.getElementById('hintDisplay').classList.remove('visible');
@@ -4415,10 +4445,71 @@
                 feedbackSection.classList.add('error');
                 document.getElementById('feedbackIcon').textContent = '✗';
                 document.getElementById('feedbackTitle').textContent = 'Tente novamente';
-                document.getElementById('feedbackText').innerHTML = 'Sua resposta não está correta. Use as dicas se precisar de ajuda!';
+
+                // Smart error detection
+                let errorFeedback = getSmartFeedback(userAnswer, ex);
+                document.getElementById('feedbackText').innerHTML = errorFeedback;
 
                 setTimeout(() => input.classList.remove('incorrect'), 400);
             }
+        }
+
+        function getSmartFeedback(userAnswer, exercise) {
+            const answer = userAnswer.trim();
+
+            // Empty answer
+            if (!answer) {
+                return 'Digite sua resposta no campo acima.';
+            }
+
+            // Common mistakes detection
+            const commonErrors = [
+                { pattern: /^console\.log/, feedback: 'Isso é JavaScript! Em Rust, use <code>println!</code>' },
+                { pattern: /^print\s*\([^)]*\)\s*;?$/, feedback: 'Faltou o <code>!</code> - em Rust é <code>println!</code> (macro)' },
+                { pattern: /^println\s*\([^)]*\)\s*;?$/, feedback: 'Faltou o <code>!</code> após println - é <code>println!</code>' },
+                { pattern: /^printf\s*\(/, feedback: 'Isso é C! Em Rust, use <code>println!</code>' },
+                { pattern: /^puts\s+/, feedback: 'Isso é Ruby! Em Rust, use <code>println!</code>' },
+                { pattern: /^echo\s+/, feedback: 'Isso é shell! Em Rust, use <code>println!</code>' },
+                { pattern: /^var\s+/, feedback: 'Rust usa <code>let</code>, não <code>var</code>' },
+                { pattern: /^int\s+\w+/, feedback: 'Rust usa <code>let nome: i32</code>, não <code>int nome</code>' },
+                { pattern: /^function\s+/, feedback: 'Rust usa <code>fn</code>, não <code>function</code>' },
+                { pattern: /^def\s+/, feedback: 'Isso é Python! Em Rust, use <code>fn</code>' },
+                { pattern: /^void\s+/, feedback: 'Isso é C/C++! Em Rust, funções sem retorno usam <code>fn nome()</code>' },
+                { pattern: /:\s*int\b/, feedback: 'O tipo inteiro em Rust é <code>i32</code>, não <code>int</code>' },
+                { pattern: /:\s*string\b/i, feedback: 'O tipo é <code>String</code> (com S maiúsculo) ou <code>&str</code>' },
+                { pattern: /=>\s*$/, feedback: 'Em match, use <code>=></code> seguido da expressão. Ex: <code>1 => "um"</code>' },
+                { pattern: /->$/, feedback: 'Após <code>-></code> especifique o tipo de retorno. Ex: <code>-> i32</code>' },
+                { pattern: /\bNULL\b|\bnull\b/, feedback: 'Rust não tem null! Use <code>None</code> com <code>Option</code>' },
+                { pattern: /\btrue\b.*\bfalse\b|\bfalse\b.*\btrue\b/i, feedback: 'Booleanos em Rust são <code>true</code> e <code>false</code> (minúsculas)' },
+                { pattern: /\bTrue\b|\bFalse\b/, feedback: 'Booleanos em Rust são minúsculos: <code>true</code> e <code>false</code>' },
+                { pattern: /['"][^'"]*['"].*['"][^'"]*['"]/, feedback: 'Strings em Rust usam aspas duplas <code>"texto"</code>. Aspas simples são para <code>char</code>.' },
+                { pattern: /^'[^']*'$/, feedback: 'Use aspas duplas <code>"..."</code> para strings. Aspas simples são para caracteres.' }
+            ];
+
+            for (const err of commonErrors) {
+                if (err.pattern.test(answer)) {
+                    return err.feedback;
+                }
+            }
+
+            // Check if close to correct answer
+            if (exercise.correctAnswers && exercise.correctAnswers.length > 0) {
+                const firstCorrect = exercise.correctAnswers[0];
+
+                // Check for case sensitivity issues
+                if (exercise.correctAnswers.some(ans => ans.toLowerCase() === answer.toLowerCase() && ans !== answer)) {
+                    return 'Quase! Verifique maiúsculas e minúsculas.';
+                }
+
+                // Check for extra/missing spaces
+                const normalizedAnswer = answer.replace(/\s+/g, '');
+                if (exercise.correctAnswers.some(ans => ans.replace(/\s+/g, '') === normalizedAnswer)) {
+                    return 'Quase! Verifique os espaços na sua resposta.';
+                }
+            }
+
+            // Default feedback with hint to use hints
+            return 'Sua resposta não está correta. Use as dicas se precisar de ajuda!';
         }
 
         function showSuccessModal() {
