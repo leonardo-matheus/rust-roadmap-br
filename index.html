@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rust: Do Zero ao Junior | Roadmap Completo</title>
-    <meta name="description" content="Roadmap profissional e didatico para aprender Rust do zero ao nivel junior.">
+    <title>Rust: Do Zero ao Júnior | Roadmap Completo</title>
+    <meta name="description" content="Roadmap profissional e didático para aprender Rust do zero ao nível júnior.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -139,15 +139,15 @@
         }
 
         .rust-logo {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             margin-bottom: 2rem;
             filter: drop-shadow(0 0 60px rgba(247, 76, 0, 0.5));
             animation: float 4s ease-in-out infinite;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
@@ -160,7 +160,7 @@
         }
 
         .hero-subtitle {
-            font-size: 1.35rem;
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
             color: #71717a;
             margin-bottom: 2.5rem;
             max-width: 600px;
@@ -169,7 +169,7 @@
 
         .hero-badges {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
             justify-content: center;
             margin-bottom: 3rem;
@@ -178,9 +178,9 @@
         .badge {
             background: var(--glass);
             backdrop-filter: blur(20px);
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 100px;
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
             font-weight: 500;
             border: 1px solid var(--glass-border);
             display: flex;
@@ -203,10 +203,10 @@
         }
 
         .btn {
-            padding: 1.1rem 2.2rem;
+            padding: 1rem 2rem;
             border-radius: 14px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: clamp(0.875rem, 2vw, 1rem);
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
@@ -246,7 +246,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(5, 5, 5, 0.8);
+            background: rgba(5, 5, 5, 0.9);
             backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 2rem;
@@ -278,7 +278,7 @@
             gap: 0.5rem;
         }
 
-        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
 
         nav a {
             color: #71717a;
@@ -303,37 +303,46 @@
         nav a:hover { color: var(--rust-light); }
         nav a:hover::after { width: 100%; }
 
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--rust-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Main Content */
         main {
             max-width: 900px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            padding: 4rem 1.5rem;
             position: relative;
         }
 
         section {
-            margin-bottom: 8rem;
+            margin-bottom: 6rem;
             scroll-margin-top: 100px;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .section-number {
             background: var(--gradient-1);
             color: white;
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
             box-shadow: 0 8px 30px rgba(247, 76, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -345,32 +354,32 @@
         }
 
         h2 {
-            font-size: 2.25rem;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
             font-weight: 800;
             color: var(--rust-light);
             letter-spacing: -0.02em;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
             font-weight: 700;
             color: var(--rust-light);
-            margin: 3rem 0 1.25rem;
-            padding-left: 1.25rem;
+            margin: 2.5rem 0 1rem;
+            padding-left: 1rem;
             border-left: 4px solid var(--rust-orange);
             transition: all 0.3s ease;
         }
 
         h3:hover {
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
             border-left-color: var(--rust-orange-light);
         }
 
         h4 {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #e4e4e7;
-            margin: 1.75rem 0 0.75rem;
+            margin: 1.5rem 0 0.75rem;
         }
 
         p { color: #a1a1aa; margin-bottom: 1.25rem; }
@@ -380,9 +389,9 @@
         .card {
             background: var(--rust-gray);
             border: 1px solid var(--rust-border);
-            border-radius: 20px;
-            padding: 1.75rem;
-            margin-bottom: 1.75rem;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
@@ -423,7 +432,7 @@
         }
 
         .exercise-card::after {
-            content: 'Exercicio';
+            content: 'Exercício';
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -438,18 +447,19 @@
         /* Code Blocks with Copy Button */
         .code-block {
             position: relative;
-            margin: 1.75rem 0;
+            margin: 1.5rem 0;
         }
 
         pre {
             background: #0d0d0d;
-            border-radius: 16px;
-            padding: 1.75rem;
+            border-radius: 12px;
+            padding: 1.5rem;
             padding-top: 2.5rem;
             overflow-x: auto;
             border: 1px solid var(--rust-border);
             transition: all 0.3s ease;
             margin: 0;
+            -webkit-overflow-scrolling: touch;
         }
 
         pre:hover {
@@ -468,7 +478,7 @@
             padding: 0.5rem 1rem;
             background: rgba(255,255,255,0.03);
             border-bottom: 1px solid var(--rust-border);
-            border-radius: 16px 16px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .code-lang {
@@ -507,15 +517,16 @@
 
         code {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
         }
 
         :not(pre) > code {
             background: var(--rust-gray-light);
-            padding: 0.25rem 0.6rem;
-            border-radius: 8px;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
             color: var(--rust-orange);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
+            word-break: break-word;
         }
 
         /* Lists */
@@ -525,7 +536,7 @@
         }
 
         li {
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
 
@@ -548,9 +559,9 @@
         .toc {
             background: var(--rust-gray);
             border: 1px solid var(--rust-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            margin-bottom: 5rem;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -568,13 +579,13 @@
         .toc h3 {
             border: none;
             padding: 0;
-            margin: 0 0 2rem;
-            font-size: 1.5rem;
+            margin: 0 0 1.5rem;
+            font-size: 1.25rem;
         }
 
         .toc-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 0.5rem;
         }
 
@@ -584,10 +595,11 @@
             gap: 0.75rem;
             color: #71717a;
             text-decoration: none;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
+            padding: 0.6rem 0.875rem;
+            border-radius: 10px;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .toc-item:hover {
@@ -603,13 +615,13 @@
 
         .toc-number {
             background: var(--rust-gray-light);
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             flex-shrink: 0;
             transition: all 0.3s ease;
@@ -618,16 +630,16 @@
         /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
 
         .project-card {
             background: var(--rust-gray);
             border: 1px solid var(--rust-border);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 1.5rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
@@ -646,7 +658,7 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: var(--rust-orange);
             box-shadow: 0 25px 60px rgba(247, 76, 0, 0.15);
         }
@@ -656,40 +668,40 @@
         .project-card h4 {
             margin-top: 0;
             color: var(--rust-light);
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
 
         .project-number {
             background: var(--gradient-1);
             color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 1.25rem;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
             box-shadow: 0 4px 15px rgba(247, 76, 0, 0.3);
         }
 
         /* Resources Grid */
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .resource-link {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1rem;
             background: var(--rust-gray);
             border: 1px solid var(--rust-border);
-            border-radius: 16px;
-            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -701,7 +713,7 @@
         }
 
         .resource-icon {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             transition: transform 0.3s ease;
         }
 
@@ -710,7 +722,7 @@
         /* Timeline */
         .timeline {
             position: relative;
-            padding-left: 3rem;
+            padding-left: 2.5rem;
         }
 
         .timeline::before {
@@ -726,10 +738,10 @@
 
         .timeline-item {
             position: relative;
-            margin-bottom: 2.5rem;
-            padding: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.25rem;
             background: var(--rust-gray);
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid var(--rust-border);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -737,13 +749,13 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -3rem;
-            top: 1.75rem;
-            width: 16px;
-            height: 16px;
+            left: -2.5rem;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
             background: var(--rust-orange);
             border-radius: 50%;
-            transform: translateX(-6.5px);
+            transform: translateX(-5.5px);
             box-shadow: 0 0 20px rgba(247, 76, 0, 0.5);
             transition: all 0.3s ease;
         }
@@ -760,8 +772,8 @@
         .faq-card {
             background: var(--rust-gray);
             border: 1px solid var(--rust-border);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 14px;
+            padding: 1.25rem;
             margin-bottom: 1rem;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -778,23 +790,25 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            font-size: 0.95rem;
         }
 
         .faq-card h4::before {
             content: '?';
             background: var(--rust-orange);
             color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 8px;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
+            flex-shrink: 0;
         }
 
-        .faq-card p { margin: 0; padding-left: 2.25rem; }
+        .faq-card p { margin: 0; padding-left: 2rem; font-size: 0.9rem; }
 
         /* Concept Table */
         .concept-table {
@@ -804,10 +818,11 @@
             background: var(--rust-gray);
             border-radius: 12px;
             overflow: hidden;
+            font-size: 0.9rem;
         }
 
         .concept-table th, .concept-table td {
-            padding: 1rem 1.25rem;
+            padding: 0.875rem 1rem;
             text-align: left;
             border-bottom: 1px solid var(--rust-border);
         }
@@ -816,6 +831,7 @@
             background: var(--rust-gray-light);
             color: var(--rust-light);
             font-weight: 600;
+            font-size: 0.85rem;
         }
 
         .concept-table td { color: #a1a1aa; }
@@ -826,7 +842,7 @@
         footer {
             background: var(--rust-dark);
             border-top: 1px solid var(--rust-border);
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             position: relative;
         }
@@ -848,14 +864,14 @@
         /* Scroll to top */
         .scroll-top {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 52px;
-            height: 52px;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
             background: var(--gradient-1);
             color: white;
             border: none;
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -865,6 +881,7 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 8px 30px rgba(247, 76, 0, 0.4);
             font-size: 1.25rem;
+            z-index: 1000;
         }
 
         .scroll-top.visible { opacity: 1; visibility: visible; }
@@ -877,25 +894,43 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             nav ul { display: none; }
-            .hero { padding: 1.5rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .badge { font-size: 0.8rem; padding: 0.5rem 1rem; }
-            .cta-buttons { flex-direction: column; width: 100%; }
-            .btn { width: 100%; justify-content: center; }
+            nav.visible ul.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(5, 5, 5, 0.95);
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 1.5rem 1rem; }
             main { padding: 3rem 1rem; }
-            section { margin-bottom: 5rem; }
-            h2 { font-size: 1.75rem; }
-            h3 { font-size: 1.25rem; }
+            section { margin-bottom: 4rem; }
+            .toc { padding: 1.5rem; }
             .toc-grid { grid-template-columns: 1fr; }
             .cursor-glow { display: none; }
+            .concept-table { font-size: 0.8rem; }
+            .concept-table th, .concept-table td { padding: 0.6rem 0.5rem; }
+            .section-header { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badges { gap: 0.4rem; }
+            .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
+            .cta-buttons { flex-direction: column; width: 100%; gap: 0.75rem; }
+            .btn { width: 100%; justify-content: center; padding: 0.875rem 1.5rem; }
+            .resources-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
 
         ::selection { background: rgba(247, 76, 0, 0.3); color: white; }
 
-        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--rust-darker); }
-        ::-webkit-scrollbar-thumb { background: var(--rust-gray-light); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--rust-gray-light); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--rust-orange); }
     </style>
 </head>
@@ -906,7 +941,8 @@
     <nav id="navbar">
         <div class="container">
             <a href="#" class="logo">Rust Roadmap</a>
-            <ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul id="navMenu">
                 <li><a href="#section-3">Fundamentos</a></li>
                 <li><a href="#section-7">Ownership</a></li>
                 <li><a href="#section-15">Projetos</a></li>
@@ -931,16 +967,16 @@
                 <path fill="#F74C00" d="M72 24c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 84c-19.9 0-36-16.1-36-36s16.1-36 36-36 36 16.1 36 36-16.1 36-36 36z"/>
                 <circle fill="#F74C00" cx="72" cy="72" r="24"/>
             </svg>
-            <h1>Rust: Do Zero ao Junior</h1>
-            <p class="hero-subtitle">Roadmap profissional e didatico para dominar Rust. Aprenda desde o basico ate projetos praticos com explicacoes claras.</p>
+            <h1>Rust: Do Zero ao Júnior</h1>
+            <p class="hero-subtitle">Roadmap profissional e didático para dominar Rust. Aprenda desde o básico até projetos práticos com explicações claras.</p>
             <div class="hero-badges">
-                <span class="badge">18 Modulos</span>
-                <span class="badge">50+ Exercicios</span>
+                <span class="badge">18 Módulos</span>
+                <span class="badge">50+ Exercícios</span>
                 <span class="badge">5 Projetos</span>
-                <span class="badge">Zero - Junior</span>
+                <span class="badge">Zero → Júnior</span>
             </div>
             <div class="cta-buttons">
-                <a href="#toc" class="btn btn-primary">Comecar Agora</a>
+                <a href="#toc" class="btn btn-primary">Começar Agora</a>
                 <a href="game.html" class="btn btn-secondary">Jogar Rust Crab</a>
                 <a href="https://play.rust-lang.org" target="_blank" class="btn btn-secondary">Playground</a>
             </div>
@@ -949,26 +985,26 @@
 
     <main>
         <div class="toc animate-on-scroll" id="toc">
-            <h3>Indice do Roadmap</h3>
+            <h3>Índice do Roadmap</h3>
             <div class="toc-grid">
-                <a href="#section-1" class="toc-item"><span class="toc-number">01</span> Introducao</a>
+                <a href="#section-1" class="toc-item"><span class="toc-number">01</span> Introdução</a>
                 <a href="#section-2" class="toc-item"><span class="toc-number">02</span> Primeiros Passos</a>
                 <a href="#section-3" class="toc-item"><span class="toc-number">03</span> Fundamentos</a>
                 <a href="#section-4" class="toc-item"><span class="toc-number">04</span> Controle de Fluxo</a>
-                <a href="#section-5" class="toc-item"><span class="toc-number">05</span> Funcoes</a>
+                <a href="#section-5" class="toc-item"><span class="toc-number">05</span> Funções</a>
                 <a href="#section-6" class="toc-item"><span class="toc-number">06</span> Estruturas de Dados</a>
                 <a href="#section-7" class="toc-item"><span class="toc-number">07</span> Ownership</a>
                 <a href="#section-8" class="toc-item"><span class="toc-number">08</span> Structs & Enums</a>
                 <a href="#section-9" class="toc-item"><span class="toc-number">09</span> Tratamento de Erros</a>
                 <a href="#section-10" class="toc-item"><span class="toc-number">10</span> Traits & Generics</a>
                 <a href="#section-11" class="toc-item"><span class="toc-number">11</span> Arquivos & I/O</a>
-                <a href="#section-12" class="toc-item"><span class="toc-number">12</span> Concorrencia</a>
+                <a href="#section-12" class="toc-item"><span class="toc-number">12</span> Concorrência</a>
                 <a href="#section-13" class="toc-item"><span class="toc-number">13</span> Testes</a>
                 <a href="#section-14" class="toc-item"><span class="toc-number">14</span> Ecossistema</a>
                 <a href="#section-15" class="toc-item"><span class="toc-number">15</span> Projetos</a>
                 <a href="#section-16" class="toc-item"><span class="toc-number">16</span> Carreira</a>
                 <a href="#section-17" class="toc-item"><span class="toc-number">17</span> FAQ</a>
-                <a href="#section-18" class="toc-item"><span class="toc-number">18</span> Referencias</a>
+                <a href="#section-18" class="toc-item"><span class="toc-number">18</span> Referências</a>
             </div>
         </div>
 
@@ -976,26 +1012,26 @@
         <section id="section-1" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2>Introducao a Programacao e ao Rust</h2>
+                <h2>Introdução à Programação e ao Rust</h2>
             </div>
-            <h3>O que e programacao?</h3>
-            <p>Programar e como ensinar um computador a executar tarefas, assim como ensinar alguem a seguir uma receita de bolo. Voce fornece instrucoes detalhadas e o computador as executa exatamente como foram dadas.</p>
+            <h3>O que é programação?</h3>
+            <p>Programar é como ensinar um computador a executar tarefas, assim como ensinar alguém a seguir uma receita de bolo. Você fornece instruções detalhadas e o computador as executa exatamente como foram dadas.</p>
 
             <h3>Por que aprender Rust?</h3>
             <div class="card card-highlight">
-                <p><strong>Seguranca de Memoria:</strong> Rust previne bugs como null pointer dereference e data races em tempo de compilacao.</p>
-                <p><strong>Performance:</strong> Velocidade comparavel a C/C++ sem garbage collector.</p>
+                <p><strong>Segurança de Memória:</strong> Rust previne bugs como null pointer dereference e data races em tempo de compilação.</p>
+                <p><strong>Performance:</strong> Velocidade comparável a C/C++ sem garbage collector.</p>
                 <p><strong>Produtividade:</strong> Mensagens de erro claras e excelente tooling.</p>
-                <p><strong>Mercado:</strong> Rust e a linguagem mais amada por 8 anos consecutivos no Stack Overflow.</p>
+                <p><strong>Mercado:</strong> Rust é a linguagem mais amada por 8 anos consecutivos no Stack Overflow.</p>
             </div>
 
-            <h3>Comparacao com outras linguagens</h3>
+            <h3>Comparação com outras linguagens</h3>
             <table class="concept-table">
-                <tr><th>Caracteristica</th><th>Rust</th><th>Python</th><th>C/C++</th></tr>
-                <tr><td>Velocidade</td><td>Muito rapido</td><td>Lento</td><td>Muito rapido</td></tr>
-                <tr><td>Seguranca de memoria</td><td>Garantida em compilacao</td><td>Garbage Collector</td><td>Manual (propenso a erros)</td></tr>
-                <tr><td>Curva de aprendizado</td><td>Moderada</td><td>Facil</td><td>Dificil</td></tr>
-                <tr><td>Aplicacoes</td><td>Sistemas, Web, CLI</td><td>Scripts, ML, Web</td><td>Sistemas, Games</td></tr>
+                <tr><th>Característica</th><th>Rust</th><th>Python</th><th>C/C++</th></tr>
+                <tr><td>Velocidade</td><td>Muito rápido</td><td>Lento</td><td>Muito rápido</td></tr>
+                <tr><td>Segurança de memória</td><td>Garantida em compilação</td><td>Garbage Collector</td><td>Manual (propenso a erros)</td></tr>
+                <tr><td>Curva de aprendizado</td><td>Moderada</td><td>Fácil</td><td>Difícil</td></tr>
+                <tr><td>Aplicações</td><td>Sistemas, Web, CLI</td><td>Scripts, ML, Web</td><td>Sistemas, Games</td></tr>
             </table>
         </section>
 
@@ -1019,7 +1055,7 @@
                 </div>
             </div>
 
-            <h3>Verificando a instalacao</h3>
+            <h3>Verificando a instalação</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">bash</span>
@@ -1036,15 +1072,15 @@ cargo --version</code></pre>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
                 <pre><code class="language-rust">fn main() {
-    println!("Ola, mundo!");
+    println!("Olá, mundo!");
 }</code></pre>
             </div>
             <div class="card tip-card">
-                <p>O <code>println!</code> e uma macro (note o <code>!</code>), nao uma funcao. Macros em Rust podem fazer coisas que funcoes nao podem, como aceitar numero variavel de argumentos.</p>
+                <p>O <code>println!</code> é uma <strong>macro</strong> (note o <code>!</code>), não uma função. Macros em Rust podem fazer coisas que funções não podem, como aceitar número variável de argumentos. É por isso que usamos <code>println!</code> com exclamação!</p>
             </div>
 
             <h3>Usando Cargo</h3>
-            <p>Cargo e o gerenciador de pacotes e build system do Rust:</p>
+            <p>Cargo é o gerenciador de pacotes e build system do Rust:</p>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">bash</span>
@@ -1060,7 +1096,7 @@ cargo run
 # Apenas compilar
 cargo build
 
-# Compilar para producao (otimizado)
+# Compilar para produção (otimizado)
 cargo build --release</code></pre>
             </div>
         </section>
@@ -1069,38 +1105,38 @@ cargo build --release</code></pre>
         <section id="section-3" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">03</span>
-                <h2>Fundamentos de Programacao</h2>
+                <h2>Fundamentos de Programação</h2>
             </div>
-            <h3>Variaveis e Mutabilidade</h3>
-            <p>Em Rust, variaveis sao <strong>imutaveis por padrao</strong>. Isso ajuda a prevenir bugs.</p>
+            <h3>Variáveis e Mutabilidade</h3>
+            <p>Em Rust, variáveis são <strong>imutáveis por padrão</strong>. Isso ajuda a prevenir bugs.</p>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
-                <pre><code class="language-rust">// Variavel imutavel (padrao)
+                <pre><code class="language-rust">// Variável imutável (padrão)
 let idade: i32 = 30;
 let nome = "Maria";
 let ativo = true;
 
-// Variavel mutavel - pode ser alterada
+// Variável mutável - pode ser alterada
 let mut contador = 0;
 contador = 1; // OK!
 
-// Constantes - sempre imutaveis, definidas em tempo de compilacao
+// Constantes - sempre imutáveis, definidas em tempo de compilação
 const MAX_PONTOS: u32 = 100_000;</code></pre>
             </div>
 
             <h3>Tipos de Dados</h3>
             <table class="concept-table">
-                <tr><th>Tipo</th><th>Descricao</th><th>Exemplo</th></tr>
+                <tr><th>Tipo</th><th>Descrição</th><th>Exemplo</th></tr>
                 <tr><td><code>i8, i16, i32, i64, i128</code></td><td>Inteiros com sinal</td><td><code>let x: i32 = -42;</code></td></tr>
                 <tr><td><code>u8, u16, u32, u64, u128</code></td><td>Inteiros sem sinal</td><td><code>let x: u32 = 42;</code></td></tr>
                 <tr><td><code>f32, f64</code></td><td>Ponto flutuante</td><td><code>let pi: f64 = 3.14;</code></td></tr>
                 <tr><td><code>bool</code></td><td>Booleano</td><td><code>let ativo = true;</code></td></tr>
                 <tr><td><code>char</code></td><td>Caractere Unicode</td><td><code>let letra = 'A';</code></td></tr>
-                <tr><td><code>String</code></td><td>String dinamica</td><td><code>let s = String::from("ola");</code></td></tr>
-                <tr><td><code>&str</code></td><td>String slice</td><td><code>let s = "ola";</code></td></tr>
+                <tr><td><code>String</code></td><td>String dinâmica</td><td><code>let s = String::from("olá");</code></td></tr>
+                <tr><td><code>&str</code></td><td>String slice</td><td><code>let s = "olá";</code></td></tr>
             </table>
 
             <h3>Operadores</h3>
@@ -1109,27 +1145,27 @@ const MAX_PONTOS: u32 = 100_000;</code></pre>
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
-                <pre><code class="language-rust">// Aritmeticos
+                <pre><code class="language-rust">// Aritméticos
 let soma = 5 + 3;        // 8
 let sub = 10 - 4;        // 6
 let mult = 3 * 4;        // 12
-let div = 10 / 3;        // 3 (divisao inteira)
+let div = 10 / 3;        // 3 (divisão inteira)
 let resto = 10 % 3;      // 1
 
-// Comparacao
+// Comparação
 let igual = 5 == 5;      // true
 let diferente = 5 != 3;  // true
 let maior = 10 > 5;      // true
 let menor_igual = 5 <= 5; // true
 
-// Logicos
+// Lógicos
 let e = true && false;   // false
 let ou = true || false;  // true
 let nao = !true;         // false</code></pre>
             </div>
 
             <div class="card exercise-card">
-                <p><strong>Exercicio:</strong> Crie variaveis para armazenar seu nome, idade e se voce gosta de programacao. Imprima tudo usando <code>println!</code>.</p>
+                <p><strong>Exercício:</strong> Crie variáveis para armazenar seu nome, idade e se você gosta de programação. Imprima tudo usando <code>println!</code>.</p>
             </div>
         </section>
 
@@ -1164,13 +1200,13 @@ if nota >= 90 {
     println!("C");
 }
 
-// if como expressao (retorna valor!)
+// if como expressão (retorna valor!)
 let status = if idade >= 18 { "adulto" } else { "menor" };
 println!("Status: {}", status);</code></pre>
             </div>
 
             <h3>Match (Pattern Matching)</h3>
-            <p>O <code>match</code> e uma das features mais poderosas do Rust:</p>
+            <p>O <code>match</code> é uma das features mais poderosas do Rust:</p>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
@@ -1180,17 +1216,17 @@ println!("Status: {}", status);</code></pre>
 
 match dia {
     1 => println!("Segunda"),
-    2 => println!("Terca"),
+    2 => println!("Terça"),
     3 => println!("Quarta"),
-    4 | 5 => println!("Quinta ou Sexta"), // multiplos padroes
+    4 | 5 => println!("Quinta ou Sexta"), // múltiplos padrões
     6..=7 => println!("Fim de semana"),    // range inclusivo
-    _ => println!("Dia invalido"),         // curinga (obrigatorio!)
+    _ => println!("Dia inválido"),         // curinga (obrigatório!)
 }
 
 // match com retorno
 let dia_nome = match dia {
     1 => "Segunda",
-    2 => "Terca",
+    2 => "Terça",
     _ => "Outro dia",
 };</code></pre>
             </div>
@@ -1216,7 +1252,7 @@ while n > 0 {
     println!("{}!", n);
     n -= 1;
 }
-println!("Lancar!");
+println!("Lançar!");
 
 // for com range
 for i in 1..5 {        // 1, 2, 3, 4 (exclusivo)
@@ -1235,7 +1271,7 @@ for num in nums.iter() {
             </div>
 
             <div class="card exercise-card">
-                <p><strong>Exercicio:</strong> Crie um programa que verifica se um numero e par ou impar usando <code>if</code> e outro usando <code>match</code>.</p>
+                <p><strong>Exercício:</strong> Crie um programa que verifica se um número é par ou ímpar usando <code>if</code> e outro usando <code>match</code>.</p>
             </div>
         </section>
 
@@ -1243,30 +1279,30 @@ for num in nums.iter() {
         <section id="section-5" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">05</span>
-                <h2>Funcoes</h2>
+                <h2>Funções</h2>
             </div>
-            <h3>Declarando Funcoes</h3>
+            <h3>Declarando Funções</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
-                <pre><code class="language-rust">// Funcao simples
+                <pre><code class="language-rust">// Função simples
 fn saudar() {
-    println!("Ola!");
+    println!("Olá!");
 }
 
-// Funcao com parametros
+// Função com parâmetros
 fn saudar_pessoa(nome: &str) {
-    println!("Ola, {}!", nome);
+    println!("Olá, {}!", nome);
 }
 
-// Funcao com retorno
+// Função com retorno
 fn soma(a: i32, b: i32) -> i32 {
-    a + b  // sem ponto-e-virgula = retorno implicito
+    a + b  // sem ponto-e-vírgula = retorno implícito
 }
 
-// Retorno explicito
+// Retorno explícito
 fn dobro(x: i32) -> i32 {
     return x * 2;  // com return, precisa de ;
 }
@@ -1280,24 +1316,24 @@ fn main() {
             </div>
 
             <div class="card tip-card">
-                <p>Em Rust, a ultima expressao de uma funcao (sem <code>;</code>) e retornada automaticamente. Isso e chamado de "retorno implicito" e e o estilo idiomatico.</p>
+                <p>Em Rust, a última expressão de uma função (sem <code>;</code>) é retornada automaticamente. Isso é chamado de "retorno implícito" e é o estilo idiomático.</p>
             </div>
 
-            <h3>Expressoes vs Statements</h3>
+            <h3>Expressões vs Statements</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
                 <pre><code class="language-rust">fn exemplo() -> i32 {
-    let x = 5;          // statement (nao retorna valor)
+    let x = 5;          // statement (não retorna valor)
 
-    let y = {           // bloco e uma expressao!
+    let y = {           // bloco é uma expressão!
         let temp = 3;
-        temp + 1        // expressao - retorna 4
+        temp + 1        // expressão - retorna 4
     };                  // y = 4
 
-    x + y               // expressao - retornada pela funcao
+    x + y               // expressão - retornada pela função
 }</code></pre>
             </div>
         </section>
@@ -1317,7 +1353,7 @@ fn main() {
                 <pre><code class="language-rust">// Array com tipo inferido
 let numeros = [1, 2, 3, 4, 5];
 
-// Array com tipo explicito
+// Array com tipo explícito
 let nums: [i32; 5] = [1, 2, 3, 4, 5];
 
 // Array preenchido com mesmo valor
@@ -1333,7 +1369,7 @@ for n in numeros.iter() {
 }</code></pre>
             </div>
 
-            <h3>Vectors (tamanho dinamico)</h3>
+            <h3>Vectors (tamanho dinâmico)</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
@@ -1347,7 +1383,7 @@ let mut vazio: Vec&lt;i32&gt; = Vec::new();
 lista.push(40);
 lista.push(50);
 
-// Removendo ultimo
+// Removendo último
 let ultimo = lista.pop();  // Some(50)
 
 // Acessando (pode causar panic!)
@@ -1356,7 +1392,7 @@ let segundo = lista[1];
 // Acesso seguro (retorna Option)
 match lista.get(10) {
     Some(valor) => println!("Valor: {}", valor),
-    None => println!("Indice invalido"),
+    None => println!("Índice inválido"),
 }
 
 // Tamanho
@@ -1370,9 +1406,9 @@ println!("Tamanho: {}", lista.len());</code></pre>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
                 <pre><code class="language-rust">// Tupla com tipos diferentes
-let pessoa = ("Joao", 25, true);
+let pessoa = ("João", 25, true);
 
-// Acessando por indice
+// Acessando por índice
 let nome = pessoa.0;
 let idade = pessoa.1;
 
@@ -1414,14 +1450,14 @@ for (nome, telefone) in &agenda {
                 <h2>Ownership e Borrowing</h2>
             </div>
             <div class="card card-highlight">
-                <p><strong>Ownership</strong> e o conceito mais importante do Rust! E o que permite seguranca de memoria sem garbage collector.</p>
+                <p><strong>Ownership</strong> é o conceito mais importante do Rust! É o que permite segurança de memória sem garbage collector.</p>
             </div>
 
             <h3>As 3 Regras do Ownership</h3>
             <ol>
                 <li>Cada valor tem um <strong>dono</strong> (owner)</li>
-                <li>So pode haver <strong>um dono</strong> por vez</li>
-                <li>Quando o dono sai de escopo, o valor e <strong>descartado</strong></li>
+                <li>Só pode haver <strong>um dono</strong> por vez</li>
+                <li>Quando o dono sai de escopo, o valor é <strong>descartado</strong></li>
             </ol>
 
             <h3>Move Semantics</h3>
@@ -1433,12 +1469,12 @@ for (nome, telefone) in &agenda {
                 <pre><code class="language-rust">let s1 = String::from("hello");
 let s2 = s1;  // s1 foi MOVIDO para s2
 
-// println!("{}", s1);  // ERRO! s1 nao e mais valido
+// println!("{}", s1);  // ERRO! s1 não é mais válido
 
 println!("{}", s2);  // OK!</code></pre>
             </div>
 
-            <h3>Clone (copia profunda)</h3>
+            <h3>Clone (cópia profunda)</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
@@ -1447,17 +1483,17 @@ println!("{}", s2);  // OK!</code></pre>
                 <pre><code class="language-rust">let s1 = String::from("hello");
 let s2 = s1.clone();  // copia os dados
 
-println!("s1: {}, s2: {}", s1, s2);  // ambos validos!</code></pre>
+println!("s1: {}, s2: {}", s1, s2);  // ambos válidos!</code></pre>
             </div>
 
-            <h3>Borrowing (Referencias)</h3>
+            <h3>Borrowing (Referências)</h3>
             <p>Em vez de mover, podemos <strong>emprestar</strong> valores:</p>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
-                <pre><code class="language-rust">fn tamanho(s: &String) -> usize {  // recebe referencia
+                <pre><code class="language-rust">fn tamanho(s: &String) -> usize {  // recebe referência
     s.len()
 }
 
@@ -1465,12 +1501,12 @@ fn main() {
     let texto = String::from("Rust");
     let tam = tamanho(&texto);  // empresta com &
 
-    // texto ainda e valido!
+    // texto ainda é válido!
     println!("{} tem {} caracteres", texto, tam);
 }</code></pre>
             </div>
 
-            <h3>Referencias Mutaveis</h3>
+            <h3>Referências Mutáveis</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
@@ -1481,14 +1517,14 @@ fn main() {
 }
 
 fn main() {
-    let mut texto = String::from("Ola");
+    let mut texto = String::from("Olá");
     adicionar_exclamacao(&mut texto);
-    println!("{}", texto);  // "Ola!"
+    println!("{}", texto);  // "Olá!"
 }</code></pre>
             </div>
 
             <div class="card tip-card">
-                <p><strong>Regra importante:</strong> Voce pode ter MUITAS referencias imutaveis OU UMA referencia mutavel, mas nunca ambas ao mesmo tempo!</p>
+                <p><strong>Regra importante:</strong> Você pode ter MUITAS referências imutáveis OU UMA referência mutável, mas nunca ambas ao mesmo tempo!</p>
             </div>
         </section>
 
@@ -1511,19 +1547,19 @@ struct Pessoa {
     ativo: bool,
 }
 
-// Implementando metodos
+// Implementando métodos
 impl Pessoa {
-    // Construtor (funcao associada)
+    // Construtor (função associada)
     fn new(nome: String, idade: u8) -> Self {
         Pessoa { nome, idade, ativo: true }
     }
 
-    // Metodo (recebe &self)
+    // Método (recebe &self)
     fn apresentar(&self) {
-        println!("Ola, sou {} e tenho {} anos", self.nome, self.idade);
+        println!("Olá, sou {} e tenho {} anos", self.nome, self.idade);
     }
 
-    // Metodo que modifica (recebe &mut self)
+    // Método que modifica (recebe &mut self)
     fn fazer_aniversario(&mut self) {
         self.idade += 1;
     }
@@ -1559,13 +1595,13 @@ enum Mensagem {
 
 fn main() {
     let status = Status::Ativo;
-    let msg = Mensagem::Texto(String::from("Ola!"));
+    let msg = Mensagem::Texto(String::from("Olá!"));
 
     // Pattern matching com enums
     match msg {
         Mensagem::Texto(s) => println!("Texto: {}", s),
-        Mensagem::Numero(n) => println!("Numero: {}", n),
-        Mensagem::Posicao { x, y } => println!("Posicao: ({}, {})", x, y),
+        Mensagem::Numero(n) => println!("Número: {}", n),
+        Mensagem::Posicao { x, y } => println!("Posição: ({}, {})", x, y),
     }
 }</code></pre>
             </div>
@@ -1605,12 +1641,12 @@ fn main() {
         println!("Par: {}", n);
     }
 
-    // unwrap_or para valor padrao
+    // unwrap_or para valor padrão
     let resultado = encontrar_par(&nums).unwrap_or(0);
 }</code></pre>
             </div>
 
-            <h3>Result - Para operacoes que podem falhar</h3>
+            <h3>Result - Para operações que podem falhar</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">rust</span>
@@ -1618,7 +1654,7 @@ fn main() {
                 </div>
                 <pre><code class="language-rust">fn dividir(a: f64, b: f64) -> Result&lt;f64, String&gt; {
     if b == 0.0 {
-        Err(String::from("Divisao por zero!"))
+        Err(String::from("Divisão por zero!"))
     } else {
         Ok(a / b)
     }
@@ -1656,7 +1692,7 @@ fn main() {
 trait Resumo {
     fn resumir(&self) -> String;
 
-    // Metodo com implementacao padrao
+    // Método com implementação padrão
     fn preview(&self) -> String {
         format!("Leia mais: {}", self.resumir())
     }
@@ -1681,12 +1717,12 @@ impl Resumo for Artigo {
                     <span class="code-lang">rust</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                 </div>
-                <pre><code class="language-rust">// Funcao generica
+                <pre><code class="language-rust">// Função genérica
 fn maior&lt;T: PartialOrd&gt;(a: T, b: T) -> T {
     if a > b { a } else { b }
 }
 
-// Struct generica
+// Struct genérica
 struct Ponto&lt;T&gt; {
     x: T,
     y: T,
@@ -1724,7 +1760,7 @@ use std::io::{Read, Write};
 fn main() -> std::io::Result&lt;()&gt; {
     // Escrevendo
     let mut arquivo = File::create("dados.txt")?;
-    arquivo.write_all(b"Ola, Rust!")?;
+    arquivo.write_all(b"Olá, Rust!")?;
 
     // Lendo
     let mut conteudo = String::new();
@@ -1740,7 +1776,7 @@ fn main() -> std::io::Result&lt;()&gt; {
         <section id="section-12" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">12</span>
-                <h2>Concorrencia</h2>
+                <h2>Concorrência</h2>
             </div>
             <div class="code-block">
                 <div class="code-header">
@@ -1758,7 +1794,7 @@ fn main() {
 
     handle.join().unwrap();
 
-    // Comunicacao entre threads (channels)
+    // Comunicação entre threads (channels)
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
@@ -1818,15 +1854,15 @@ mod tests {
             <h3>Crates populares</h3>
             <div class="card">
                 <ul>
-                    <li><code>serde</code> - Serializacao (JSON, YAML, etc.)</li>
-                    <li><code>tokio</code> - Runtime assincrono</li>
+                    <li><code>serde</code> - Serialização (JSON, YAML, etc.)</li>
+                    <li><code>tokio</code> - Runtime assíncrono</li>
                     <li><code>actix-web</code> / <code>axum</code> - Frameworks web</li>
                     <li><code>clap</code> - Parser de argumentos CLI</li>
                     <li><code>reqwest</code> - Cliente HTTP</li>
                     <li><code>diesel</code> / <code>sqlx</code> - ORM e database</li>
                 </ul>
             </div>
-            <h3>Adicionando dependencias</h3>
+            <h3>Adicionando dependências</h3>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-lang">bash</span>
@@ -1841,23 +1877,23 @@ cargo add tokio --features full</code></pre>
         <section id="section-15" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">15</span>
-                <h2>Projetos Praticos</h2>
+                <h2>Projetos Práticos</h2>
             </div>
             <div class="projects-grid">
                 <div class="project-card">
                     <span class="project-number">1</span>
                     <h4>To-Do List CLI</h4>
-                    <p>Lista de tarefas no terminal com adicao, remocao e listagem.</p>
+                    <p>Lista de tarefas no terminal com adição, remoção e listagem.</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">2</span>
                     <h4>Conversor de Moedas</h4>
-                    <p>Converte valores entre moedas usando taxas de cambio.</p>
+                    <p>Converte valores entre moedas usando taxas de câmbio.</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">3</span>
-                    <h4>Jogo de Adivinhacao</h4>
-                    <p>Adivinhe o numero secreto com dicas de "maior" ou "menor".</p>
+                    <h4>Jogo de Adivinhação</h4>
+                    <p>Adivinhe o número secreto com dicas de "maior" ou "menor".</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">4</span>
@@ -1866,7 +1902,7 @@ cargo add tokio --features full</code></pre>
                 </div>
                 <div class="project-card">
                     <span class="project-number">5</span>
-                    <h4>CRUD com Persistencia</h4>
+                    <h4>CRUD com Persistência</h4>
                     <p>Projeto final com banco de dados SQLite.</p>
                 </div>
             </div>
@@ -1881,7 +1917,7 @@ cargo add tokio --features full</code></pre>
             <div class="timeline">
                 <div class="timeline-item">
                     <h4>Pratique sempre</h4>
-                    <p>Pequenos projetos valem mais que so leitura.</p>
+                    <p>Pequenos projetos valem mais que só leitura.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Participe de comunidades</h4>
@@ -1892,7 +1928,7 @@ cargo add tokio --features full</code></pre>
                     <p>Comece com issues marcadas "good first issue".</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Monte um portfolio</h4>
+                    <h4>Monte um portfólio</h4>
                     <p>Publique projetos no GitHub com README bem escrito.</p>
                 </div>
             </div>
@@ -1906,14 +1942,14 @@ cargo add tokio --features full</code></pre>
             </div>
             <div class="faq-card">
                 <h4>Por que o compilador reclama do ownership?</h4>
-                <p>Voce esta tentando usar um valor que foi movido para outra variavel. Use <code>.clone()</code> ou referencias <code>&</code>.</p>
+                <p>Você está tentando usar um valor que foi movido para outra variável. Use <code>.clone()</code> ou referências <code>&</code>.</p>
             </div>
             <div class="faq-card">
-                <h4>Qual a diferenca entre String e &str?</h4>
-                <p><code>String</code> e dinamica e vive no heap. <code>&str</code> e uma referencia a dados de string (pode ser literal ou parte de String).</p>
+                <h4>Qual a diferença entre String e &str?</h4>
+                <p><code>String</code> é dinâmica e vive no heap. <code>&str</code> é uma referência a dados de string (pode ser literal ou parte de String).</p>
             </div>
             <div class="faq-card">
-                <h4>Como instalar dependencias?</h4>
+                <h4>Como instalar dependências?</h4>
                 <p>Use <code>cargo add nome_da_crate</code> ou adicione manualmente no <code>Cargo.toml</code>.</p>
             </div>
             <div class="faq-card">
@@ -1926,7 +1962,7 @@ cargo add tokio --features full</code></pre>
         <section id="section-18" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">18</span>
-                <h2>Referencias</h2>
+                <h2>Referências</h2>
             </div>
             <div class="resources-grid">
                 <a href="https://doc.rust-lang.org/book/" target="_blank" class="resource-link">
@@ -1959,8 +1995,8 @@ cargo add tokio --features full</code></pre>
 
     <footer>
         <div class="footer-logo">🦀</div>
-        <p>Roadmap Rust: Do Zero ao Junior</p>
-        <p style="margin-top: 0.5rem;">Feito com dedicacao para a comunidade Rust brasileira</p>
+        <p>Roadmap Rust: Do Zero ao Júnior</p>
+        <p style="margin-top: 0.5rem;">Feito com dedicação para a comunidade Rust brasileira</p>
     </footer>
 
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
@@ -2014,6 +2050,11 @@ cargo add tokio --features full</code></pre>
                 scrollTopBtn.classList.remove('visible');
             }
         });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('mobile-open');
+        }
 
         // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
