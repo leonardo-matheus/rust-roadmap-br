@@ -8,17 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --rust-orange: #F74C00;
-            --rust-orange-light: #FF6B2C;
-            --bg-dark: #0a0a0a;
-            --bg-card: #18181b;
+            --rust-primary: #B7410E;
+            --rust-light: #CE5A24;
+            --ferris-orange: #F74C00;
+            --ferris-light: #FF6B2B;
+            --bg-dark: #1E1E1E;
+            --bg-medium: #2D2D2D;
+            --bg-light: #3C3C3C;
             --bg-code: #0d0d0d;
-            --text: #fafafa;
-            --text-muted: #71717a;
-            --success: #22c55e;
-            --error: #ef4444;
-            --warning: #f59e0b;
-            --border: #27272a;
+            --text-primary: #F5F5F5;
+            --text-secondary: #B0B0B0;
+            --text-muted: #808080;
+            --success: #4EC9B0;
+            --error: #F14C4C;
+            --warning: #CCA700;
+            --info: #3794FF;
+            --owned: #4EC9B0;
+            --borrowed: #569CD6;
+            --mutable: #DCDCAA;
+            --moved: #808080;
+            --border: #404040;
         }
 
         * {
@@ -30,16 +39,16 @@
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-dark);
-            color: var(--text);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
         /* Header */
         header {
-            background: var(--bg-card);
+            background: var(--bg-medium);
             border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,21 +64,34 @@
             font-weight: 800;
             font-size: 1.25rem;
             text-decoration: none;
-            color: var(--text);
+            color: var(--text-primary);
         }
 
-        .logo span {
-            color: var(--rust-orange);
+        .logo span { color: var(--ferris-orange); }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .category-badge {
+            background: var(--bg-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .progress-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .progress-bar {
-            width: 200px;
+            width: 180px;
             height: 8px;
             background: var(--border);
             border-radius: 4px;
@@ -78,134 +100,228 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--rust-orange), var(--rust-orange-light));
+            background: linear-gradient(90deg, var(--rust-primary), var(--ferris-orange));
             border-radius: 4px;
             transition: width 0.5s ease;
         }
 
         .level-indicator {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
-        .level-indicator strong {
-            color: var(--rust-orange);
+        .level-indicator strong { color: var(--ferris-orange); }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-icon { font-size: 1rem; }
 
         /* Main Layout */
         .game-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: calc(100vh - 60px);
+            grid-template-columns: 1fr 1.2fr;
+            min-height: calc(100vh - 56px);
         }
 
         @media (max-width: 1024px) {
-            .game-container {
-                grid-template-columns: 1fr;
-            }
+            .game-container { grid-template-columns: 1fr; }
         }
 
-        /* Left Panel - Instructions */
+        /* Left Panel */
         .instruction-panel {
-            padding: 2rem;
+            padding: 1.5rem;
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.25rem;
             overflow-y: auto;
-            max-height: calc(100vh - 60px);
+            max-height: calc(100vh - 56px);
+            background: var(--bg-medium);
         }
 
         .level-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .level-badge {
-            background: var(--rust-orange);
+            background: linear-gradient(135deg, var(--rust-primary), var(--ferris-orange));
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
             font-weight: 700;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
         }
 
         .level-title {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 800;
         }
 
-        .instruction-text {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 1rem;
+        .task-text {
+            background: var(--bg-light);
+            border-left: 3px solid var(--ferris-orange);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
-        .instruction-text code {
+        .task-text code {
             background: var(--bg-code);
-            color: var(--rust-orange);
-            padding: 0.2rem 0.5rem;
+            color: var(--ferris-orange);
+            padding: 0.15rem 0.4rem;
             border-radius: 4px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .concept-box {
-            background: var(--bg-card);
+            background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
+            border-radius: 10px;
+            padding: 1rem;
         }
 
         .concept-box h4 {
-            color: var(--rust-orange);
-            margin-bottom: 0.75rem;
-            font-size: 0.875rem;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .concept-box p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
             line-height: 1.6;
+        }
+
+        .concept-box code {
+            background: var(--bg-code);
+            color: var(--mutable);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* Hints System */
+        .hints-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hints-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .hint-btn {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
-        .hint-btn:hover {
+        .hint-btn:hover:not(:disabled) {
             border-color: var(--warning);
             color: var(--warning);
         }
 
+        .hint-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hint-counter {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
         .hint-text {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: rgba(204, 167, 0, 0.1);
+            border: 1px solid rgba(204, 167, 0, 0.3);
             border-radius: 8px;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             color: var(--warning);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .hint-text.visible { display: block; }
+
+        .hint-text code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Common Error Box */
+        .error-box {
+            background: rgba(241, 76, 76, 0.1);
+            border: 1px solid rgba(241, 76, 76, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
             display: none;
         }
 
-        .hint-text.visible {
-            display: block;
+        .error-box.visible { display: block; }
+
+        .error-box h4 {
+            color: var(--error);
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        /* Right Panel - Code Editor */
+        .error-box .error-code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--error);
+            margin-bottom: 0.5rem;
+        }
+
+        .error-box p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Right Panel */
         .code-panel {
             display: flex;
             flex-direction: column;
@@ -213,8 +329,8 @@
         }
 
         .code-header {
-            background: var(--bg-card);
-            padding: 1rem 1.5rem;
+            background: var(--bg-medium);
+            padding: 0.75rem 1.25rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -222,9 +338,21 @@
         }
 
         .code-header h3 {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .file-name {
+            background: var(--bg-light);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .editor-container {
@@ -234,49 +362,40 @@
         }
 
         .code-context {
-            padding: 1.5rem;
+            padding: 1.25rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.8;
-            color: #6b7280;
+            color: var(--text-muted);
             border-bottom: 1px solid var(--border);
+            white-space: pre-wrap;
+            overflow-x: auto;
         }
 
-        .code-context .highlight {
-            color: var(--text);
-        }
-
-        .code-context .keyword {
-            color: #c678dd;
-        }
-
-        .code-context .function {
-            color: #61afef;
-        }
-
-        .code-context .string {
-            color: #98c379;
-        }
-
-        .code-context .type {
-            color: #e5c07b;
-        }
-
-        .code-context .comment {
-            color: #5c6370;
-            font-style: italic;
+        .code-context .keyword { color: #c678dd; }
+        .code-context .function { color: #61afef; }
+        .code-context .string { color: #98c379; }
+        .code-context .type { color: #e5c07b; }
+        .code-context .comment { color: #5c6370; font-style: italic; }
+        .code-context .number { color: #d19a66; }
+        .code-context .blank {
+            background: var(--ferris-orange);
+            color: var(--bg-dark);
+            padding: 0.1rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
         }
 
         .input-area {
-            padding: 1.5rem;
+            padding: 1.25rem;
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .input-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -284,124 +403,161 @@
 
         .code-input {
             width: 100%;
-            background: var(--bg-card);
+            background: var(--bg-medium);
             border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            color: var(--text);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
             outline: none;
             transition: all 0.3s ease;
-            resize: none;
-            min-height: 60px;
         }
 
         .code-input:focus {
-            border-color: var(--rust-orange);
-            box-shadow: 0 0 0 3px rgba(247, 76, 0, 0.1);
+            border-color: var(--ferris-orange);
+            box-shadow: 0 0 0 3px rgba(247, 76, 0, 0.15);
         }
 
         .code-input.correct {
             border-color: var(--success);
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 0 0 3px rgba(78, 201, 176, 0.15);
         }
 
         .code-input.incorrect {
             border-color: var(--error);
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+            box-shadow: 0 0 0 3px rgba(241, 76, 76, 0.15);
             animation: shake 0.5s ease;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .btn-container {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .submit-btn {
             flex: 1;
-            background: linear-gradient(135deg, var(--rust-orange), var(--rust-orange-light));
+            background: linear-gradient(135deg, var(--rust-primary), var(--ferris-orange));
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(247, 76, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(247, 76, 0, 0.3);
         }
 
         .reset-btn {
-            background: var(--bg-card);
+            background: var(--bg-medium);
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .reset-btn:hover {
             border-color: var(--text-muted);
-            color: var(--text);
+            color: var(--text-primary);
         }
 
-        /* Visualization Panel */
+        /* Feedback */
+        .feedback {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .feedback.visible { display: flex; }
+
+        .feedback.success {
+            background: rgba(78, 201, 176, 0.15);
+            border: 1px solid rgba(78, 201, 176, 0.3);
+            color: var(--success);
+        }
+
+        .feedback.error {
+            background: rgba(241, 76, 76, 0.15);
+            border: 1px solid rgba(241, 76, 76, 0.3);
+            color: var(--error);
+        }
+
+        /* Visualization */
         .visualization {
-            background: var(--bg-card);
+            background: var(--bg-medium);
             border-top: 1px solid var(--border);
-            padding: 2rem;
-            min-height: 200px;
+            padding: 1.25rem;
+            min-height: 140px;
         }
 
         .vis-title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .memory-boxes {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
         }
 
         .memory-box {
-            background: var(--bg-code);
+            background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            min-width: 150px;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            min-width: 120px;
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .memory-box.owned {
-            border-color: var(--rust-orange);
-            box-shadow: 0 0 30px rgba(247, 76, 0, 0.2);
+            border-color: var(--owned);
+            box-shadow: 0 0 20px rgba(78, 201, 176, 0.2);
         }
 
         .memory-box.borrowed {
-            border-color: var(--success);
+            border-color: var(--borrowed);
             border-style: dashed;
         }
 
+        .memory-box.mutable {
+            border-color: var(--mutable);
+        }
+
         .memory-box.moved {
-            opacity: 0.3;
+            opacity: 0.4;
             border-style: dashed;
         }
 
@@ -411,93 +567,55 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(241, 76, 76, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(241, 76, 76, 0); }
         }
 
         .var-name {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            color: var(--rust-orange);
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--ferris-orange);
+            margin-bottom: 0.3rem;
         }
 
         .var-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            color: var(--text);
-            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
         }
 
         .var-status {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
         }
 
-        .var-status.owner {
-            color: var(--rust-orange);
-        }
-
-        .var-status.borrowed {
-            color: var(--success);
-        }
-
-        /* Feedback Messages */
-        .feedback {
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            display: none;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .feedback.visible {
-            display: flex;
-        }
-
-        .feedback.success {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: var(--success);
-        }
-
-        .feedback.error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--error);
-        }
-
-        .feedback-icon {
+        .arrow {
+            color: var(--ferris-orange);
             font-size: 1.25rem;
+            animation: arrowMove 1s ease-in-out infinite;
+        }
+
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
         }
 
         /* Level Navigation */
         .level-nav {
             display: flex;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--bg-card);
+            gap: 3px;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-medium);
             border-top: 1px solid var(--border);
             overflow-x: auto;
+            flex-wrap: wrap;
         }
 
         .level-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--border);
             cursor: pointer;
@@ -505,24 +623,27 @@
             flex-shrink: 0;
         }
 
-        .level-dot:hover {
-            background: var(--text-muted);
-        }
-
-        .level-dot.completed {
-            background: var(--success);
-        }
-
+        .level-dot:hover { background: var(--text-muted); transform: scale(1.2); }
+        .level-dot.completed { background: var(--success); }
         .level-dot.current {
-            background: var(--rust-orange);
-            box-shadow: 0 0 10px rgba(247, 76, 0, 0.5);
+            background: var(--ferris-orange);
+            box-shadow: 0 0 8px rgba(247, 76, 0, 0.5);
+            transform: scale(1.3);
         }
 
-        /* Success Modal */
+        /* Category separators */
+        .level-separator {
+            width: 1px;
+            height: 10px;
+            background: var(--text-muted);
+            margin: 0 5px;
+        }
+
+        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
@@ -530,9 +651,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .modal-overlay.visible {
-            display: flex;
-        }
+        .modal-overlay.visible { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -540,92 +659,102 @@
         }
 
         .modal {
-            background: var(--bg-card);
+            background: var(--bg-medium);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
-            max-width: 400px;
+            max-width: 380px;
             animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .modal h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .modal p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
 
         .modal-btn {
-            background: linear-gradient(135deg, var(--rust-orange), var(--rust-orange-light));
+            background: linear-gradient(135deg, var(--rust-primary), var(--ferris-orange));
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .modal-btn:hover {
-            transform: scale(1.05);
-        }
+        .modal-btn:hover { transform: scale(1.05); }
 
-        /* Crab Animation */
-        .crab {
-            font-size: 3rem;
-            animation: crabWalk 2s ease-in-out infinite;
-        }
-
-        @keyframes crabWalk {
-            0%, 100% { transform: translateX(0) scaleX(1); }
-            25% { transform: translateX(10px) scaleX(1); }
-            50% { transform: translateX(0) scaleX(-1); }
-            75% { transform: translateX(-10px) scaleX(-1); }
-        }
-
-        /* Arrow animation */
-        .arrow {
+        /* Ferris states */
+        .ferris {
+            font-size: 2rem;
             display: inline-block;
-            margin: 0 1rem;
-            color: var(--rust-orange);
-            animation: arrowMove 1s ease-in-out infinite;
         }
 
-        @keyframes arrowMove {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(10px); }
+        .ferris.happy { animation: bounce 0.5s ease; }
+        .ferris.thinking { animation: wiggle 1s ease-in-out infinite; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 0.5rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .header-center { display: none; }
+            .stats { display: none; }
+            .game-container { grid-template-columns: 1fr; }
+            .instruction-panel { max-height: none; }
+            .level-nav { padding: 0.5rem; }
         }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">🦀 <span>Rust Crab</span></a>
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        <div class="header-center">
+            <span class="category-badge" id="categoryBadge">Básico</span>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+                </div>
+                <span class="level-indicator">Nível <strong id="currentLevelDisplay">1</strong>/<strong id="totalLevels">50</strong></span>
             </div>
-            <span class="level-indicator">Nível <strong id="currentLevelDisplay">1</strong> de <strong>10</strong></span>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-icon">✓</span>
+                <span id="completedCount">0</span> completos
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🔥</span>
+                <span id="streakCount">0</span> sequência
+            </div>
         </div>
     </header>
 
@@ -633,65 +762,65 @@
         <div class="instruction-panel">
             <div class="level-header">
                 <span class="level-badge" id="levelBadge">Nível 1</span>
-                <h2 class="level-title" id="levelTitle">Variáveis</h2>
+                <h2 class="level-title" id="levelTitle">Olá, Rust!</h2>
             </div>
 
-            <div class="instruction-text" id="instructionText">
-                <p>Bem-vindo ao <strong>Rust Crab</strong>! 🦀</p>
-                <p>Em Rust, usamos <code>let</code> para declarar variáveis. Complete o código para criar uma variável chamada <code>x</code> com o valor <code>5</code>.</p>
+            <div class="task-text" id="taskText">
+                Use a macro println! para imprimir a mensagem "Olá, Rust!" na tela.
             </div>
 
             <div class="concept-box">
                 <h4>💡 Conceito</h4>
-                <p id="conceptText">Em Rust, variáveis são imutáveis por padrão. Use <code>let</code> para declarar uma variável.</p>
+                <p id="conceptText">A macro println! é usada para imprimir texto na saída padrão.</p>
             </div>
 
-            <button class="hint-btn" onclick="toggleHint()">
-                💡 Precisa de uma dica?
-            </button>
-            <div class="hint-text" id="hintText">
-                A sintaxe é: <code>let nome = valor;</code>
+            <div class="hints-container">
+                <div class="hints-header">
+                    <button class="hint-btn" id="hintBtn" onclick="showNextHint()">
+                        💡 Dica <span id="hintNumber">1</span>/3
+                    </button>
+                    <span class="hint-counter" id="hintsUsed">0 dicas usadas</span>
+                </div>
+                <div class="hint-text" id="hint1"></div>
+                <div class="hint-text" id="hint2"></div>
+                <div class="hint-text" id="hint3"></div>
+            </div>
+
+            <div class="error-box" id="errorBox">
+                <h4>⚠️ Erro Comum</h4>
+                <div class="error-code" id="errorCode"></div>
+                <p id="errorExplanation"></p>
             </div>
         </div>
 
         <div class="code-panel">
             <div class="code-header">
-                <h3>📝 Editor de Código</h3>
-                <span id="fileName">main.rs</span>
+                <h3>📝 Editor</h3>
+                <span class="file-name">main.rs</span>
             </div>
 
             <div class="editor-container">
-                <div class="code-context" id="codeContext">
-                    <span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie a variável aqui:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="codePrefix"></span>
-                </div>
+                <div class="code-context" id="codeContext"></div>
 
                 <div class="input-area">
-                    <span class="input-label">Sua resposta:</span>
-                    <input type="text" class="code-input" id="codeInput" placeholder="Digite seu código aqui..." autocomplete="off" spellcheck="false">
+                    <span class="input-label">Complete o código:</span>
+                    <input type="text" class="code-input" id="codeInput" placeholder="Digite aqui..." autocomplete="off" spellcheck="false">
 
                     <div class="feedback" id="feedback">
-                        <span class="feedback-icon" id="feedbackIcon">✓</span>
+                        <span id="feedbackIcon">✓</span>
                         <span id="feedbackText">Correto!</span>
                     </div>
 
                     <div class="btn-container">
-                        <button class="submit-btn" onclick="checkAnswer()">Verificar →</button>
+                        <button class="submit-btn" onclick="checkAnswer()">Verificar ✓</button>
                         <button class="reset-btn" onclick="resetLevel()">Limpar</button>
                     </div>
                 </div>
             </div>
 
             <div class="visualization">
-                <div class="vis-title">🔍 Visualização da Memória</div>
-                <div class="memory-boxes" id="memoryVisualization">
-                    <div class="memory-box">
-                        <div class="var-name">x</div>
-                        <div class="var-value">?</div>
-                        <div class="var-status">aguardando...</div>
-                    </div>
-                </div>
+                <div class="vis-title">🔍 Memória</div>
+                <div class="memory-boxes" id="memoryVisualization"></div>
             </div>
         </div>
     </div>
@@ -700,287 +829,688 @@
 
     <div class="modal-overlay" id="successModal">
         <div class="modal">
-            <div class="modal-icon">🎉</div>
-            <h2>Parabéns!</h2>
+            <div class="modal-icon" id="modalIcon">🎉</div>
+            <h2 id="modalTitle">Parabéns!</h2>
             <p id="modalText">Você completou o nível!</p>
-            <button class="modal-btn" onclick="nextLevel()">Próximo Nível →</button>
+            <button class="modal-btn" id="modalBtn" onclick="nextLevel()">Próximo Nível →</button>
         </div>
     </div>
 
     <script>
-        const levels = [
+        // Game Data - 50 Levels
+        const exercises = [
             {
-                id: 1,
-                title: "Variáveis",
-                badge: "Nível 1",
-                instruction: `<p>Bem-vindo ao <strong>Rust Crab</strong>! 🦀</p>
-                    <p>Em Rust, usamos <code>let</code> para declarar variáveis. Complete o código para criar uma variável chamada <code>x</code> com o valor <code>5</code>.</p>`,
-                concept: "Em Rust, variáveis são imutáveis por padrão. Use <code>let</code> para declarar uma variável.",
-                hint: "A sintaxe é: <code>let nome = valor;</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie a variável x com valor 5:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let x = 5;", "let x=5;", "let x = 5"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">x</div>
-                        <div class="var-value">${correct ? '5' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'owned' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 1, title: "Olá, Rust!", category: "Básico",
+                context_code: "fn main() {\n    // Imprima \"Olá, Rust!\" na tela\n    ___\n}",
+                task: "Use a macro <code>println!</code> para imprimir a mensagem \"Olá, Rust!\" na tela.",
+                correct_answers: ["println!(\"Olá, Rust!\");", "println!(\"Olá, Rust!\")", "print!(\"Olá, Rust!\\n\");"],
+                explanation: "A macro <code>println!</code> imprime texto com nova linha. Macros usam <code>!</code> após o nome.",
+                hints: ["Use uma macro que imprime texto...", "A macro começa com 'print' e termina com 'ln'...", "Use <code>println!(\"sua mensagem\");</code>"],
+                common_error: { error: "println(\"Olá, Rust!\");", explanation: "Esqueceu o '!' - println é uma macro!" },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">stdout</div><div class="var-value">${ok?'"Olá, Rust!"':'?'}</div><div class="var-status">${ok?'printed':'aguardando'}</div></div>`
             },
             {
-                id: 2,
-                title: "Mutabilidade",
-                badge: "Nível 2",
-                instruction: `<p>Por padrão, variáveis em Rust são <strong>imutáveis</strong>. Para torná-las mutáveis, use <code>mut</code>.</p>
-                    <p>Crie uma variável <strong>mutável</strong> chamada <code>contador</code> com valor <code>0</code>.</p>`,
-                concept: "Use <code>let mut</code> para criar variáveis que podem ser alteradas depois.",
-                hint: "A sintaxe é: <code>let mut nome = valor;</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma variável mutável:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let mut contador = 0;", "let mut contador=0;", "let mut contador = 0"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">contador</div>
-                        <div class="var-value">${correct ? '0' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'mut ✏️' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 2, title: "Primeira Variável", category: "Básico",
+                context_code: "fn main() {\n    ___ nome = \"Maria\";\n    println!(\"Olá, {}!\", nome);\n}",
+                task: "Declare uma variável imutável usando a palavra-chave correta.",
+                correct_answers: ["let", "let "],
+                explanation: "Em Rust, usamos <code>let</code> para declarar variáveis. Por padrão, são imutáveis.",
+                hints: ["Qual palavra-chave cria variáveis em Rust?", "Começa com 'l' e tem 3 letras...", "Use <code>let</code>"],
+                common_error: { error: "var nome = \"Maria\";", explanation: "Rust não usa 'var'. A palavra-chave é 'let'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">nome</div><div class="var-value">${ok?'"Maria"':'?'}</div><div class="var-status">${ok?'owned':'aguardando'}</div></div>`
             },
             {
-                id: 3,
-                title: "Tipos",
-                badge: "Nível 3",
-                instruction: `<p>Rust é uma linguagem com <strong>tipagem estática</strong>. Você pode especificar o tipo de uma variável.</p>
-                    <p>Crie uma variável <code>idade</code> do tipo <code>i32</code> com valor <code>25</code>.</p>`,
-                concept: "<code>i32</code> é um inteiro de 32 bits com sinal. Outros tipos: <code>i64</code>, <code>u32</code>, <code>f64</code>.",
-                hint: "A sintaxe é: <code>let nome: tipo = valor;</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Especifique o tipo i32:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let idade: i32 = 25;", "let idade:i32 = 25;", "let idade: i32=25;"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">idade: i32</div>
-                        <div class="var-value">${correct ? '25' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? '32 bits' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 3, title: "Variável Mutável", category: "Básico",
+                context_code: "fn main() {\n    let ___ idade = 25;\n    idade = 26;\n    println!(\"Idade: {}\", idade);\n}",
+                task: "Adicione a palavra-chave que permite modificar a variável.",
+                correct_answers: ["mut", "mut "],
+                explanation: "Use <code>let mut</code> para criar variáveis mutáveis que podem ser alteradas.",
+                hints: ["Variáveis são imutáveis por padrão...", "A palavra é abreviação de 'mutable'...", "Use <code>mut</code>"],
+                common_error: { error: "let idade = 25; idade = 26;", explanation: "Sem 'mut', a variável é imutável e não pode ser alterada." },
+                visualization: (ok) => `<div class="memory-box ${ok?'mutable':''}"><div class="var-name">idade</div><div class="var-value">${ok?'26':'?'}</div><div class="var-status">${ok?'mut ✏️':'aguardando'}</div></div>`
             },
             {
-                id: 4,
-                title: "Ownership",
-                badge: "Nível 4",
-                instruction: `<p>🦀 <strong>Ownership</strong> é o conceito mais importante do Rust!</p>
-                    <p>Cada valor tem um único dono. Quando passamos um valor, ele é <strong>movido</strong>.</p>
-                    <p>Crie uma String <code>nome</code> com o valor <code>"Rust"</code>.</p>`,
-                concept: "Strings são alocadas no heap e seguem as regras de ownership. Use <code>String::from()</code> para criar.",
-                hint: "Use: <code>let nome = String::from(\"valor\");</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma String:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ['let nome = String::from("Rust");', "let nome = String::from(\"Rust\");"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">nome</div>
-                        <div class="var-value">${correct ? '"Rust"' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'owner 👑' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 4, title: "Tipo Inteiro", category: "Básico",
+                context_code: "fn main() {\n    let quantidade: ___ = 42;\n    println!(\"Quantidade: {}\", quantidade);\n}",
+                task: "Especifique o tipo inteiro de 32 bits com sinal.",
+                correct_answers: ["i32", " i32", "i32 "],
+                explanation: "<code>i32</code> é um inteiro de 32 bits com sinal. É o tipo inteiro padrão em Rust.",
+                hints: ["Inteiros com sinal começam com 'i'...", "32 bits = sufixo 32...", "O tipo é <code>i32</code>"],
+                common_error: { error: "int", explanation: "Rust não usa 'int'. Use i8, i16, i32, i64, i128 ou u8, u16, etc." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">quantidade: i32</div><div class="var-value">${ok?'42':'?'}</div><div class="var-status">${ok?'32 bits':'aguardando'}</div></div>`
             },
             {
-                id: 5,
-                title: "Borrowing",
-                badge: "Nível 5",
-                instruction: `<p>Em vez de mover o ownership, podemos <strong>emprestar</strong> uma referência usando <code>&</code>.</p>
-                    <p>Crie uma referência <code>ref_nome</code> para a variável <code>nome</code>.</p>`,
-                concept: "Referências permitem usar um valor sem tomar ownership. Use <code>&</code> para criar uma referência.",
-                hint: "Use: <code>let ref_nome = &nome;</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> nome = <span class="function">String::from</span>(<span class="string">"Rust"</span>);<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma referência:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let ref_nome = &nome;", "let ref_nome=&nome;"],
-                visualization: (correct) => `
-                    <div class="memory-box owned">
-                        <div class="var-name">nome</div>
-                        <div class="var-value">"Rust"</div>
-                        <div class="var-status owner">owner 👑</div>
-                    </div>
-                    <span class="arrow">→</span>
-                    <div class="memory-box ${correct ? 'borrowed' : ''}">
-                        <div class="var-name">ref_nome</div>
-                        <div class="var-value">${correct ? '&nome' : '?'}</div>
-                        <div class="var-status ${correct ? 'borrowed' : ''}">${correct ? 'borrowed 🔗' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 5, title: "Tipo Flutuante", category: "Básico",
+                context_code: "fn main() {\n    let pi: ___ = 3.14159;\n    println!(\"Pi = {}\", pi);\n}",
+                task: "Especifique o tipo de ponto flutuante de 64 bits.",
+                correct_answers: ["f64", " f64", "f64 "],
+                explanation: "<code>f64</code> é um número de ponto flutuante de 64 bits (double precision).",
+                hints: ["Tipos flutuantes começam com 'f'...", "64 bits oferece mais precisão...", "O tipo é <code>f64</code>"],
+                common_error: { error: "float", explanation: "Rust não usa 'float' ou 'double'. Use f32 ou f64." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">pi: f64</div><div class="var-value">${ok?'3.14159':'?'}</div><div class="var-status">${ok?'64 bits':'aguardando'}</div></div>`
             },
             {
-                id: 6,
-                title: "Vetores",
-                badge: "Nível 6",
-                instruction: `<p>Vetores são coleções dinâmicas. Use <code>vec!</code> macro para criar.</p>
-                    <p>Crie um vetor <code>numeros</code> com os valores <code>1, 2, 3</code>.</p>`,
-                concept: "A macro <code>vec!</code> cria um Vec com valores iniciais. Vetores podem crescer dinamicamente.",
-                hint: "Use: <code>let numeros = vec![1, 2, 3];</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie um vetor:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let numeros = vec![1, 2, 3];", "let numeros=vec![1,2,3];", "let numeros = vec![1,2,3];"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">numeros</div>
-                        <div class="var-value">${correct ? '[1, 2, 3]' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'Vec<i32>' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 6, title: "Tipo Booleano", category: "Básico",
+                context_code: "fn main() {\n    let ativo: bool = ___;\n    if ativo {\n        println!(\"Sistema ativo!\");\n    }\n}",
+                task: "Atribua o valor verdadeiro à variável booleana.",
+                correct_answers: ["true", " true", "true "],
+                explanation: "Em Rust, os valores booleanos são <code>true</code> e <code>false</code> (minúsculas).",
+                hints: ["Booleanos: verdadeiro ou falso...", "Em inglês e minúsculo...", "Use <code>true</code>"],
+                common_error: { error: "True", explanation: "Rust usa 'true' em minúsculas, não 'True'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">ativo</div><div class="var-value">${ok?'true':'?'}</div><div class="var-status">${ok?'bool':'aguardando'}</div></div>`
             },
             {
-                id: 7,
-                title: "Struct",
-                badge: "Nível 7",
-                instruction: `<p>Structs permitem criar tipos personalizados.</p>
-                    <p>Defina uma struct <code>Pessoa</code> com um campo <code>nome</code> do tipo <code>String</code>.</p>`,
-                concept: "Structs agrupam dados relacionados. Cada campo tem um nome e tipo.",
-                hint: "Use: <code>struct Nome { campo: Tipo }</code>",
-                codeContext: `<span class="comment">// Defina a struct:</span><br>`,
-                answer: ["struct Pessoa { nome: String }", "struct Pessoa { nome: String, }", "struct Pessoa{ nome: String }"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">Pessoa</div>
-                        <div class="var-value">${correct ? '{ nome }' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'struct' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 7, title: "Tipo Caractere", category: "Básico",
+                context_code: "fn main() {\n    let letra: char = ___;\n    println!(\"Letra: {}\", letra);\n}",
+                task: "Atribua o caractere 'A' à variável. Caracteres usam aspas simples!",
+                correct_answers: ["'A'", " 'A'", "'A' "],
+                explanation: "O tipo <code>char</code> representa um caractere Unicode e usa aspas simples.",
+                hints: ["Caracteres usam aspas simples, não duplas...", "É só uma letra entre aspas simples...", "Use <code>'A'</code>"],
+                common_error: { error: "\"A\"", explanation: "Aspas duplas criam uma String, não um char. Use aspas simples." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">letra</div><div class="var-value">${ok?"'A'":'?'}</div><div class="var-status">${ok?'char':'aguardando'}</div></div>`
             },
             {
-                id: 8,
-                title: "Option",
-                badge: "Nível 8",
-                instruction: `<p><code>Option</code> representa um valor que pode existir ou não.</p>
-                    <p>Crie uma variável <code>talvez</code> do tipo <code>Option&lt;i32&gt;</code> com valor <code>Some(42)</code>.</p>`,
-                concept: "<code>Option&lt;T&gt;</code> pode ser <code>Some(valor)</code> ou <code>None</code>. Evita null pointer errors!",
-                hint: "Use: <code>let talvez: Option<i32> = Some(42);</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie um Option:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ["let talvez: Option<i32> = Some(42);", "let talvez = Some(42);"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">talvez</div>
-                        <div class="var-value">${correct ? 'Some(42)' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'Option<i32>' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 8, title: "Interpolação", category: "Básico",
+                context_code: "fn main() {\n    let nome = \"Carlos\";\n    let idade = 30;\n    println!(\"___ tem ___ anos\", nome, idade);\n}",
+                task: "Complete os placeholders para interpolar as variáveis.",
+                correct_answers: ["{} {}", "{}{}", "{}, {}"],
+                explanation: "Em Rust, <code>{}</code> é um placeholder substituído pelos argumentos na ordem.",
+                hints: ["Placeholders são chaves vazias...", "Use um par de chaves para cada variável...", "Use <code>{}</code>"],
+                common_error: { error: "%s %d", explanation: "Rust não usa formatação estilo C. Use {} para todos os tipos." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">output</div><div class="var-value">${ok?'"Carlos tem 30 anos"':'?'}</div><div class="var-status">${ok?'formatted':'aguardando'}</div></div>`
             },
             {
-                id: 9,
-                title: "Match",
-                badge: "Nível 9",
-                instruction: `<p><code>match</code> é pattern matching poderoso do Rust.</p>
-                    <p>Complete o padrão para quando <code>x</code> for <code>1</code>.</p>`,
-                concept: "Match deve cobrir todos os casos possíveis. Use <code>_</code> para \"qualquer outro valor\".",
-                hint: "O padrão é só o valor: <code>1 => ...</code>",
-                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> x = 1;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">match</span> x {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Complete o padrão:</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`,
-                answer: ['1 => println!("um"),', '1 => println!("um")', "1 => {}", "1 => ()"],
-                visualization: (correct) => `
-                    <div class="memory-box owned">
-                        <div class="var-name">x</div>
-                        <div class="var-value">1</div>
-                        <div class="var-status owner">i32</div>
-                    </div>
-                    <span class="arrow">match</span>
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">pattern</div>
-                        <div class="var-value">${correct ? '1 ✓' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'matched!' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 9, title: "Soma", category: "Básico",
+                context_code: "fn main() {\n    let a = 10;\n    let b = 3;\n    let soma = a ___ b;\n    println!(\"Soma: {}\", soma);\n}",
+                task: "Use o operador correto para somar os dois números.",
+                correct_answers: ["+", " +", "+ ", " + "],
+                explanation: "O operador <code>+</code> realiza adição. Outros: <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>.",
+                hints: ["Qual símbolo representa adição?", "É o mesmo de outras linguagens...", "Use <code>+</code>"],
+                common_error: { error: "a.add(b)", explanation: "Para operações simples, use o operador + diretamente." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">soma</div><div class="var-value">${ok?'13':'?'}</div><div class="var-status">${ok?'i32':'aguardando'}</div></div>`
             },
             {
-                id: 10,
-                title: "Resultado Final!",
-                badge: "Nível 10",
-                instruction: `<p>🎉 Último desafio! Crie uma função que retorna um <code>i32</code>.</p>
-                    <p>Escreva a assinatura da função <code>soma</code> que recebe <code>a: i32</code> e <code>b: i32</code>.</p>`,
-                concept: "Funções usam <code>fn nome(params) -> RetornoTipo</code>. O último valor sem ; é retornado.",
-                hint: "Use: <code>fn soma(a: i32, b: i32) -> i32</code>",
-                codeContext: `<span class="comment">// Defina a função soma:</span><br>`,
-                answer: ["fn soma(a: i32, b: i32) -> i32", "fn soma(a: i32, b: i32) -> i32 {", "fn soma(a:i32, b:i32) -> i32"],
-                visualization: (correct) => `
-                    <div class="memory-box ${correct ? 'owned' : ''}">
-                        <div class="var-name">soma()</div>
-                        <div class="var-value">${correct ? 'a + b' : '?'}</div>
-                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? '→ i32' : 'aguardando...'}</div>
-                    </div>
-                `
+                level: 10, title: "Divisão", category: "Básico",
+                context_code: "fn main() {\n    let a: i32 = 17;\n    let b: i32 = 5;\n    let resultado = a ___ b;\n    println!(\"Resultado: {}\", resultado);\n}",
+                task: "Use o operador de divisão. Entre inteiros, o resultado é inteiro.",
+                correct_answers: ["/", " /", "/ ", " / "],
+                explanation: "Divisão entre inteiros resulta em inteiro truncado. 17 / 5 = 3.",
+                hints: ["Qual símbolo representa divisão?", "É a barra comum...", "Use <code>/</code>"],
+                common_error: { error: "17 / 5 = 3.4", explanation: "Divisão inteira trunca. Para 3.4, use f64." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">resultado</div><div class="var-value">${ok?'3':'?'}</div><div class="var-status">${ok?'truncated':'aguardando'}</div></div>`
+            },
+            {
+                level: 11, title: "Resto", category: "Básico",
+                context_code: "fn main() {\n    let numero = 17;\n    let resto = numero ___ 5;\n    println!(\"Resto: {}\", resto);\n}",
+                task: "Use o operador de módulo (resto da divisão).",
+                correct_answers: ["%", " %", "% ", " % "],
+                explanation: "O operador <code>%</code> retorna o resto. 17 % 5 = 2.",
+                hints: ["Este operador é chamado 'módulo'...", "É o símbolo de porcentagem...", "Use <code>%</code>"],
+                common_error: { error: "mod", explanation: "'mod' é para módulos de código. Para resto, use %." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">resto</div><div class="var-value">${ok?'2':'?'}</div><div class="var-status">${ok?'17 = 5×3 + 2':'aguardando'}</div></div>`
+            },
+            {
+                level: 12, title: "Igualdade", category: "Básico",
+                context_code: "fn main() {\n    let a = 5;\n    let b = 5;\n    let sao_iguais = a ___ b;\n    println!(\"Iguais? {}\", sao_iguais);\n}",
+                task: "Use o operador de comparação de igualdade.",
+                correct_answers: ["==", " ==", "== ", " == "],
+                explanation: "O operador <code>==</code> compara igualdade e retorna bool.",
+                hints: ["Para comparar, não basta um igual...", "Você precisa de dois sinais de igual...", "Use <code>==</code>"],
+                common_error: { error: "a = b", explanation: "Um único = é atribuição, não comparação. Use ==." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">sao_iguais</div><div class="var-value">${ok?'true':'?'}</div><div class="var-status">${ok?'bool':'aguardando'}</div></div>`
+            },
+            {
+                level: 13, title: "Maior ou Igual", category: "Básico",
+                context_code: "fn main() {\n    let idade = 18;\n    let pode_votar = idade ___ 16;\n    println!(\"Pode votar? {}\", pode_votar);\n}",
+                task: "Use o operador que verifica se idade é maior ou igual a 16.",
+                correct_answers: [">=", " >=", ">= ", " >= "],
+                explanation: "O operador <code>>=</code> verifica maior ou igual. Outros: >, <, <=, !=",
+                hints: ["Precisa verificar 'maior ou igual'...", "Combine > com =...", "Use <code>>=</code>"],
+                common_error: { error: "=>", explanation: "A ordem é >=, não =>. O símbolo => é para match." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">pode_votar</div><div class="var-value">${ok?'true':'?'}</div><div class="var-status">${ok?'18 >= 16':'aguardando'}</div></div>`
+            },
+            {
+                level: 14, title: "AND Lógico", category: "Básico",
+                context_code: "fn main() {\n    let tem_carteira = true;\n    let tem_18_anos = true;\n    let pode_dirigir = tem_carteira ___ tem_18_anos;\n    println!(\"Pode dirigir? {}\", pode_dirigir);\n}",
+                task: "Use o operador lógico AND para verificar ambas as condições.",
+                correct_answers: ["&&", " &&", "&& ", " && "],
+                explanation: "O operador <code>&&</code> (AND) retorna true só se ambos forem true.",
+                hints: ["Você precisa do operador 'E'...", "São dois símbolos de 'e comercial'...", "Use <code>&&</code>"],
+                common_error: { error: "and", explanation: "Rust não usa 'and' como palavra-chave. Use &&." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">pode_dirigir</div><div class="var-value">${ok?'true':'?'}</div><div class="var-status">${ok?'true && true':'aguardando'}</div></div>`
+            },
+            {
+                level: 15, title: "OR Lógico", category: "Básico",
+                context_code: "fn main() {\n    let tem_pix = false;\n    let tem_cartao = true;\n    let pode_pagar = tem_pix ___ tem_cartao;\n    println!(\"Pode pagar? {}\", pode_pagar);\n}",
+                task: "Use o operador lógico OR para verificar se pelo menos uma condição é verdadeira.",
+                correct_answers: ["||", " ||", "|| ", " || "],
+                explanation: "O operador <code>||</code> (OR) retorna true se pelo menos um for true.",
+                hints: ["Você precisa do operador 'OU'...", "São duas barras verticais...", "Use <code>||</code>"],
+                common_error: { error: "or", explanation: "Rust não usa 'or'. Use || para OR lógico." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">pode_pagar</div><div class="var-value">${ok?'true':'?'}</div><div class="var-status">${ok?'false || true':'aguardando'}</div></div>`
+            },
+            {
+                level: 16, title: "If Simples", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let numero = 10;\n    ___ numero > 5 {\n        println!(\"Maior que 5!\");\n    }\n}",
+                task: "Complete com a palavra-chave condicional.",
+                correct_answers: ["if", "if "],
+                explanation: "A estrutura <code>if</code> avalia uma condição. Parênteses são desnecessários!",
+                hints: ["Qual palavra é usada para condicionais?", "É a mesma de outras linguagens...", "Use <code>if</code>"],
+                common_error: { error: "if (numero > 5)", explanation: "Em Rust, parênteses na condição são desnecessários." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">numero</div><div class="var-value">10</div><div class="var-status">${ok?'> 5 ✓':'aguardando'}</div></div>`
+            },
+            {
+                level: 17, title: "If-Else", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let numero = 3;\n    if numero > 5 {\n        println!(\"Grande\");\n    } ___ {\n        println!(\"Pequeno\");\n    }\n}",
+                task: "Adicione a cláusula para o caso alternativo.",
+                correct_answers: ["else", " else", "else "],
+                explanation: "O bloco <code>else</code> executa quando a condição do if é falsa.",
+                hints: ["Qual palavra indica 'caso contrário'?", "É o complemento do 'if'...", "Use <code>else</code>"],
+                common_error: { error: "}\nelse {", explanation: "O 'else' deve estar na mesma linha que '}'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">output</div><div class="var-value">${ok?'"Pequeno"':'?'}</div><div class="var-status">${ok?'3 <= 5':'aguardando'}</div></div>`
+            },
+            {
+                level: 18, title: "If Expressão", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let condicao = true;\n    let numero = if condicao { 5 } ___ { 10 };\n    println!(\"Número: {}\", numero);\n}",
+                task: "Complete para que o if funcione como expressão que retorna valor.",
+                correct_answers: ["else", " else", "else "],
+                explanation: "Em Rust, <code>if</code> é uma expressão que retorna valor. Ambos os braços devem retornar o mesmo tipo.",
+                hints: ["O if precisa de um caso alternativo...", "Sem else, não pode retornar valor...", "Use <code>else</code>"],
+                common_error: { error: "let numero = if condicao { 5 };", explanation: "Sem else, o tipo seria () quando falso." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">numero</div><div class="var-value">${ok?'5':'?'}</div><div class="var-status">${ok?'expression':'aguardando'}</div></div>`
+            },
+            {
+                level: 19, title: "Else If", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let nota = 75;\n    if nota >= 90 {\n        println!(\"A\");\n    } ___ nota >= 70 {\n        println!(\"B\");\n    } else {\n        println!(\"C\");\n    }\n}",
+                task: "Adicione a verificação intermediária.",
+                correct_answers: ["else if", " else if", "else if "],
+                explanation: "Use <code>else if</code> para múltiplas condições em sequência.",
+                hints: ["Precisa de uma combinação de duas palavras...", "É o 'senão se'...", "Use <code>else if</code>"],
+                common_error: { error: "elif", explanation: "Rust não usa 'elif'. Use 'else if' (duas palavras)." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">output</div><div class="var-value">${ok?'"B"':'?'}</div><div class="var-status">${ok?'75 >= 70':'aguardando'}</div></div>`
+            },
+            {
+                level: 20, title: "Match", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let numero = 2;\n    ___ numero {\n        1 => println!(\"Um\"),\n        2 => println!(\"Dois\"),\n        _ => println!(\"Outro\"),\n    }\n}",
+                task: "Use a expressão de pattern matching do Rust.",
+                correct_answers: ["match", "match "],
+                explanation: "<code>match</code> é pattern matching poderoso. Deve ser exaustivo!",
+                hints: ["Rust tem uma expressão para comparação de padrões...", "Começa com 'm' e tem 5 letras...", "Use <code>match</code>"],
+                common_error: { error: "switch", explanation: "Rust não tem 'switch'. Use 'match'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">numero</div><div class="var-value">2</div><div class="var-status">${ok?'matched!':'aguardando'}</div></div>`
+            },
+            {
+                level: 21, title: "Match Curinga", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let dia = 5;\n    match dia {\n        1 => println!(\"Segunda\"),\n        7 => println!(\"Domingo\"),\n        ___ => println!(\"Dia útil\"),\n    }\n}",
+                task: "Adicione o padrão que captura todos os outros casos.",
+                correct_answers: ["_", " _", "_ "],
+                explanation: "O underscore <code>_</code> é um padrão curinga que captura qualquer valor.",
+                hints: ["Existe um caractere para 'qualquer coisa'...", "É usado para ignorar valores...", "Use <code>_</code>"],
+                common_error: { error: "default =>", explanation: "Rust não usa 'default'. Use '_' como curinga." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">dia</div><div class="var-value">5</div><div class="var-status">${ok?'_ matched':'aguardando'}</div></div>`
+            },
+            {
+                level: 22, title: "Loop Infinito", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let mut contador = 0;\n    ___ {\n        contador += 1;\n        if contador == 3 {\n            break;\n        }\n    }\n}",
+                task: "Use a palavra-chave para criar um loop infinito.",
+                correct_answers: ["loop", "loop "],
+                explanation: "<code>loop</code> cria um loop infinito. Use <code>break</code> para sair.",
+                hints: ["Rust tem uma palavra para loops infinitos...", "Tem 4 letras...", "Use <code>loop</code>"],
+                common_error: { error: "while true", explanation: "Embora funcione, Rust prefere 'loop' para infinito." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">contador</div><div class="var-value">${ok?'3':'?'}</div><div class="var-status">${ok?'break!':'aguardando'}</div></div>`
+            },
+            {
+                level: 23, title: "While", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    let mut n = 5;\n    ___ n > 0 {\n        println!(\"{}!\", n);\n        n -= 1;\n    }\n    println!(\"Lançar!\");\n}",
+                task: "Use o loop condicional.",
+                correct_answers: ["while", "while "],
+                explanation: "<code>while</code> executa enquanto a condição for verdadeira.",
+                hints: ["Qual loop executa 'enquanto' a condição for verdadeira?", "É a mesma de outras linguagens...", "Use <code>while</code>"],
+                common_error: { error: "while (n > 0)", explanation: "Parênteses ao redor da condição são desnecessários." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">n</div><div class="var-value">${ok?'0':'?'}</div><div class="var-status">${ok?'countdown':'aguardando'}</div></div>`
+            },
+            {
+                level: 24, title: "For com Range", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    ___ i in 1..4 {\n        println!(\"Número: {}\", i);\n    }\n}",
+                task: "Use o loop for para iterar sobre um range.",
+                correct_answers: ["for", "for "],
+                explanation: "<code>for</code> itera sobre iteradores. O range 1..4 gera 1, 2, 3.",
+                hints: ["Qual loop itera sobre coleções?", "É a mesma de outras linguagens...", "Use <code>for</code>"],
+                common_error: { error: "for (i = 1; i < 4; i++)", explanation: "Rust não usa for estilo C. Use 'for var in iter'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">i</div><div class="var-value">${ok?'1..3':'?'}</div><div class="var-status">${ok?'iterating':'aguardando'}</div></div>`
+            },
+            {
+                level: 25, title: "Range Inclusivo", category: "Controle de Fluxo",
+                context_code: "fn main() {\n    for i in 1___5 {\n        println!(\"{}\", i);\n    }\n    // Imprime 1, 2, 3, 4, 5\n}",
+                task: "Modifique o range para incluir o número 5.",
+                correct_answers: ["..=", " ..=", "..= "],
+                explanation: "O range <code>1..=5</code> é inclusivo (1 até 5). <code>1..5</code> seria 1 até 4.",
+                hints: ["Ranges exclusivos usam '..'...", "Adicione um sinal de igual...", "Use <code>..=</code>"],
+                common_error: { error: "1...5", explanation: "Três pontos não é válido. Use '..' ou '..='." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">range</div><div class="var-value">${ok?'1..=5':'?'}</div><div class="var-status">${ok?'inclusive':'aguardando'}</div></div>`
+            },
+            {
+                level: 26, title: "Declarando Função", category: "Funções e Ownership",
+                context_code: "___ saudar() {\n    println!(\"Olá!\");\n}\n\nfn main() {\n    saudar();\n}",
+                task: "Use a palavra-chave para declarar uma função.",
+                correct_answers: ["fn", "fn "],
+                explanation: "Funções são declaradas com <code>fn</code> seguido do nome e parâmetros.",
+                hints: ["É uma abreviação de 'function'...", "Tem apenas 2 letras...", "Use <code>fn</code>"],
+                common_error: { error: "function saudar()", explanation: "Rust usa 'fn', não 'function' ou 'func'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">saudar()</div><div class="var-value">${ok?'fn':'?'}</div><div class="var-status">${ok?'callable':'aguardando'}</div></div>`
+            },
+            {
+                level: 27, title: "Função com Parâmetro", category: "Funções e Ownership",
+                context_code: "fn saudar(nome___ String) {\n    println!(\"Olá, {}!\", nome);\n}\n\nfn main() {\n    saudar(String::from(\"Maria\"));\n}",
+                task: "Adicione a sintaxe para especificar o tipo do parâmetro.",
+                correct_answers: [":", ": ", " :", " : "],
+                explanation: "Tipos de parâmetros são obrigatórios: <code>nome: Tipo</code>",
+                hints: ["Você precisa separar nome do tipo...", "É um caractere de pontuação...", "Use <code>:</code>"],
+                common_error: { error: "fn saudar(String nome)", explanation: "A ordem é nome: Tipo, não Tipo nome." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">nome</div><div class="var-value">${ok?'"Maria"':'?'}</div><div class="var-status">${ok?'String':'aguardando'}</div></div>`
+            },
+            {
+                level: 28, title: "Função com Retorno", category: "Funções e Ownership",
+                context_code: "fn dobro(x: i32) ___ i32 {\n    x * 2\n}\n\nfn main() {\n    let r = dobro(5);\n    println!(\"Dobro: {}\", r);\n}",
+                task: "Adicione a sintaxe que indica o tipo de retorno.",
+                correct_answers: ["->", " ->", "-> ", " -> "],
+                explanation: "O tipo de retorno é especificado com <code>-></code> após os parâmetros.",
+                hints: ["A sintaxe usa uma 'seta'...", "É traço e maior-que...", "Use <code>-></code>"],
+                common_error: { error: "fn dobro(x: i32): i32", explanation: "Rust usa '->' não ':' para tipo de retorno." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">dobro(5)</div><div class="var-value">${ok?'10':'?'}</div><div class="var-status">${ok?'-> i32':'aguardando'}</div></div>`
+            },
+            {
+                level: 29, title: "Retorno Implícito", category: "Funções e Ownership",
+                context_code: "fn quadrado(x: i32) -> i32 {\n    x * x___\n}\n\nfn main() {\n    println!(\"{}\", quadrado(4));\n}",
+                task: "A função deve retornar o resultado. O que NÃO deve ter no final?",
+                correct_answers: ["", " "],
+                explanation: "A última expressão sem <code>;</code> é retornada automaticamente.",
+                hints: ["Expressões retornam valores, statements não...", "O ponto-e-vírgula transforma em statement...", "Não coloque ';'"],
+                common_error: { error: "x * x;", explanation: "Com ';', vira statement e retorna (). Remova o ';'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">quadrado(4)</div><div class="var-value">${ok?'16':'?'}</div><div class="var-status">${ok?'implicit':'aguardando'}</div></div>`
+            },
+            {
+                level: 30, title: "Return Explícito", category: "Funções e Ownership",
+                context_code: "fn absoluto(x: i32) -> i32 {\n    if x < 0 {\n        ___ -x;\n    }\n    x\n}",
+                task: "Adicione a palavra-chave para retorno antecipado.",
+                correct_answers: ["return", "return "],
+                explanation: "Use <code>return</code> para retornar antes do final da função.",
+                hints: ["Qual palavra força o retorno imediato?", "É a mesma de outras linguagens...", "Use <code>return</code>"],
+                common_error: { error: "return -x (sem ;)", explanation: "Com 'return', o ; é necessário." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">absoluto(-5)</div><div class="var-value">${ok?'5':'?'}</div><div class="var-status">${ok?'early return':'aguardando'}</div></div>`
+            },
+            {
+                level: 31, title: "Ownership Básico", category: "Funções e Ownership",
+                context_code: "fn main() {\n    let s1 = String::from(\"hello\");\n    let s2 = s1___;\n    println!(\"s2: {}\", s2);\n    println!(\"s1: {}\", s1);\n}",
+                task: "Clone a String para que s1 continue válido.",
+                correct_answers: [".clone()", ".clone() "],
+                explanation: "Atribuir uma String MOVE a ownership. Use <code>.clone()</code> para copiar.",
+                hints: ["Você precisa criar uma cópia...", "Existe um método para clonar...", "Use <code>.clone()</code>"],
+                common_error: { error: "let s2 = s1; println!(s1);", explanation: "Erro 'value borrowed after move'. Use .clone()." },
+                visualization: (ok) => `<div class="memory-box owned"><div class="var-name">s1</div><div class="var-value">"hello"</div><div class="var-status">owner</div></div><span class="arrow">→</span><div class="memory-box ${ok?'owned':''}"><div class="var-name">s2</div><div class="var-value">${ok?'"hello"':'?'}</div><div class="var-status">${ok?'cloned':'aguardando'}</div></div>`
+            },
+            {
+                level: 32, title: "Referência Imutável", category: "Funções e Ownership",
+                context_code: "fn tamanho(s: ___String) -> usize {\n    s.len()\n}\n\nfn main() {\n    let texto = String::from(\"Rust\");\n    let tam = tamanho(&texto);\n    println!(\"'{}' tem {} chars\", texto, tam);\n}",
+                task: "Use referência para emprestar sem tomar ownership.",
+                correct_answers: ["&", "& "],
+                explanation: "O <code>&</code> cria uma referência (borrow) sem tomar ownership.",
+                hints: ["Você quer 'emprestar', não tomar posse...", "Qual símbolo cria referência?", "Use <code>&</code>"],
+                common_error: { error: "fn tamanho(s: String)", explanation: "Sem &, a função toma ownership e texto não pode ser usado." },
+                visualization: (ok) => `<div class="memory-box owned"><div class="var-name">texto</div><div class="var-value">"Rust"</div><div class="var-status">owner</div></div><span class="arrow">→</span><div class="memory-box ${ok?'borrowed':''}"><div class="var-name">s</div><div class="var-value">${ok?'&texto':'?'}</div><div class="var-status">${ok?'borrowed':'aguardando'}</div></div>`
+            },
+            {
+                level: 33, title: "Referência Mutável", category: "Funções e Ownership",
+                context_code: "fn add_exclamacao(s: &___ String) {\n    s.push('!');\n}\n\nfn main() {\n    let mut texto = String::from(\"Olá\");\n    add_exclamacao(&mut texto);\n    println!(\"{}\", texto);\n}",
+                task: "Permita que a função modifique a String emprestada.",
+                correct_answers: ["mut", "mut "],
+                explanation: "Para modificar um valor emprestado, use <code>&mut T</code>.",
+                hints: ["Referências imutáveis não permitem modificação...", "Você precisa de referência mutável...", "Use <code>mut</code>"],
+                common_error: { error: "&String tentando modificar", explanation: "Referências &T não permitem modificação. Use &mut T." },
+                visualization: (ok) => `<div class="memory-box mutable"><div class="var-name">texto</div><div class="var-value">${ok?'"Olá!"':'"Olá"'}</div><div class="var-status">${ok?'&mut':'mut'}</div></div>`
+            },
+            {
+                level: 34, title: "String Slice", category: "Funções e Ownership",
+                context_code: "fn primeira(s: &String) -> ___str {\n    &s[..5]\n}\n\nfn main() {\n    let texto = String::from(\"Hello World\");\n    println!(\"{}\", primeira(&texto));\n}",
+                task: "Use o tipo correto para uma fatia de string.",
+                correct_answers: ["&", "& "],
+                explanation: "<code>&str</code> é um string slice - referência a parte de uma String.",
+                hints: ["O retorno é uma 'fatia' da string...", "str precisa de referência...", "Use <code>&str</code>"],
+                common_error: { error: "-> String", explanation: "Retornar String copiaria dados. &str é eficiente." },
+                visualization: (ok) => `<div class="memory-box owned"><div class="var-name">texto</div><div class="var-value">"Hello World"</div><div class="var-status">String</div></div><span class="arrow">→</span><div class="memory-box ${ok?'borrowed':''}"><div class="var-name">slice</div><div class="var-value">${ok?'"Hello"':'?'}</div><div class="var-status">${ok?'&str':'aguardando'}</div></div>`
+            },
+            {
+                level: 35, title: "Slice de Array", category: "Funções e Ownership",
+                context_code: "fn main() {\n    let numeros = [1, 2, 3, 4, 5];\n    let slice = &numeros[1___4];\n    println!(\"{:?}\", slice);\n}",
+                task: "Complete a sintaxe de range para o slice.",
+                correct_answers: ["..", " ..", ".. ", " .. "],
+                explanation: "Slices usam <code>[inicio..fim]</code> onde fim é exclusivo.",
+                hints: ["A sintaxe de range é a mesma de for loops...", "Dois pontos entre início e fim...", "Use <code>..</code>"],
+                common_error: { error: "&numeros[1:4]", explanation: "Rust usa '..' para ranges, não ':' como Python." },
+                visualization: (ok) => `<div class="memory-box ${ok?'borrowed':''}"><div class="var-name">slice</div><div class="var-value">${ok?'[2, 3, 4]':'?'}</div><div class="var-status">${ok?'&[i32]':'aguardando'}</div></div>`
+            },
+            {
+                level: 36, title: "Definindo Struct", category: "Structs, Enums e Collections",
+                context_code: "___ Pessoa {\n    nome: String,\n    idade: u32,\n}\n\nfn main() {\n    let p = Pessoa { nome: String::from(\"Ana\"), idade: 25 };\n    println!(\"{} tem {} anos\", p.nome, p.idade);\n}",
+                task: "Use a palavra-chave para definir uma estrutura.",
+                correct_answers: ["struct", "struct "],
+                explanation: "<code>struct</code> define tipos personalizados que agrupam dados.",
+                hints: ["É similar a classes, mas sem métodos...", "Vem de 'structure'...", "Use <code>struct</code>"],
+                common_error: { error: "class Pessoa", explanation: "Rust não tem 'class'. Use 'struct' + 'impl'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">Pessoa</div><div class="var-value">${ok?'{nome, idade}':'?'}</div><div class="var-status">${ok?'struct':'aguardando'}</div></div>`
+            },
+            {
+                level: 37, title: "Instanciando Struct", category: "Structs, Enums e Collections",
+                context_code: "struct Ponto {\n    x: i32,\n    y: i32,\n}\n\nfn main() {\n    let p = Ponto { x___ 10, y: 20 };\n    println!(\"({}, {})\", p.x, p.y);\n}",
+                task: "Use a sintaxe correta para atribuir valor ao campo.",
+                correct_answers: [":", ": "],
+                explanation: "Ao criar instâncias, usamos <code>campo: valor</code>.",
+                hints: ["A sintaxe é similar à definição...", "Campo e valor são separados por...", "Use <code>:</code>"],
+                common_error: { error: "Ponto { x = 10 }", explanation: "Na sintaxe de struct, use ':' não '='." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">p</div><div class="var-value">${ok?'(10, 20)':'?'}</div><div class="var-status">${ok?'Ponto':'aguardando'}</div></div>`
+            },
+            {
+                level: 38, title: "Método em Struct", category: "Structs, Enums e Collections",
+                context_code: "struct Retangulo {\n    largura: u32,\n    altura: u32,\n}\n\n___ Retangulo {\n    fn area(&self) -> u32 {\n        self.largura * self.altura\n    }\n}",
+                task: "Use a palavra-chave para implementar métodos.",
+                correct_answers: ["impl", "impl "],
+                explanation: "O bloco <code>impl</code> define métodos para um tipo.",
+                hints: ["É abreviação de 'implementation'...", "Tem 4 letras...", "Use <code>impl</code>"],
+                common_error: { error: "struct Retangulo { fn area() }", explanation: "Métodos ficam em bloco 'impl' separado." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">Retangulo</div><div class="var-value">${ok?'area()':'?'}</div><div class="var-status">${ok?'impl':'aguardando'}</div></div>`
+            },
+            {
+                level: 39, title: "Definindo Enum", category: "Structs, Enums e Collections",
+                context_code: "___ Direcao {\n    Norte,\n    Sul,\n    Leste,\n    Oeste,\n}\n\nfn main() {\n    let dir = Direcao::Norte;\n}",
+                task: "Use a palavra-chave para definir um tipo enumerado.",
+                correct_answers: ["enum", "enum "],
+                explanation: "<code>enum</code> define um tipo com variantes fixas.",
+                hints: ["É abreviação de 'enumeration'...", "Tem 4 letras...", "Use <code>enum</code>"],
+                common_error: { error: "const NORTE = 0;", explanation: "Enums são mais seguros que constantes numéricas." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">Direcao</div><div class="var-value">${ok?'Norte|Sul|...':'?'}</div><div class="var-status">${ok?'enum':'aguardando'}</div></div>`
+            },
+            {
+                level: 40, title: "Enum com Dados", category: "Structs, Enums e Collections",
+                context_code: "enum Msg {\n    Texto(String),\n    Numero(i32),\n}\n\nfn main() {\n    let m = Msg::Texto(String::from(\"Olá\"));\n    match m {\n        Msg::Texto(s) ___ println!(\"{}\", s),\n        Msg::Numero(n) => println!(\"{}\", n),\n    }\n}",
+                task: "Complete a sintaxe do braço do match.",
+                correct_answers: ["=>", " =>", "=> ", " => "],
+                explanation: "No match, cada padrão é seguido por <code>=></code> e a expressão.",
+                hints: ["É uma 'seta gorda'...", "Diferente de '->', usa igual...", "Use <code>=></code>"],
+                common_error: { error: "Msg::Texto(s) -> ", explanation: "Em match, use '=>' não '->'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">m</div><div class="var-value">${ok?'"Olá"':'?'}</div><div class="var-status">${ok?'matched':'aguardando'}</div></div>`
+            },
+            {
+                level: 41, title: "Criando Vector", category: "Structs, Enums e Collections",
+                context_code: "fn main() {\n    let nums: Vec<i32> = ___![];\n    println!(\"{:?}\", nums);\n}",
+                task: "Use a macro para criar um vector vazio.",
+                correct_answers: ["vec", "Vec::new(); let nums: Vec<i32> = vec"],
+                explanation: "<code>vec![]</code> é uma macro que cria um Vector.",
+                hints: ["É uma macro (precisa de '!')...", "Abreviação de 'vector'...", "Use <code>vec!</code>"],
+                common_error: { error: "[1, 2, 3]", explanation: "Isso cria array fixo, não Vector. Use vec![]." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">nums</div><div class="var-value">${ok?'[]':'?'}</div><div class="var-status">${ok?'Vec<i32>':'aguardando'}</div></div>`
+            },
+            {
+                level: 42, title: "Adicionando ao Vector", category: "Structs, Enums e Collections",
+                context_code: "fn main() {\n    let mut nums = vec![1, 2, 3];\n    nums.___(4);\n    println!(\"{:?}\", nums);\n}",
+                task: "Use o método para adicionar um elemento ao final.",
+                correct_answers: ["push", "push "],
+                explanation: "O método <code>push()</code> adiciona ao final do Vector.",
+                hints: ["É o mesmo nome de outras linguagens...", "Começa com 'p', 'empurra' elementos...", "Use <code>push</code>"],
+                common_error: { error: "nums.add(4)", explanation: "Rust usa 'push' não 'add' para Vectors." },
+                visualization: (ok) => `<div class="memory-box ${ok?'mutable':''}"><div class="var-name">nums</div><div class="var-value">${ok?'[1,2,3,4]':'[1,2,3]'}</div><div class="var-status">${ok?'pushed':'aguardando'}</div></div>`
+            },
+            {
+                level: 43, title: "Acessando Vector", category: "Structs, Enums e Collections",
+                context_code: "fn main() {\n    let nums = vec![10, 20, 30];\n    let segundo = nums.___(1);\n    match segundo {\n        Some(v) => println!(\"{}\", v),\n        None => println!(\"Inválido\"),\n    }\n}",
+                task: "Use o método seguro para acessar por índice.",
+                correct_answers: ["get", "get "],
+                explanation: "<code>get()</code> retorna Option - Some se existe, None se não.",
+                hints: ["Você quer acesso seguro que retorna Option...", "O nome sugere 'obter'...", "Use <code>get</code>"],
+                common_error: { error: "nums[1]", explanation: "nums[1] pode causar panic. get() retorna Option." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">segundo</div><div class="var-value">${ok?'Some(20)':'?'}</div><div class="var-status">${ok?'safe access':'aguardando'}</div></div>`
+            },
+            {
+                level: 44, title: "HashMap", category: "Structs, Enums e Collections",
+                context_code: "use std::collections::HashMap;\n\nfn main() {\n    let mut scores = HashMap::___();\n    scores.insert(\"Blue\", 10);\n}",
+                task: "Crie um novo HashMap vazio.",
+                correct_answers: ["new", "new "],
+                explanation: "<code>HashMap::new()</code> cria um mapa vazio.",
+                hints: ["É o construtor padrão...", "Três letras...", "Use <code>new</code>"],
+                common_error: { error: "HashMap {}", explanation: "HashMap não é struct pública. Use ::new()." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">scores</div><div class="var-value">${ok?'{"Blue": 10}':'?'}</div><div class="var-status">${ok?'HashMap':'aguardando'}</div></div>`
+            },
+            {
+                level: 45, title: "Iterando Vector", category: "Structs, Enums e Collections",
+                context_code: "fn main() {\n    let nums = vec![1, 2, 3];\n    for n in nums.___() {\n        println!(\"{}\", n);\n    }\n    println!(\"{:?}\", nums);\n}",
+                task: "Itere sobre referências para manter o vector válido.",
+                correct_answers: ["iter", "iter "],
+                explanation: "<code>iter()</code> retorna referências, mantendo ownership.",
+                hints: ["Você quer um 'iterador'...", "Abreviação de 'iterator'...", "Use <code>iter</code>"],
+                common_error: { error: "for n in nums {}", explanation: "'for n in nums' consome o vector. Use iter()." },
+                visualization: (ok) => `<div class="memory-box ${ok?'borrowed':''}"><div class="var-name">nums</div><div class="var-value">[1, 2, 3]</div><div class="var-status">${ok?'iter()':'aguardando'}</div></div>`
+            },
+            {
+                level: 46, title: "Option Some", category: "Option, Result e Traits",
+                context_code: "fn encontrar_par(nums: &[i32]) -> Option<i32> {\n    for &n in nums {\n        if n % 2 == 0 {\n            return ___(n);\n        }\n    }\n    None\n}",
+                task: "Retorne o valor encontrado encapsulado em Option.",
+                correct_answers: ["Some", "Some "],
+                explanation: "<code>Option</code> tem <code>Some(T)</code> e <code>None</code>.",
+                hints: ["Option tem duas variantes...", "A variante com valor começa com 'S'...", "Use <code>Some</code>"],
+                common_error: { error: "return n;", explanation: "A função retorna Option, não i32. Use Some(n)." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">resultado</div><div class="var-value">${ok?'Some(4)':'?'}</div><div class="var-status">${ok?'Option<i32>':'aguardando'}</div></div>`
+            },
+            {
+                level: 47, title: "Unwrap com Default", category: "Option, Result e Traits",
+                context_code: "fn main() {\n    let nome: Option<&str> = None;\n    let final_name = nome.unwrap_or(___);\n    println!(\"Nome: {}\", final_name);\n}",
+                task: "Forneça um valor padrão caso Option seja None.",
+                correct_answers: ["\"Visitante\"", " \"Visitante\"", "\"Visitante\" "],
+                explanation: "<code>unwrap_or()</code> retorna o valor ou o padrão fornecido.",
+                hints: ["Forneça o valor padrão como argumento...", "É uma string literal...", "Use <code>\"Visitante\"</code>"],
+                common_error: { error: "nome.unwrap()", explanation: "unwrap() em None causa panic. Use unwrap_or()." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">final_name</div><div class="var-value">${ok?'"Visitante"':'?'}</div><div class="var-status">${ok?'default':'aguardando'}</div></div>`
+            },
+            {
+                level: 48, title: "Result Err", category: "Option, Result e Traits",
+                context_code: "fn dividir(a: i32, b: i32) -> Result<i32, String> {\n    if b == 0 {\n        ___(String::from(\"Divisão por zero!\"))\n    } else {\n        Ok(a / b)\n    }\n}",
+                task: "Retorne o erro apropriado.",
+                correct_answers: ["Err", "Err "],
+                explanation: "<code>Result</code> tem <code>Ok(T)</code> e <code>Err(E)</code>.",
+                hints: ["Result tem Ok e... para erro?", "Abreviação de 'Error'...", "Use <code>Err</code>"],
+                common_error: { error: "panic!()", explanation: "panic! aborta. Result permite tratamento pelo chamador." },
+                visualization: (ok) => `<div class="memory-box ${ok?'error':''}"><div class="var-name">dividir(10, 0)</div><div class="var-value">${ok?'Err(...)':'?'}</div><div class="var-status">${ok?'Result':'aguardando'}</div></div>`
+            },
+            {
+                level: 49, title: "Operador ?", category: "Option, Result e Traits",
+                context_code: "fn pode_falhar() -> Result<i32, String> {\n    Err(String::from(\"ops\"))\n}\n\nfn usar() -> Result<i32, String> {\n    let valor = pode_falhar()___;\n    Ok(valor * 2)\n}",
+                task: "Use o operador para propagar erros automaticamente.",
+                correct_answers: ["?", " ?", "? "],
+                explanation: "O operador <code>?</code> propaga erros automaticamente.",
+                hints: ["É um operador de propagação...", "É um único caractere...", "Use <code>?</code>"],
+                common_error: { error: ".unwrap()", explanation: "unwrap() causa panic. Use ? para propagar." },
+                visualization: (ok) => `<div class="memory-box ${ok?'error':''}"><div class="var-name">usar()</div><div class="var-value">${ok?'Err propagated':'?'}</div><div class="var-status">${ok?'? operator':'aguardando'}</div></div>`
+            },
+            {
+                level: 50, title: "Implementando Trait", category: "Option, Result e Traits",
+                context_code: "struct Ponto {\n    x: i32,\n    y: i32,\n}\n\n___ std::fmt::Display for Ponto {\n    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {\n        write!(f, \"({}, {})\", self.x, self.y)\n    }\n}",
+                task: "Use a palavra-chave para implementar um trait.",
+                correct_answers: ["impl", "impl "],
+                explanation: "Usamos <code>impl Trait for Tipo</code> para implementar traits.",
+                hints: ["É a mesma palavra usada para métodos...", "Seguida de 'TraitName for TipoName'...", "Use <code>impl</code>"],
+                common_error: { error: "struct Ponto implements Display", explanation: "Rust não usa 'implements'. Use 'impl Trait for Tipo'." },
+                visualization: (ok) => `<div class="memory-box ${ok?'owned':''}"><div class="var-name">Ponto</div><div class="var-value">${ok?'Display':'?'}</div><div class="var-status">${ok?'trait impl':'aguardando'}</div></div>`
             }
         ];
 
+        // Game State
         let currentLevel = 0;
         let completedLevels = new Set();
+        let currentHint = 0;
+        let streak = 0;
+        let hintsUsedTotal = 0;
+
+        // LocalStorage keys
+        const STORAGE_KEY = 'rustCrabProgress';
+
+        function saveProgress() {
+            const state = {
+                currentLevel,
+                completedLevels: Array.from(completedLevels),
+                streak,
+                hintsUsedTotal,
+                lastPlayed: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const state = JSON.parse(saved);
+                    currentLevel = state.currentLevel || 0;
+                    completedLevels = new Set(state.completedLevels || []);
+                    streak = state.streak || 0;
+                    hintsUsedTotal = state.hintsUsedTotal || 0;
+
+                    // Reset streak if last played was more than 24h ago
+                    if (state.lastPlayed) {
+                        const lastPlayed = new Date(state.lastPlayed);
+                        const now = new Date();
+                        const diffHours = (now - lastPlayed) / (1000 * 60 * 60);
+                        if (diffHours > 24) {
+                            streak = 0;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading progress:', e);
+            }
+        }
 
         function init() {
+            loadProgress();
             renderLevelNav();
             loadLevel(currentLevel);
+            updateStats();
 
             document.getElementById('codeInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    checkAnswer();
-                }
+                if (e.key === 'Enter') checkAnswer();
             });
+
+            // Save on page unload
+            window.addEventListener('beforeunload', saveProgress);
+        }
+
+        function updateStats() {
+            document.getElementById('completedCount').textContent = completedLevels.size;
+            document.getElementById('streakCount').textContent = streak;
+            document.getElementById('totalLevels').textContent = exercises.length;
         }
 
         function renderLevelNav() {
             const nav = document.getElementById('levelNav');
-            nav.innerHTML = levels.map((level, index) => `
-                <div class="level-dot ${index === currentLevel ? 'current' : ''} ${completedLevels.has(index) ? 'completed' : ''}"
-                     onclick="loadLevel(${index})"
-                     title="Nível ${index + 1}: ${level.title}">
-                </div>
-            `).join('');
+            let html = '';
+            let lastCategory = '';
+
+            exercises.forEach((ex, index) => {
+                if (ex.category !== lastCategory && lastCategory !== '') {
+                    html += '<div class="level-separator"></div>';
+                }
+                lastCategory = ex.category;
+
+                const classes = ['level-dot'];
+                if (index === currentLevel) classes.push('current');
+                if (completedLevels.has(index)) classes.push('completed');
+
+                html += `<div class="${classes.join(' ')}" onclick="loadLevel(${index})" title="Nível ${index + 1}: ${ex.title}"></div>`;
+            });
+
+            nav.innerHTML = html;
         }
 
         function loadLevel(index) {
             currentLevel = index;
-            const level = levels[index];
+            currentHint = 0;
+            const ex = exercises[index];
 
-            document.getElementById('levelBadge').textContent = level.badge;
-            document.getElementById('levelTitle').textContent = level.title;
-            document.getElementById('instructionText').innerHTML = level.instruction;
-            document.getElementById('conceptText').innerHTML = level.concept;
-            document.getElementById('hintText').innerHTML = level.hint;
-            document.getElementById('codeContext').innerHTML = level.codeContext;
+            document.getElementById('levelBadge').textContent = `Nível ${index + 1}`;
+            document.getElementById('levelTitle').textContent = ex.title;
+            document.getElementById('categoryBadge').textContent = ex.category;
+            document.getElementById('taskText').innerHTML = ex.task;
+            document.getElementById('conceptText').innerHTML = ex.explanation;
             document.getElementById('currentLevelDisplay').textContent = index + 1;
-            document.getElementById('progressFill').style.width = ((index + 1) / levels.length * 100) + '%';
+            document.getElementById('progressFill').style.width = ((index + 1) / exercises.length * 100) + '%';
 
+            // Format code context with syntax highlighting
+            const formattedCode = formatCode(ex.context_code);
+            document.getElementById('codeContext').innerHTML = formattedCode;
+
+            // Reset hints
+            for (let i = 1; i <= 3; i++) {
+                const hintEl = document.getElementById(`hint${i}`);
+                hintEl.classList.remove('visible');
+                hintEl.innerHTML = ex.hints[i-1] || '';
+            }
+            document.getElementById('hintNumber').textContent = '1';
+            document.getElementById('hintsUsed').textContent = '0 dicas usadas';
+            document.getElementById('hintBtn').disabled = false;
+
+            // Reset error box
+            document.getElementById('errorBox').classList.remove('visible');
+            if (ex.common_error) {
+                document.getElementById('errorCode').textContent = ex.common_error.error;
+                document.getElementById('errorExplanation').textContent = ex.common_error.explanation;
+            }
+
+            // Reset input
             document.getElementById('codeInput').value = '';
             document.getElementById('codeInput').className = 'code-input';
             document.getElementById('feedback').classList.remove('visible');
-            document.getElementById('hintText').classList.remove('visible');
 
-            document.getElementById('memoryVisualization').innerHTML = level.visualization(false);
+            // Update visualization
+            document.getElementById('memoryVisualization').innerHTML = ex.visualization(false);
 
             renderLevelNav();
+            saveProgress();
+        }
+
+        function formatCode(code) {
+            return code
+                .replace(/\b(fn|let|mut|if|else|match|for|while|loop|return|struct|enum|impl|use|pub|mod|const|static|type|trait|where|async|await|move|ref|in)\b/g, '<span class="keyword">$1</span>')
+                .replace(/\b(String|i32|i64|u32|u64|f64|bool|char|usize|Option|Result|Vec|HashMap|Some|None|Ok|Err)\b/g, '<span class="type">$1</span>')
+                .replace(/\b(println|print|format|vec|from|new|push|get|insert|len|clone|iter)\b!/g, '<span class="function">$1</span>!')
+                .replace(/(\d+)/g, '<span class="number">$1</span>')
+                .replace(/"([^"]*)"/g, '<span class="string">"$1"</span>')
+                .replace(/\/\/([^\n]*)/g, '<span class="comment">//$1</span>')
+                .replace(/___/g, '<span class="blank">___</span>')
+                .replace(/\n/g, '<br>');
+        }
+
+        function showNextHint() {
+            const ex = exercises[currentLevel];
+            if (currentHint < 3 && ex.hints[currentHint]) {
+                currentHint++;
+                document.getElementById(`hint${currentHint}`).classList.add('visible');
+                document.getElementById('hintNumber').textContent = Math.min(currentHint + 1, 3);
+                document.getElementById('hintsUsed').textContent = `${currentHint} dica${currentHint > 1 ? 's' : ''} usada${currentHint > 1 ? 's' : ''}`;
+                hintsUsedTotal++;
+
+                if (currentHint >= 3) {
+                    document.getElementById('hintBtn').disabled = true;
+                }
+                saveProgress();
+            }
         }
 
         function checkAnswer() {
             const input = document.getElementById('codeInput');
             const feedback = document.getElementById('feedback');
-            const feedbackIcon = document.getElementById('feedbackIcon');
-            const feedbackText = document.getElementById('feedbackText');
-            const level = levels[currentLevel];
+            const ex = exercises[currentLevel];
 
             const userAnswer = input.value.trim();
-            const isCorrect = level.answer.some(ans =>
-                userAnswer.toLowerCase().replace(/\s+/g, ' ') === ans.toLowerCase().replace(/\s+/g, ' ') ||
-                userAnswer === ans
+            const isCorrect = ex.correct_answers.some(ans =>
+                userAnswer === ans ||
+                userAnswer.toLowerCase().replace(/\s+/g, ' ') === ans.toLowerCase().replace(/\s+/g, ' ')
             );
 
             feedback.classList.add('visible');
@@ -990,37 +1520,54 @@
                 input.classList.add('correct');
                 feedback.classList.remove('error');
                 feedback.classList.add('success');
-                feedbackIcon.textContent = '✓';
-                feedbackText.textContent = 'Correto! Excelente trabalho! 🦀';
+                document.getElementById('feedbackIcon').textContent = '✓';
+                document.getElementById('feedbackText').textContent = 'Correto! 🦀';
 
-                document.getElementById('memoryVisualization').innerHTML = level.visualization(true);
+                document.getElementById('memoryVisualization').innerHTML = ex.visualization(true);
+                document.getElementById('errorBox').classList.remove('visible');
 
-                completedLevels.add(currentLevel);
+                if (!completedLevels.has(currentLevel)) {
+                    completedLevels.add(currentLevel);
+                    streak++;
+                }
+                updateStats();
                 renderLevelNav();
+                saveProgress();
 
                 setTimeout(() => {
-                    if (currentLevel < levels.length - 1) {
-                        document.getElementById('modalText').textContent = `Você dominou: ${level.title}!`;
-                        document.getElementById('successModal').classList.add('visible');
+                    if (currentLevel < exercises.length - 1) {
+                        document.getElementById('modalIcon').textContent = '🎉';
+                        document.getElementById('modalTitle').textContent = 'Parabéns!';
+                        document.getElementById('modalText').textContent = `Você dominou: ${ex.title}!`;
+                        document.getElementById('modalBtn').textContent = 'Próximo Nível →';
+                        document.getElementById('modalBtn').onclick = nextLevel;
                     } else {
-                        document.getElementById('modalText').textContent = '🎉 Você completou todos os níveis! Você é um verdadeiro Rustacean!';
-                        document.querySelector('.modal h2').textContent = 'Parabéns, Rustacean!';
-                        document.querySelector('.modal-btn').textContent = 'Jogar Novamente';
-                        document.querySelector('.modal-btn').onclick = () => {
+                        document.getElementById('modalIcon').textContent = '🏆';
+                        document.getElementById('modalTitle').textContent = 'Você é um Rustacean!';
+                        document.getElementById('modalText').textContent = `Completou todos os ${exercises.length} níveis!`;
+                        document.getElementById('modalBtn').textContent = 'Jogar Novamente';
+                        document.getElementById('modalBtn').onclick = () => {
                             completedLevels.clear();
+                            streak = 0;
+                            saveProgress();
                             loadLevel(0);
                             document.getElementById('successModal').classList.remove('visible');
                         };
-                        document.getElementById('successModal').classList.add('visible');
                     }
-                }, 1000);
+                    document.getElementById('successModal').classList.add('visible');
+                }, 800);
             } else {
                 input.classList.remove('correct');
                 input.classList.add('incorrect');
                 feedback.classList.remove('success');
                 feedback.classList.add('error');
-                feedbackIcon.textContent = '✗';
-                feedbackText.textContent = 'Não está certo. Tente novamente!';
+                document.getElementById('feedbackIcon').textContent = '✗';
+                document.getElementById('feedbackText').textContent = 'Tente novamente!';
+
+                // Show common error if answer matches
+                if (ex.common_error && userAnswer.includes(ex.common_error.error.split(' ')[0])) {
+                    document.getElementById('errorBox').classList.add('visible');
+                }
 
                 setTimeout(() => {
                     input.classList.remove('incorrect');
@@ -1032,20 +1579,18 @@
             document.getElementById('codeInput').value = '';
             document.getElementById('codeInput').className = 'code-input';
             document.getElementById('feedback').classList.remove('visible');
-            document.getElementById('memoryVisualization').innerHTML = levels[currentLevel].visualization(false);
-        }
-
-        function toggleHint() {
-            document.getElementById('hintText').classList.toggle('visible');
+            document.getElementById('errorBox').classList.remove('visible');
+            document.getElementById('memoryVisualization').innerHTML = exercises[currentLevel].visualization(false);
         }
 
         function nextLevel() {
             document.getElementById('successModal').classList.remove('visible');
-            if (currentLevel < levels.length - 1) {
+            if (currentLevel < exercises.length - 1) {
                 loadLevel(currentLevel + 1);
             }
         }
 
+        // Initialize game
         init();
     </script>
 </body>

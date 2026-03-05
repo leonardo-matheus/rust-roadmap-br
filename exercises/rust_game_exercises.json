@@ -1,0 +1,1102 @@
+{
+  "metadata": {
+    "title": "Rust Learning Game - 50 Exercícios Práticos",
+    "version": "1.0.0",
+    "total_exercises": 50,
+    "categories": {
+      "basic": { "range": [1, 15], "description": "Variáveis, tipos, println, operadores" },
+      "control_flow": { "range": [16, 25], "description": "if, match, loops" },
+      "functions_ownership": { "range": [26, 35], "description": "Funções e ownership" },
+      "structs_enums": { "range": [36, 45], "description": "Structs, enums, collections" },
+      "advanced": { "range": [46, 50], "description": "Option, Result, traits" }
+    }
+  },
+  "exercises": [
+    {
+      "level": 1,
+      "title": "Olá, Rust!",
+      "category": "Básico",
+      "context_code": "fn main() {\n    // Imprima \"Olá, Rust!\" na tela\n    ___\n}",
+      "task": "Use a macro println! para imprimir a mensagem \"Olá, Rust!\" na tela.",
+      "correct_answers": [
+        "println!(\"Olá, Rust!\");",
+        "println!(\"Olá, Rust!\")",
+        "print!(\"Olá, Rust!\\n\");",
+        "println!( \"Olá, Rust!\" );"
+      ],
+      "explanation": "A macro println! é usada para imprimir texto na saída padrão com uma nova linha no final. Macros em Rust são identificadas pelo ! após o nome.",
+      "hints": [
+        "Você precisa usar uma macro que imprime texto...",
+        "A macro começa com 'print' e termina com 'ln' para adicionar nova linha...",
+        "Use println!(\"sua mensagem aqui\");"
+      ],
+      "common_error": {
+        "error": "println(\"Olá, Rust!\");",
+        "explanation": "Esqueceu o '!' após println. Em Rust, println é uma macro, não uma função, e macros sempre precisam do '!' para serem invocadas."
+      }
+    },
+    {
+      "level": 2,
+      "title": "Minha Primeira Variável",
+      "category": "Básico",
+      "context_code": "fn main() {\n    ___ nome = \"Maria\";\n    println!(\"Olá, {}!\", nome);\n}",
+      "task": "Declare uma variável imutável usando a palavra-chave correta.",
+      "correct_answers": [
+        "let",
+        "let "
+      ],
+      "explanation": "Em Rust, usamos 'let' para declarar variáveis. Por padrão, variáveis são imutáveis, o que significa que seu valor não pode ser alterado após a atribuição.",
+      "hints": [
+        "Qual palavra-chave é usada para criar variáveis em Rust?",
+        "Começa com 'l' e tem 3 letras...",
+        "Use 'let' para declarar variáveis."
+      ],
+      "common_error": {
+        "error": "var nome = \"Maria\";",
+        "explanation": "Rust não usa 'var' como JavaScript. A palavra-chave correta é 'let'."
+      }
+    },
+    {
+      "level": 3,
+      "title": "Variável Mutável",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let ___ idade = 25;\n    idade = 26;\n    println!(\"Idade: {}\", idade);\n}",
+      "task": "Adicione a palavra-chave que permite que a variável seja modificada.",
+      "correct_answers": [
+        "mut",
+        "mut "
+      ],
+      "explanation": "Para tornar uma variável mutável em Rust, adicionamos 'mut' após 'let'. Isso permite que o valor seja alterado posteriormente.",
+      "hints": [
+        "Variáveis em Rust são imutáveis por padrão. Qual palavra torna ela mutável?",
+        "A palavra é uma abreviação de 'mutable'...",
+        "Use 'mut' entre 'let' e o nome da variável."
+      ],
+      "common_error": {
+        "error": "let idade = 25; idade = 26;",
+        "explanation": "Sem 'mut', a variável é imutável. O erro seria: 'cannot assign twice to immutable variable'."
+      }
+    },
+    {
+      "level": 4,
+      "title": "Tipo Inteiro",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let quantidade: ___ = 42;\n    println!(\"Quantidade: {}\", quantidade);\n}",
+      "task": "Especifique o tipo inteiro de 32 bits com sinal.",
+      "correct_answers": [
+        "i32",
+        " i32",
+        "i32 "
+      ],
+      "explanation": "i32 é um inteiro de 32 bits com sinal (pode ser positivo ou negativo). É o tipo inteiro padrão em Rust quando não especificado.",
+      "hints": [
+        "Inteiros com sinal começam com 'i' em Rust...",
+        "32 bits significa que o número tem esse sufixo...",
+        "O tipo é 'i32'."
+      ],
+      "common_error": {
+        "error": "int",
+        "explanation": "Rust não usa 'int'. Os tipos inteiros são i8, i16, i32, i64, i128 (com sinal) ou u8, u16, u32, u64, u128 (sem sinal)."
+      }
+    },
+    {
+      "level": 5,
+      "title": "Tipo Flutuante",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let pi: ___ = 3.14159;\n    println!(\"Pi = {}\", pi);\n}",
+      "task": "Especifique o tipo de ponto flutuante de 64 bits.",
+      "correct_answers": [
+        "f64",
+        " f64",
+        "f64 "
+      ],
+      "explanation": "f64 é um número de ponto flutuante de 64 bits (double precision). É o tipo padrão para números decimais em Rust.",
+      "hints": [
+        "Tipos de ponto flutuante começam com 'f'...",
+        "64 bits oferece mais precisão que 32...",
+        "O tipo é 'f64'."
+      ],
+      "common_error": {
+        "error": "float",
+        "explanation": "Rust não usa 'float' ou 'double'. Use f32 ou f64 para números decimais."
+      }
+    },
+    {
+      "level": 6,
+      "title": "Tipo Booleano",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let ativo: bool = ___;\n    if ativo {\n        println!(\"Sistema ativo!\");\n    }\n}",
+      "task": "Atribua o valor verdadeiro à variável booleana.",
+      "correct_answers": [
+        "true",
+        " true",
+        "true "
+      ],
+      "explanation": "Em Rust, os valores booleanos são 'true' e 'false' (em minúsculas). Diferente de outras linguagens, Rust não aceita 1 ou 0 como booleanos.",
+      "hints": [
+        "Booleanos têm dois valores possíveis: verdadeiro ou falso...",
+        "Em inglês e minúsculo...",
+        "Use 'true' para verdadeiro."
+      ],
+      "common_error": {
+        "error": "True",
+        "explanation": "Rust usa 'true' em minúsculas, não 'True'. Rust é case-sensitive."
+      }
+    },
+    {
+      "level": 7,
+      "title": "Tipo Caractere",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let letra: char = ___;\n    println!(\"Letra: {}\", letra);\n}",
+      "task": "Atribua o caractere 'A' à variável. Lembre-se: caracteres usam aspas simples!",
+      "correct_answers": [
+        "'A'",
+        " 'A'",
+        "'A' "
+      ],
+      "explanation": "O tipo char em Rust representa um único caractere Unicode e usa aspas simples. Strings usam aspas duplas.",
+      "hints": [
+        "Caracteres em Rust usam aspas simples, não duplas...",
+        "É só uma letra entre aspas simples...",
+        "Use 'A' (com aspas simples)."
+      ],
+      "common_error": {
+        "error": "\"A\"",
+        "explanation": "Aspas duplas criam uma String (&str), não um char. Use aspas simples para caracteres: 'A'."
+      }
+    },
+    {
+      "level": 8,
+      "title": "Interpolação Básica",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let nome = \"Carlos\";\n    let idade = 30;\n    println!(\"___ tem ___ anos\", nome, idade);\n}",
+      "task": "Complete os placeholders para interpolar as variáveis.",
+      "correct_answers": [
+        "{} {}",
+        "{}{}",
+        "{}, {}"
+      ],
+      "explanation": "Em Rust, {} é um placeholder na macro println! que será substituído pelos argumentos na ordem em que aparecem.",
+      "hints": [
+        "Placeholders são representados por chaves...",
+        "Use um par de chaves vazio para cada variável...",
+        "Use {} para cada valor a ser interpolado."
+      ],
+      "common_error": {
+        "error": "%s %d",
+        "explanation": "Rust não usa formatação estilo C como %s ou %d. Use {} para todos os tipos básicos."
+      }
+    },
+    {
+      "level": 9,
+      "title": "Operação Aritmética",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let a = 10;\n    let b = 3;\n    let soma = a ___ b;\n    println!(\"Soma: {}\", soma); // Deve imprimir 13\n}",
+      "task": "Use o operador correto para somar os dois números.",
+      "correct_answers": [
+        "+",
+        " +",
+        "+ ",
+        " + "
+      ],
+      "explanation": "O operador + realiza adição em Rust. Os operadores aritméticos básicos são: + (soma), - (subtração), * (multiplicação), / (divisão), % (resto).",
+      "hints": [
+        "Qual símbolo matemático representa adição?",
+        "É o mesmo usado na maioria das linguagens...",
+        "Use o operador +"
+      ],
+      "common_error": {
+        "error": "a.add(b)",
+        "explanation": "Embora .add() exista via trait, para operações simples use o operador + diretamente."
+      }
+    },
+    {
+      "level": 10,
+      "title": "Divisão Inteira",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let a: i32 = 17;\n    let b: i32 = 5;\n    let resultado = a ___ b;\n    println!(\"Resultado: {}\", resultado); // Deve imprimir 3\n}",
+      "task": "Use o operador de divisão. Note que entre inteiros, o resultado é inteiro.",
+      "correct_answers": [
+        "/",
+        " /",
+        "/ ",
+        " / "
+      ],
+      "explanation": "A divisão entre inteiros em Rust resulta em um inteiro (truncado). 17 / 5 = 3 (não 3.4). Para resultado decimal, use f64.",
+      "hints": [
+        "Qual símbolo representa divisão?",
+        "É a barra comum usada em programação...",
+        "Use o operador /"
+      ],
+      "common_error": {
+        "error": "17 / 5 esperando 3.4",
+        "explanation": "Divisão entre inteiros sempre retorna inteiro. Para 3.4, converta para f64: 17.0 / 5.0"
+      }
+    },
+    {
+      "level": 11,
+      "title": "Resto da Divisão",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let numero = 17;\n    let resto = numero ___ 5;\n    println!(\"Resto: {}\", resto); // Deve imprimir 2\n}",
+      "task": "Use o operador de módulo (resto da divisão).",
+      "correct_answers": [
+        "%",
+        " %",
+        "% ",
+        " % "
+      ],
+      "explanation": "O operador % retorna o resto da divisão inteira. 17 % 5 = 2 porque 17 = 5*3 + 2.",
+      "hints": [
+        "Este operador é chamado de 'módulo'...",
+        "É o símbolo de porcentagem...",
+        "Use o operador %"
+      ],
+      "common_error": {
+        "error": "mod",
+        "explanation": "Em Rust, 'mod' é usado para módulos (organização de código). Para resto da divisão, use %."
+      }
+    },
+    {
+      "level": 12,
+      "title": "Comparação de Igualdade",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let a = 5;\n    let b = 5;\n    let sao_iguais = a ___ b;\n    println!(\"São iguais? {}\", sao_iguais); // true\n}",
+      "task": "Use o operador de comparação de igualdade.",
+      "correct_answers": [
+        "==",
+        " ==",
+        "== ",
+        " == "
+      ],
+      "explanation": "O operador == compara se dois valores são iguais e retorna um bool. Um único = é atribuição, não comparação.",
+      "hints": [
+        "Para comparar, não basta um sinal de igual...",
+        "Você precisa de dois sinais de igual...",
+        "Use == para comparação."
+      ],
+      "common_error": {
+        "error": "a = b (retornando bool)",
+        "explanation": "Um único = é atribuição, não comparação. Use == para verificar igualdade."
+      }
+    },
+    {
+      "level": 13,
+      "title": "Comparação Maior Que",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let idade = 18;\n    let pode_votar = idade ___ 16;\n    println!(\"Pode votar? {}\", pode_votar); // true\n}",
+      "task": "Use o operador que verifica se idade é maior ou igual a 16.",
+      "correct_answers": [
+        ">=",
+        " >=",
+        ">= ",
+        " >= "
+      ],
+      "explanation": "O operador >= verifica se o valor da esquerda é maior ou igual ao da direita. Outros operadores: >, <, <=, ==, !=",
+      "hints": [
+        "Precisa verificar 'maior ou igual'...",
+        "Combine > com =...",
+        "Use >= (maior ou igual)."
+      ],
+      "common_error": {
+        "error": "=>",
+        "explanation": "A ordem importa! É >= (maior ou igual), não =>. O símbolo => é usado em match arms."
+      }
+    },
+    {
+      "level": 14,
+      "title": "Operador Lógico E",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let tem_carteira = true;\n    let tem_18_anos = true;\n    let pode_dirigir = tem_carteira ___ tem_18_anos;\n    println!(\"Pode dirigir? {}\", pode_dirigir);\n}",
+      "task": "Use o operador lógico AND para verificar ambas as condições.",
+      "correct_answers": [
+        "&&",
+        " &&",
+        "&& ",
+        " && "
+      ],
+      "explanation": "O operador && (AND lógico) retorna true apenas se ambos os operandos forem true. É avaliado em curto-circuito.",
+      "hints": [
+        "Você precisa do operador lógico 'E'...",
+        "São dois símbolos de 'e comercial'...",
+        "Use && para AND lógico."
+      ],
+      "common_error": {
+        "error": "and",
+        "explanation": "Rust não usa 'and' como palavra-chave para lógica booleana. Use &&."
+      }
+    },
+    {
+      "level": 15,
+      "title": "Operador Lógico OU",
+      "category": "Básico",
+      "context_code": "fn main() {\n    let tem_pix = false;\n    let tem_cartao = true;\n    let pode_pagar = tem_pix ___ tem_cartao;\n    println!(\"Pode pagar? {}\", pode_pagar); // true\n}",
+      "task": "Use o operador lógico OR para verificar se pelo menos uma condição é verdadeira.",
+      "correct_answers": [
+        "||",
+        " ||",
+        "|| ",
+        " || "
+      ],
+      "explanation": "O operador || (OR lógico) retorna true se pelo menos um dos operandos for true. Também usa avaliação em curto-circuito.",
+      "hints": [
+        "Você precisa do operador lógico 'OU'...",
+        "São duas barras verticais...",
+        "Use || para OR lógico."
+      ],
+      "common_error": {
+        "error": "or",
+        "explanation": "Rust não usa 'or' como palavra-chave. Use || para OR lógico."
+      }
+    },
+    {
+      "level": 16,
+      "title": "If Simples",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let numero = 10;\n    ___ numero > 5 {\n        println!(\"Maior que 5!\");\n    }\n}",
+      "task": "Complete com a palavra-chave condicional.",
+      "correct_answers": [
+        "if",
+        "if "
+      ],
+      "explanation": "A estrutura 'if' em Rust avalia uma condição booleana. Diferente de outras linguagens, a condição NÃO precisa estar entre parênteses.",
+      "hints": [
+        "Qual palavra-chave é usada para condicionais?",
+        "É a mesma de outras linguagens...",
+        "Use 'if' antes da condição."
+      ],
+      "common_error": {
+        "error": "if (numero > 5)",
+        "explanation": "Em Rust, os parênteses ao redor da condição são desnecessários e considerados má prática. Use: if numero > 5"
+      }
+    },
+    {
+      "level": 17,
+      "title": "If-Else",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let numero = 3;\n    if numero > 5 {\n        println!(\"Grande\");\n    } ___ {\n        println!(\"Pequeno\");\n    }\n}",
+      "task": "Adicione a cláusula para o caso alternativo.",
+      "correct_answers": [
+        "else",
+        " else",
+        "else "
+      ],
+      "explanation": "O bloco 'else' é executado quando a condição do 'if' é falsa. Em Rust, 'else' deve estar na mesma linha que a chave de fechamento do if.",
+      "hints": [
+        "Qual palavra indica 'caso contrário'?",
+        "É o complemento do 'if'...",
+        "Use 'else' para o caso alternativo."
+      ],
+      "common_error": {
+        "error": "}\nelse {",
+        "explanation": "Em Rust, o 'else' deve estar na mesma linha que '}': '} else {', não em linha separada."
+      }
+    },
+    {
+      "level": 18,
+      "title": "If como Expressão",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let condicao = true;\n    let numero = if condicao { 5 } ___ { 10 };\n    println!(\"Número: {}\", numero);\n}",
+      "task": "Complete para que o if funcione como expressão que retorna um valor.",
+      "correct_answers": [
+        "else",
+        " else",
+        "else "
+      ],
+      "explanation": "Em Rust, 'if' é uma expressão que retorna valor. Ambos os braços devem retornar o mesmo tipo. Note a ausência de ponto-e-vírgula nos valores retornados.",
+      "hints": [
+        "O if precisa de um caso alternativo...",
+        "Sem else, o if não pode retornar valor...",
+        "Use 'else' para completar a expressão."
+      ],
+      "common_error": {
+        "error": "let numero = if condicao { 5 };",
+        "explanation": "Quando if é usado como expressão, deve ter else. Sem else, o tipo seria () quando a condição é falsa."
+      }
+    },
+    {
+      "level": 19,
+      "title": "Else If",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let nota = 75;\n    if nota >= 90 {\n        println!(\"A\");\n    } ___ nota >= 70 {\n        println!(\"B\");\n    } else {\n        println!(\"C\");\n    }\n}",
+      "task": "Adicione a verificação intermediária.",
+      "correct_answers": [
+        "else if",
+        " else if",
+        "else if "
+      ],
+      "explanation": "Use 'else if' para verificar múltiplas condições em sequência. A primeira condição verdadeira é executada, as demais são ignoradas.",
+      "hints": [
+        "Você precisa de uma combinação de duas palavras-chave...",
+        "É o 'senão se'...",
+        "Use 'else if' para condições adicionais."
+      ],
+      "common_error": {
+        "error": "elif",
+        "explanation": "Rust não usa 'elif' como Python. Use 'else if' (duas palavras separadas)."
+      }
+    },
+    {
+      "level": 20,
+      "title": "Match Básico",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let numero = 2;\n    ___ numero {\n        1 => println!(\"Um\"),\n        2 => println!(\"Dois\"),\n        _ => println!(\"Outro\"),\n    }\n}",
+      "task": "Use a expressão de pattern matching do Rust.",
+      "correct_answers": [
+        "match",
+        "match "
+      ],
+      "explanation": "O 'match' é uma poderosa expressão de pattern matching em Rust. Deve ser exaustivo - cobrir todos os casos possíveis. O '_' é um padrão curinga.",
+      "hints": [
+        "Rust tem uma expressão poderosa para comparação de padrões...",
+        "Começa com 'm' e tem 5 letras...",
+        "Use 'match' para pattern matching."
+      ],
+      "common_error": {
+        "error": "switch numero",
+        "explanation": "Rust não tem 'switch'. Use 'match', que é mais poderoso e seguro."
+      }
+    },
+    {
+      "level": 21,
+      "title": "Match Curinga",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let dia = 5;\n    match dia {\n        1 => println!(\"Segunda\"),\n        7 => println!(\"Domingo\"),\n        ___ => println!(\"Dia útil\"),\n    }\n}",
+      "task": "Adicione o padrão que captura todos os outros casos.",
+      "correct_answers": [
+        "_",
+        " _",
+        "_ "
+      ],
+      "explanation": "O underscore '_' é um padrão curinga em match. Ele captura qualquer valor não coberto pelos padrões anteriores, tornando o match exaustivo.",
+      "hints": [
+        "Existe um caractere especial para 'qualquer coisa'...",
+        "É usado para ignorar valores em Rust...",
+        "Use '_' como padrão curinga."
+      ],
+      "common_error": {
+        "error": "default =>",
+        "explanation": "Rust não usa 'default' como em switch/case. Use '_' como padrão curinga."
+      }
+    },
+    {
+      "level": 22,
+      "title": "Loop Infinito",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let mut contador = 0;\n    ___ {\n        contador += 1;\n        if contador == 3 {\n            break;\n        }\n        println!(\"Contagem: {}\", contador);\n    }\n}",
+      "task": "Use a palavra-chave para criar um loop infinito.",
+      "correct_answers": [
+        "loop",
+        "loop "
+      ],
+      "explanation": "O 'loop' cria um loop infinito que só termina com 'break'. É diferente de 'while true' pois o compilador sabe que sempre executa pelo menos uma vez.",
+      "hints": [
+        "Rust tem uma palavra-chave específica para loops infinitos...",
+        "Tem 4 letras e significa 'repetição'...",
+        "Use 'loop' para loop infinito."
+      ],
+      "common_error": {
+        "error": "while true",
+        "explanation": "Embora funcione, Rust prefere 'loop' para loops infinitos. É mais idiomático e permite 'break' com valor."
+      }
+    },
+    {
+      "level": 23,
+      "title": "While Loop",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    let mut numero = 5;\n    ___ numero > 0 {\n        println!(\"{}!\", numero);\n        numero -= 1;\n    }\n    println!(\"Lançar!\");\n}",
+      "task": "Use o loop condicional.",
+      "correct_answers": [
+        "while",
+        "while "
+      ],
+      "explanation": "O 'while' executa o bloco enquanto a condição for verdadeira. A condição é verificada antes de cada iteração.",
+      "hints": [
+        "Qual loop executa 'enquanto' uma condição for verdadeira?",
+        "É a mesma palavra de outras linguagens...",
+        "Use 'while' seguido da condição."
+      ],
+      "common_error": {
+        "error": "while (numero > 0)",
+        "explanation": "Como no 'if', parênteses ao redor da condição são desnecessários em Rust."
+      }
+    },
+    {
+      "level": 24,
+      "title": "For com Range",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    ___ i in 1..4 {\n        println!(\"Número: {}\", i);\n    }\n    // Imprime 1, 2, 3\n}",
+      "task": "Use o loop for para iterar sobre um range.",
+      "correct_answers": [
+        "for",
+        "for "
+      ],
+      "explanation": "O 'for' em Rust itera sobre qualquer iterador. O range 1..4 gera valores de 1 até 3 (exclusivo). Para incluir 4, use 1..=4.",
+      "hints": [
+        "Qual loop é usado para iterar sobre coleções?",
+        "É a mesma palavra de outras linguagens...",
+        "Use 'for' para iterar."
+      ],
+      "common_error": {
+        "error": "for (i = 1; i < 4; i++)",
+        "explanation": "Rust não usa for no estilo C. Use 'for variavel in iterador' com ranges como 1..4."
+      }
+    },
+    {
+      "level": 25,
+      "title": "Range Inclusivo",
+      "category": "Controle de Fluxo",
+      "context_code": "fn main() {\n    for i in 1___5 {\n        println!(\"{}\", i);\n    }\n    // Deve imprimir 1, 2, 3, 4, 5\n}",
+      "task": "Modifique o range para incluir o número 5.",
+      "correct_answers": [
+        "..=",
+        " ..=",
+        "..= "
+      ],
+      "explanation": "O range 1..=5 é inclusivo, gerando valores de 1 até 5 (incluindo 5). O range 1..5 seria exclusivo (1 até 4).",
+      "hints": [
+        "Ranges exclusivos usam '..', mas inclusivos precisam de algo mais...",
+        "Adicione um sinal de igual...",
+        "Use '..=' para range inclusivo."
+      ],
+      "common_error": {
+        "error": "1...5",
+        "explanation": "Três pontos '...' não é válido. Use '..' para exclusivo ou '..=' para inclusivo."
+      }
+    },
+    {
+      "level": 26,
+      "title": "Declarando Função",
+      "category": "Funções e Ownership",
+      "context_code": "___ saudar() {\n    println!(\"Olá!\");\n}\n\nfn main() {\n    saudar();\n}",
+      "task": "Use a palavra-chave para declarar uma função.",
+      "correct_answers": [
+        "fn",
+        "fn "
+      ],
+      "explanation": "Em Rust, funções são declaradas com 'fn' seguido do nome, parâmetros entre parênteses e o corpo entre chaves.",
+      "hints": [
+        "É uma abreviação de 'function'...",
+        "Tem apenas 2 letras...",
+        "Use 'fn' para declarar funções."
+      ],
+      "common_error": {
+        "error": "function saudar()",
+        "explanation": "Rust usa 'fn', não 'function' ou 'func'. É mais conciso."
+      }
+    },
+    {
+      "level": 27,
+      "title": "Função com Parâmetro",
+      "category": "Funções e Ownership",
+      "context_code": "fn saudar(nome___ String) {\n    println!(\"Olá, {}!\", nome);\n}\n\nfn main() {\n    saudar(String::from(\"Maria\"));\n}",
+      "task": "Adicione a sintaxe correta para especificar o tipo do parâmetro.",
+      "correct_answers": [
+        ":",
+        ": ",
+        " :",
+        " : "
+      ],
+      "explanation": "Em Rust, tipos de parâmetros são obrigatórios e especificados com ':' após o nome. Exemplo: fn func(param: Tipo)",
+      "hints": [
+        "Você precisa separar o nome do tipo...",
+        "É um caractere de pontuação comum em tipagem...",
+        "Use ':' entre o nome e o tipo."
+      ],
+      "common_error": {
+        "error": "fn saudar(String nome)",
+        "explanation": "A ordem é nome: Tipo, não Tipo nome como em Java/C. E o ':' é obrigatório."
+      }
+    },
+    {
+      "level": 28,
+      "title": "Função com Retorno",
+      "category": "Funções e Ownership",
+      "context_code": "fn dobro(x: i32) ___ i32 {\n    x * 2\n}\n\nfn main() {\n    let resultado = dobro(5);\n    println!(\"Dobro: {}\", resultado);\n}",
+      "task": "Adicione a sintaxe que indica o tipo de retorno da função.",
+      "correct_answers": [
+        "->",
+        " ->",
+        "-> ",
+        " -> "
+      ],
+      "explanation": "O tipo de retorno é especificado com -> após os parâmetros. Note que a última expressão (sem ;) é retornada automaticamente.",
+      "hints": [
+        "A sintaxe de retorno usa uma 'seta'...",
+        "É formada por um traço e um maior-que...",
+        "Use '->' para indicar tipo de retorno."
+      ],
+      "common_error": {
+        "error": "fn dobro(x: i32): i32",
+        "explanation": "Rust usa '->' para tipo de retorno, não ':' como em TypeScript ou Python type hints."
+      }
+    },
+    {
+      "level": 29,
+      "title": "Retorno Implícito",
+      "category": "Funções e Ownership",
+      "context_code": "fn quadrado(x: i32) -> i32 {\n    x * x___\n}\n\nfn main() {\n    println!(\"Quadrado de 4: {}\", quadrado(4));\n}",
+      "task": "A função deve retornar o resultado. O que NÃO deve ter no final da expressão?",
+      "correct_answers": [
+        "",
+        " "
+      ],
+      "explanation": "Em Rust, a última expressão de uma função (sem ponto-e-vírgula) é retornada automaticamente. Adicionar ';' transformaria em statement e retornaria ().",
+      "hints": [
+        "Expressões retornam valores, statements não...",
+        "O ponto-e-vírgula transforma expressão em statement...",
+        "Não coloque ';' - deixe vazio para retorno implícito."
+      ],
+      "common_error": {
+        "error": "x * x;",
+        "explanation": "Com ';', a expressão vira statement e a função retorna (). Remova o ';' para retorno implícito."
+      }
+    },
+    {
+      "level": 30,
+      "title": "Return Explícito",
+      "category": "Funções e Ownership",
+      "context_code": "fn valor_absoluto(x: i32) -> i32 {\n    if x < 0 {\n        ___ -x;\n    }\n    x\n}\n\nfn main() {\n    println!(\"Absoluto de -5: {}\", valor_absoluto(-5));\n}",
+      "task": "Adicione a palavra-chave para retorno antecipado.",
+      "correct_answers": [
+        "return",
+        "return "
+      ],
+      "explanation": "Use 'return' para retornar antes do final da função. No final, o retorno implícito (sem return) é preferido.",
+      "hints": [
+        "Qual palavra-chave força o retorno imediato?",
+        "É a mesma de outras linguagens...",
+        "Use 'return' para retorno explícito."
+      ],
+      "common_error": {
+        "error": "return -x (sem ponto-e-vírgula)",
+        "explanation": "Com 'return', o ponto-e-vírgula é necessário pois é um statement. Sem 'return', omita o ';'."
+      }
+    },
+    {
+      "level": 31,
+      "title": "Ownership Básico",
+      "category": "Funções e Ownership",
+      "context_code": "fn main() {\n    let s1 = String::from(\"hello\");\n    let s2 = s1___;\n    println!(\"s2: {}\", s2);\n    // s1 ainda deve ser válido!\n    println!(\"s1: {}\", s1);\n}",
+      "task": "Clone a String para que s1 continue válido após a atribuição.",
+      "correct_answers": [
+        ".clone()",
+        ".clone() "
+      ],
+      "explanation": "Em Rust, atribuir uma String a outra variável MOVE a ownership. Para manter s1 válido, usamos .clone() para criar uma cópia profunda.",
+      "hints": [
+        "Você precisa criar uma cópia da String...",
+        "Existe um método para clonar valores...",
+        "Use .clone() para copiar dados do heap."
+      ],
+      "common_error": {
+        "error": "let s2 = s1; println!(s1);",
+        "explanation": "Isso causa erro 'value borrowed after move'. String não implementa Copy, então a ownership é movida. Use .clone()."
+      }
+    },
+    {
+      "level": 32,
+      "title": "Referência Imutável",
+      "category": "Funções e Ownership",
+      "context_code": "fn tamanho(s: ___String) -> usize {\n    s.len()\n}\n\nfn main() {\n    let texto = String::from(\"Rust\");\n    let tam = tamanho(&texto);\n    println!(\"'{}' tem {} caracteres\", texto, tam);\n}",
+      "task": "Use referência para emprestar a String sem tomar ownership.",
+      "correct_answers": [
+        "&",
+        "& "
+      ],
+      "explanation": "O & cria uma referência (borrow) que permite usar o valor sem tomar ownership. A função recebe &String em vez de String.",
+      "hints": [
+        "Você quer 'emprestar' a String, não tomar posse...",
+        "Qual símbolo cria uma referência em Rust?",
+        "Use '&' para criar uma referência."
+      ],
+      "common_error": {
+        "error": "fn tamanho(s: String)",
+        "explanation": "Sem &, a função toma ownership de texto e ele não pode mais ser usado em main. Use &String para emprestar."
+      }
+    },
+    {
+      "level": 33,
+      "title": "Referência Mutável",
+      "category": "Funções e Ownership",
+      "context_code": "fn adicionar_exclamacao(s: &___ String) {\n    s.push('!');\n}\n\nfn main() {\n    let mut texto = String::from(\"Olá\");\n    adicionar_exclamacao(&mut texto);\n    println!(\"{}\", texto); // Olá!\n}",
+      "task": "Permita que a função modifique a String emprestada.",
+      "correct_answers": [
+        "mut",
+        "mut "
+      ],
+      "explanation": "Para modificar um valor emprestado, a referência deve ser mutável: &mut T. Só pode existir uma referência mutável por vez.",
+      "hints": [
+        "Referências imutáveis não permitem modificação...",
+        "Você precisa de uma referência que permite mudança...",
+        "Use &mut para referência mutável."
+      ],
+      "common_error": {
+        "error": "&String mas tentando modificar",
+        "explanation": "Referências imutáveis (&T) não permitem modificação. Use &mut T e passe &mut variavel."
+      }
+    },
+    {
+      "level": 34,
+      "title": "String Slice",
+      "category": "Funções e Ownership",
+      "context_code": "fn primeira_palavra(s: &String) -> ___str {\n    &s[..5]\n}\n\nfn main() {\n    let texto = String::from(\"Hello World\");\n    let palavra = primeira_palavra(&texto);\n    println!(\"Primeira: {}\", palavra);\n}",
+      "task": "Use o tipo correto para uma fatia de string.",
+      "correct_answers": [
+        "&",
+        "& "
+      ],
+      "explanation": "&str é um 'string slice' - uma referência a parte de uma String. É mais flexível que &String pois aceita ambos &String e &str.",
+      "hints": [
+        "O retorno é uma 'fatia' da string original...",
+        "str sozinho não tem tamanho conhecido, precisa de referência...",
+        "Use &str (referência para string slice)."
+      ],
+      "common_error": {
+        "error": "-> String",
+        "explanation": "Retornar String copiaria os dados. &str é uma referência eficiente à string original."
+      }
+    },
+    {
+      "level": 35,
+      "title": "Slice de Array",
+      "category": "Funções e Ownership",
+      "context_code": "fn main() {\n    let numeros = [1, 2, 3, 4, 5];\n    let slice = &numeros[1___4];\n    println!(\"{:?}\", slice); // [2, 3, 4]\n}",
+      "task": "Complete a sintaxe de range para o slice.",
+      "correct_answers": [
+        "..",
+        " ..",
+        ".. ",
+        " .. "
+      ],
+      "explanation": "Slices usam a sintaxe [inicio..fim] onde fim é exclusivo. &numeros[1..4] retorna elementos nos índices 1, 2, 3.",
+      "hints": [
+        "A sintaxe de range é a mesma usada em for loops...",
+        "Dois pontos entre início e fim...",
+        "Use '..' para criar um range."
+      ],
+      "common_error": {
+        "error": "&numeros[1:4]",
+        "explanation": "Rust usa '..' para ranges, não ':' como Python. Use &array[inicio..fim]."
+      }
+    },
+    {
+      "level": 36,
+      "title": "Definindo Struct",
+      "category": "Structs, Enums e Collections",
+      "context_code": "___ Pessoa {\n    nome: String,\n    idade: u32,\n}\n\nfn main() {\n    let p = Pessoa {\n        nome: String::from(\"Ana\"),\n        idade: 25,\n    };\n    println!(\"{} tem {} anos\", p.nome, p.idade);\n}",
+      "task": "Use a palavra-chave para definir uma estrutura.",
+      "correct_answers": [
+        "struct",
+        "struct "
+      ],
+      "explanation": "Structs são tipos personalizados que agrupam dados relacionados. Definimos com 'struct Nome { campos }'. Campos são acessados com '.'",
+      "hints": [
+        "É similar a classes em outras linguagens, mas sem métodos por padrão...",
+        "A palavra vem de 'structure'...",
+        "Use 'struct' para definir estruturas."
+      ],
+      "common_error": {
+        "error": "class Pessoa",
+        "explanation": "Rust não tem 'class'. Use 'struct' para dados e 'impl' para métodos."
+      }
+    },
+    {
+      "level": 37,
+      "title": "Instanciando Struct",
+      "category": "Structs, Enums e Collections",
+      "context_code": "struct Ponto {\n    x: i32,\n    y: i32,\n}\n\nfn main() {\n    let p = Ponto { x___ 10, y: 20 };\n    println!(\"Ponto: ({}, {})\", p.x, p.y);\n}",
+      "task": "Use a sintaxe correta para atribuir valor ao campo.",
+      "correct_answers": [
+        ":",
+        ": "
+      ],
+      "explanation": "Ao criar instâncias de struct, usamos 'campo: valor'. Se a variável tem o mesmo nome do campo, podemos usar apenas 'campo' (field init shorthand).",
+      "hints": [
+        "A sintaxe é similar à definição...",
+        "Campo e valor são separados por...",
+        "Use ':' entre nome do campo e valor."
+      ],
+      "common_error": {
+        "error": "Ponto { x = 10, y = 20 }",
+        "explanation": "Na sintaxe de struct, use ':' não '='. O '=' é para atribuição normal de variáveis."
+      }
+    },
+    {
+      "level": 38,
+      "title": "Método em Struct",
+      "category": "Structs, Enums e Collections",
+      "context_code": "struct Retangulo {\n    largura: u32,\n    altura: u32,\n}\n\n___ Retangulo {\n    fn area(&self) -> u32 {\n        self.largura * self.altura\n    }\n}\n\nfn main() {\n    let r = Retangulo { largura: 10, altura: 5 };\n    println!(\"Área: {}\", r.area());\n}",
+      "task": "Use a palavra-chave para implementar métodos na struct.",
+      "correct_answers": [
+        "impl",
+        "impl "
+      ],
+      "explanation": "O bloco 'impl' (implementation) define métodos para um tipo. O primeiro parâmetro '&self' é a instância atual (similar a 'this' em outras linguagens).",
+      "hints": [
+        "É uma abreviação de 'implementation'...",
+        "Tem 4 letras...",
+        "Use 'impl' para implementar métodos."
+      ],
+      "common_error": {
+        "error": "struct Retangulo { fn area() }",
+        "explanation": "Métodos não ficam dentro da struct, mas em um bloco 'impl' separado."
+      }
+    },
+    {
+      "level": 39,
+      "title": "Definindo Enum",
+      "category": "Structs, Enums e Collections",
+      "context_code": "___ Direcao {\n    Norte,\n    Sul,\n    Leste,\n    Oeste,\n}\n\nfn main() {\n    let dir = Direcao::Norte;\n    match dir {\n        Direcao::Norte => println!(\"Indo para o Norte!\"),\n        _ => println!(\"Outra direção\"),\n    }\n}",
+      "task": "Use a palavra-chave para definir um tipo enumerado.",
+      "correct_answers": [
+        "enum",
+        "enum "
+      ],
+      "explanation": "Enums definem um tipo com variantes fixas. Acessamos variantes com '::'. Enums em Rust podem ter dados associados (como Option e Result).",
+      "hints": [
+        "É a abreviação de 'enumeration'...",
+        "Tem 4 letras...",
+        "Use 'enum' para definir enumerações."
+      ],
+      "common_error": {
+        "error": "const NORTE = 0; const SUL = 1;",
+        "explanation": "Embora possível, enums são mais seguros e expressivos que constantes numéricas."
+      }
+    },
+    {
+      "level": 40,
+      "title": "Enum com Dados",
+      "category": "Structs, Enums e Collections",
+      "context_code": "enum Mensagem {\n    Texto(String),\n    Numero(i32),\n}\n\nfn main() {\n    let m = Mensagem::Texto(String::from(\"Olá\"));\n    match m {\n        Mensagem::Texto(s) ___ println!(\"Texto: {}\", s),\n        Mensagem::Numero(n) => println!(\"Número: {}\", n),\n    }\n}",
+      "task": "Complete a sintaxe do braço do match.",
+      "correct_answers": [
+        "=>",
+        " =>",
+        "=> ",
+        " => "
+      ],
+      "explanation": "No match, cada padrão é seguido por '=>' e a expressão a executar. Enum variants podem carregar dados que são extraídos no pattern matching.",
+      "hints": [
+        "É uma 'seta gorda' que separa padrão de ação...",
+        "Diferente de '->', usa sinal de igual...",
+        "Use '=>' entre padrão e expressão."
+      ],
+      "common_error": {
+        "error": "Mensagem::Texto(s) -> println!",
+        "explanation": "Em match, use '=>' (fat arrow), não '->' que é para tipos de retorno."
+      }
+    },
+    {
+      "level": 41,
+      "title": "Criando Vector",
+      "category": "Structs, Enums e Collections",
+      "context_code": "fn main() {\n    let numeros: Vec<i32> = ___![];\n    println!(\"Vector vazio: {:?}\", numeros);\n}",
+      "task": "Use a macro para criar um vector vazio.",
+      "correct_answers": [
+        "vec",
+        "Vec::new(); let numeros: Vec<i32> = vec"
+      ],
+      "explanation": "vec![] é uma macro que cria um Vector. Para vazio: vec![] ou Vec::new(). Com valores: vec![1, 2, 3]. Vectors são arrays dinâmicos.",
+      "hints": [
+        "É uma macro, então precisa de '!'...",
+        "O nome é uma abreviação de 'vector'...",
+        "Use 'vec!' para a macro de vector."
+      ],
+      "common_error": {
+        "error": "[1, 2, 3]",
+        "explanation": "Isso cria um array fixo, não um Vector. Use vec![1, 2, 3] para Vector dinâmico."
+      }
+    },
+    {
+      "level": 42,
+      "title": "Adicionando ao Vector",
+      "category": "Structs, Enums e Collections",
+      "context_code": "fn main() {\n    let mut numeros = vec![1, 2, 3];\n    numeros.___(4);\n    println!(\"{:?}\", numeros); // [1, 2, 3, 4]\n}",
+      "task": "Use o método para adicionar um elemento ao final.",
+      "correct_answers": [
+        "push",
+        "push "
+      ],
+      "explanation": "O método push() adiciona um elemento ao final do Vector. O Vector deve ser mut para permitir modificação.",
+      "hints": [
+        "É o mesmo nome usado em outras linguagens para adicionar ao final...",
+        "Começa com 'p' e 'empurra' elementos...",
+        "Use 'push' para adicionar elementos."
+      ],
+      "common_error": {
+        "error": "numeros.add(4)",
+        "explanation": "Rust usa 'push' não 'add' ou 'append' para Vectors."
+      }
+    },
+    {
+      "level": 43,
+      "title": "Acessando Vector",
+      "category": "Structs, Enums e Collections",
+      "context_code": "fn main() {\n    let nums = vec![10, 20, 30];\n    let segundo = nums.___(1);\n    match segundo {\n        Some(valor) => println!(\"Valor: {}\", valor),\n        None => println!(\"Índice inválido\"),\n    }\n}",
+      "task": "Use o método seguro para acessar por índice.",
+      "correct_answers": [
+        "get",
+        "get "
+      ],
+      "explanation": "O método get() retorna Option<&T> - Some(&valor) se existir ou None se o índice for inválido. É mais seguro que nums[1] que pode causar panic.",
+      "hints": [
+        "Você quer um acesso seguro que retorna Option...",
+        "O nome do método sugere 'obter'...",
+        "Use 'get' para acesso seguro."
+      ],
+      "common_error": {
+        "error": "nums[1]",
+        "explanation": "nums[1] funciona mas causa panic se o índice for inválido. get(1) retorna Option para tratamento seguro."
+      }
+    },
+    {
+      "level": 44,
+      "title": "HashMap Básico",
+      "category": "Structs, Enums e Collections",
+      "context_code": "use std::collections::HashMap;\n\nfn main() {\n    let mut scores = HashMap::___();\n    scores.insert(String::from(\"Blue\"), 10);\n    scores.insert(String::from(\"Red\"), 50);\n    println!(\"{:?}\", scores);\n}",
+      "task": "Crie um novo HashMap vazio.",
+      "correct_answers": [
+        "new",
+        "new "
+      ],
+      "explanation": "HashMap::new() cria um mapa vazio. Diferente de Vec, não há macro hashmap![] na biblioteca padrão. Use insert() para adicionar pares.",
+      "hints": [
+        "É o construtor padrão em Rust...",
+        "Três letras, método de criação...",
+        "Use 'new' para criar instância vazia."
+      ],
+      "common_error": {
+        "error": "HashMap {}",
+        "explanation": "HashMap não é struct com campos públicos. Use HashMap::new() ou from() para criar."
+      }
+    },
+    {
+      "level": 45,
+      "title": "Iterando Vector",
+      "category": "Structs, Enums e Collections",
+      "context_code": "fn main() {\n    let nums = vec![1, 2, 3, 4, 5];\n    for n in nums.___() {\n        println!(\"{}\", n);\n    }\n    println!(\"Vector ainda válido: {:?}\", nums);\n}",
+      "task": "Itere sobre referências para manter o vector válido.",
+      "correct_answers": [
+        "iter",
+        "iter "
+      ],
+      "explanation": "iter() retorna um iterador de referências (&T), mantendo ownership do vector. iter_mut() para &mut T, into_iter() consome o vector.",
+      "hints": [
+        "Você quer um 'iterador'...",
+        "É a abreviação de 'iterator'...",
+        "Use 'iter' para iterar por referência."
+      ],
+      "common_error": {
+        "error": "for n in nums { } println!(nums)",
+        "explanation": "'for n in nums' consome o vector (chama into_iter). Use nums.iter() para manter ownership."
+      }
+    },
+    {
+      "level": 46,
+      "title": "Option Some",
+      "category": "Option, Result e Traits",
+      "context_code": "fn encontrar_par(nums: &[i32]) -> Option<i32> {\n    for &n in nums {\n        if n % 2 == 0 {\n            return ___(n);\n        }\n    }\n    None\n}\n\nfn main() {\n    let nums = vec![1, 3, 4, 5];\n    println!(\"Par: {:?}\", encontrar_par(&nums));\n}",
+      "task": "Retorne o valor encontrado encapsulado em Option.",
+      "correct_answers": [
+        "Some",
+        "Some "
+      ],
+      "explanation": "Option<T> tem duas variantes: Some(T) contém um valor, None representa ausência. É a alternativa segura a null.",
+      "hints": [
+        "Option tem duas variantes: uma com valor, outra sem...",
+        "A variante com valor começa com 'S'...",
+        "Use 'Some' para encapsular o valor encontrado."
+      ],
+      "common_error": {
+        "error": "return n;",
+        "explanation": "A função retorna Option<i32>, não i32. Encapsule com Some(n) para indicar sucesso."
+      }
+    },
+    {
+      "level": 47,
+      "title": "Unwrap com Default",
+      "category": "Option, Result e Traits",
+      "context_code": "fn main() {\n    let nome: Option<&str> = None;\n    let nome_final = nome.unwrap_or(___);\n    println!(\"Nome: {}\", nome_final); // Nome: Visitante\n}",
+      "task": "Forneça um valor padrão caso Option seja None.",
+      "correct_answers": [
+        "\"Visitante\"",
+        " \"Visitante\"",
+        "\"Visitante\" "
+      ],
+      "explanation": "unwrap_or() retorna o valor de Some ou o valor padrão fornecido se for None. É mais seguro que unwrap() que causa panic.",
+      "hints": [
+        "Você precisa fornecer o valor padrão como argumento...",
+        "É uma string literal...",
+        "Use \"Visitante\" como valor padrão."
+      ],
+      "common_error": {
+        "error": "nome.unwrap()",
+        "explanation": "unwrap() em None causa panic. Use unwrap_or(default), unwrap_or_else(|| ...), ou match para segurança."
+      }
+    },
+    {
+      "level": 48,
+      "title": "Result Ok e Err",
+      "category": "Option, Result e Traits",
+      "context_code": "fn dividir(a: i32, b: i32) -> Result<i32, String> {\n    if b == 0 {\n        ___(String::from(\"Divisão por zero!\"))\n    } else {\n        Ok(a / b)\n    }\n}\n\nfn main() {\n    println!(\"{:?}\", dividir(10, 2));\n    println!(\"{:?}\", dividir(10, 0));\n}",
+      "task": "Retorne o erro apropriado.",
+      "correct_answers": [
+        "Err",
+        "Err "
+      ],
+      "explanation": "Result<T, E> tem duas variantes: Ok(T) para sucesso e Err(E) para erro. É usado para operações que podem falhar de forma recuperável.",
+      "hints": [
+        "Result tem Ok para sucesso e... para erro?",
+        "É a abreviação de 'Error'...",
+        "Use 'Err' para retornar um erro."
+      ],
+      "common_error": {
+        "error": "panic!(\"Divisão por zero\")",
+        "explanation": "panic! aborta o programa. Result permite tratamento gracioso do erro pelo chamador."
+      }
+    },
+    {
+      "level": 49,
+      "title": "Operador ? para Propagação",
+      "category": "Option, Result e Traits",
+      "context_code": "fn pode_falhar() -> Result<i32, String> {\n    Err(String::from(\"ops\"))\n}\n\nfn usar_resultado() -> Result<i32, String> {\n    let valor = pode_falhar()___;\n    Ok(valor * 2)\n}\n\nfn main() {\n    println!(\"{:?}\", usar_resultado());\n}",
+      "task": "Use o operador para propagar erros automaticamente.",
+      "correct_answers": [
+        "?",
+        " ?",
+        "? "
+      ],
+      "explanation": "O operador ? propaga erros automaticamente: se Result for Err, retorna imediatamente; se for Ok, extrai o valor. Só funciona em funções que retornam Result.",
+      "hints": [
+        "É um operador de propagação de erro...",
+        "É um único caractere de pontuação...",
+        "Use '?' após a chamada."
+      ],
+      "common_error": {
+        "error": "pode_falhar().unwrap()",
+        "explanation": "unwrap() causa panic em Err. Use '?' para propagar o erro elegantemente."
+      }
+    },
+    {
+      "level": 50,
+      "title": "Implementando Trait",
+      "category": "Option, Result e Traits",
+      "context_code": "struct Ponto {\n    x: i32,\n    y: i32,\n}\n\n___ std::fmt::Display for Ponto {\n    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {\n        write!(f, \"({}, {})\", self.x, self.y)\n    }\n}\n\nfn main() {\n    let p = Ponto { x: 3, y: 4 };\n    println!(\"{}\", p); // (3, 4)\n}",
+      "task": "Use a palavra-chave para implementar um trait para o tipo.",
+      "correct_answers": [
+        "impl",
+        "impl "
+      ],
+      "explanation": "Usamos 'impl Trait for Tipo' para implementar traits. Display permite usar {} em println!. Traits são como interfaces que definem comportamento compartilhado.",
+      "hints": [
+        "É a mesma palavra usada para métodos de struct...",
+        "Mas aqui seguida de 'TraitName for TipoName'...",
+        "Use 'impl' seguido do trait e 'for' tipo."
+      ],
+      "common_error": {
+        "error": "struct Ponto implements Display",
+        "explanation": "Rust não usa 'implements'. A sintaxe é 'impl Trait for Tipo { ... }'."
+      }
+    }
+  ]
+}

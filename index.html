@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rust: Do Zero ao Júnior | Roadmap Completo</title>
-    <meta name="description" content="Roadmap profissional e didático para aprender Rust do zero ao nível júnior.">
+    <title>Rust: Do Zero ao Junior | Roadmap Completo</title>
+    <meta name="description" content="Roadmap profissional e didatico para aprender Rust do zero ao nivel junior.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -21,22 +21,14 @@
             --rust-border: #3f3f46;
             --gradient-1: linear-gradient(135deg, #F74C00 0%, #FF8C42 100%);
             --gradient-2: linear-gradient(135deg, #F74C00 0%, #dc2626 100%);
-            --gradient-glow: radial-gradient(ellipse at center, rgba(247, 76, 0, 0.15) 0%, transparent 70%);
             --success: #22c55e;
             --info: #3b82f6;
             --glass: rgba(24, 24, 27, 0.8);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -46,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Reading Progress Bar */
         .progress-bar {
             position: fixed;
             top: 0;
@@ -58,7 +49,6 @@
             transition: width 0.1s ease;
         }
 
-        /* Cursor Glow Effect */
         .cursor-glow {
             position: fixed;
             width: 400px;
@@ -70,32 +60,9 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes float {
@@ -103,25 +70,10 @@
             50% { transform: translateY(-20px); }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(247, 76, 0, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(247, 76, 0, 0.6); }
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
         }
 
         .animate-on-scroll {
@@ -134,12 +86,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-        .stagger-4 { transition-delay: 0.4s; }
-        .stagger-5 { transition-delay: 0.5s; }
 
         /* Hero Section */
         .hero {
@@ -173,11 +119,7 @@
             mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
         }
 
-        .hero-particles {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
+        .hero-particles { position: absolute; inset: 0; overflow: hidden; }
 
         .particle {
             position: absolute;
@@ -280,22 +222,9 @@
             box-shadow: 0 4px 30px rgba(247, 76, 0, 0.4);
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 10px 50px rgba(247, 76, 0, 0.5);
-        }
-
-        .btn-primary:hover::before {
-            opacity: 1;
         }
 
         .btn-secondary {
@@ -349,11 +278,7 @@
             gap: 0.5rem;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
 
         nav a {
             color: #71717a;
@@ -375,13 +300,8 @@
             transition: width 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--rust-light);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
+        nav a:hover { color: var(--rust-light); }
+        nav a:hover::after { width: 100%; }
 
         /* Main Content */
         main {
@@ -391,7 +311,6 @@
             position: relative;
         }
 
-        /* Section Styles */
         section {
             margin-bottom: 8rem;
             scroll-margin-top: 100px;
@@ -454,15 +373,8 @@
             margin: 1.75rem 0 0.75rem;
         }
 
-        p {
-            color: #a1a1aa;
-            margin-bottom: 1.25rem;
-        }
-
-        strong {
-            color: var(--rust-light);
-            font-weight: 600;
-        }
+        p { color: #a1a1aa; margin-bottom: 1.25rem; }
+        strong { color: var(--rust-light); font-weight: 600; }
 
         /* Cards */
         .card {
@@ -476,23 +388,10 @@
             overflow: hidden;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(247, 76, 0, 0.05) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
         .card:hover {
             transform: translateY(-4px);
             border-color: rgba(247, 76, 0, 0.3);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .card:hover::before {
-            opacity: 1;
         }
 
         .card-highlight {
@@ -506,7 +405,7 @@
         }
 
         .tip-card::after {
-            content: '💡 Dica';
+            content: 'Dica';
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -524,7 +423,7 @@
         }
 
         .exercise-card::after {
-            content: '🎯 Exercício';
+            content: 'Exercicio';
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -536,16 +435,21 @@
             border-radius: 50px;
         }
 
-        /* Code Blocks */
+        /* Code Blocks with Copy Button */
+        .code-block {
+            position: relative;
+            margin: 1.75rem 0;
+        }
+
         pre {
             background: #0d0d0d;
             border-radius: 16px;
             padding: 1.75rem;
+            padding-top: 2.5rem;
             overflow-x: auto;
-            margin: 1.75rem 0;
             border: 1px solid var(--rust-border);
-            position: relative;
             transition: all 0.3s ease;
+            margin: 0;
         }
 
         pre:hover {
@@ -553,16 +457,52 @@
             box-shadow: 0 0 40px rgba(247, 76, 0, 0.1);
         }
 
-        pre::before {
-            content: 'rust';
+        .code-header {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid var(--rust-border);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .code-lang {
             font-size: 0.7rem;
             color: #52525b;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-weight: 600;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--rust-border);
+            color: #71717a;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--rust-orange);
+            color: var(--rust-orange);
+            background: rgba(247, 76, 0, 0.1);
+        }
+
+        .copy-btn.copied {
+            border-color: var(--success);
+            color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
         }
 
         code {
@@ -594,9 +534,7 @@
             transform: translateX(4px);
         }
 
-        li::marker {
-            color: var(--rust-orange);
-        }
+        li::marker { color: var(--rust-orange); }
 
         /* Links */
         a {
@@ -604,21 +542,6 @@
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
-        }
-
-        p a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--rust-orange);
-            transition: width 0.3s ease;
-        }
-
-        p a:hover::after {
-            width: 100%;
         }
 
         /* Table of Contents */
@@ -728,9 +651,7 @@
             box-shadow: 0 25px 60px rgba(247, 76, 0, 0.15);
         }
 
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
+        .project-card:hover::before { transform: scaleX(1); }
 
         .project-card h4 {
             margin-top: 0;
@@ -784,9 +705,7 @@
             transition: transform 0.3s ease;
         }
 
-        .resource-link:hover .resource-icon {
-            transform: scale(1.2);
-        }
+        .resource-link:hover .resource-icon { transform: scale(1.2); }
 
         /* Timeline */
         .timeline {
@@ -834,20 +753,8 @@
             border-color: var(--rust-orange);
         }
 
-        .timeline-item:hover::before {
-            transform: translateX(-6.5px) scale(1.3);
-            box-shadow: 0 0 30px rgba(247, 76, 0, 0.7);
-        }
-
-        .timeline-item h4 {
-            margin: 0 0 0.5rem;
-            color: var(--rust-light);
-        }
-
-        .timeline-item p {
-            margin: 0;
-            color: #71717a;
-        }
+        .timeline-item h4 { margin: 0 0 0.5rem; color: var(--rust-light); }
+        .timeline-item p { margin: 0; color: #71717a; }
 
         /* FAQ Cards */
         .faq-card {
@@ -887,10 +794,33 @@
             font-weight: 700;
         }
 
-        .faq-card p {
-            margin: 0;
-            padding-left: 2.25rem;
+        .faq-card p { margin: 0; padding-left: 2.25rem; }
+
+        /* Concept Table */
+        .concept-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--rust-gray);
+            border-radius: 12px;
+            overflow: hidden;
         }
+
+        .concept-table th, .concept-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--rust-border);
+        }
+
+        .concept-table th {
+            background: var(--rust-gray-light);
+            color: var(--rust-light);
+            font-weight: 600;
+        }
+
+        .concept-table td { color: #a1a1aa; }
+        .concept-table tr:last-child td { border-bottom: none; }
+        .concept-table tr:hover td { background: rgba(247, 76, 0, 0.05); }
 
         /* Footer */
         footer {
@@ -912,15 +842,8 @@
             background: var(--gradient-1);
         }
 
-        footer p {
-            color: #52525b;
-            font-size: 0.9rem;
-        }
-
-        footer .footer-logo {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
+        footer p { color: #52525b; font-size: 0.9rem; }
+        footer .footer-logo { font-size: 2rem; margin-bottom: 1rem; }
 
         /* Scroll to top */
         .scroll-top {
@@ -944,10 +867,7 @@
             font-size: 1.25rem;
         }
 
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
 
         .scroll-top:hover {
             transform: translateY(-4px) scale(1.1);
@@ -956,117 +876,45 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .hero {
-                padding: 1.5rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-badges {
-                gap: 0.5rem;
-            }
-
-            .badge {
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            main {
-                padding: 3rem 1rem;
-            }
-
-            section {
-                margin-bottom: 5rem;
-            }
-
-            h2 {
-                font-size: 1.75rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            .toc-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .cursor-glow {
-                display: none;
-            }
+            nav ul { display: none; }
+            .hero { padding: 1.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .badge { font-size: 0.8rem; padding: 0.5rem 1rem; }
+            .cta-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            main { padding: 3rem 1rem; }
+            section { margin-bottom: 5rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+            .toc-grid { grid-template-columns: 1fr; }
+            .cursor-glow { display: none; }
         }
 
-        /* Selection */
-        ::selection {
-            background: rgba(247, 76, 0, 0.3);
-            color: white;
-        }
+        ::selection { background: rgba(247, 76, 0, 0.3); color: white; }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--rust-darker);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--rust-gray-light);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--rust-orange);
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--rust-darker); }
+        ::-webkit-scrollbar-thumb { background: var(--rust-gray-light); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--rust-orange); }
     </style>
 </head>
 <body>
     <div class="progress-bar" id="progressBar"></div>
     <div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
-            <a href="#" class="logo">🦀 Rust Roadmap</a>
+            <a href="#" class="logo">Rust Roadmap</a>
             <ul>
                 <li><a href="#section-3">Fundamentos</a></li>
-                <li><a href="#section-7">Conceitos</a></li>
+                <li><a href="#section-7">Ownership</a></li>
                 <li><a href="#section-15">Projetos</a></li>
                 <li><a href="#section-18">Recursos</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-bg"></div>
         <div class="hero-grid"></div>
@@ -1076,8 +924,6 @@
             <div class="particle" style="left: 70%; top: 30%; animation-delay: 2s;"></div>
             <div class="particle" style="left: 80%; top: 70%; animation-delay: 0.5s;"></div>
             <div class="particle" style="left: 50%; top: 80%; animation-delay: 1.5s;"></div>
-            <div class="particle" style="left: 30%; top: 40%; animation-delay: 2.5s;"></div>
-            <div class="particle" style="left: 90%; top: 50%; animation-delay: 3s;"></div>
         </div>
         <div class="hero-content">
             <svg class="rust-logo" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
@@ -1085,45 +931,44 @@
                 <path fill="#F74C00" d="M72 24c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 84c-19.9 0-36-16.1-36-36s16.1-36 36-36 36 16.1 36 36-16.1 36-36 36z"/>
                 <circle fill="#F74C00" cx="72" cy="72" r="24"/>
             </svg>
-            <h1>Rust: Do Zero ao Júnior</h1>
-            <p class="hero-subtitle">Roadmap profissional e didático para dominar Rust. Aprenda desde o básico até projetos práticos com explicações claras.</p>
+            <h1>Rust: Do Zero ao Junior</h1>
+            <p class="hero-subtitle">Roadmap profissional e didatico para dominar Rust. Aprenda desde o basico ate projetos praticos com explicacoes claras.</p>
             <div class="hero-badges">
-                <span class="badge">📚 18 Módulos</span>
-                <span class="badge">💻 5 Projetos</span>
-                <span class="badge">🎯 Exercícios</span>
-                <span class="badge">🚀 Zero → Júnior</span>
+                <span class="badge">18 Modulos</span>
+                <span class="badge">50+ Exercicios</span>
+                <span class="badge">5 Projetos</span>
+                <span class="badge">Zero - Junior</span>
             </div>
             <div class="cta-buttons">
-                <a href="#toc" class="btn btn-primary">Começar Agora →</a>
-                <a href="game.html" class="btn btn-secondary">🎮 Jogar Rust Crab</a>
-                <a href="https://play.rust-lang.org" target="_blank" class="btn btn-secondary">Playground Online</a>
+                <a href="#toc" class="btn btn-primary">Comecar Agora</a>
+                <a href="game.html" class="btn btn-secondary">Jogar Rust Crab</a>
+                <a href="https://play.rust-lang.org" target="_blank" class="btn btn-secondary">Playground</a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- Table of Contents -->
         <div class="toc animate-on-scroll" id="toc">
-            <h3>📖 Índice do Roadmap</h3>
+            <h3>Indice do Roadmap</h3>
             <div class="toc-grid">
-                <a href="#section-1" class="toc-item"><span class="toc-number">01</span> Introdução</a>
+                <a href="#section-1" class="toc-item"><span class="toc-number">01</span> Introducao</a>
                 <a href="#section-2" class="toc-item"><span class="toc-number">02</span> Primeiros Passos</a>
                 <a href="#section-3" class="toc-item"><span class="toc-number">03</span> Fundamentos</a>
                 <a href="#section-4" class="toc-item"><span class="toc-number">04</span> Controle de Fluxo</a>
-                <a href="#section-5" class="toc-item"><span class="toc-number">05</span> Funções</a>
+                <a href="#section-5" class="toc-item"><span class="toc-number">05</span> Funcoes</a>
                 <a href="#section-6" class="toc-item"><span class="toc-number">06</span> Estruturas de Dados</a>
                 <a href="#section-7" class="toc-item"><span class="toc-number">07</span> Ownership</a>
                 <a href="#section-8" class="toc-item"><span class="toc-number">08</span> Structs & Enums</a>
                 <a href="#section-9" class="toc-item"><span class="toc-number">09</span> Tratamento de Erros</a>
                 <a href="#section-10" class="toc-item"><span class="toc-number">10</span> Traits & Generics</a>
                 <a href="#section-11" class="toc-item"><span class="toc-number">11</span> Arquivos & I/O</a>
-                <a href="#section-12" class="toc-item"><span class="toc-number">12</span> Concorrência</a>
+                <a href="#section-12" class="toc-item"><span class="toc-number">12</span> Concorrencia</a>
                 <a href="#section-13" class="toc-item"><span class="toc-number">13</span> Testes</a>
                 <a href="#section-14" class="toc-item"><span class="toc-number">14</span> Ecossistema</a>
                 <a href="#section-15" class="toc-item"><span class="toc-number">15</span> Projetos</a>
                 <a href="#section-16" class="toc-item"><span class="toc-number">16</span> Carreira</a>
                 <a href="#section-17" class="toc-item"><span class="toc-number">17</span> FAQ</a>
-                <a href="#section-18" class="toc-item"><span class="toc-number">18</span> Referências</a>
+                <a href="#section-18" class="toc-item"><span class="toc-number">18</span> Referencias</a>
             </div>
         </div>
 
@@ -1131,18 +976,27 @@
         <section id="section-1" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2>Introdução à Programação e ao Rust</h2>
+                <h2>Introducao a Programacao e ao Rust</h2>
             </div>
-            <h3>O que é programação?</h3>
-            <p>Programar é como ensinar um computador a executar tarefas, assim como ensinar alguém a seguir uma receita de bolo. Você fornece instruções detalhadas e o computador as executa exatamente como foram dadas.</p>
-            <h3>Por que aprender programação?</h3>
+            <h3>O que e programacao?</h3>
+            <p>Programar e como ensinar um computador a executar tarefas, assim como ensinar alguem a seguir uma receita de bolo. Voce fornece instrucoes detalhadas e o computador as executa exatamente como foram dadas.</p>
+
+            <h3>Por que aprender Rust?</h3>
             <div class="card card-highlight">
-                <p>A programação desenvolve o <strong>raciocínio lógico</strong>, abre portas para o <strong>mercado de trabalho</strong> e permite criar <strong>soluções para problemas do dia a dia</strong>.</p>
+                <p><strong>Seguranca de Memoria:</strong> Rust previne bugs como null pointer dereference e data races em tempo de compilacao.</p>
+                <p><strong>Performance:</strong> Velocidade comparavel a C/C++ sem garbage collector.</p>
+                <p><strong>Produtividade:</strong> Mensagens de erro claras e excelente tooling.</p>
+                <p><strong>Mercado:</strong> Rust e a linguagem mais amada por 8 anos consecutivos no Stack Overflow.</p>
             </div>
-            <h3>O que é Rust?</h3>
-            <p>Rust é uma linguagem de programação moderna, criada para ser <strong>segura, rápida e eficiente</strong>. Imagine um carro esportivo com todos os itens de segurança: desempenho e proteção juntos.</p>
-            <h3>Diferenças entre Rust e outras linguagens</h3>
-            <p>Rust combina a <strong>velocidade do C/C++</strong> com a <strong>segurança de linguagens modernas</strong> como Python.</p>
+
+            <h3>Comparacao com outras linguagens</h3>
+            <table class="concept-table">
+                <tr><th>Caracteristica</th><th>Rust</th><th>Python</th><th>C/C++</th></tr>
+                <tr><td>Velocidade</td><td>Muito rapido</td><td>Lento</td><td>Muito rapido</td></tr>
+                <tr><td>Seguranca de memoria</td><td>Garantida em compilacao</td><td>Garbage Collector</td><td>Manual (propenso a erros)</td></tr>
+                <tr><td>Curva de aprendizado</td><td>Moderada</td><td>Facil</td><td>Dificil</td></tr>
+                <tr><td>Aplicacoes</td><td>Sistemas, Web, CLI</td><td>Scripts, ML, Web</td><td>Sistemas, Games</td></tr>
+            </table>
         </section>
 
         <!-- Section 2 -->
@@ -1156,14 +1010,58 @@
                 <h4>Windows</h4>
                 <p>Baixe o instalador em <a href="https://rustup.rs" target="_blank">rustup.rs</a></p>
                 <h4>Linux/Mac</h4>
-                <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code class="language-bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+                </div>
             </div>
+
+            <h3>Verificando a instalacao</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-bash">rustc --version
+cargo --version</code></pre>
+            </div>
+
             <h3>Seu primeiro programa</h3>
-            <pre><code class="language-rust">fn main() {
-    println!("Olá, mundo!");
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn main() {
+    println!("Ola, mundo!");
 }</code></pre>
+            </div>
             <div class="card tip-card">
-                <p>Esse comando imprime uma mensagem na tela. Pense nele como acender a luz de um quarto para mostrar que tudo está funcionando.</p>
+                <p>O <code>println!</code> e uma macro (note o <code>!</code>), nao uma funcao. Macros em Rust podem fazer coisas que funcoes nao podem, como aceitar numero variavel de argumentos.</p>
+            </div>
+
+            <h3>Usando Cargo</h3>
+            <p>Cargo e o gerenciador de pacotes e build system do Rust:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-bash"># Criar novo projeto
+cargo new meu_projeto
+cd meu_projeto
+
+# Compilar e executar
+cargo run
+
+# Apenas compilar
+cargo build
+
+# Compilar para producao (otimizado)
+cargo build --release</code></pre>
             </div>
         </section>
 
@@ -1171,141 +1069,706 @@
         <section id="section-3" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">03</span>
-                <h2>Fundamentos de Programação</h2>
+                <h2>Fundamentos de Programacao</h2>
             </div>
-            <h3>Variáveis e Tipos de Dados</h3>
-            <p>Variáveis são como <strong>caixas onde você guarda valores</strong>.</p>
-            <pre><code class="language-rust">let idade: i32 = 30;
+            <h3>Variaveis e Mutabilidade</h3>
+            <p>Em Rust, variaveis sao <strong>imutaveis por padrao</strong>. Isso ajuda a prevenir bugs.</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Variavel imutavel (padrao)
+let idade: i32 = 30;
 let nome = "Maria";
-let ativo = true;</code></pre>
+let ativo = true;
+
+// Variavel mutavel - pode ser alterada
+let mut contador = 0;
+contador = 1; // OK!
+
+// Constantes - sempre imutaveis, definidas em tempo de compilacao
+const MAX_PONTOS: u32 = 100_000;</code></pre>
+            </div>
+
+            <h3>Tipos de Dados</h3>
+            <table class="concept-table">
+                <tr><th>Tipo</th><th>Descricao</th><th>Exemplo</th></tr>
+                <tr><td><code>i8, i16, i32, i64, i128</code></td><td>Inteiros com sinal</td><td><code>let x: i32 = -42;</code></td></tr>
+                <tr><td><code>u8, u16, u32, u64, u128</code></td><td>Inteiros sem sinal</td><td><code>let x: u32 = 42;</code></td></tr>
+                <tr><td><code>f32, f64</code></td><td>Ponto flutuante</td><td><code>let pi: f64 = 3.14;</code></td></tr>
+                <tr><td><code>bool</code></td><td>Booleano</td><td><code>let ativo = true;</code></td></tr>
+                <tr><td><code>char</code></td><td>Caractere Unicode</td><td><code>let letra = 'A';</code></td></tr>
+                <tr><td><code>String</code></td><td>String dinamica</td><td><code>let s = String::from("ola");</code></td></tr>
+                <tr><td><code>&str</code></td><td>String slice</td><td><code>let s = "ola";</code></td></tr>
+            </table>
+
             <h3>Operadores</h3>
-            <ul>
-                <li><strong>Matemáticos:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
-                <li><strong>Lógicos:</strong> <code>&&</code> (e), <code>||</code> (ou), <code>!</code> (não)</li>
-            </ul>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Aritmeticos
+let soma = 5 + 3;        // 8
+let sub = 10 - 4;        // 6
+let mult = 3 * 4;        // 12
+let div = 10 / 3;        // 3 (divisao inteira)
+let resto = 10 % 3;      // 1
+
+// Comparacao
+let igual = 5 == 5;      // true
+let diferente = 5 != 3;  // true
+let maior = 10 > 5;      // true
+let menor_igual = 5 <= 5; // true
+
+// Logicos
+let e = true && false;   // false
+let ou = true || false;  // true
+let nao = !true;         // false</code></pre>
+            </div>
+
+            <div class="card exercise-card">
+                <p><strong>Exercicio:</strong> Crie variaveis para armazenar seu nome, idade e se voce gosta de programacao. Imprima tudo usando <code>println!</code>.</p>
+            </div>
         </section>
 
-        <!-- Section 4-6 abbreviated for space -->
+        <!-- Section 4 -->
         <section id="section-4" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">04</span>
                 <h2>Controle de Fluxo</h2>
             </div>
-            <h3>Condicionais</h3>
-            <pre><code class="language-rust">if idade >= 18 {
+            <h3>Condicionais (if/else)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">let idade = 18;
+
+// if simples
+if idade >= 18 {
     println!("Maior de idade");
 } else {
     println!("Menor de idade");
 }
 
-match cor {
-    "vermelho" => println!("Pare"),
-    "verde" => println!("Siga"),
-    _ => println!("Cor desconhecida"),
+// if else if
+let nota = 75;
+if nota >= 90 {
+    println!("A");
+} else if nota >= 70 {
+    println!("B");
+} else {
+    println!("C");
+}
+
+// if como expressao (retorna valor!)
+let status = if idade >= 18 { "adulto" } else { "menor" };
+println!("Status: {}", status);</code></pre>
+            </div>
+
+            <h3>Match (Pattern Matching)</h3>
+            <p>O <code>match</code> e uma das features mais poderosas do Rust:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">let dia = 3;
+
+match dia {
+    1 => println!("Segunda"),
+    2 => println!("Terca"),
+    3 => println!("Quarta"),
+    4 | 5 => println!("Quinta ou Sexta"), // multiplos padroes
+    6..=7 => println!("Fim de semana"),    // range inclusivo
+    _ => println!("Dia invalido"),         // curinga (obrigatorio!)
+}
+
+// match com retorno
+let dia_nome = match dia {
+    1 => "Segunda",
+    2 => "Terca",
+    _ => "Outro dia",
+};</code></pre>
+            </div>
+
+            <h3>Loops</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// loop infinito (use break para sair)
+let mut contador = 0;
+loop {
+    contador += 1;
+    if contador == 5 {
+        break;
+    }
+}
+
+// while
+let mut n = 3;
+while n > 0 {
+    println!("{}!", n);
+    n -= 1;
+}
+println!("Lancar!");
+
+// for com range
+for i in 1..5 {        // 1, 2, 3, 4 (exclusivo)
+    println!("{}", i);
+}
+
+for i in 1..=5 {       // 1, 2, 3, 4, 5 (inclusivo)
+    println!("{}", i);
+}
+
+// for com iterador
+let nums = [10, 20, 30];
+for num in nums.iter() {
+    println!("{}", num);
 }</code></pre>
+            </div>
+
             <div class="card exercise-card">
-                <p>Crie um programa que diga se um número é par ou ímpar.</p>
+                <p><strong>Exercicio:</strong> Crie um programa que verifica se um numero e par ou impar usando <code>if</code> e outro usando <code>match</code>.</p>
             </div>
         </section>
 
+        <!-- Section 5 -->
         <section id="section-5" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">05</span>
-                <h2>Funções</h2>
+                <h2>Funcoes</h2>
             </div>
-            <pre><code class="language-rust">fn soma(a: i32, b: i32) -> i32 {
-    a + b
+            <h3>Declarando Funcoes</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Funcao simples
+fn saudar() {
+    println!("Ola!");
+}
+
+// Funcao com parametros
+fn saudar_pessoa(nome: &str) {
+    println!("Ola, {}!", nome);
+}
+
+// Funcao com retorno
+fn soma(a: i32, b: i32) -> i32 {
+    a + b  // sem ponto-e-virgula = retorno implicito
+}
+
+// Retorno explicito
+fn dobro(x: i32) -> i32 {
+    return x * 2;  // com return, precisa de ;
+}
+
+fn main() {
+    saudar();
+    saudar_pessoa("Maria");
+    let resultado = soma(5, 3);
+    println!("Soma: {}", resultado);
 }</code></pre>
+            </div>
+
+            <div class="card tip-card">
+                <p>Em Rust, a ultima expressao de uma funcao (sem <code>;</code>) e retornada automaticamente. Isso e chamado de "retorno implicito" e e o estilo idiomatico.</p>
+            </div>
+
+            <h3>Expressoes vs Statements</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn exemplo() -> i32 {
+    let x = 5;          // statement (nao retorna valor)
+
+    let y = {           // bloco e uma expressao!
+        let temp = 3;
+        temp + 1        // expressao - retorna 4
+    };                  // y = 4
+
+    x + y               // expressao - retornada pela funcao
+}</code></pre>
+            </div>
         </section>
 
+        <!-- Section 6 -->
         <section id="section-6" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">06</span>
                 <h2>Estruturas de Dados</h2>
             </div>
-            <pre><code class="language-rust">let numeros = [1, 2, 3];
-let mut lista = vec![10, 20, 30];
-let pessoa = ("João", 25, true);
+            <h3>Arrays (tamanho fixo)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Array com tipo inferido
+let numeros = [1, 2, 3, 4, 5];
 
-use std::collections::HashMap;
+// Array com tipo explicito
+let nums: [i32; 5] = [1, 2, 3, 4, 5];
+
+// Array preenchido com mesmo valor
+let zeros = [0; 10];  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+// Acessando elementos
+let primeiro = numeros[0];
+let segundo = numeros[1];
+
+// Iterando
+for n in numeros.iter() {
+    println!("{}", n);
+}</code></pre>
+            </div>
+
+            <h3>Vectors (tamanho dinamico)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Criando vectors
+let mut lista = vec![10, 20, 30];
+let mut vazio: Vec&lt;i32&gt; = Vec::new();
+
+// Adicionando elementos
+lista.push(40);
+lista.push(50);
+
+// Removendo ultimo
+let ultimo = lista.pop();  // Some(50)
+
+// Acessando (pode causar panic!)
+let segundo = lista[1];
+
+// Acesso seguro (retorna Option)
+match lista.get(10) {
+    Some(valor) => println!("Valor: {}", valor),
+    None => println!("Indice invalido"),
+}
+
+// Tamanho
+println!("Tamanho: {}", lista.len());</code></pre>
+            </div>
+
+            <h3>Tuplas</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Tupla com tipos diferentes
+let pessoa = ("Joao", 25, true);
+
+// Acessando por indice
+let nome = pessoa.0;
+let idade = pessoa.1;
+
+// Destructuring
+let (nome, idade, ativo) = pessoa;
+println!("{} tem {} anos", nome, idade);</code></pre>
+            </div>
+
+            <h3>HashMap</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">use std::collections::HashMap;
+
 let mut agenda = HashMap::new();
-agenda.insert("Ana", "1234-5678");</code></pre>
+
+// Inserindo
+agenda.insert("Ana", "1234-5678");
+agenda.insert("Carlos", "9876-5432");
+
+// Acessando
+if let Some(tel) = agenda.get("Ana") {
+    println!("Telefone: {}", tel);
+}
+
+// Iterando
+for (nome, telefone) in &agenda {
+    println!("{}: {}", nome, telefone);
+}</code></pre>
+            </div>
         </section>
 
-        <!-- Section 7 -->
+        <!-- Section 7 - Ownership -->
         <section id="section-7" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">07</span>
-                <h2>Ownership & Borrowing</h2>
+                <h2>Ownership e Borrowing</h2>
             </div>
             <div class="card card-highlight">
-                <p>Imagine que cada valor é uma <strong>bola</strong>. Só pode haver <strong>um dono por vez</strong>. Quando você passa a bola, perde o direito de usá-la.</p>
+                <p><strong>Ownership</strong> e o conceito mais importante do Rust! E o que permite seguranca de memoria sem garbage collector.</p>
             </div>
-            <h3>Borrowing</h3>
-            <pre><code class="language-rust">fn mostra_nome(nome: &String) {
-    println!("{}", nome);
+
+            <h3>As 3 Regras do Ownership</h3>
+            <ol>
+                <li>Cada valor tem um <strong>dono</strong> (owner)</li>
+                <li>So pode haver <strong>um dono</strong> por vez</li>
+                <li>Quando o dono sai de escopo, o valor e <strong>descartado</strong></li>
+            </ol>
+
+            <h3>Move Semantics</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">let s1 = String::from("hello");
+let s2 = s1;  // s1 foi MOVIDO para s2
+
+// println!("{}", s1);  // ERRO! s1 nao e mais valido
+
+println!("{}", s2);  // OK!</code></pre>
+            </div>
+
+            <h3>Clone (copia profunda)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">let s1 = String::from("hello");
+let s2 = s1.clone();  // copia os dados
+
+println!("s1: {}, s2: {}", s1, s2);  // ambos validos!</code></pre>
+            </div>
+
+            <h3>Borrowing (Referencias)</h3>
+            <p>Em vez de mover, podemos <strong>emprestar</strong> valores:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn tamanho(s: &String) -> usize {  // recebe referencia
+    s.len()
+}
+
+fn main() {
+    let texto = String::from("Rust");
+    let tam = tamanho(&texto);  // empresta com &
+
+    // texto ainda e valido!
+    println!("{} tem {} caracteres", texto, tam);
 }</code></pre>
+            </div>
+
+            <h3>Referencias Mutaveis</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn adicionar_exclamacao(s: &mut String) {
+    s.push('!');
+}
+
+fn main() {
+    let mut texto = String::from("Ola");
+    adicionar_exclamacao(&mut texto);
+    println!("{}", texto);  // "Ola!"
+}</code></pre>
+            </div>
+
+            <div class="card tip-card">
+                <p><strong>Regra importante:</strong> Voce pode ter MUITAS referencias imutaveis OU UMA referencia mutavel, mas nunca ambas ao mesmo tempo!</p>
+            </div>
         </section>
 
-        <!-- Section 8-14 abbreviated -->
+        <!-- Section 8 -->
         <section id="section-8" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">08</span>
-                <h2>Structs & Enums</h2>
+                <h2>Structs e Enums</h2>
             </div>
-            <pre><code class="language-rust">struct Pessoa {
+            <h3>Structs</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Definindo uma struct
+struct Pessoa {
     nome: String,
     idade: u8,
+    ativo: bool,
 }
 
+// Implementando metodos
+impl Pessoa {
+    // Construtor (funcao associada)
+    fn new(nome: String, idade: u8) -> Self {
+        Pessoa { nome, idade, ativo: true }
+    }
+
+    // Metodo (recebe &self)
+    fn apresentar(&self) {
+        println!("Ola, sou {} e tenho {} anos", self.nome, self.idade);
+    }
+
+    // Metodo que modifica (recebe &mut self)
+    fn fazer_aniversario(&mut self) {
+        self.idade += 1;
+    }
+}
+
+fn main() {
+    let mut pessoa = Pessoa::new(String::from("Maria"), 25);
+    pessoa.apresentar();
+    pessoa.fazer_aniversario();
+    println!("Agora tenho {} anos", pessoa.idade);
+}</code></pre>
+            </div>
+
+            <h3>Enums</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Enum simples
 enum Status {
     Ativo,
     Inativo,
+    Pendente,
+}
+
+// Enum com dados associados
+enum Mensagem {
+    Texto(String),
+    Numero(i32),
+    Posicao { x: i32, y: i32 },
+}
+
+fn main() {
+    let status = Status::Ativo;
+    let msg = Mensagem::Texto(String::from("Ola!"));
+
+    // Pattern matching com enums
+    match msg {
+        Mensagem::Texto(s) => println!("Texto: {}", s),
+        Mensagem::Numero(n) => println!("Numero: {}", n),
+        Mensagem::Posicao { x, y } => println!("Posicao: ({}, {})", x, y),
+    }
 }</code></pre>
+            </div>
         </section>
 
+        <!-- Section 9 -->
         <section id="section-9" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">09</span>
                 <h2>Tratamento de Erros</h2>
             </div>
-            <pre><code class="language-rust">fn divide(a: f64, b: f64) -> Option&lt;f64&gt; {
-    if b == 0.0 { None } else { Some(a / b) }
+            <h3>Option - Para valores opcionais</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn encontrar_par(nums: &[i32]) -> Option&lt;i32&gt; {
+    for &n in nums {
+        if n % 2 == 0 {
+            return Some(n);
+        }
+    }
+    None
+}
+
+fn main() {
+    let nums = vec![1, 3, 5, 6, 7];
+
+    match encontrar_par(&nums) {
+        Some(n) => println!("Encontrado: {}", n),
+        None => println!("Nenhum par encontrado"),
+    }
+
+    // Ou usando if let
+    if let Some(n) = encontrar_par(&nums) {
+        println!("Par: {}", n);
+    }
+
+    // unwrap_or para valor padrao
+    let resultado = encontrar_par(&nums).unwrap_or(0);
 }</code></pre>
+            </div>
+
+            <h3>Result - Para operacoes que podem falhar</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn dividir(a: f64, b: f64) -> Result&lt;f64, String&gt; {
+    if b == 0.0 {
+        Err(String::from("Divisao por zero!"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    match dividir(10.0, 2.0) {
+        Ok(resultado) => println!("Resultado: {}", resultado),
+        Err(erro) => println!("Erro: {}", erro),
+    }
+
+    // Operador ? para propagar erros
+    fn calcular() -> Result&lt;f64, String&gt; {
+        let x = dividir(10.0, 2.0)?;  // retorna erro se falhar
+        let y = dividir(x, 2.0)?;
+        Ok(y)
+    }
+}</code></pre>
+            </div>
         </section>
 
+        <!-- Section 10 -->
         <section id="section-10" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">10</span>
-                <h2>Traits & Generics</h2>
+                <h2>Traits e Generics</h2>
             </div>
-            <pre><code class="language-rust">trait Descreve {
-    fn descricao(&self) -> String;
+            <h3>Traits (interfaces)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Definindo um trait
+trait Resumo {
+    fn resumir(&self) -> String;
+
+    // Metodo com implementacao padrao
+    fn preview(&self) -> String {
+        format!("Leia mais: {}", self.resumir())
+    }
+}
+
+struct Artigo {
+    titulo: String,
+    conteudo: String,
+}
+
+// Implementando o trait
+impl Resumo for Artigo {
+    fn resumir(&self) -> String {
+        format!("{}: {}", self.titulo, &self.conteudo[..50])
+    }
 }</code></pre>
+            </div>
+
+            <h3>Generics</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">// Funcao generica
+fn maior&lt;T: PartialOrd&gt;(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+// Struct generica
+struct Ponto&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Ponto&lt;T&gt; {
+    fn new(x: T, y: T) -> Self {
+        Ponto { x, y }
+    }
+}
+
+fn main() {
+    let p1 = Ponto::new(5, 10);
+    let p2 = Ponto::new(1.0, 2.5);
+
+    println!("Maior: {}", maior(5, 10));
+}</code></pre>
+            </div>
         </section>
 
+        <!-- Section 11-14 abbreviated -->
         <section id="section-11" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">11</span>
-                <h2>Arquivos & I/O</h2>
+                <h2>Arquivos e I/O</h2>
             </div>
-            <pre><code class="language-rust">use std::fs::File;
-use std::io::prelude::*;
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">use std::fs::File;
+use std::io::{Read, Write};
 
-let mut arquivo = File::create("dados.txt")?;
-arquivo.write_all(b"Olá!")?;</code></pre>
+fn main() -> std::io::Result&lt;()&gt; {
+    // Escrevendo
+    let mut arquivo = File::create("dados.txt")?;
+    arquivo.write_all(b"Ola, Rust!")?;
+
+    // Lendo
+    let mut conteudo = String::new();
+    let mut arquivo = File::open("dados.txt")?;
+    arquivo.read_to_string(&mut conteudo)?;
+    println!("{}", conteudo);
+
+    Ok(())
+}</code></pre>
+            </div>
         </section>
 
         <section id="section-12" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">12</span>
-                <h2>Concorrência</h2>
+                <h2>Concorrencia</h2>
             </div>
-            <pre><code class="language-rust">use std::thread;
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">use std::thread;
+use std::sync::mpsc;
 
-thread::spawn(|| {
-    println!("Nova thread!");
-});</code></pre>
+fn main() {
+    // Criando thread
+    let handle = thread::spawn(|| {
+        println!("Thread executando!");
+    });
+
+    handle.join().unwrap();
+
+    // Comunicacao entre threads (channels)
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        tx.send("Mensagem da thread").unwrap();
+    });
+
+    let msg = rx.recv().unwrap();
+    println!("Recebido: {}", msg);
+}</code></pre>
+            </div>
         </section>
 
         <section id="section-13" class="animate-on-scroll">
@@ -1313,24 +1776,64 @@ thread::spawn(|| {
                 <span class="section-number">13</span>
                 <h2>Testes</h2>
             </div>
-            <pre><code class="language-rust">#[test]
-fn test_soma() {
-    assert_eq!(soma(2, 2), 4);
-}</code></pre>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">rust</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-rust">fn soma(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_soma_positivos() {
+        assert_eq!(soma(2, 2), 4);
+    }
+
+    #[test]
+    fn test_soma_negativos() {
+        assert_eq!(soma(-1, -1), -2);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_que_deve_falhar() {
+        panic!("Este teste deve falhar!");
+    }
+}
+
+// Rodar testes: cargo test</code></pre>
+            </div>
         </section>
 
         <section id="section-14" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">14</span>
-                <h2>Ecossistema</h2>
+                <h2>Ecossistema Rust</h2>
             </div>
+            <h3>Crates populares</h3>
             <div class="card">
                 <ul>
-                    <li><code>serde</code> - serialização</li>
-                    <li><code>tokio</code> - assíncrono</li>
-                    <li><code>actix-web</code> - web</li>
-                    <li><code>clap</code> - CLI</li>
+                    <li><code>serde</code> - Serializacao (JSON, YAML, etc.)</li>
+                    <li><code>tokio</code> - Runtime assincrono</li>
+                    <li><code>actix-web</code> / <code>axum</code> - Frameworks web</li>
+                    <li><code>clap</code> - Parser de argumentos CLI</li>
+                    <li><code>reqwest</code> - Cliente HTTP</li>
+                    <li><code>diesel</code> / <code>sqlx</code> - ORM e database</li>
                 </ul>
+            </div>
+            <h3>Adicionando dependencias</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">bash</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                </div>
+                <pre><code class="language-bash">cargo add serde --features derive
+cargo add tokio --features full</code></pre>
             </div>
         </section>
 
@@ -1338,33 +1841,33 @@ fn test_soma() {
         <section id="section-15" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">15</span>
-                <h2>Projetos Práticos</h2>
+                <h2>Projetos Praticos</h2>
             </div>
             <div class="projects-grid">
                 <div class="project-card">
                     <span class="project-number">1</span>
                     <h4>To-Do List CLI</h4>
-                    <p>Lista de tarefas no terminal.</p>
+                    <p>Lista de tarefas no terminal com adicao, remocao e listagem.</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">2</span>
                     <h4>Conversor de Moedas</h4>
-                    <p>Converte valores usando taxa fixa.</p>
+                    <p>Converte valores entre moedas usando taxas de cambio.</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">3</span>
-                    <h4>API REST</h4>
-                    <p>CRUD de tarefas com web.</p>
+                    <h4>Jogo de Adivinhacao</h4>
+                    <p>Adivinhe o numero secreto com dicas de "maior" ou "menor".</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">4</span>
-                    <h4>Jogo de Adivinhação</h4>
-                    <p>Adivinhe o número secreto.</p>
+                    <h4>API REST</h4>
+                    <p>CRUD de tarefas com Actix-web ou Axum.</p>
                 </div>
                 <div class="project-card">
                     <span class="project-number">5</span>
-                    <h4>CRUD com Persistência</h4>
-                    <p>Projeto final completo.</p>
+                    <h4>CRUD com Persistencia</h4>
+                    <p>Projeto final com banco de dados SQLite.</p>
                 </div>
             </div>
         </section>
@@ -1378,19 +1881,19 @@ fn test_soma() {
             <div class="timeline">
                 <div class="timeline-item">
                     <h4>Pratique sempre</h4>
-                    <p>Pequenos projetos valem mais que só leitura.</p>
+                    <p>Pequenos projetos valem mais que so leitura.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Participe de comunidades</h4>
-                    <p>Discord, Telegram, Stack Overflow.</p>
+                    <p>Discord, Telegram, Reddit r/rust.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Monte um portfólio</h4>
-                    <p>Publique projetos no GitHub.</p>
+                    <h4>Contribua com open source</h4>
+                    <p>Comece com issues marcadas "good first issue".</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Prepare-se para entrevistas</h4>
-                    <p>Explique ownership e borrowing.</p>
+                    <h4>Monte um portfolio</h4>
+                    <p>Publique projetos no GitHub com README bem escrito.</p>
                 </div>
             </div>
         </section>
@@ -1403,15 +1906,19 @@ fn test_soma() {
             </div>
             <div class="faq-card">
                 <h4>Por que o compilador reclama do ownership?</h4>
-                <p>Porque você está tentando usar um valor que já foi movido.</p>
+                <p>Voce esta tentando usar um valor que foi movido para outra variavel. Use <code>.clone()</code> ou referencias <code>&</code>.</p>
             </div>
             <div class="faq-card">
-                <h4>Como instalar dependências?</h4>
-                <p>Use <code>cargo add nome_da_crate</code></p>
+                <h4>Qual a diferenca entre String e &str?</h4>
+                <p><code>String</code> e dinamica e vive no heap. <code>&str</code> e uma referencia a dados de string (pode ser literal ou parte de String).</p>
+            </div>
+            <div class="faq-card">
+                <h4>Como instalar dependencias?</h4>
+                <p>Use <code>cargo add nome_da_crate</code> ou adicione manualmente no <code>Cargo.toml</code>.</p>
             </div>
             <div class="faq-card">
                 <h4>Como rodar testes?</h4>
-                <p><code>cargo test</code></p>
+                <p><code>cargo test</code> executa todos os testes. Use <code>cargo test nome</code> para filtrar.</p>
             </div>
         </section>
 
@@ -1419,12 +1926,12 @@ fn test_soma() {
         <section id="section-18" class="animate-on-scroll">
             <div class="section-header">
                 <span class="section-number">18</span>
-                <h2>Referências</h2>
+                <h2>Referencias</h2>
             </div>
             <div class="resources-grid">
-                <a href="https://rustbook.hexops.com.br/" target="_blank" class="resource-link">
+                <a href="https://doc.rust-lang.org/book/" target="_blank" class="resource-link">
                     <span class="resource-icon">📘</span>
-                    <span>The Rust Book (PT-BR)</span>
+                    <span>The Rust Book</span>
                 </a>
                 <a href="https://doc.rust-lang.org/rust-by-example/" target="_blank" class="resource-link">
                     <span class="resource-icon">📝</span>
@@ -1438,13 +1945,13 @@ fn test_soma() {
                     <span class="resource-icon">📦</span>
                     <span>Crates.io</span>
                 </a>
-                <a href="https://roadmap.sh/rust" target="_blank" class="resource-link">
-                    <span class="resource-icon">🗺️</span>
-                    <span>Roadmap.sh</span>
+                <a href="https://play.rust-lang.org" target="_blank" class="resource-link">
+                    <span class="resource-icon">🎮</span>
+                    <span>Playground</span>
                 </a>
-                <a href="https://discord.gg/rustlang" target="_blank" class="resource-link">
+                <a href="https://discord.gg/rust-lang" target="_blank" class="resource-link">
                     <span class="resource-icon">💬</span>
-                    <span>Discord Rust</span>
+                    <span>Discord</span>
                 </a>
             </div>
         </section>
@@ -1452,8 +1959,8 @@ fn test_soma() {
 
     <footer>
         <div class="footer-logo">🦀</div>
-        <p>Roadmap Rust: Do Zero ao Júnior</p>
-        <p style="margin-top: 0.5rem;">Feito com ❤️ para a comunidade Rust brasileira</p>
+        <p>Roadmap Rust: Do Zero ao Junior</p>
+        <p style="margin-top: 0.5rem;">Feito com dedicacao para a comunidade Rust brasileira</p>
     </footer>
 
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
@@ -1462,6 +1969,21 @@ fn test_soma() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
     <script>
         hljs.highlightAll();
+
+        // Copy code function
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code').innerText;
+
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copiado!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copiar';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
 
         // Reading progress bar
         const progressBar = document.getElementById('progressBar');
@@ -1481,31 +2003,26 @@ fn test_soma() {
 
         // Navbar and scroll to top visibility
         const navbar = document.getElementById('navbar');
-        const scrollTop = document.getElementById('scrollTop');
+        const scrollTopBtn = document.getElementById('scrollTop');
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             if (currentScroll > 500) {
                 navbar.classList.add('visible');
-                scrollTop.classList.add('visible');
+                scrollTopBtn.classList.add('visible');
             } else {
                 navbar.classList.remove('visible');
-                scrollTop.classList.remove('visible');
+                scrollTopBtn.classList.remove('visible');
             }
         });
 
         // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
