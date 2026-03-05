@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦀 Rust Crab - Aprenda Rust Jogando!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rust-orange: #F74C00;
+            --rust-orange-light: #FF6B2C;
+            --bg-dark: #0a0a0a;
+            --bg-card: #18181b;
+            --bg-code: #0d0d0d;
+            --text: #fafafa;
+            --text-muted: #71717a;
+            --success: #22c55e;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --border: #27272a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo span {
+            color: var(--rust-orange);
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--rust-orange), var(--rust-orange-light));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .level-indicator {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .level-indicator strong {
+            color: var(--rust-orange);
+        }
+
+        /* Main Layout */
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 60px);
+        }
+
+        @media (max-width: 1024px) {
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Panel - Instructions */
+        .instruction-panel {
+            padding: 2rem;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .level-badge {
+            background: var(--rust-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .level-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+        }
+
+        .instruction-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .instruction-text code {
+            background: var(--bg-code);
+            color: var(--rust-orange);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .concept-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .concept-box h4 {
+            color: var(--rust-orange);
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .concept-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .hint-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hint-btn:hover {
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+
+        .hint-text {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--warning);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .hint-text.visible {
+            display: block;
+        }
+
+        /* Right Panel - Code Editor */
+        .code-panel {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-code);
+        }
+
+        .code-header {
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-header h3 {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-context {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #6b7280;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-context .highlight {
+            color: var(--text);
+        }
+
+        .code-context .keyword {
+            color: #c678dd;
+        }
+
+        .code-context .function {
+            color: #61afef;
+        }
+
+        .code-context .string {
+            color: #98c379;
+        }
+
+        .code-context .type {
+            color: #e5c07b;
+        }
+
+        .code-context .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        .input-area {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .code-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            resize: none;
+            min-height: 60px;
+        }
+
+        .code-input:focus {
+            border-color: var(--rust-orange);
+            box-shadow: 0 0 0 3px rgba(247, 76, 0, 0.1);
+        }
+
+        .code-input.correct {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .code-input.incorrect {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            flex: 1;
+            background: linear-gradient(135deg, var(--rust-orange), var(--rust-orange-light));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(247, 76, 0, 0.3);
+        }
+
+        .reset-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text);
+        }
+
+        /* Visualization Panel */
+        .visualization {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            min-height: 200px;
+        }
+
+        .vis-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .memory-boxes {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .memory-box {
+            background: var(--bg-code);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 150px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .memory-box.owned {
+            border-color: var(--rust-orange);
+            box-shadow: 0 0 30px rgba(247, 76, 0, 0.2);
+        }
+
+        .memory-box.borrowed {
+            border-color: var(--success);
+            border-style: dashed;
+        }
+
+        .memory-box.moved {
+            opacity: 0.3;
+            border-style: dashed;
+        }
+
+        .memory-box.error {
+            border-color: var(--error);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        }
+
+        .var-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--rust-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .var-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .var-status {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .var-status.owner {
+            color: var(--rust-orange);
+        }
+
+        .var-status.borrowed {
+            color: var(--success);
+        }
+
+        /* Feedback Messages */
+        .feedback {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback.visible {
+            display: flex;
+        }
+
+        .feedback.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--success);
+        }
+
+        .feedback.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--error);
+        }
+
+        .feedback-icon {
+            font-size: 1.25rem;
+        }
+
+        /* Level Navigation */
+        .level-nav {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .level-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .level-dot:hover {
+            background: var(--text-muted);
+        }
+
+        .level-dot.completed {
+            background: var(--success);
+        }
+
+        .level-dot.current {
+            background: var(--rust-orange);
+            box-shadow: 0 0 10px rgba(247, 76, 0, 0.5);
+        }
+
+        /* Success Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, var(--rust-orange), var(--rust-orange-light));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Crab Animation */
+        .crab {
+            font-size: 3rem;
+            animation: crabWalk 2s ease-in-out infinite;
+        }
+
+        @keyframes crabWalk {
+            0%, 100% { transform: translateX(0) scaleX(1); }
+            25% { transform: translateX(10px) scaleX(1); }
+            50% { transform: translateX(0) scaleX(-1); }
+            75% { transform: translateX(-10px) scaleX(-1); }
+        }
+
+        /* Arrow animation */
+        .arrow {
+            display: inline-block;
+            margin: 0 1rem;
+            color: var(--rust-orange);
+            animation: arrowMove 1s ease-in-out infinite;
+        }
+
+        @keyframes arrowMove {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">🦀 <span>Rust Crab</span></a>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+            </div>
+            <span class="level-indicator">Nível <strong id="currentLevelDisplay">1</strong> de <strong>10</strong></span>
+        </div>
+    </header>
+
+    <div class="game-container">
+        <div class="instruction-panel">
+            <div class="level-header">
+                <span class="level-badge" id="levelBadge">Nível 1</span>
+                <h2 class="level-title" id="levelTitle">Variáveis</h2>
+            </div>
+
+            <div class="instruction-text" id="instructionText">
+                <p>Bem-vindo ao <strong>Rust Crab</strong>! 🦀</p>
+                <p>Em Rust, usamos <code>let</code> para declarar variáveis. Complete o código para criar uma variável chamada <code>x</code> com o valor <code>5</code>.</p>
+            </div>
+
+            <div class="concept-box">
+                <h4>💡 Conceito</h4>
+                <p id="conceptText">Em Rust, variáveis são imutáveis por padrão. Use <code>let</code> para declarar uma variável.</p>
+            </div>
+
+            <button class="hint-btn" onclick="toggleHint()">
+                💡 Precisa de uma dica?
+            </button>
+            <div class="hint-text" id="hintText">
+                A sintaxe é: <code>let nome = valor;</code>
+            </div>
+        </div>
+
+        <div class="code-panel">
+            <div class="code-header">
+                <h3>📝 Editor de Código</h3>
+                <span id="fileName">main.rs</span>
+            </div>
+
+            <div class="editor-container">
+                <div class="code-context" id="codeContext">
+                    <span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie a variável aqui:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="codePrefix"></span>
+                </div>
+
+                <div class="input-area">
+                    <span class="input-label">Sua resposta:</span>
+                    <input type="text" class="code-input" id="codeInput" placeholder="Digite seu código aqui..." autocomplete="off" spellcheck="false">
+
+                    <div class="feedback" id="feedback">
+                        <span class="feedback-icon" id="feedbackIcon">✓</span>
+                        <span id="feedbackText">Correto!</span>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="submit-btn" onclick="checkAnswer()">Verificar →</button>
+                        <button class="reset-btn" onclick="resetLevel()">Limpar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visualization">
+                <div class="vis-title">🔍 Visualização da Memória</div>
+                <div class="memory-boxes" id="memoryVisualization">
+                    <div class="memory-box">
+                        <div class="var-name">x</div>
+                        <div class="var-value">?</div>
+                        <div class="var-status">aguardando...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="level-nav" id="levelNav"></div>
+
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">🎉</div>
+            <h2>Parabéns!</h2>
+            <p id="modalText">Você completou o nível!</p>
+            <button class="modal-btn" onclick="nextLevel()">Próximo Nível →</button>
+        </div>
+    </div>
+
+    <script>
+        const levels = [
+            {
+                id: 1,
+                title: "Variáveis",
+                badge: "Nível 1",
+                instruction: `<p>Bem-vindo ao <strong>Rust Crab</strong>! 🦀</p>
+                    <p>Em Rust, usamos <code>let</code> para declarar variáveis. Complete o código para criar uma variável chamada <code>x</code> com o valor <code>5</code>.</p>`,
+                concept: "Em Rust, variáveis são imutáveis por padrão. Use <code>let</code> para declarar uma variável.",
+                hint: "A sintaxe é: <code>let nome = valor;</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie a variável x com valor 5:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let x = 5;", "let x=5;", "let x = 5"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">x</div>
+                        <div class="var-value">${correct ? '5' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'owned' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "Mutabilidade",
+                badge: "Nível 2",
+                instruction: `<p>Por padrão, variáveis em Rust são <strong>imutáveis</strong>. Para torná-las mutáveis, use <code>mut</code>.</p>
+                    <p>Crie uma variável <strong>mutável</strong> chamada <code>contador</code> com valor <code>0</code>.</p>`,
+                concept: "Use <code>let mut</code> para criar variáveis que podem ser alteradas depois.",
+                hint: "A sintaxe é: <code>let mut nome = valor;</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma variável mutável:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let mut contador = 0;", "let mut contador=0;", "let mut contador = 0"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">contador</div>
+                        <div class="var-value">${correct ? '0' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'mut ✏️' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "Tipos",
+                badge: "Nível 3",
+                instruction: `<p>Rust é uma linguagem com <strong>tipagem estática</strong>. Você pode especificar o tipo de uma variável.</p>
+                    <p>Crie uma variável <code>idade</code> do tipo <code>i32</code> com valor <code>25</code>.</p>`,
+                concept: "<code>i32</code> é um inteiro de 32 bits com sinal. Outros tipos: <code>i64</code>, <code>u32</code>, <code>f64</code>.",
+                hint: "A sintaxe é: <code>let nome: tipo = valor;</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Especifique o tipo i32:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let idade: i32 = 25;", "let idade:i32 = 25;", "let idade: i32=25;"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">idade: i32</div>
+                        <div class="var-value">${correct ? '25' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? '32 bits' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 4,
+                title: "Ownership",
+                badge: "Nível 4",
+                instruction: `<p>🦀 <strong>Ownership</strong> é o conceito mais importante do Rust!</p>
+                    <p>Cada valor tem um único dono. Quando passamos um valor, ele é <strong>movido</strong>.</p>
+                    <p>Crie uma String <code>nome</code> com o valor <code>"Rust"</code>.</p>`,
+                concept: "Strings são alocadas no heap e seguem as regras de ownership. Use <code>String::from()</code> para criar.",
+                hint: "Use: <code>let nome = String::from(\"valor\");</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma String:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ['let nome = String::from("Rust");', "let nome = String::from(\"Rust\");"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">nome</div>
+                        <div class="var-value">${correct ? '"Rust"' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'owner 👑' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                title: "Borrowing",
+                badge: "Nível 5",
+                instruction: `<p>Em vez de mover o ownership, podemos <strong>emprestar</strong> uma referência usando <code>&</code>.</p>
+                    <p>Crie uma referência <code>ref_nome</code> para a variável <code>nome</code>.</p>`,
+                concept: "Referências permitem usar um valor sem tomar ownership. Use <code>&</code> para criar uma referência.",
+                hint: "Use: <code>let ref_nome = &nome;</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> nome = <span class="function">String::from</span>(<span class="string">"Rust"</span>);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie uma referência:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let ref_nome = &nome;", "let ref_nome=&nome;"],
+                visualization: (correct) => `
+                    <div class="memory-box owned">
+                        <div class="var-name">nome</div>
+                        <div class="var-value">"Rust"</div>
+                        <div class="var-status owner">owner 👑</div>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="memory-box ${correct ? 'borrowed' : ''}">
+                        <div class="var-name">ref_nome</div>
+                        <div class="var-value">${correct ? '&nome' : '?'}</div>
+                        <div class="var-status ${correct ? 'borrowed' : ''}">${correct ? 'borrowed 🔗' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 6,
+                title: "Vetores",
+                badge: "Nível 6",
+                instruction: `<p>Vetores são coleções dinâmicas. Use <code>vec!</code> macro para criar.</p>
+                    <p>Crie um vetor <code>numeros</code> com os valores <code>1, 2, 3</code>.</p>`,
+                concept: "A macro <code>vec!</code> cria um Vec com valores iniciais. Vetores podem crescer dinamicamente.",
+                hint: "Use: <code>let numeros = vec![1, 2, 3];</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie um vetor:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let numeros = vec![1, 2, 3];", "let numeros=vec![1,2,3];", "let numeros = vec![1,2,3];"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">numeros</div>
+                        <div class="var-value">${correct ? '[1, 2, 3]' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'Vec<i32>' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 7,
+                title: "Struct",
+                badge: "Nível 7",
+                instruction: `<p>Structs permitem criar tipos personalizados.</p>
+                    <p>Defina uma struct <code>Pessoa</code> com um campo <code>nome</code> do tipo <code>String</code>.</p>`,
+                concept: "Structs agrupam dados relacionados. Cada campo tem um nome e tipo.",
+                hint: "Use: <code>struct Nome { campo: Tipo }</code>",
+                codeContext: `<span class="comment">// Defina a struct:</span><br>`,
+                answer: ["struct Pessoa { nome: String }", "struct Pessoa { nome: String, }", "struct Pessoa{ nome: String }"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">Pessoa</div>
+                        <div class="var-value">${correct ? '{ nome }' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'struct' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 8,
+                title: "Option",
+                badge: "Nível 8",
+                instruction: `<p><code>Option</code> representa um valor que pode existir ou não.</p>
+                    <p>Crie uma variável <code>talvez</code> do tipo <code>Option&lt;i32&gt;</code> com valor <code>Some(42)</code>.</p>`,
+                concept: "<code>Option&lt;T&gt;</code> pode ser <code>Some(valor)</code> ou <code>None</code>. Evita null pointer errors!",
+                hint: "Use: <code>let talvez: Option<i32> = Some(42);</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Crie um Option:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ["let talvez: Option<i32> = Some(42);", "let talvez = Some(42);"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">talvez</div>
+                        <div class="var-value">${correct ? 'Some(42)' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'Option<i32>' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 9,
+                title: "Match",
+                badge: "Nível 9",
+                instruction: `<p><code>match</code> é pattern matching poderoso do Rust.</p>
+                    <p>Complete o padrão para quando <code>x</code> for <code>1</code>.</p>`,
+                concept: "Match deve cobrir todos os casos possíveis. Use <code>_</code> para \"qualquer outro valor\".",
+                hint: "O padrão é só o valor: <code>1 => ...</code>",
+                codeContext: `<span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> x = 1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">match</span> x {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Complete o padrão:</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`,
+                answer: ['1 => println!("um"),', '1 => println!("um")', "1 => {}", "1 => ()"],
+                visualization: (correct) => `
+                    <div class="memory-box owned">
+                        <div class="var-name">x</div>
+                        <div class="var-value">1</div>
+                        <div class="var-status owner">i32</div>
+                    </div>
+                    <span class="arrow">match</span>
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">pattern</div>
+                        <div class="var-value">${correct ? '1 ✓' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? 'matched!' : 'aguardando...'}</div>
+                    </div>
+                `
+            },
+            {
+                id: 10,
+                title: "Resultado Final!",
+                badge: "Nível 10",
+                instruction: `<p>🎉 Último desafio! Crie uma função que retorna um <code>i32</code>.</p>
+                    <p>Escreva a assinatura da função <code>soma</code> que recebe <code>a: i32</code> e <code>b: i32</code>.</p>`,
+                concept: "Funções usam <code>fn nome(params) -> RetornoTipo</code>. O último valor sem ; é retornado.",
+                hint: "Use: <code>fn soma(a: i32, b: i32) -> i32</code>",
+                codeContext: `<span class="comment">// Defina a função soma:</span><br>`,
+                answer: ["fn soma(a: i32, b: i32) -> i32", "fn soma(a: i32, b: i32) -> i32 {", "fn soma(a:i32, b:i32) -> i32"],
+                visualization: (correct) => `
+                    <div class="memory-box ${correct ? 'owned' : ''}">
+                        <div class="var-name">soma()</div>
+                        <div class="var-value">${correct ? 'a + b' : '?'}</div>
+                        <div class="var-status ${correct ? 'owner' : ''}">${correct ? '→ i32' : 'aguardando...'}</div>
+                    </div>
+                `
+            }
+        ];
+
+        let currentLevel = 0;
+        let completedLevels = new Set();
+
+        function init() {
+            renderLevelNav();
+            loadLevel(currentLevel);
+
+            document.getElementById('codeInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkAnswer();
+                }
+            });
+        }
+
+        function renderLevelNav() {
+            const nav = document.getElementById('levelNav');
+            nav.innerHTML = levels.map((level, index) => `
+                <div class="level-dot ${index === currentLevel ? 'current' : ''} ${completedLevels.has(index) ? 'completed' : ''}"
+                     onclick="loadLevel(${index})"
+                     title="Nível ${index + 1}: ${level.title}">
+                </div>
+            `).join('');
+        }
+
+        function loadLevel(index) {
+            currentLevel = index;
+            const level = levels[index];
+
+            document.getElementById('levelBadge').textContent = level.badge;
+            document.getElementById('levelTitle').textContent = level.title;
+            document.getElementById('instructionText').innerHTML = level.instruction;
+            document.getElementById('conceptText').innerHTML = level.concept;
+            document.getElementById('hintText').innerHTML = level.hint;
+            document.getElementById('codeContext').innerHTML = level.codeContext;
+            document.getElementById('currentLevelDisplay').textContent = index + 1;
+            document.getElementById('progressFill').style.width = ((index + 1) / levels.length * 100) + '%';
+
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeInput').className = 'code-input';
+            document.getElementById('feedback').classList.remove('visible');
+            document.getElementById('hintText').classList.remove('visible');
+
+            document.getElementById('memoryVisualization').innerHTML = level.visualization(false);
+
+            renderLevelNav();
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('codeInput');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const level = levels[currentLevel];
+
+            const userAnswer = input.value.trim();
+            const isCorrect = level.answer.some(ans =>
+                userAnswer.toLowerCase().replace(/\s+/g, ' ') === ans.toLowerCase().replace(/\s+/g, ' ') ||
+                userAnswer === ans
+            );
+
+            feedback.classList.add('visible');
+
+            if (isCorrect) {
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+                feedback.classList.remove('error');
+                feedback.classList.add('success');
+                feedbackIcon.textContent = '✓';
+                feedbackText.textContent = 'Correto! Excelente trabalho! 🦀';
+
+                document.getElementById('memoryVisualization').innerHTML = level.visualization(true);
+
+                completedLevels.add(currentLevel);
+                renderLevelNav();
+
+                setTimeout(() => {
+                    if (currentLevel < levels.length - 1) {
+                        document.getElementById('modalText').textContent = `Você dominou: ${level.title}!`;
+                        document.getElementById('successModal').classList.add('visible');
+                    } else {
+                        document.getElementById('modalText').textContent = '🎉 Você completou todos os níveis! Você é um verdadeiro Rustacean!';
+                        document.querySelector('.modal h2').textContent = 'Parabéns, Rustacean!';
+                        document.querySelector('.modal-btn').textContent = 'Jogar Novamente';
+                        document.querySelector('.modal-btn').onclick = () => {
+                            completedLevels.clear();
+                            loadLevel(0);
+                            document.getElementById('successModal').classList.remove('visible');
+                        };
+                        document.getElementById('successModal').classList.add('visible');
+                    }
+                }, 1000);
+            } else {
+                input.classList.remove('correct');
+                input.classList.add('incorrect');
+                feedback.classList.remove('success');
+                feedback.classList.add('error');
+                feedbackIcon.textContent = '✗';
+                feedbackText.textContent = 'Não está certo. Tente novamente!';
+
+                setTimeout(() => {
+                    input.classList.remove('incorrect');
+                }, 500);
+            }
+        }
+
+        function resetLevel() {
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeInput').className = 'code-input';
+            document.getElementById('feedback').classList.remove('visible');
+            document.getElementById('memoryVisualization').innerHTML = levels[currentLevel].visualization(false);
+        }
+
+        function toggleHint() {
+            document.getElementById('hintText').classList.toggle('visible');
+        }
+
+        function nextLevel() {
+            document.getElementById('successModal').classList.remove('visible');
+            if (currentLevel < levels.length - 1) {
+                loadLevel(currentLevel + 1);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
