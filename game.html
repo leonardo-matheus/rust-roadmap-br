@@ -1268,7 +1268,9 @@
                 almostCorrect: [
                     { answer: 'let texto = "Rust";', feedback: 'Isso cria um <code>&str</code>. Use <code>String::from()</code> para String.' },
                     { almostPattern: /^let\s+texto\s*=\s*"[^"]*"\s*;?$/, feedback: 'Isso cria um <code>&str</code>. Use <code>String::from("...")</code> para criar uma String.' },
-                    { almostPattern: /^let\s+texto\s*=\s*'[^']*'\s*;?$/, feedback: 'Use aspas duplas <code>"..."</code> para strings, não aspas simples.' }
+                    { almostPattern: /^let\s+texto\s*=\s*'[^']*'\s*;?$/, feedback: 'Use aspas duplas <code>"..."</code> para strings, não aspas simples.' },
+                    { almostPattern: /^let\s+(?!texto)\w+\s*(:\s*String\s*)?=\s*String::from\s*\(\s*"[^"]*"\s*\)\s*;?$/, feedback: 'A variável deve se chamar <code>texto</code> para funcionar com o println abaixo.' },
+                    { almostPattern: /^let\s+(?!texto)\w+\s*=\s*"[^"]*"\s*;?$/, feedback: 'A variável deve se chamar <code>texto</code>. E use <code>String::from("...")</code> para criar uma String.' }
                 ],
                 hints: [
                     "String::from(\"texto\")"
