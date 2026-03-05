@@ -2958,13 +2958,37 @@
         }
 
         function highlightSyntax(code) {
-            return code
+            // Usar placeholders para evitar conflitos entre regexes
+            const placeholders = [];
+            let result = code;
+
+            // 1. Primeiro, proteger strings (para não interferir com HTML depois)
+            result = result.replace(/"([^"]*)"/g, (match) => {
+                const id = `__STR${placeholders.length}__`;
+                placeholders.push({ id, html: `<span class="string">${match}</span>` });
+                return id;
+            });
+
+            // 2. Proteger comentários
+            result = result.replace(/\/\/([^\n]*)/g, (match) => {
+                const id = `__CMT${placeholders.length}__`;
+                placeholders.push({ id, html: `<span class="comment">${match}</span>` });
+                return id;
+            });
+
+            // 3. Aplicar highlighting de keywords, types, functions, numbers
+            result = result
                 .replace(/\b(fn|let|mut|if|else|match|for|while|loop|return|struct|enum|impl|use|in)\b/g, '<span class="keyword">$1</span>')
                 .replace(/\b(String|i32|i64|u32|f64|f32|bool|char)\b/g, '<span class="type">$1</span>')
                 .replace(/\b(println|print|format|vec)\b!/g, '<span class="function">$1</span>!')
-                .replace(/(\d+)/g, '<span class="number">$1</span>')
-                .replace(/"([^"]*)"/g, '<span class="string">"$1"</span>')
-                .replace(/\/\/([^\n]*)/g, '<span class="comment">//$1</span>');
+                .replace(/\b(\d+)\b/g, '<span class="number">$1</span>');
+
+            // 4. Restaurar placeholders
+            placeholders.forEach(p => {
+                result = result.replace(p.id, p.html);
+            });
+
+            return result;
         }
 
         function showNextHint() {
